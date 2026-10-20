@@ -1,6 +1,6 @@
 # Geração de Questões Inéditas de Matemática no ENEM (PoT + ChromaDB)
 
-Projeto autônomo e local para elaboração, validação e persistência de **questões inéditas de Matemática alinhadas à Matriz de Referência do ENEM** (Competências `C1` a `C7`, Habilidades `H01` a `H30`).
+Projeto local para elaboração, validação e persistência de **questões inéditas de Matemática alinhadas à Matriz de Referência do ENEM** (Competências `C1` a `C7`, Habilidades `H01` a `H30`).
 
 ---
 
@@ -74,7 +74,7 @@ Por padrão, o projeto utiliza SQLite local (`sqlite:///./questoes_ineditas.db`)
 
 ---
 
-## 💻 Uso da CLI Unificada
+## 💻 Uso da CLI
 
 O projeto é operado inteiramente via linha de comando tradicional (`argparse` padrão do Python, sem dependências externas de formatação).
 
@@ -141,14 +141,4 @@ python cli.py export -o caderno_questoes.md
 
 # Exportar em formato JSON estruturado:
 python cli.py export -o questoes.json --habilidade H01
-```
-
----
-
-## 🧪 Executando os Testes Automatizados
-
-A suíte cobre execução de subprocesso isolado, AST de segurança, backward slicing, auto-healing de distratores, validação cega em 3 etapas, busca vetorial no ChromaDB e todos os comandos da CLI:
-
-```bash
-pytest
 ```
