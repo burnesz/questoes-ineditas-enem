@@ -1,0 +1,392 @@
+[
+  {
+    "competencia": "Competência de área 1 - Construir significados para os números naturais, inteiros, racionais e reais.",
+    "habilidade": "H1",
+    "habilidade_codigo": "H01",
+    "descricao_original": "Reconhecer, no contexto social, diferentes significados e representações dos números e operações - naturais, inteiros, racionais ou reais.",
+    "query": "Reconhecer em situações do cotidiano diferentes significados e representações de números naturais, inteiros, racionais e reais, como frações, decimais, porcentagens e números negativos, e interpretar o sentido das operações aritméticas nesses contextos sociais.",
+    "tipologias": [
+      "Conversão e comparação entre representações fracionárias, decimais e percentuais em contexto financeiro ou tarifário",
+      "Operações combinadas com números racionais decimais em leitura de medidores, faturas ou consumo acumulado",
+      "Ordenação e diferença de grandezas com números inteiros e racionais (saldos, variações térmicas ou altitudes)",
+      "Decomposição posicional e cálculo de taxas unitárias em compras ou pacotes com diferentes quantidades"
+    ]
+  },
+  {
+    "competencia": "Competência de área 1 - Construir significados para os números naturais, inteiros, racionais e reais.",
+    "habilidade": "H2",
+    "habilidade_codigo": "H02",
+    "descricao_original": "Identificar padrões numéricos ou princípios de contagem.",
+    "query": "Identificar padrões e regularidades em sequências numéricas e progressões aritméticas ou geométricas, ou aplicar princípios de contagem, como o princípio multiplicativo, para determinar o número de possibilidades, agrupamentos ou termos de uma sequência.",
+    "tipologias": [
+      "Princípio multiplicativo com escolhas independentes em etapas sucessivas (senhas, cardápios, códigos ou rotas)",
+      "Padrão em sequência numérica ou progressão aritmética (termo geral e soma de termos em cronogramas ou lotes)",
+      "Arranjos e combinações simples na formação de comissões, escalas de plantão ou disputas em torneios",
+      "Regularidades em ciclos periódicos e resto de divisão inteira para prever eventos repetitivos"
+    ]
+  },
+  {
+    "competencia": "Competência de área 1 - Construir significados para os números naturais, inteiros, racionais e reais.",
+    "habilidade": "H3",
+    "habilidade_codigo": "H03",
+    "descricao_original": "Resolver situação-problema envolvendo conhecimentos numéricos.",
+    "query": "Resolver situação-problema contextualizada que exige cálculos com números racionais e reais, envolvendo operações, razões, porcentagem, juros, divisibilidade, fatoração ou desigualdades, como em compras, descontos, orçamentos e divisão de quantidades.",
+    "tipologias": [
+      "Descontos e acréscimos percentuais sucessivos sobre preços, faturas ou orçamentos",
+      "Divisibilidade, MMC ou MDC aplicados à sincronização de ciclos e divisão exata de lotes",
+      "Operações com frações complementares na divisão de orçamentos, heranças ou etapas de produção",
+      "Juros simples e cálculo de montante ou parcela em compras financiadas"
+    ]
+  },
+  {
+    "competencia": "Competência de área 1 - Construir significados para os números naturais, inteiros, racionais e reais.",
+    "habilidade": "H4",
+    "habilidade_codigo": "H04",
+    "descricao_original": "Avaliar a razoabilidade de um resultado numérico na construção de argumentos sobre afirmações quantitativas.",
+    "query": "Avaliar a razoabilidade de um resultado numérico, por meio de estimativas e comparações de valores, para julgar a validade de afirmações quantitativas e construir argumentos que sustentem ou refutem conclusões baseadas em números.",
+    "tipologias": [
+      "Estimativa de consumo ou produção acumulada para verificar se uma meta numérica é atingida",
+      "Cálculo de margem de segurança ou folga operacional entre capacidade máxima e demanda estimada",
+      "Verificação quantitativa de alegação promocional comparando preço unitário real e anunciado",
+      "Projeção de gasto total em múltiplos períodos para validar limite orçamentário"
+    ]
+  },
+  {
+    "competencia": "Competência de área 1 - Construir significados para os números naturais, inteiros, racionais e reais.",
+    "habilidade": "H5",
+    "habilidade_codigo": "H05",
+    "descricao_original": "Avaliar propostas de intervenção na realidade utilizando conhecimentos numéricos.",
+    "query": "Avaliar e comparar propostas de intervenção em situações reais, como planos de pagamento, tarifas ou distribuição de recursos, usando cálculos com porcentagens, razões e proporções para decidir qual alternativa é mais vantajosa ou viável.",
+    "tipologias": [
+      "Comparação do custo total entre propostas de fornecedores com diferentes descontos e fretes",
+      "Cálculo da economia gerada pela adoção de uma proposta de redução percentual de desperdício",
+      "Avaliação de planos tarifários com franquia fixa mais excedente unitário para determinar o menor gasto",
+      "Reallocação de recursos financeiros entre setores com metas percentuais de corte de custos"
+    ]
+  },
+  {
+    "competencia": "Competência de área 2 - Utilizar o conhecimento geométrico para realizar a leitura e a representação da realidade e agir sobre ela.",
+    "habilidade": "H6",
+    "habilidade_codigo": "H06",
+    "descricao_original": "Interpretar a localização e a movimentação de pessoas/objetos no espaço tridimensional e sua representação no espaço bidimensional.",
+    "query": "Interpretar a localização e a movimentação de pessoas ou objetos no espaço tridimensional a partir de suas representações planas, como vistas, projeções, planificações, plantas baixas e mapas, relacionando posições, trajetos e pontos de vista.",
+    "tipologias": [
+      "Cálculo de distância percorrida em malha quadriculada ou planta baixa com quarteirões retangulares",
+      "Deslocamento ortogonal em coordenadas cartesianas aplicando o Teorema de Pitágoras para distância em linha reta",
+      "Cálculo de comprimento total de trajetória em vistas ortogonais de tubulações ou esteiras em galpão",
+      "Comparação entre caminhos alternativos em mapa urbano com trechos de diferentes comprimentos"
+    ]
+  },
+  {
+    "competencia": "Competência de área 2 - Utilizar o conhecimento geométrico para realizar a leitura e a representação da realidade e agir sobre ela.",
+    "habilidade": "H7",
+    "habilidade_codigo": "H07",
+    "descricao_original": "Identificar características de figuras planas ou espaciais.",
+    "query": "Identificar características e propriedades de figuras geométricas planas e espaciais, como polígonos, circunferências, prismas, pirâmides, cilindros, cones e esferas, reconhecendo elementos como lados, ângulos, faces, arestas, vértices, simetrias e posições de retas.",
+    "tipologias": [
+      "Relação de Euler (V - A + F = 2) e contagem de vértices, arestas e faces em poliedros e embalagens prismáticas",
+      "Soma dos ângulos internos e externos de polígonos regulares em projetos de mosaicos ou estruturas",
+      "Cálculo do comprimento total de arestas metálicas na montagem da estrutura de prismas e pirâmides",
+      "Quantidade de diagonais ou triângulos na decomposição de polígonos planos para treliças"
+    ]
+  },
+  {
+    "competencia": "Competência de área 2 - Utilizar o conhecimento geométrico para realizar a leitura e a representação da realidade e agir sobre ela.",
+    "habilidade": "H8",
+    "habilidade_codigo": "H08",
+    "descricao_original": "Resolver situação-problema que envolva conhecimentos geométricos de espaço e forma.",
+    "query": "Resolver situação-problema de espaço e forma aplicando semelhança e congruência de triângulos, teorema de Tales, relações métricas no triângulo, trigonometria do ângulo agudo e propriedades de ângulos e circunferências em contextos práticos.",
+    "tipologias": [
+      "Teorema de Pitágoras aplicado ao dimensionamento de rampas, escadas, cabos de sustentação ou telhados",
+      "Semelhança de triângulos e Teorema de Tales no cálculo de alturas indiretas (sombras, postes, terrenos)",
+      "Relações métricas em figuras compostas por retângulos e triângulos retângulos em projetos de engenharia",
+      "Comprimento de arco e circunferência (com pi = 3,14 explícito) em pistas circulares, polias ou rodas"
+    ]
+  },
+  {
+    "competencia": "Competência de área 2 - Utilizar o conhecimento geométrico para realizar a leitura e a representação da realidade e agir sobre ela.",
+    "habilidade": "H9",
+    "habilidade_codigo": "H09",
+    "descricao_original": "Utilizar conhecimentos geométricos de espaço e forma na seleção de argumentos propostos como solução de problemas do cotidiano.",
+    "query": "Selecionar, entre argumentos ou soluções propostas para um problema do cotidiano, aquele justificado corretamente por propriedades geométricas de espaço e forma, como semelhança, simetria, ângulos e características de figuras planas e espaciais.",
+    "tipologias": [
+      "Dimensionamento geométrico do número máximo de peças retangulares que cabem em uma chapa ou piso",
+      "Verificação de inclinação máxima de rampa de acessibilidade via razão entre altura e projeção horizontal",
+      "Comparação de aproveitamento espacial entre diferentes disposições de caixas em um palete ou caminhão",
+      "Cálculo de folga lateral ou raio de giro necessário para instalação de equipamento circular ou retangular"
+    ]
+  },
+  {
+    "competencia": "Competência de área 3 - Construir noções de grandezas e medidas para a compreensão da realidade e a solução de problemas do cotidiano.",
+    "habilidade": "H10",
+    "habilidade_codigo": "H10",
+    "descricao_original": "Identificar relações entre grandezas e unidades de medida.",
+    "query": "Identificar relações entre grandezas e suas unidades de medida, realizando conversões entre unidades de comprimento, área, volume, capacidade, massa e tempo e reconhecendo a unidade adequada para expressar cada grandeza.",
+    "tipologias": [
+      "Conversão entre unidades de volume e capacidade (m³ para litros) no enchimento de reservatórios",
+      "Conversão entre unidades de massa (toneladas, kg e gramas) no fracionamento de cargas e embalagens",
+      "Conversão de taxas compostas (m/s para km/h, litros por minuto para m³ por hora) em processos industriais",
+      "Conversão de unidades agrárias e de superfície (hectares, m² e cm²) em plantio ou revestimento"
+    ]
+  },
+  {
+    "competencia": "Competência de área 3 - Construir noções de grandezas e medidas para a compreensão da realidade e a solução de problemas do cotidiano.",
+    "habilidade": "H11",
+    "habilidade_codigo": "H11",
+    "descricao_original": "Utilizar a noção de escalas na leitura de representação de situação do cotidiano.",
+    "query": "Utilizar a noção de escala para ler e interpretar mapas, plantas, maquetes e desenhos técnicos, convertendo medidas do desenho em medidas reais, e vice-versa, a partir da razão entre as dimensões representadas e as verdadeiras.",
+    "tipologias": [
+      "Escala linear em mapas e plantas arquitetônicas (conversão de centímetros no mapa para quilômetros ou metros reais)",
+      "Escala superficial (quadrado da razão linear) para cálculo de área real de terrenos a partir da planta baixa",
+      "Dimensionamento de maquetes tridimensionais convertendo alturas e comprimentos reais pela razão de escala",
+      "Determinação do tempo de deslocamento ou custo de pavimentação a partir de distância medida em mapa com escala"
+    ]
+  },
+  {
+    "competencia": "Competência de área 3 - Construir noções de grandezas e medidas para a compreensão da realidade e a solução de problemas do cotidiano.",
+    "habilidade": "H12",
+    "habilidade_codigo": "H12",
+    "descricao_original": "Resolver situação-problema que envolva medidas de grandezas.",
+    "query": "Resolver situação-problema que envolva o cálculo de medidas de grandezas, como perímetros, áreas de superfícies, volumes e capacidades de recipientes, em contextos como construção, reforma, embalagens e armazenamento de líquidos.",
+    "tipologias": [
+      "Cálculo de área composta (retângulos/trapézios) descontando aberturas (portas/janelas) para orçamento de pintura ou piso",
+      "Volume de bloco retangular (paralelepípedo) aplicado a piscinas, caixas-d'água ou caçambas de transporte",
+      "Volume de cilindro (com pi = 3,14 explícito) para cálculo de armazenamento em silos ou tanques circulares",
+      "Perímetro e espaçamento de estacas ou mudas ao longo do contorno de terrenos poligonais"
+    ]
+  },
+  {
+    "competencia": "Competência de área 3 - Construir noções de grandezas e medidas para a compreensão da realidade e a solução de problemas do cotidiano.",
+    "habilidade": "H13",
+    "habilidade_codigo": "H13",
+    "descricao_original": "Avaliar o resultado de uma medição na construção de um argumento consistente.",
+    "query": "Avaliar a precisão e a adequação do resultado de uma medição, considerando o instrumento, a unidade utilizada e possíveis erros ou aproximações, para usá-lo na construção de um argumento consistente sobre dimensões ou quantidades.",
+    "tipologias": [
+      "Tolerância dimensional e desvio máximo permitido no controle de qualidade de peças ou embalagens",
+      "Cálculo de dosagem de medicamentos ou insumos agrícolas proporcional à massa corporal ou área tratada",
+      "Consumo energético (kWh) a partir da potência nominal (W) e tempo diário de uso de equipamentos",
+      "Propagação de erro ou perda percentual no corte e beneficiamento de matéria-prima medida em laboratório"
+    ]
+  },
+  {
+    "competencia": "Competência de área 3 - Construir noções de grandezas e medidas para a compreensão da realidade e a solução de problemas do cotidiano.",
+    "habilidade": "H14",
+    "habilidade_codigo": "H14",
+    "descricao_original": "Avaliar proposta de intervenção na realidade utilizando conhecimentos geométricos relacionados a grandezas e medidas.",
+    "query": "Avaliar propostas de intervenção na realidade, como projetos de reforma, ocupação de terrenos ou fabricação de embalagens, com base em cálculos geométricos de comprimentos, áreas e volumes, decidindo qual opção atende melhor às condições exigidas.",
+    "tipologias": [
+      "Comparação de custo por metro quadrado instalado entre diferentes formatos de ladrilhos ou revestimentos",
+      "Dimensionamento da quantidade de reservatórios ou viagens de caminhão-pipa para suprir demanda hídrica",
+      "Redimensionamento de embalagem mantendo o volume constante ao alterar uma das dimensões da base",
+      "Cálculo de área de captação de água da chuva em telhados retangulares para dimensionar cisterna"
+    ]
+  },
+  {
+    "competencia": "Competência de área 4 - Construir noções de variação de grandezas para a compreensão da realidade e a solução de problemas do cotidiano.",
+    "habilidade": "H15",
+    "habilidade_codigo": "H15",
+    "descricao_original": "Identificar a relação de dependência entre grandezas.",
+    "query": "Identificar a relação de dependência entre grandezas em situações do cotidiano, reconhecendo a variável dependente e a independente e descrevendo, de forma qualitativa, como a variação de uma grandeza afeta a outra.",
+    "tipologias": [
+      "Taxa de variação constante (custo fixo mais parcela variável por unidade produzida ou quilômetro rodado)",
+      "Variação linear da quantidade de líquido em reservatório com taxas simultâneas de entrada e saída",
+      "Relação entre consumo de combustível, distância percorrida e autonomia restante em viagem",
+      "Depreciação linear de equipamento ao longo do tempo de uso com valor residual"
+    ]
+  },
+  {
+    "competencia": "Competência de área 4 - Construir noções de variação de grandezas para a compreensão da realidade e a solução de problemas do cotidiano.",
+    "habilidade": "H16",
+    "habilidade_codigo": "H16",
+    "descricao_original": "Resolver situação-problema envolvendo a variação de grandezas, direta ou inversamente proporcionais.",
+    "query": "Resolver situação-problema com grandezas diretamente ou inversamente proporcionais, usando razões, proporções e regra de três simples ou composta, como em receitas, consumo de combustível, velocidade e tempo ou divisão proporcional de valores.",
+    "tipologias": [
+      "Regra de três composta relacionando número de máquinas/operários, horas diárias e produção total",
+      "Divisão diretamente proporcional de lucros, custos ou cotas de produção entre sócios ou setores",
+      "Grandezas inversamente proporcionais (velocidade média vs. tempo de percurso, vazão vs. tempo de enchimento)",
+      "Misturas e concentrações proporcionais no preparo de soluções, ligas ou insumos agrícolas"
+    ]
+  },
+  {
+    "competencia": "Competência de área 4 - Construir noções de variação de grandezas para a compreensão da realidade e a solução de problemas do cotidiano.",
+    "habilidade": "H17",
+    "habilidade_codigo": "H17",
+    "descricao_original": "Analisar informações envolvendo a variação de grandezas como recurso para a construção de argumentação.",
+    "query": "Analisar informações sobre a variação de grandezas proporcionais ou não proporcionais, comparando taxas e razões, para construir ou avaliar argumentos e justificar conclusões sobre como uma grandeza se altera quando outra varia.",
+    "tipologias": [
+      "Comparação de densidade demográfica, produtividade por hectare ou eficiência energética entre regiões/modelos",
+      "Análise de variação percentual acumulada em dois períodos consecutivos (crescimento seguido de queda)",
+      "Comparação da razão custo-benefício por unidade de massa ou volume em embalagens de diferentes tamanhos",
+      "Cálculo de velocidade média global em percurso dividido em trechos com velocidades distintas"
+    ]
+  },
+  {
+    "competencia": "Competência de área 4 - Construir noções de variação de grandezas para a compreensão da realidade e a solução de problemas do cotidiano.",
+    "habilidade": "H18",
+    "habilidade_codigo": "H18",
+    "descricao_original": "Avaliar propostas de intervenção na realidade envolvendo variação de grandezas.",
+    "query": "Avaliar propostas de intervenção na realidade que dependem da variação proporcional entre grandezas, como ajuste de produção, consumo, custo ou tempo de execução, escolhendo a alternativa mais adequada com base em razões e proporções.",
+    "tipologias": [
+      "Determinação do número adicional de trabalhadores ou máquinas para reduzir o prazo de entrega de uma obra",
+      "Ajuste proporcional de insumos em receita industrial para atender nova demanda com perda percentual",
+      "Comparação entre modalidades de transporte com capacidades e custos por viagem distintos",
+      "Otimização do gasto energético pela substituição de lâmpadas ou motores de diferentes potências e custos"
+    ]
+  },
+  {
+    "competencia": "Competência de área 5 - Modelar e resolver problemas que envolvem variáveis socioeconômicas ou técnico-científicas, usando representações algébricas.",
+    "habilidade": "H19",
+    "habilidade_codigo": "H19",
+    "descricao_original": "Identificar representações algébricas que expressem a relação entre grandezas.",
+    "query": "Identificar a expressão algébrica, fórmula ou lei de formação de uma função que representa a relação entre grandezas descrita em uma situação real, como funções do primeiro e do segundo graus, exponenciais ou logarítmicas.",
+    "tipologias": [
+      "Modelagem por função afim f(x) = ax + b a partir de dois pares de valores (tarifa básica + custo variável)",
+      "Avaliação numérica de expressão algébrica polinomial que relaciona receita, custo e lucro por unidade",
+      "Determinação do coeficiente angular (taxa de variação) e valor inicial em modelo linear de crescimento",
+      "Modelagem de desconto progressivo por faixa de unidades adquiridas em compras corporativas"
+    ]
+  },
+  {
+    "competencia": "Competência de área 5 - Modelar e resolver problemas que envolvem variáveis socioeconômicas ou técnico-científicas, usando representações algébricas.",
+    "habilidade": "H20",
+    "habilidade_codigo": "H20",
+    "descricao_original": "Interpretar gráfico cartesiano que represente relações entre grandezas.",
+    "query": "Interpretar gráfico cartesiano que representa a relação entre duas grandezas, analisando crescimento, decrescimento, taxa de variação, pontos de máximo e mínimo, intersecções com os eixos e o significado desses elementos no contexto.",
+    "tipologias": [
+      "Interpolação linear entre dois pontos consecutivos de uma série temporal para estimar valor intermediário",
+      "Cálculo da taxa média de variação (inclinação da reta secante) entre dois instantes registrados em tabela/série",
+      "Determinação do ponto de equilíbrio (intersecção) entre curvas lineares de receita e custo total",
+      "Variação líquida acumulada a partir de taxas de crescimento e decrescimento por intervalo de tempo"
+    ]
+  },
+  {
+    "competencia": "Competência de área 5 - Modelar e resolver problemas que envolvem variáveis socioeconômicas ou técnico-científicas, usando representações algébricas.",
+    "habilidade": "H21",
+    "habilidade_codigo": "H21",
+    "descricao_original": "Resolver situação-problema cuja modelagem envolva conhecimentos algébricos.",
+    "query": "Resolver situação-problema modelando-a algebricamente por meio de equações, inequações, sistemas de equações ou funções polinomiais, exponenciais, logarítmicas e trigonométricas, e interpretar a solução obtida no contexto do problema.",
+    "tipologias": [
+      "Sistema linear de duas equações e duas incógnitas (ex.: ingressos inteiros e meia-entrada, veículos de 2 e 4 rodas)",
+      "Função quadrática (máximo de receita/lucro ou vértice da parábola xv = -b/(2a) e yv)",
+      "Equação do 1º grau modelando ponto de nivelamento (break-even) entre custo de instalação e economia mensal",
+      "Crescimento ou decaimento exponencial discreto (dobrar/reduzir à metade em ciclos sucessivos)"
+    ]
+  },
+  {
+    "competencia": "Competência de área 5 - Modelar e resolver problemas que envolvem variáveis socioeconômicas ou técnico-científicas, usando representações algébricas.",
+    "habilidade": "H22",
+    "habilidade_codigo": "H22",
+    "descricao_original": "Utilizar conhecimentos algébricos/geométricos como recurso para a construção de argumentação.",
+    "query": "Utilizar conhecimentos algébricos e geométricos do plano cartesiano, como equações de retas e circunferências, paralelismo e perpendicularidade, para construir ou validar argumentos matemáticos sobre relações entre grandezas.",
+    "tipologias": [
+      "Distância entre dois pontos e ponto médio no plano cartesiano para localização de antenas ou postos de atendimento",
+      "Equação da reta e colinearidade de pontos aplicados a trajetórias retilíneas no plano cartesiano",
+      "Área e perímetro de figuras poligonais definidas por coordenadas cartesianas ou restrições algébricas",
+      "Comparação entre modelos algébricos linear e quadrático para projeção de metas de produção"
+    ]
+  },
+  {
+    "competencia": "Competência de área 5 - Modelar e resolver problemas que envolvem variáveis socioeconômicas ou técnico-científicas, usando representações algébricas.",
+    "habilidade": "H23",
+    "habilidade_codigo": "H23",
+    "descricao_original": "Avaliar propostas de intervenção na realidade utilizando conhecimentos algébricos.",
+    "query": "Avaliar propostas de intervenção na realidade, como planos de tarifas, contratos ou modelos de custo e receita, comparando funções e expressões algébricas para determinar a partir de que valor uma alternativa se torna mais vantajosa.",
+    "tipologias": [
+      "Inequação do 1º grau para determinar a quantidade mínima de unidades que torna um plano B mais econômico que o plano A",
+      "Comparação entre dois contratos de prestação de serviço (salário fixo alto + comissão baixa vs. fixo baixo + comissão alta)",
+      "Otimização de preço de venda em função da queda linear de demanda para maximizar a arrecadação",
+      "Cálculo do tempo de retorno (payback) na substituição de equipamento antigo por modelo de menor custo operacional"
+    ]
+  },
+  {
+    "competencia": "Competência de área 6 - Interpretar informações de natureza científica e social obtidas da leitura de gráficos e tabelas, realizando previsão de tendência, extrapolação, interpolação e interpretação.",
+    "habilidade": "H24",
+    "habilidade_codigo": "H24",
+    "descricao_original": "Utilizar informações expressas em gráficos ou tabelas para fazer inferências.",
+    "query": "Fazer inferências a partir de dados apresentados em gráficos de barras, de setores, de linhas ou em tabelas, identificando tendências e realizando previsões, interpolações ou extrapolações sobre fenômenos científicos e sociais.",
+    "tipologias": [
+      "Extrapolação linear de tendência a partir de tabela histórica para projetar o valor em período futuro",
+      "Cálculo de participação percentual de uma categoria específica sobre o total acumulado na tabela",
+      "Diferença entre a maior e a menor variação absoluta registrada entre períodos consecutivos de uma tabela",
+      "Previsão de estoque ou saldo final combinando entradas e saídas tabuladas ao longo de vários períodos"
+    ]
+  },
+  {
+    "competencia": "Competência de área 6 - Interpretar informações de natureza científica e social obtidas da leitura de gráficos e tabelas, realizando previsão de tendência, extrapolação, interpolação e interpretação.",
+    "habilidade": "H25",
+    "habilidade_codigo": "H25",
+    "descricao_original": "Resolver problema com dados apresentados em tabelas ou gráficos.",
+    "query": "Resolver problema cujos dados numéricos estão em tabelas ou gráficos, extraindo valores, calculando diferenças, totais, razões ou porcentagens e comparando informações para obter a resposta solicitada.",
+    "tipologias": [
+      "Cruzamento de duas colunas de uma tabela (ex.: quantidade vendida × preço unitário menos custo logístico)",
+      "Cálculo de faturamento líquido ou consumo ponderado aplicando alíquotas percentuais tabuladas por faixa",
+      "Razão entre a soma de subgrupos selecionados da tabela e o total geral do levantamento",
+      "Cálculo de custo total em tabela de tarifas escalonadas por faixa de consumo (água, energia ou frete)"
+    ]
+  },
+  {
+    "competencia": "Competência de área 6 - Interpretar informações de natureza científica e social obtidas da leitura de gráficos e tabelas, realizando previsão de tendência, extrapolação, interpolação e interpretação.",
+    "habilidade": "H26",
+    "habilidade_codigo": "H26",
+    "descricao_original": "Analisar informações expressas em gráficos ou tabelas como recurso para a construção de argumentos.",
+    "query": "Analisar criticamente informações expressas em gráficos e tabelas para construir ou avaliar argumentos, verificando se conclusões e afirmações sobre dados científicos ou sociais são sustentadas pela leitura correta das representações.",
+    "tipologias": [
+      "Verificação de meta de redução percentual comparando médias de dois períodos tabulados",
+      "Cálculo de índice relativo (por 100 habitantes ou por unidade produzida) a partir de dados brutos da tabela",
+      "Determinação do déficit ou superávit acumulado a partir de tabela de receitas e despesas mensais",
+      "Comparação entre variação absoluta e variação percentual de indicadores socioeconômicos em tabela"
+    ]
+  },
+  {
+    "competencia": "Competência de área 7 - Compreender o caráter aleatório e não-determinístico dos fenômenos naturais e sociais e utilizar instrumentos adequados para medidas, determinação de amostras e cálculos de probabilidade para interpretar informações de variáveis apresentadas em uma distribuição estatística.",
+    "habilidade": "H27",
+    "habilidade_codigo": "H27",
+    "descricao_original": "Calcular medidas de tendência central ou de dispersão de um conjunto de dados expressos em uma tabela de frequências de dados agrupados (não em classes) ou em gráficos.",
+    "query": "Calcular média aritmética, média ponderada, moda, mediana, variância ou desvio padrão de um conjunto de dados apresentados em tabela de frequências, sem agrupamento em classes, ou em gráficos.",
+    "tipologias": [
+      "Média aritmética ponderada a partir de tabela de frequências (valores × frequências dividido pelo total)",
+      "Cálculo da mediana de distribuição de dados agrupados por frequência absoluta (ordem central)",
+      "Determinação de nota ou valor mínimo na última etapa para atingir média aritmética ou ponderada exigida",
+      "Diferença entre a média ponderada e a moda (ou amplitude) de um conjunto de dados em tabela de frequências"
+    ]
+  },
+  {
+    "competencia": "Competência de área 7 - Compreender o caráter aleatório e não-determinístico dos fenômenos naturais e sociais e utilizar instrumentos adequados para medidas, determinação de amostras e cálculos de probabilidade para interpretar informações de variáveis apresentadas em uma distribuição estatística.",
+    "habilidade": "H28",
+    "habilidade_codigo": "H28",
+    "descricao_original": "Resolver situação-problema que envolva conhecimentos de estatística e probabilidade.",
+    "query": "Resolver situação-problema de estatística e probabilidade, calculando a probabilidade de eventos simples, complementares ou sucessivos, ou interpretando medidas estatísticas, em contextos como sorteios, jogos, pesquisas e controle de qualidade.",
+    "tipologias": [
+      "Probabilidade condicional restrita a um subconjunto extraído de tabela de dupla entrada (contingência)",
+      "Probabilidade da união de eventos ou do evento complementar em sorteios e controle de qualidade",
+      "Probabilidade de eventos sucessivos independentes ou sem reposição em extrações de lotes",
+      "Valor esperado (esperança matemática) ou frequência esperada em amostra estratificada"
+    ]
+  },
+  {
+    "competencia": "Competência de área 7 - Compreender o caráter aleatório e não-determinístico dos fenômenos naturais e sociais e utilizar instrumentos adequados para medidas, determinação de amostras e cálculos de probabilidade para interpretar informações de variáveis apresentadas em uma distribuição estatística.",
+    "habilidade": "H29",
+    "habilidade_codigo": "H29",
+    "descricao_original": "Utilizar conhecimentos de estatística e probabilidade como recurso para a construção de argumentação.",
+    "query": "Utilizar medidas estatísticas e cálculos de probabilidade para construir argumentos consistentes, comparando chances de eventos ou o comportamento de conjuntos de dados para justificar ou contestar afirmações e conclusões.",
+    "tipologias": [
+      "Cálculo do número de novos elementos a acrescentar em uma urna/lote para atingir probabilidade-alvo",
+      "Comparação de risco relativo ou taxa de falha percentual entre duas linhas de produção tabuladas",
+      "Análise de regularidade (amplitude ou desvio médio absoluto) entre dois atletas ou equipamentos com mesma média",
+      "Proporção amostral e extrapolação para população total em pesquisa de intenção ou controle sanitário"
+    ]
+  },
+  {
+    "competencia": "Competência de área 7 - Compreender o caráter aleatório e não-determinístico dos fenômenos naturais e sociais e utilizar instrumentos adequados para medidas, determinação de amostras e cálculos de probabilidade para interpretar informações de variáveis apresentadas em uma distribuição estatística.",
+    "habilidade": "H30",
+    "habilidade_codigo": "H30",
+    "descricao_original": "Avaliar propostas de intervenção na realidade utilizando conhecimentos de estatística e probabilidade.",
+    "query": "Avaliar propostas de intervenção na realidade com base em estatística e probabilidade, comparando médias, dispersões ou chances de sucesso de diferentes alternativas para escolher a decisão mais adequada ou segura.",
+    "tipologias": [
+      "Escolha de estratégia de intervenção com base na maior redução esperada no número absoluto de casos/defeitos",
+      "Determinação da meta de atendimento ou vacinação necessária para reduzir a probabilidade de contágio abaixo de um limite",
+      "Comparação de médias ponderadas de desempenho após simulação de bônus ou treinamento em setores",
+      "Alocação de orçamento preventivo proporcional à frequência histórica de ocorrências em tabela"
+    ]
+  }
+]

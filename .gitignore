@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.db
+*.sqlite3
+chroma_db/
+test_chroma_data/
+.env
+.coverage
+htmlcov/
