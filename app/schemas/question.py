@@ -1,17 +1,15 @@
 """
-Schemas Pydantic para validação estrutural e transferência de dados de Questões Inéditas do ENEM.
-Atende a RN-Q01 (validação estrutural de unicidade e formato) e RN-Q02 (schema JSON estrito).
+Schemas Pydantic para validação estrutural e dados de questões inéditas do ENEM.
 """
 
 from enum import Enum
 from typing import Dict, Optional, List, Any
 import uuid
-from datetime import datetime
-from pydantic import BaseModel, Field, field_validator, ConfigDict
+from pydantic import BaseModel, Field, field_validator
 
 
 class PipelineErrorCode(str, Enum):
-    """Códigos tipificados de falha na pipeline PoT (A7)."""
+    """Códigos de falha na pipeline PoT."""
     SINTAXE = "SINTAXE"
     SEGURANCA = "SEGURANCA"
     TIMEOUT = "TIMEOUT"
@@ -266,12 +264,11 @@ class QuestaoEquivalenciaOutput(BaseModel):
 
 class QuestaoAuditoriaSemanticaOutput(BaseModel):
     """
-    Schema para a Chamada 3 da Fase de Validação: Auditoria Semântica e Pedagógica.
-    Avalia a presença de defeitos no item através de critérios semânticos e pedagógicos (B3).
+    Schema para auditoria semântica e pedagógica da questão.
     """
     analise: Optional[str] = Field(
         None,
-        description="Evidência curta dos problemas identificados ou 'Item adequado'."
+        description="Evidência dos problemas identificados ou 'Item adequado'."
     )
     incoerencia_ou_absurdo: bool = Field(
         False,
@@ -287,15 +284,15 @@ class QuestaoAuditoriaSemanticaOutput(BaseModel):
     )
     desalinhamento_comando_grandeza: bool = Field(
         False,
-        description="True se o comando final NÃO perguntar exatamente a grandeza definida no enunciado/gabarito (B3a)."
+        description="True se o comando final não perguntar a grandeza solicitada."
     )
     fuga_habilidade_alvo: bool = Field(
         False,
-        description="True se a resolução da questão NÃO exigir a habilidade-alvo especificada (B3b)."
+        description="True se a resolução da questão não exigir a habilidade-alvo especificada."
     )
     complexidade_insuficiente: bool = Field(
         False,
-        description="Sinal secundário: True se o item for trivial demais para o ENEM (operação direta única)."
+        description="True se o item for trivial demais para o ENEM (operação direta única)."
     )
 
     # Campos legados mantidos para compatibilidade retroativa com testes
@@ -417,66 +414,6 @@ class QuestaoIneditaLLMOutput(BaseModel):
         return clean
 
 
-class QuestaoIneditaBase(BaseModel):
-    habilidade_codigo: str = Field(..., description="Código da Habilidade da Matriz de Referência (ex: 'H01')")
-    enunciado: str = Field(..., description="Enunciado completo da questão")
-    alternativas: Dict[str, str] = Field(..., description="Dicionário com as alternativas A, B, C, D, E")
-    gabarito: str = Field(..., description="Letra do gabarito oficial ('A' a 'E')")
-    justificativa: str = Field(..., description="Justificativa da resposta e resolução")
-    thought_scratchpad: Optional[str] = None
-    is_validated: bool = True
-
-
-class QuestaoIneditaCreate(QuestaoIneditaBase):
-    pass
-
-
-class QuestaoIneditaResponse(QuestaoIneditaBase):
-    id: uuid.UUID
-    created_at: datetime
-    model_config = ConfigDict(from_attributes=True)
-
-
-class QuestaoGenerateRequest(BaseModel):
-    habilidade_codigo: str = Field(
-        ...,
-        description="Código da habilidade da Matriz do ENEM para gerar o item (ex: 'H01')"
-    )
-    num_few_shot_examples: int = Field(
-        default=2,
-        ge=1,
-        le=5,
-        description="Quantidade de itens reais de treino do acervo a injetar no prompt (padrão 2)"
-    )
-    tema: Optional[str] = Field(
-        None,
-        description="Tema contextual opcional (ex: 'Saúde', 'Transporte'). Se omitido, é sorteado aleatoriamente."
-    )
-    abertura: Optional[str] = Field(
-        None,
-        description="Estilo de abertura narrativa opcional (ex: 'pesquisa amostral'). Se omitido, é sorteado aleatoriamente."
-    )
-
-
-class BatchPopulationRequest(BaseModel):
-    habilidades: Optional[List[str]] = Field(
-        None,
-        description="Lista de códigos de habilidades específicas (ex: ['H01', 'H02']). Se omitido, processa todas as 30."
-    )
-    count_per_habilidade: int = Field(
-        default=1,
-        ge=1,
-        le=5,
-        description="Número de questões inéditas a gerar por habilidade (padrão 1)"
-    )
-    num_few_shot_examples: int = Field(
-        default=2,
-        ge=1,
-        le=5,
-        description="Número de exemplos históricos few-shot a usar no prompt"
-    )
-
-
 class BatchPopulationItemResult(BaseModel):
     habilidade_codigo: str
     questao_id: Optional[uuid.UUID] = None
@@ -491,5 +428,5 @@ class BatchPopulationSummary(BaseModel):
     total_sucesso: int
     total_falhas: int
     tempo_total_segundos: float
-    habilidades_com_erro: List[str] = Field(default_factory=list, description="Lista de códigos das habilidades que falharam em todas as tentativas")
+    habilidades_com_erro: List[str] = Field(default_factory=list, description="Códigos das habilidades que falharam em todas as tentativas")
     itens: List[BatchPopulationItemResult]

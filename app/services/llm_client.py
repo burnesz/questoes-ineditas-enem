@@ -136,43 +136,6 @@ class LLMClient:
                 "message": f"Falha de conexão com o servidor Ollama ({e})"
             }
 
-    async def ahealth_check(self) -> Dict[str, Any]:
-        if self.mock_mode or not self.endpoint_url:
-            return {"status": "mock", "healthy": True, "message": "Modo Mock ativo"}
-
-        url = f"{self.endpoint_url}/api/tags"
-        start_time = time.time()
-        try:
-            async with httpx.AsyncClient(timeout=10.0) as client:
-                response = await client.get(url, headers=self.headers)
-                latency_ms = round((time.time() - start_time) * 1000, 2)
-                if response.status_code == 200:
-                    data = response.json() if response.text and response.headers.get("content-type", "").startswith("application/json") else {}
-                    models = [m.get("name") for m in data.get("models", [])]
-                    model_available = any(self.model_name in m for m in models) if self.model_name else True
-                    return {
-                        "status": "healthy",
-                        "healthy": True,
-                        "provider": "ollama",
-                        "model": self.model_name,
-                        "model_available": model_available,
-                        "latency_ms": latency_ms,
-                        "details": data
-                    }
-                return {
-                    "status": "unhealthy",
-                    "healthy": False,
-                    "status_code": response.status_code,
-                    "latency_ms": latency_ms,
-                    "message": f"Servidor Ollama retornou HTTP {response.status_code}"
-                }
-        except Exception as e:
-            return {
-                "status": "error",
-                "healthy": False,
-                "message": f"Falha de conexão assíncrona com o Ollama ({e})"
-            }
-
     def generate(
         self,
         prompt: str,
@@ -183,9 +146,7 @@ class LLMClient:
         format: Optional[Union[str, Dict[str, Any]]] = None,
         seed: Optional[int] = None
     ) -> str:
-        """
-        Executa chamada síncrona ao LLM com retries e backoff exponencial.
-        """
+        """Executa chamada síncrona ao LLM com retries e backoff exponencial."""
         if self.mock_mode:
             return self._generate_mock_response(prompt, format=format)
 
@@ -234,69 +195,6 @@ class LLMClient:
         if isinstance(last_exception, LLMError):
             raise last_exception
         raise LLMConnectionError(f"Não foi possível obter resposta após {self.max_retries} tentativas: {last_exception}")
-
-    async def agenerate(
-        self,
-        prompt: str,
-        max_tokens: Optional[int] = None,
-        temperature: float = 0.0,
-        top_p: float = 0.9,
-        repetition_penalty: float = 1.0,
-        format: Optional[Union[str, Dict[str, Any]]] = None,
-        seed: Optional[int] = None
-    ) -> str:
-        """
-        Executa chamada assíncrona ao LLM com retries e backoff exponencial.
-        """
-        if self.mock_mode:
-            return self._generate_mock_response(prompt, format=format)
-
-        url, payload = self._build_payload_and_url(
-            prompt=prompt,
-            max_tokens=max_tokens,
-            temperature=temperature,
-            top_p=top_p,
-            repetition_penalty=repetition_penalty,
-            format=format,
-            seed=seed
-        )
-
-        import asyncio
-        last_exception = None
-        for attempt in range(1, self.max_retries + 1):
-            try:
-                async with httpx.AsyncClient(timeout=self.timeout_seconds) as client:
-                    response = await client.post(url, json=payload, headers=self.headers)
-
-                    if response.status_code == 200:
-                        data = response.json()
-                        if "response" in data:
-                            return data["response"]
-                        raise LLMResponseError(f"Formato de resposta inesperado do Ollama: {data}")
-
-                    if response.status_code in [502, 503, 504]:
-                        logger.warning(f"Servidor retornou HTTP {response.status_code} na tentativa {attempt}.")
-                    else:
-                        raise LLMResponseError(
-                            f"Erro retornado pelo LLM (HTTP {response.status_code}): {response.text}"
-                        )
-
-            except httpx.TimeoutException as e:
-                logger.warning(f"Timeout assíncrono na tentativa {attempt}/{self.max_retries} ({e})")
-                last_exception = LLMTimeoutError(f"Tempo limite de {self.timeout_seconds}s esgotado.")
-            except httpx.RequestError as e:
-                logger.warning(f"Erro de conexão na tentativa {attempt}/{self.max_retries} ({e})")
-                last_exception = LLMConnectionError(f"Falha de comunicação assíncrona com {url}: {e}")
-            except Exception as e:
-                last_exception = e
-
-            if attempt < self.max_retries:
-                sleep_time = (2 ** (attempt - 1)) * 1.5
-                await asyncio.sleep(sleep_time)
-
-        if isinstance(last_exception, LLMError):
-            raise last_exception
-        raise LLMConnectionError(f"Não foi possível obter resposta assíncrona após {self.max_retries} tentativas: {last_exception}")
 
     def _generate_mock_response(self, prompt: str, format: Optional[Union[str, Dict[str, Any]]] = None) -> str:
         """

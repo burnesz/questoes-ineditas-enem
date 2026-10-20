@@ -2,6 +2,7 @@ import os
 import sys
 import logging
 import argparse
+from typing import Optional
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -15,8 +16,9 @@ logger = logging.getLogger("seed_chroma")
 def seed_chroma(
     csv_path: str = "data/itens_prova_2009_2024_enriquecido.csv",
     batch_size: int = 50,
-    mock_embeddings: bool = False
-):
+    mock_embeddings: bool = False,
+    store: Optional[ChromaVectorStore] = None
+) -> int:
     logger.info("=" * 70)
     logger.info(" SEED DO BANCO VETORIAL LOCAL CHROMADB (ENEM 2009-2024)")
     logger.info("=" * 70)
@@ -24,11 +26,13 @@ def seed_chroma(
     items = parse_csv_rows(csv_path)
     logger.info(f"Carregadas {len(items)} questões do CSV '{csv_path}'.")
 
-    emb_service = EmbeddingService(mock_mode=mock_embeddings)
-    store = ChromaVectorStore(embedding_service=emb_service)
+    if store is None:
+        emb_service = EmbeddingService(mock_mode=mock_embeddings)
+        store = ChromaVectorStore(embedding_service=emb_service)
 
     total_upserted = store.upsert_itens(items, batch_size=batch_size)
     logger.info(f"Concluído: {total_upserted} questões indexadas com sucesso no ChromaDB.")
+    return total_upserted
 
 
 if __name__ == "__main__":

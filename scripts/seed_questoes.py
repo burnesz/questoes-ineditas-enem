@@ -4,7 +4,8 @@ import csv
 import uuid
 import logging
 import argparse
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
+from sqlalchemy.orm import Session
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -72,13 +73,22 @@ def parse_csv_rows(csv_path: str) -> List[Dict[str, Any]]:
     return items
 
 
-def seed_questoes(csv_path: str = "data/itens_prova_2009_2024_enriquecido.csv"):
-    seed_habilidades()
-    Base.metadata.create_all(bind=engine)
+def seed_questoes(
+    csv_path: str = "data/itens_prova_2009_2024_enriquecido.csv",
+    db: Optional[Session] = None
+) -> Tuple[int, int]:
+    should_close = False
+    if db is None:
+        Base.metadata.create_all(bind=engine)
+        db = SessionLocal()
+        should_close = True
+        seed_habilidades(db=db)
+    else:
+        seed_habilidades(db=db)
+
     items = parse_csv_rows(csv_path)
     logger.info(f"Lidos {len(items)} itens válidos do CSV.")
 
-    db = SessionLocal()
     try:
         inserted = 0
         updated = 0
@@ -107,8 +117,10 @@ def seed_questoes(csv_path: str = "data/itens_prova_2009_2024_enriquecido.csv"):
                 inserted += 1
         db.commit()
         logger.info(f"Seed concluído no banco relacional: {inserted} inseridos, {updated} atualizados.")
+        return inserted, updated
     finally:
-        db.close()
+        if should_close:
+            db.close()
 
 
 if __name__ == "__main__":

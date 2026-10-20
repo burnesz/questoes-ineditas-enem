@@ -30,12 +30,11 @@ Projeto autônomo e local para elaboração, validação e persistência de **qu
 ```
 questoes-ineditas-enem/
 ├── app/
-│   ├── api/                     # Rotas FastAPI (/health, /questoes/ineditas)
+│   ├── cli.py                   # Implementação da CLI tradicional (argparse puro)
 │   ├── core/                    # Configurações Pydantic, prompts PoT e sanitizadores
 │   ├── db/                      # Modelos SQLAlchemy 2.0 (Habilidade, Inedita, Enem)
 │   ├── schemas/                 # Schemas tipados Pydantic v2 e JSON Schemas Ollama
-│   ├── services/                # CodeExecutor, QuestionService, LLMClient, ChromaVectorStore
-│   └── main.py                  # Ponto de entrada da aplicação FastAPI
+│   └── services/                # CodeExecutor, QuestionService, LLMClient, ChromaVectorStore
 ├── data/
 │   ├── habilidades_queries.json                # 30 habilidades com queries expandidas e tipologias
 │   └── itens_prova_2009_2024_enriquecido.csv   # Dataset raw de questões históricas do ENEM
@@ -43,8 +42,9 @@ questoes-ineditas-enem/
 │   ├── seed_habilidades.py           # Popula H01 a H30 no banco
 │   ├── seed_questoes.py              # Popula acervo histórico no banco relacional
 │   ├── seed_chroma.py                # Indexa o CSV histórico no ChromaDB local
-│   └── populate_questoes_ineditas.py # CLI para geração e povoamento em lote
+│   └── populate_questoes_ineditas.py # Wrapper compatível para geração em lote
 ├── tests/                       # Suíte completa de testes unitários e de integração
+├── cli.py                       # Ponto de entrada executável da CLI unificada
 ├── requirements.txt             # Dependências do projeto
 ├── pytest.ini                   # Configurações do Pytest
 └── README.md
@@ -74,60 +74,80 @@ Por padrão, o projeto utiliza SQLite local (`sqlite:///./questoes_ineditas.db`)
 
 ---
 
-## 📊 Povoamento e Indexação
+## 💻 Uso da CLI Unificada
 
-### 1. Cadastrar as Habilidades e o Acervo Histórico no SQLite
+O projeto é operado inteiramente via linha de comando tradicional (`argparse` padrão do Python, sem dependências externas de formatação).
 
+### 1. Povoamento do Ambiente (`seed`)
+
+Popule o banco relacional SQLite e o ChromaDB com as mais de 400 questões históricas do ENEM:
 ```bash
-python scripts/seed_questoes.py
+# Povoar banco relacional e ChromaDB (completo):
+python cli.py seed
+
+# Apenas banco relacional:
+python cli.py seed --target db
+
+# Apenas ChromaDB (com embeddings simulados para testes rápidos):
+python cli.py seed --target chroma --mock-embeddings
 ```
 
-### 2. Indexar as Questões no ChromaDB Local
+### 2. Geração de Questões Inéditas (`generate`)
 
-Gera os embeddings de alta fidelidade das mais de 400 questões históricas no ChromaDB:
+Execute a pipeline autônoma PoT com validação em 3 etapas:
 ```bash
-python scripts/seed_chroma.py
-```
-*(Para indexar rapidamente em modo simulação/testes, adicione a flag `--mock-embeddings`).*
+# Gerar 1 questão para a habilidade H01 (modo simulação/mock, sem precisar do Ollama ativo):
+python cli.py generate --habilidades H01 --mock
 
----
+# Gerar para uma habilidade com o LLM local (Qwen 2.5 via Ollama):
+python cli.py generate --habilidades H01
 
-## 💻 Uso via CLI (Geração em Lote)
+# Gerar para múltiplas habilidades com 2 questões por habilidade:
+python cli.py generate --habilidades H01,H02,H03 --count 2
 
-Gere questões inéditas diretamente pelo terminal:
-
-```bash
-# Gerar 1 questão para uma habilidade específica (ex: H01):
-python scripts/populate_questoes_ineditas.py --habilidades H01
-
-# Gerar para múltiplas habilidades:
-python scripts/populate_questoes_ineditas.py --habilidades H01,H02,H03 --count 2
-
-# Gerar 1 questão para todas as 30 habilidades do ENEM (H01 a H30):
-python scripts/populate_questoes_ineditas.py --habilidades all
-
-# Modo simulação (sem necessidade de GPU/Ollama ativo):
-python scripts/populate_questoes_ineditas.py --habilidades H01 --mock
+# Gerar para todas as 30 habilidades do ENEM (H01 a H30):
+python cli.py generate --habilidades all
 ```
 
----
+### 3. Consulta e Inspeção (`list` e `show`)
 
-## 🌐 Executando a API Web
-
-Inicie o servidor FastAPI:
 ```bash
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+# Listar questões geradas no banco:
+python cli.py list
+
+# Filtrar listagem por habilidade específica:
+python cli.py list --habilidade H01
+
+# Exibir detalhes completos de uma questão pelo ID:
+python cli.py show <UUID_DA_QUESTAO>
+
+# Exibir os dados da questão em JSON estrito:
+python cli.py show <UUID_DA_QUESTAO> --json
 ```
 
-Acesse a documentação interativa:
-- Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)
-- Health Check: [http://localhost:8000/api/v1/health](http://localhost:8000/api/v1/health)
+### 4. Status e Métricas do Sistema (`stats`)
+
+Consulte a saúde da conexão com o LLM local, acervo de questões e contagem do banco vetorial:
+```bash
+python cli.py stats
+```
+
+### 5. Exportação de Cadernos (`export`)
+
+Exporte o acervo gerado para impressão ou arquivamento:
+```bash
+# Exportar caderno pronto em Markdown:
+python cli.py export -o caderno_questoes.md
+
+# Exportar em formato JSON estruturado:
+python cli.py export -o questoes.json --habilidade H01
+```
 
 ---
 
 ## 🧪 Executando os Testes Automatizados
 
-A suíte cobre execução de subprocesso, AST de segurança, backward slicing, auto-healing de distratores, validação cega em 3 etapas, busca vetorial no ChromaDB e endpoints da API:
+A suíte cobre execução de subprocesso isolado, AST de segurança, backward slicing, auto-healing de distratores, validação cega em 3 etapas, busca vetorial no ChromaDB e todos os comandos da CLI:
 
 ```bash
 pytest

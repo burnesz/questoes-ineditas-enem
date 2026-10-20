@@ -1,6 +1,5 @@
-from typing import Generator
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm import sessionmaker
 
 from app.core.config import settings
 
@@ -19,14 +18,3 @@ SessionLocal = sessionmaker(
     autoflush=False,
     bind=engine
 )
-
-
-def get_db() -> Generator[Session, None, None]:
-    """
-    Dependência FastAPI para gerenciamento de sessões do banco de dados.
-    """
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()

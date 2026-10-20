@@ -279,8 +279,8 @@ def sortear_few_shot(
     habilidade_codigo: Optional[str] = None
 ) -> str:
     """
-    Retorna um exemplo few-shot alinhado à competência/habilidade (B1),
-    evitando ancorar sempre nos mesmos 3 exemplos genéricos.
+    Retorna um exemplo few-shot alinhado à competência ou habilidade,
+    evitando ancorar sempre nos mesmos exemplos genéricos.
     """
     comp = competencia or _infer_competencia_from_habilidade(habilidade_codigo)
     pool = POT_FEW_SHOT_BY_COMPETENCIA.get(comp, []) if comp else []
@@ -682,7 +682,7 @@ def build_auditoria_criterio_prompt(
     habilidade_descricao: Optional[str] = None
 ) -> str:
     """
-    Constrói prompt binário curto (sim/não) para um único critério da Etapa 3 da Auditoria Semântica (B3).
+    Constrói prompt binário curto para auditoria de um único critério pedagógico ou semântico.
     """
     alts_formatted = "\n".join([f"  {k}) {v}" for k, v in sorted(alternativas.items())])
     has_md_table = bool(re.search(r"\|(?:\s*:?-+:?\s*\|)+", enunciado or ""))

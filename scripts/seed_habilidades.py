@@ -1,6 +1,8 @@
 import os
 import sys
 import logging
+from typing import Optional
+from sqlalchemy.orm import Session
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -52,9 +54,12 @@ HABILIDADES_MAT = [
 ]
 
 
-def seed_habilidades():
-    Base.metadata.create_all(bind=engine)
-    db = SessionLocal()
+def seed_habilidades(db: Optional[Session] = None) -> int:
+    should_close = False
+    if db is None:
+        Base.metadata.create_all(bind=engine)
+        db = SessionLocal()
+        should_close = True
     try:
         count = 0
         for item in HABILIDADES_MAT:
@@ -68,8 +73,10 @@ def seed_habilidades():
             count += 1
         db.commit()
         logger.info(f"Sucesso: {count} habilidades processadas.")
+        return count
     finally:
-        db.close()
+        if should_close:
+            db.close()
 
 
 if __name__ == "__main__":

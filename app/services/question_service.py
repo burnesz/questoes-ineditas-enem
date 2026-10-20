@@ -1,72 +1,60 @@
 """
-Serviço de geração e gerenciamento de Questões Inéditas de Matemática para o ENEM.
-Implementa o fluxo RAG de 4 etapas previsto na Seção 8 do pré-projeto / AGENTS.md:
-1. Entrada: Habilidade-alvo da Matriz de Referência do ENEM.
-2. Retrieval RAG: Resgate semântico dos Top-3 itens históricos no Pinecone (namespace questoes_enem)
-   ancorado nas queries otimizadas pelo Claude.
-3. Geração: Prompt estruturado com CoT, three-shot e formato JSON estrito no LLM local (Ollama).
-4. Validação Estrutural Automática: Unicidade das alternativas, formato e gabarito (RN-Q01, RN-Q02).
+Serviço orquestrador para geração, validação e persistência de questões inéditas do ENEM via RAG e PoT.
 """
 
-import os
-import re
 import json
-import time
 import logging
-import uuid
+import os
 import random
-from typing import List, Dict, Any, Optional, Callable, Tuple, Union
-from sqlalchemy.orm import Session
+import re
+import time
+import uuid
+from typing import Any, Callable, Dict, List, Optional, Union
+from pydantic import ValidationError
 from sqlalchemy import func
+from sqlalchemy.orm import Session
 
 from app.core.config import settings
-from app.db.models.habilidade import HabilidadeEnem
-from app.db.models.questao_enem import QuestaoEnem
-from app.db.models.questao_inedita import QuestaoInedita
-from app.services.llm_client import LLMClient
-from app.services.vectorstore import ChromaVectorStore
-from app.services.question_validator import (
-    extract_json_from_text,
-    sanitize_latex_json_text,
-    sanitize_parsed_dict_values,
-    format_enunciado_with_table,
-    check_prohibited_terms,
-    check_table_duplication
-)
-from app.services.code_executor import (
-    execute_solver_code,
-    validate_solver_complexity,
-    validate_solver_consistency,
-    assemble_alternatives_and_gabarito
-)
 from app.core.prompts import (
     AUDITORIA_CRITERIOS_B3,
-    build_enunciado_solver_prompt,
     build_enunciado_plan_only_prompt,
     build_solver_only_prompt,
     build_blind_solving_prompt,
     build_equivalencia_gabarito_prompt,
-    build_auditoria_semantica_prompt,
     build_auditoria_criterio_prompt,
     sortear_contexto_criativo,
-    TEMAS_COTIDIANO,
-    FORMAS_ABERTURA
 )
+from app.db.models.habilidade import HabilidadeEnem
+from app.db.models.questao_enem import QuestaoEnem
+from app.db.models.questao_inedita import QuestaoInedita
 from app.schemas.question import (
+    BatchPopulationItemResult,
+    BatchPopulationSummary,
     PipelineErrorCode,
     PipelineValidationError,
-    QuestaoEnunciadoSolverOutput,
-    QuestaoPlanejamentoEnunciadoOutput,
-    QuestaoBlindSolvingOutput,
-    QuestaoEquivalenciaOutput,
-    QuestaoAuditoriaSemanticaOutput,
-    BatchPopulationSummary,
-    BatchPopulationItemResult,
-    POT_PHASE1_JSON_SCHEMA,
     POT_PHASE1A_JSON_SCHEMA,
-    POT_PHASE1B_SOLVER_JSON_SCHEMA
+    POT_PHASE1B_SOLVER_JSON_SCHEMA,
+    QuestaoAuditoriaSemanticaOutput,
+    QuestaoBlindSolvingOutput,
+    QuestaoEnunciadoSolverOutput,
+    QuestaoEquivalenciaOutput,
+    QuestaoPlanejamentoEnunciadoOutput,
 )
-from pydantic import ValidationError
+from app.services.code_executor import (
+    assemble_alternatives_and_gabarito,
+    execute_solver_code,
+    validate_solver_complexity,
+    validate_solver_consistency,
+)
+from app.services.llm_client import LLMClient
+from app.services.question_validator import (
+    check_prohibited_terms,
+    extract_json_from_text,
+    format_enunciado_with_table,
+    sanitize_latex_json_text,
+    sanitize_parsed_dict_values,
+)
+from app.services.vectorstore import ChromaVectorStore
 
 logger = logging.getLogger(__name__)
 
@@ -94,10 +82,7 @@ _RETRY_HINTS_BY_CODE: Dict[PipelineErrorCode, str] = {
 
 
 def _classify_retry_hint(error: Union[PipelineErrorCode, PipelineValidationError, None]) -> Optional[str]:
-    """
-    Mapeia diretamente o código tipificado de falha (PipelineErrorCode) para uma diretriz curta
-    de 1 linha no Stateless Retry, sem busca por substring (A7).
-    """
+    """Mapeia o código de falha para a diretriz concisa de ajuste para a próxima tentativa."""
     if error is None:
         return None
     if isinstance(error, PipelineValidationError):
@@ -110,9 +95,7 @@ def _classify_retry_hint(error: Union[PipelineErrorCode, PipelineValidationError
 
 
 class QuestionService:
-    """
-    Serviço orquestrador para geração, validação e persistência de itens inéditos via RAG.
-    """
+    """Orquestrador de geração, validação e persistência de questões inéditas."""
 
     def __init__(
         self,
@@ -126,9 +109,7 @@ class QuestionService:
         self._habilidades_queries = self._load_habilidades_queries()
 
     def _load_habilidades_queries(self) -> Dict[str, Dict[str, Any]]:
-        """
-        Carrega as queries semânticas expandidas das 30 habilidades do ENEM geradas pelo Claude.
-        """
+        """Carrega metadados e queries de busca das 30 habilidades de Matemática do ENEM."""
         mapping = {}
         if os.path.exists(self.queries_path):
             try:
@@ -150,9 +131,7 @@ class QuestionService:
         return mapping
 
     def sortear_tipologia(self, habilidade_codigo: str, excluir: Optional[str] = None) -> Optional[str]:
-        """
-        Sorteia uma tipologia matemática específica para a habilidade a partir de habilidades_queries.json (B1).
-        """
+        """Sorteia uma tipologia de problema cadastrada para a habilidade informada."""
         clean_hab = habilidade_codigo.strip().upper()
         if clean_hab.startswith("H") and clean_hab[1:].isdigit():
             clean_hab = f"H{int(clean_hab[1:]):02d}"
@@ -169,22 +148,18 @@ class QuestionService:
         habilidade_codigo: str,
         k: int = 3
     ) -> List[QuestaoEnem]:
-        """
-        Recupera determinística ou aleatoriamente itens reais do acervo relacional (questoes_enem)
-        da mesma habilidade oficial para servirem de fallback.
-        """
+        """Recupera itens históricos diretamente do banco relacional como fallback."""
         clean_hab = habilidade_codigo.strip().upper()
         if clean_hab.startswith("H") and clean_hab[1:].isdigit():
             clean_hab = f"H{int(clean_hab[1:]):02d}"
 
-        exemplos = (
+        return (
             db.query(QuestaoEnem)
             .filter(QuestaoEnem.habilidade_codigo == clean_hab)
             .order_by(func.random())
             .limit(k)
             .all()
         )
-        return exemplos
 
     def retrieve_rag_few_shot_examples(
         self,
@@ -193,11 +168,7 @@ class QuestionService:
         top_candidates: int = 10,
         db: Optional[Session] = None
     ) -> List[Dict[str, Any]]:
-        """
-        Recupera os Top-candidates (padrão 10) itens históricos do ENEM mais similares
-        semanticamente no Pinecone (namespace 'questoes_enem') e sorteia k exemplos (padrão 2)
-        para compor o contexto few-shot, maximizando a diversidade e relevância.
-        """
+        """Recupera exemplos históricos mais similares no ChromaDB com fallback relacional."""
         clean_hab = habilidade_codigo.strip().upper()
         if clean_hab.startswith("H") and clean_hab[1:].isdigit():
             clean_hab = f"H{int(clean_hab[1:]):02d}"
@@ -258,7 +229,6 @@ class QuestionService:
         except Exception as e:
             logger.warning(f"Falha na recuperação RAG via ChromaDB para {clean_hab}: {e}. Acionando fallback relacional...")
 
-        # Fallback relacional no SQLite/PostgreSQL caso ChromaDB falhe ou não retorne resultados
         if db:
             itens_db = self.retrieve_few_shot_examples(db, clean_hab, k=k)
             return [
@@ -285,32 +255,18 @@ class QuestionService:
         tema: Optional[str] = None,
         abertura: Optional[str] = None
     ) -> QuestaoInedita:
-        """
-        Executa o pipeline RAG de geração de uma questão inédita via Program-Aided Generation (PoT):
-        1. Validação da habilidade na Matriz oficial do ENEM.
-        2. Retrieval RAG semântico dos Top-k exemplos no namespace 'questoes_enem' do Pinecone.
-        3. Geração via Program-Aided Generation (PoT):
-           - Fase 1: LLM gera planejamento, situação-problema e def resolver() em Python.
-           - Execução isolada em subprocess com timeout e verificação de AST de segurança.
-           - Validação de nexo numérico (groundedness) e unicidade estrita das 5 alternativas.
-           - Embaralhamento programático das alternativas e definição determinística do gabarito.
-           - Validação Cega em 3 Etapas (Resolução Cega + Equivalência + Auditoria Semântica).
-        4. Persistência na tabela questoes_ineditas no PostgreSQL.
-        """
+        """Gera uma questão inédita validada para a habilidade informada via pipeline PoT."""
         clean_hab = habilidade_codigo.strip().upper()
         if clean_hab.startswith("H") and clean_hab[1:].isdigit():
             clean_hab = f"H{int(clean_hab[1:]):02d}"
 
-        # 1. Valida se a habilidade existe na Matriz oficial
         habilidade = db.get(HabilidadeEnem, clean_hab)
         if not habilidade:
             raise ValueError(f"Habilidade '{clean_hab}' não encontrada na Matriz de Referência do ENEM.")
 
-        # 2. Sorteia contexto criativo caso não tenha sido fixado
         if not tema and not abertura:
             tema, abertura = sortear_contexto_criativo()
 
-        # 3. Retrieval RAG semântico no Pinecone (Top-k exemplos mais similares)
         few_shot_dicts = self.retrieve_rag_few_shot_examples(
             habilidade_codigo=clean_hab,
             k=num_few_shot,
@@ -339,15 +295,11 @@ class QuestionService:
         tema: Optional[str] = None,
         abertura: Optional[str] = None
     ) -> QuestaoInedita:
-        """
-        Geração Program-Aided (PoT) com execução de código, checagem de nexo numérico
-        e montagem algorítmica de alternativas/gabarito.
-        """
+        """Executa o ciclo iterativo de geração, execução do solver e validação em 3 etapas."""
         clean_hab = habilidade.codigo
         if not tema and not abertura:
             tema, abertura = sortear_contexto_criativo()
 
-        # Recupera até 3 enunciados recentes aprovados para a mesma habilidade a fim de evitar repetição temática
         enunciados_recentes: List[str] = []
         if db is not None:
             try:
@@ -374,17 +326,14 @@ class QuestionService:
 
         last_error: Optional[str] = None
         last_error_code: Optional[PipelineErrorCode] = None
-        enunciado_anterior: Optional[str] = None
-        solver_anterior: Optional[str] = None
         curr_tipologia: Optional[str] = None
 
         for attempt in range(1, max_attempts + 1):
-            # Se for retry após falha estrutural, aplica amostragem independente (Stateless Retry)
-            # passando apenas uma diretriz curta da categoria do erro anterior (sem o rascunho/código)
             retry_hint: Optional[str] = None
             attempt_seed = random.randint(1, 2_000_000_000)
             base_temp = min(temperature, 0.3)
             curr_tipologia = self.sortear_tipologia(clean_hab, excluir=curr_tipologia)
+
             if attempt > 1:
                 curr_tema, curr_abertura = sortear_contexto_criativo()
                 curr_few_shot = self.retrieve_rag_few_shot_examples(
@@ -395,7 +344,7 @@ class QuestionService:
                 curr_temp = round(min(base_temp + 0.05 * (attempt - 1), 0.3), 2)
                 retry_hint = _classify_retry_hint(last_error_code)
                 logger.info(
-                    f"PoT Stateless Retry: Tentativa limpa {attempt}/{max_attempts} para {clean_hab} "
+                    f"PoT Retry: Tentativa {attempt}/{max_attempts} para {clean_hab} "
                     f"(Novo tema: '{curr_tema}' | Tipologia: '{curr_tipologia}' | Temp: {curr_temp:.2f} | Seed: {attempt_seed} | Código: {last_error_code} | Alerta: '{retry_hint}')..."
                 )
             else:
@@ -408,7 +357,6 @@ class QuestionService:
                     f"(Tipologia: '{curr_tipologia}' | Temp: {curr_temp:.2f} | Seed: {attempt_seed})..."
                 )
 
-            # Chamada 1a: Planejamento, Enunciado, Tabela e 4 Erros Típicos
             prompt_1a = build_enunciado_plan_only_prompt(
                 habilidade_codigo=habilidade.codigo,
                 habilidade_descricao=habilidade.descricao,
@@ -450,8 +398,6 @@ class QuestionService:
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na Etapa 1a: {e}")
                 continue
 
-            # Chamada 1b: Geração estrita do solver em Python condicionado a 1a (temperatura baixa)
-            # Se raw_1a já continha solver (compatibilidade retroativa com stubs de teste de payload único), aproveita diretamente
             if isinstance(parsed_1a, dict) and "solver" in parsed_1a and "def resolver" in str(parsed_1a.get("solver", "")):
                 solver_code = str(parsed_1a["solver"])
             else:
@@ -489,13 +435,8 @@ class QuestionService:
                 "solver": solver_code
             }
 
-
-
-            # Validação do Schema Pydantic da Fase 1 (exige solver em Python)
             try:
                 pot_output = QuestaoEnunciadoSolverOutput(**parsed_data)
-                
-                # Conversão e higienização da tabela nativa para Markdown (se existir)
                 if pot_output.tabela_dados:
                     try:
                         pot_output.enunciado = format_enunciado_with_table(
@@ -504,9 +445,6 @@ class QuestionService:
                         )
                     except Exception as e:
                         logger.warning(f"Aviso ao formatar tabela_dados para Markdown: {e}")
-                
-                enunciado_anterior = pot_output.enunciado
-                solver_anterior = pot_output.solver
             except ValidationError as e:
                 err_locs = {loc_part for err in e.errors() for loc_part in err.get("loc", ())}
                 if "tabela_dados" in err_locs:
@@ -519,8 +457,6 @@ class QuestionService:
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou no schema Pydantic: {e}")
                 continue
 
-            # --- VALIDAÇÕES DETERMINÍSTICAS EM PYTHON (0ms) ---
-            # 1. Vazamento de termos técnicos de bastidor ('solver', 'python', 'código', etc.)
             ok_terms, err_terms = check_prohibited_terms(pot_output.enunciado)
             if not ok_terms:
                 last_error_code = PipelineErrorCode.TERMO_PROIBIDO
@@ -528,7 +464,6 @@ class QuestionService:
                 logger.warning(f"Tentativa {attempt}/{max_attempts} descartada por termo proibido: {err_terms}")
                 continue
 
-            # --- EXECUÇÃO DO SOLVER EM SUBPROCESS ISOLADO ---
             try:
                 solver_result = execute_solver_code(pot_output.solver, timeout=5)
             except Exception as e:
@@ -542,7 +477,6 @@ class QuestionService:
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na execução do código: {e}")
                 continue
 
-            # --- CHECAGEM DE CONSISTÊNCIA E NEXO NUMÉRICO (GROUNDEDNESS) ---
             try:
                 formatted_values = validate_solver_consistency(
                     enunciado=pot_output.enunciado,
@@ -560,10 +494,8 @@ class QuestionService:
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na checagem de nexo/complexidade: {e}")
                 continue
 
-            # --- MONTAGEM ALGORÍTMICA DE ALTERNATIVAS E GABARITO ---
             alternativas, gabarito = assemble_alternatives_and_gabarito(formatted_values)
 
-            # --- VALIDAÇÃO ETAPA 1: RESOLUÇÃO CEGA PURA (Zero Alternativas) ---
             try:
                 blind_sol = self._run_blind_solving(
                     enunciado=pot_output.enunciado,
@@ -575,7 +507,6 @@ class QuestionService:
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na resolução cega: {e}")
                 continue
 
-            # Validação Etapa 1b: Auto-relato de Premissas, Pergunta Respondível e Dados Ociosos (Early Exit)
             if not getattr(blind_sol, "pergunta_respondivel", True):
                 last_error_code = PipelineErrorCode.NAO_RESPONDIVEL
                 last_error = "O resolvedor cego apontou que a pergunta não é respondível numericamente com os dados fornecidos."
@@ -591,7 +522,7 @@ class QuestionService:
                 if premissas_reais:
                     last_error_code = PipelineErrorCode.PREMISSA_OCULTA
                     last_error = f"Premissas implícitas assumidas na resolução: {'; '.join(premissas_reais)}"
-                    logger.warning(f"Tentativa {attempt}/{max_attempts} descartada por premissa implícita (Early Exit): {last_error}")
+                    logger.warning(f"Tentativa {attempt}/{max_attempts} descartada por premissa implícita: {last_error}")
                     continue
 
             dados_ociosos = getattr(blind_sol, "dados_nao_utilizados", [])
@@ -603,10 +534,9 @@ class QuestionService:
                 if len(ociosos_reais) > 1:
                     last_error_code = PipelineErrorCode.DADOS_OCIOSOS
                     last_error = f"Dados ociosos em excesso no enunciado/tabela ({len(ociosos_reais)} não utilizados): {'; '.join(ociosos_reais)}"
-                    logger.warning(f"Tentativa {attempt}/{max_attempts} descartada por excesso de dados ociosos (Early Exit): {last_error}")
+                    logger.warning(f"Tentativa {attempt}/{max_attempts} descartada por excesso de dados ociosos: {last_error}")
                     continue
 
-            # --- VALIDAÇÃO ETAPA 2: CONFRONTO DIRETO DE EQUIVALÊNCIA (com Early Exit) ---
             try:
                 equiv = self._run_equivalence_check(
                     resultado_solver=solver_result["correta"],
@@ -623,12 +553,11 @@ class QuestionService:
                 motivo = equiv.explicacao_equivalencia or "Divergência conceitual ou numérica entre o solver e a resolução cega."
                 last_error = f"Divergência matemática no confronto: {motivo}"
                 logger.warning(
-                    f"Tentativa {attempt}/{max_attempts} descartada por divergência (Early Exit): "
+                    f"Tentativa {attempt}/{max_attempts} descartada por divergência: "
                     f"Solver='{solver_result['correta']}' vs LLM='{blind_sol.resultado_obtido}' | Motivo: {motivo}"
                 )
                 continue
 
-            # --- VALIDAÇÃO ETAPA 3: AUDITORIA SEMÂNTICA E PEDAGÓGICA (Chamadas Sim/Não Separadas - B3) ---
             try:
                 audit = self._run_semantic_audit(
                     enunciado=pot_output.enunciado,
@@ -658,11 +587,10 @@ class QuestionService:
                 continue
 
             logger.info(
-                f"Item PoT para {clean_hab} gerado, comprovado e validado nas 3 etapas com sucesso na tentativa {attempt}! "
+                f"Item PoT para {clean_hab} gerado e validado com sucesso na tentativa {attempt}! "
                 f"Gabarito: {gabarito} ({alternativas[gabarito]})."
             )
 
-            # --- PERSISTÊNCIA NO POSTGRESQL ---
             scratchpad_header = (
                 f"# Planejamento PoT:\n# {pot_output.planejamento}\n\n"
                 if pot_output.planejamento
@@ -694,10 +622,7 @@ class QuestionService:
         tabela_dados: Optional[List[Dict[str, Any]]] = None,
         temperature: float = 0.0
     ) -> QuestaoBlindSolvingOutput:
-        """
-        Etapa 1 da Validação: Resolução Cega Pura.
-        A LLM recebe exclusivamente o enunciado (e tabela) e deduz a resolução e o resultado obtido.
-        """
+        """Etapa 1: Resolução cega pelo modelo apenas a partir do enunciado e dados."""
         prompt = build_blind_solving_prompt(
             enunciado=enunciado,
             tabela_dados=tabela_dados
@@ -723,13 +648,7 @@ class QuestionService:
         return QuestaoBlindSolvingOutput(**parsed)
 
     def _run_equivalence_check(self, resultado_solver: Any, resultado_obtido: Any) -> QuestaoEquivalenciaOutput:
-        """
-        Etapa 2 da Validação: Confronto Direto de Equivalência Matemática.
-        Avalia se a resposta calculada pelo solver e o resultado deduzido pela LLM são equivalentes.
-        Aplica atalho determinístico em Python (0ms) para igualdade exata ou numérica
-        antes de acionar o juiz LLM.
-        """
-        # 1. Atalho determinístico em Python (0ms) para igualdade textual ou numérica exata
+        """Etapa 2: Confronto de equivalência matemática entre solver e resolução cega."""
         s_solver = str(resultado_solver).strip()
         s_obtido = str(resultado_obtido).strip()
         if s_solver == s_obtido:
@@ -749,7 +668,6 @@ class QuestionService:
         except (ValueError, TypeError):
             pass
 
-        # 2. Confronto semântico via LLM quando há divergência de formato ou unidades (ex: 2500 vs R$ 2.500)
         prompt = build_equivalencia_gabarito_prompt(
             resultado_solver=resultado_solver,
             resultado_obtido=resultado_obtido
@@ -768,7 +686,6 @@ class QuestionService:
 
         if isinstance(parsed, dict):
             if "equivalentes" not in parsed:
-                # Suporte a variações semânticas se o modelo responder "sao_equivalentes"
                 parsed["equivalentes"] = bool(parsed.get("sao_equivalentes", True))
 
         return QuestaoEquivalenciaOutput(**parsed)
@@ -782,10 +699,7 @@ class QuestionService:
         habilidade_codigo: Optional[str] = None,
         habilidade_descricao: Optional[str] = None
     ) -> QuestaoAuditoriaSemanticaOutput:
-        """
-        Etapa 3 da Validação: Auditoria Semântica e Pedagógica em chamadas sim/não separadas (B3).
-        Executa uma chamada por critério (temperature=0.0, saída curta) com Early Exit ao detectar defeito.
-        """
+        """Etapa 3: Auditoria semântica e pedagógica por critérios com interrupção rápida."""
         flags: Dict[str, Any] = {c: False for c in AUDITORIA_CRITERIOS_B3}
         evidencias: List[str] = []
 
@@ -814,7 +728,6 @@ class QuestionService:
             if isinstance(parsed, dict) and "defeito" not in parsed and (
                 "incoerencia_ou_absurdo" in parsed or "possui_incoerencia" in parsed
             ):
-                # Compatibilidade com mocks de testes que retornam o objeto consolidado em chamada única
                 return QuestaoAuditoriaSemanticaOutput(**parsed)
 
             defeito = bool(parsed.get("defeito", False)) if isinstance(parsed, dict) else False
@@ -823,7 +736,6 @@ class QuestionService:
             if defeito:
                 if evidencia:
                     evidencias.append(f"[{criterio}] {evidencia}")
-                # Early Exit na Etapa 3 ao detectar o primeiro critério reprovado
                 break
 
         flags["analise"] = " | ".join(evidencias) if evidencias else "Item adequado."
@@ -837,13 +749,9 @@ class QuestionService:
         num_few_shot: int = 2,
         on_progress: Optional[Callable[[str, int, int, bool, Optional[str]], None]] = None
     ) -> BatchPopulationSummary:
-        """
-        Executa a geração em lote de questões inéditas para uma lista de habilidades
-        ou para todas as 30 habilidades cadastradas no ENEM.
-        """
+        """Gera lote de questões inéditas para as habilidades especificadas ou para todas as 30."""
         start_time = time.time()
 
-        # Se não especificou, busca todas as habilidades cadastradas na Matriz
         if not habilidades:
             all_habs = db.query(HabilidadeEnem).order_by(HabilidadeEnem.codigo).all()
             target_codes = [h.codigo for h in all_habs]
@@ -919,7 +827,7 @@ class QuestionService:
         skip: int = 0,
         limit: int = 50
     ) -> List[QuestaoInedita]:
-        """Consulta questões inéditas geradas com paginação e filtro por habilidade."""
+        """Consulta questões inéditas persistidas com paginação e filtro por habilidade."""
         query = db.query(QuestaoInedita)
         if habilidade_codigo:
             query = query.filter(QuestaoInedita.habilidade_codigo == habilidade_codigo.strip().upper())

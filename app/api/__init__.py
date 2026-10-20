@@ -1,3 +1,0 @@
-"""
-Módulo da API FastAPI.
-"""

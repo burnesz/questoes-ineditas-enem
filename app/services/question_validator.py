@@ -1,12 +1,11 @@
 """
-Validador estrutural e de integridade para questões inéditas geradas por LLM.
-Implementa as regras RN-Q01 (validação estrutural de unicidade) e RN-Q02 (conformidade com schema).
+Validador estrutural e de integridade para questões inéditas do ENEM.
 """
 
 import json
-import re
 import logging
-from typing import Union, Dict, Any, List, Optional, Tuple
+import re
+from typing import Any, Dict, List, Optional, Tuple, Union
 from pydantic import ValidationError
 
 from app.schemas.question import QuestaoIneditaLLMOutput
@@ -15,17 +14,12 @@ logger = logging.getLogger(__name__)
 
 
 def extract_json_from_text(text: str) -> str:
-    """
-    Localiza e extrai o bloco de JSON dentro de uma string de resposta do modelo,
-    mesmo que o modelo tenha incluído marcações markdown ```json ... ``` ou texto ao redor.
-    """
+    """Extrai o bloco JSON de uma resposta textual, suportando blocos markdown."""
     text = text.strip()
-    # 1. Procura bloco delimitado por ```json ... ```
     match_md = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL | re.IGNORECASE)
     if match_md:
         return match_md.group(1).strip()
 
-    # 2. Procura pelo primeiro '{' e último '}'
     first_brace = text.find("{")
     last_brace = text.rfind("}")
     if first_brace != -1 and last_brace != -1 and last_brace > first_brace:
@@ -36,23 +30,17 @@ def extract_json_from_text(text: str) -> str:
 
 def sanitize_latex_json_text(text: str) -> str:
     r"""
-    Sanitiza strings de JSON contendo expressões matemáticas em LaTeX antes do json.loads().
-    Resolve os seguintes problemas comuns gerados por LLMs:
-    1. Formfeed corrompido: '\f' no JSON vira \x0c, deixando 'rac{a}{b}' em vez de '\frac{a}{b}'.
-    2. Comandos LaTeX iniciados por caracteres válidos de escape JSON (\frac, \times, \right, \neq, \bar).
-    3. Qualquer barra simples antes de comandos LaTeX (\sqrt, \cdot, etc.) que seja escape inválido em JSON.
+    Sanitiza expressões matemáticas em LaTeX no JSON bruto antes do json.loads().
+    Normaliza formfeed (\x0c), escapes válidos do JSON e comandos comuns do LaTeX.
     """
     if not text:
         return text
 
-    # 1. Trata o caractere de controle form feed (chr(12) / \x0c) e resíduos literais
     text = text.replace("\x0crac", "\\\\frac")
     text = text.replace("\x0c", " ")
     text = text.replace(r"\x0crac", "\\\\frac")
     text = text.replace(r"\x0c", " ")
 
-    # 2. Comandos LaTeX específicos que começam com letras de escape do JSON (\f, \t, \r, \n, \b)
-    # Convertemos para barra dupla antes de qualquer outra operação:
     text = re.sub(r"(?<!\\)\\frac", r"\\\\frac", text)
     text = re.sub(r"(?<!\\)\\times", r"\\\\times", text)
     text = re.sub(r"(?<!\\)\\right", r"\\\\right", text)
@@ -60,29 +48,21 @@ def sanitize_latex_json_text(text: str) -> str:
     text = re.sub(r"(?<!\\)\\bar", r"\\\\bar", text)
     text = re.sub(r"(?<!\\)\\beta", r"\\\\beta", text)
 
-    # 3. Qualquer barra simples não duplicada que não seja um escape válido de JSON:
-    # No JSON, os escapes válidos são: \" \\ \/ \b \f \n \r \t \uXXXX
     text = re.sub(r'\\(?!["\\/bfnrt]|u[0-9a-fA-F]{4})', r"\\\\", text)
-
-    # 4. Corrige ocorrências de 'rac{' órfãs causadas por escape prévio de form feed
     text = re.sub(r"(?<![\\a-zA-Z])rac\{", r"\\frac{", text)
 
     return text
 
 
 def sanitize_parsed_dict_values(data: Any) -> Any:
-    """
-    Limpa recursivamente valores de strings no dicionário decodificado, garantindo que
-    quaisquer resíduos de form feed (\x0c) ou comandos LaTeX incompletos sejam restaurados.
-    """
+    """Limpa resíduos de form feed e normaliza comandos LaTeX em estruturas decodificadas."""
     if isinstance(data, str):
         val = data.replace("\x0crac", r"\frac")
         val = val.replace("\x0c", " ")
-        val = re.sub(r"(?<![\\a-zA-Z])rac\{", r"\\frac{", val)
-        return val
-    elif isinstance(data, dict):
+        return re.sub(r"(?<![\\a-zA-Z])rac\{", r"\\frac{", val)
+    if isinstance(data, dict):
         return {k: sanitize_parsed_dict_values(v) for k, v in data.items()}
-    elif isinstance(data, list):
+    if isinstance(data, list):
         return [sanitize_parsed_dict_values(v) for v in data]
     return data
 
@@ -95,10 +75,8 @@ def check_command_gabarito_alignment(
     scratchpad: Optional[str] = None
 ) -> Tuple[bool, Optional[str]]:
     """
-    Valida a consistência semântica entre o comando da questão e a alternativa indicada no gabarito:
-    Detecta o erro clássico de 'Shortcut Reasoning' / parada em passo intermediário:
-    Ex: se o enunciado pede 'valor total' ou 'ao todo', e a justificativa/scratchpad calcula um produto final
-    (ex: N * unitário = total), o gabarito NÃO pode ser o valor unitário intermediário.
+    Valida consistência entre o comando final e a alternativa selecionada.
+    Evita que valores unitários intermediários sejam marcados quando o total é solicitado.
     """
     clean_enunciado = enunciado.lower()
     clean_just = justificativa.lower()
@@ -107,10 +85,8 @@ def check_command_gabarito_alignment(
 
     alt_escolhida = alternativas.get(gabarito, "").strip()
 
-    # Checagem de 'valor total' vs 'valor unitário':
     asks_for_total = any(k in clean_enunciado for k in ["valor total", "ao todo", "quantia total", "custo total", "total pago", "total arrecadado"])
     if asks_for_total:
-        # Procura multiplicações do tipo N * X = Y ou N x X = Y no raciocínio
         mult_match = re.search(r"(\d+)\s*(?:[xX*×]|vezes)\s*(\d+(?:[\.,]\d+)?)\s*=\s*(\d+(?:[\.,]\d+)?)", combined_reasoning)
         if mult_match:
             qtd, unit, total_val = mult_match.groups()
@@ -135,7 +111,7 @@ def check_command_gabarito_alignment(
 
 
 def _jaccard_similarity(text_a: str, text_b: str) -> float:
-    """Calcula a similaridade de Jaccard com base nos conjuntos de palavras."""
+    """Calcula a similaridade de Jaccard entre dois textos baseando-se no conjunto de palavras."""
     words_a = set(re.findall(r"\w+", text_a.lower()))
     words_b = set(re.findall(r"\w+", text_b.lower()))
     if not words_a or not words_b:
@@ -167,42 +143,15 @@ TABLE_INDICATOR_PATTERNS = [
 ]
 
 
-TABLE_INDICATOR_PATTERNS = [
-    r"\btabela\s+a\s+seguir\b",
-    r"\btabela\s+abaixo\b",
-    r"\bquadro\s+a\s+seguir\b",
-    r"\bquadro\s+abaixo\b",
-    r"\bapresentados?\s+na\s+tabela\b",
-    r"\bapresentadas?\s+na\s+tabela\b",
-    r"\bconstam\s+na\s+tabela\b",
-    r"\bconstam\s+no\s+quadro\b",
-    r"\bdados\s+da\s+tabela\b",
-    r"\bna\s+seguinte\s+tabela\b",
-    r"\bno\s+seguinte\s+quadro\b",
-    r"\bconforme\s+a\s+tabela\b",
-    r"\bconforme\s+o\s+quadro\b",
-    r"\bmostrad[oa]s?\s+na\s+tabela\b",
-    r"\bmostrad[oa]s?\s+no\s+quadro\b",
-    r"\bobservando\s+a\s+tabela\b",
-    r"\bobservando\s+o\s+quadro\b",
-    r"\bsegundo\s+a\s+tabela\b",
-]
-
-
 def check_table_markdown_structure(enunciado: str) -> Tuple[bool, Optional[str]]:
-    """
-    Verifica se enunciados que anunciam uma tabela possuem estrutura de tabela em Markdown válida.
-    Evita que o LLM achate dados tabulares em texto corrido e confuso.
-    """
+    """Verifica se enunciados que anunciam uma tabela possuem formatação tabular Markdown."""
     clean_text = enunciado.lower()
     announces_table = any(re.search(pat, clean_text) for pat in TABLE_INDICATOR_PATTERNS)
     if not announces_table:
         return True, None
 
-    # Verifica linhas com pipes
     lines = [line.strip() for line in enunciado.split("\n") if line.strip()]
     pipe_lines = [l for l in lines if "|" in l]
-    # Linha delimitadora clássica do Markdown: ex | --- | --- | ou |:---|:---:|
     has_delimiter = any(re.search(r"\|?\s*:?-{2,}:?\s*\|", l) for l in pipe_lines)
 
     if len(pipe_lines) >= 3 and has_delimiter:
@@ -221,29 +170,19 @@ def format_enunciado_with_table(
     enunciado: str,
     tabela_dados: Optional[List[Dict[str, Any]]]
 ) -> str:
-    """
-    Converte tabela_dados em uma tabela Markdown e anexa ao enunciado de forma idempotente e limpa:
-    1. Se tabela_dados for vazia ou None, retorna o enunciado inalterado.
-    2. Se o enunciado já contiver uma tabela Markdown com delimitadores (| --- |), não duplica.
-    3. Remove blocos redundantes de pseudo-tabelas ou listas introduzidas por 'Tabela ...:' que repetem os dados.
-    4. Anexa a tabela Markdown formatada ao enunciado.
-    """
+    """Converte lista de dicionários em tabela Markdown e anexa ao enunciado se ainda não presente."""
     if not tabela_dados or not isinstance(tabela_dados, list) or len(tabela_dados) == 0:
         return enunciado
 
-    # Monta a tabela Markdown canônica
     keys = list(tabela_dados[0].keys())
     md_table = "\n\n| " + " | ".join(keys) + " |\n"
     md_table += "| " + " | ".join(["---"] * len(keys)) + " |\n"
     for row in tabela_dados:
         md_table += "| " + " | ".join([str(row.get(k, "")) for k in keys]) + " |\n"
 
-    # 1. Se já existe uma tabela Markdown com linha divisória (| --- |), não anexa outra
     if re.search(r"\|(?:\s*:?-+:?\s*\|)+", enunciado):
         return enunciado
 
-    # 2. Higieniza eventuais pseudo-tabelas em texto simples ou listas de tópicos redundantes
-    # Padrão: 'Tabela ...:' seguido de linhas com marcadores (- ou *) ou barras verticais (|)
     clean_enunciado = re.sub(
         r"(?:\n\s*(?:Tabela|Quadro)[^\n:]*:\s*\n(?:[ \t]*[-*•|].*(?:\n|$))+)",
         "\n",
@@ -251,7 +190,6 @@ def format_enunciado_with_table(
         flags=re.IGNORECASE
     ).strip()
 
-    # Se após remoção ainda houver uma pseudo-tabela de pipes solta no final sem cabeçalho específico
     if "|" in clean_enunciado:
         lines = clean_enunciado.split("\n")
         non_pipe_lines = []
@@ -263,7 +201,7 @@ def format_enunciado_with_table(
             non_pipe_lines.append(line)
         if len(non_pipe_lines) < len(lines):
             candidate = "\n".join(reversed(non_pipe_lines)).strip()
-            if len(candidate) > 30:  # preserva o enunciado principal
+            if len(candidate) > 30:
                 clean_enunciado = candidate
 
     return clean_enunciado + md_table
@@ -273,20 +211,7 @@ def validate_questao_inedita(
     raw_output: Union[str, Dict[str, Any]],
     few_shot_exemplos: Optional[List[Dict[str, Any]]] = None
 ) -> Tuple[bool, Optional[str], Optional[QuestaoIneditaLLMOutput]]:
-    """
-    Realiza a validação estrutural e semântica obrigatória do item inédito antes de salvar no banco:
-    1. Parsing e conformidade com o schema Pydantic QuestaoIneditaLLMOutput (RN-Q02).
-    2. Sanitização de sintaxe LaTeX pré-parsing e pós-parsing.
-    3. Existência de exatamente 5 alternativas (A, B, C, D, E) com textos não vazios.
-    4. Gabarito válido e restrito a uma única letra ('A' a 'E').
-    5. Unicidade estrita das alternativas (RN-Q01: ausência de alternativas duplicadas).
-    6. Verificação de originalidade (não plagiar enunciados dos exemplos few-shot fornecidos).
-    7. Validação semântica de alinhamento comando-gabarito (mitigação de shortcut reasoning).
-    8. Validação estrutural de tabelas Markdown quando anunciadas.
-
-    Retorna: (is_valid, error_message, parsed_model_or_none)
-    """
-    # 1. Extração, sanitização de LaTeX e decodificação do JSON
+    """Valida formato estrutural, unicidade das alternativas, anti-plágio e tabelas da questão."""
     if isinstance(raw_output, dict):
         data = sanitize_parsed_dict_values(raw_output)
     else:
@@ -305,10 +230,8 @@ def validate_questao_inedita(
         logger.warning(msg)
         return False, msg, None
 
-    # 2. Validação via Pydantic Schema (inclui validação de alternativas e unicidade - RN-Q01 e RN-Q02)
     try:
         validated_item = QuestaoIneditaLLMOutput.model_validate(data)
-        
         if validated_item.tabela_dados:
             try:
                 validated_item.enunciado = format_enunciado_with_table(
@@ -317,7 +240,6 @@ def validate_questao_inedita(
                 )
             except Exception as e:
                 logger.warning(f"Aviso ao converter tabela_dados para Markdown no modo tradicional: {e}")
-                
     except ValidationError as e:
         error_details = []
         for err in e.errors():
@@ -328,7 +250,6 @@ def validate_questao_inedita(
         logger.warning(msg)
         return False, msg, None
 
-    # 3. Verificação de anti-plágio com exemplos few-shot (não permitir cópia literal do banco)
     if few_shot_exemplos:
         enunciado_gerado = validated_item.enunciado
         for ex in few_shot_exemplos:
@@ -341,7 +262,6 @@ def validate_questao_inedita(
                 logger.warning(msg)
                 return False, msg, None
 
-    # 4. Validação semântica de alinhamento comando-gabarito
     is_aligned, align_error = check_command_gabarito_alignment(
         enunciado=validated_item.enunciado,
         alternativas=validated_item.alternativas,
@@ -352,7 +272,6 @@ def validate_questao_inedita(
     if not is_aligned:
         return False, align_error, None
 
-    # 5. Validação estrutural de tabelas Markdown quando anunciadas
     is_table_valid, table_error = check_table_markdown_structure(validated_item.enunciado)
     if not is_table_valid:
         logger.warning(table_error)
@@ -362,10 +281,7 @@ def validate_questao_inedita(
 
 
 def check_prohibited_terms(text: str) -> Tuple[bool, Optional[str]]:
-    """
-    Verifica deterministicamente via regex se o texto contém palavras de bastidores técnicos proibidas.
-    Evita vazamento de termos como 'solver', 'python', 'código', 'algoritmo', 'distrator' e 'gabarito'.
-    """
+    """Detecta vazamento de termos técnicos internos no enunciado da questão."""
     if not text:
         return True, None
 
@@ -385,10 +301,7 @@ def check_prohibited_terms(text: str) -> Tuple[bool, Optional[str]]:
 
 
 def check_table_duplication(enunciado: str, tabela_dados: Optional[List[Dict[str, Any]]]) -> Tuple[bool, Optional[str]]:
-    """
-    Verifica se o enunciado duplicou dados da tabela em formato tabular Markdown cru (com pipes '|').
-    No pipeline PoT, os dados residem exclusivamente em tabela_dados e são formatados pelo sistema.
-    """
+    """Verifica se o enunciado duplicou a estrutura da tabela quando tabela_dados é fornecida."""
     if not tabela_dados or not enunciado:
         return True, None
     if "|" in enunciado:
@@ -397,11 +310,7 @@ def check_table_duplication(enunciado: str, tabela_dados: Optional[List[Dict[str
 
 
 def validate_tabela_dados(tabela_dados: Optional[List[Dict[str, Any]]]) -> Tuple[bool, Optional[str]]:
-    """
-    Valida a integridade estrutural de tabela_dados (A3):
-    1. Máximo de 6 linhas.
-    2. Todas as linhas devem ter exatamente as mesmas chaves.
-    """
+    """Valida que tabela_dados possui até 6 linhas e colunas uniformes em todas as linhas."""
     if tabela_dados is None:
         return True, None
     if not isinstance(tabela_dados, list):
@@ -420,5 +329,3 @@ def validate_tabela_dados(tabela_dados: Optional[List[Dict[str, Any]]]) -> Tuple
                     f"Esperado {expected_keys}, linha {idx} possui {list(row.keys()) if isinstance(row, dict) else type(row).__name__}."
                 )
     return True, None
-
-
