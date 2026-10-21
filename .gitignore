@@ -10,3 +10,5 @@ test_chroma_data/
 .env
 .coverage
 htmlcov/
+AGENTS.md
+docs/*.md
