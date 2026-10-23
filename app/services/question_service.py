@@ -408,7 +408,7 @@ class QuestionService:
                     erros_tipicos=plan_out.erros_tipicos,
                     alerta_tentativa_anterior=retry_hint
                 )
-                solver_temp = round(min(curr_temp, 0.1), 2)
+                solver_temp = 0.0
                 try:
                     raw_1b = self.llm_client.generate(
                         prompt=prompt_1b,
