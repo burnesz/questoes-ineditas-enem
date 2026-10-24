@@ -1,7 +1,7 @@
 import pytest
 import uuid
 import json
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
@@ -1110,5 +1110,58 @@ def test_relational_persistence_all_attempts_failed():
             assert q_out.enunciado is None
     finally:
         db.close()
+
+
+def test_generate_single_questao_inedita_rejects_disabled_habilidades():
+    """Verifica que a tentativa de gerar H06 ou H20 levanta HabilidadeDesabilitadaError imediatamente."""
+    from app.schemas.question import HabilidadeDesabilitadaError
+
+    db = TestingSessionLocal()
+    try:
+        mock_llm = MagicMock(spec=LLMClient)
+        mock_vs = MagicMock(spec=ChromaVectorStore)
+        service = QuestionService(llm_client=mock_llm, vector_store=mock_vs)
+
+        for hab_code in ["H06", "H6", "6", "H20", "20"]:
+            with pytest.raises(HabilidadeDesabilitadaError) as exc_info:
+                service.generate_single_questao_inedita(
+                    db=db,
+                    habilidade_codigo=hab_code,
+                    max_attempts=1
+                )
+            assert "está desabilitada" in str(exc_info.value)
+            assert "interpretação visual" in str(exc_info.value)
+
+        # Não deve haver chamadas ao LLM nem ao vector_store
+        assert mock_llm.generate.call_count == 0
+        assert mock_vs.search.call_count == 0
+    finally:
+        db.close()
+
+
+def test_generate_batch_excludes_disabled_habilidades_by_default():
+    """Verifica que generate_batch sem lista explícita processa apenas as 28 habilidades ativas."""
+    db = TestingSessionLocal()
+    try:
+        mock_llm = MagicMock(spec=LLMClient)
+        mock_vs = MagicMock(spec=ChromaVectorStore)
+        service = QuestionService(llm_client=mock_llm, vector_store=mock_vs)
+
+        # Mock generate_single_questao_inedita para não executar o LLM
+        with patch.object(service, "generate_single_questao_inedita") as mock_gen_single:
+            mock_item = MagicMock()
+            mock_item.id = uuid.uuid4()
+            mock_item.ciclo.total_tentativas = 1
+            mock_gen_single.return_value = mock_item
+
+            summary = service.generate_batch(db=db, habilidades=None, count_per_habilidade=1)
+            # No banco de teste, temos apenas H01 populada
+            # mas vamos garantir que target_codes nunca inclui H06 nem H20
+            chamadas_habs = [call.kwargs.get("habilidade_codigo") for call in mock_gen_single.call_args_list]
+            assert "H06" not in chamadas_habs
+            assert "H20" not in chamadas_habs
+    finally:
+        db.close()
+
 
 

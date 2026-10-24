@@ -32,6 +32,9 @@ from app.db.models.tentativa_geracao import TentativaGeracao
 from app.schemas.question import (
     BatchPopulationItemResult,
     BatchPopulationSummary,
+    HABILIDADES_DESABILITADAS,
+    HabilidadeDesabilitadaError,
+    MOTIVOS_HABILIDADES_DESABILITADAS,
     PipelineErrorCode,
     PipelineValidationError,
     POT_PHASE1A_JSON_SCHEMA,
@@ -261,6 +264,11 @@ class QuestionService:
         clean_hab = habilidade_codigo.strip().upper()
         if clean_hab.startswith("H") and clean_hab[1:].isdigit():
             clean_hab = f"H{int(clean_hab[1:]):02d}"
+        elif clean_hab.isdigit():
+            clean_hab = f"H{int(clean_hab):02d}"
+
+        if clean_hab in HABILIDADES_DESABILITADAS:
+            raise HabilidadeDesabilitadaError(clean_hab)
 
         habilidade = db.get(HabilidadeEnem, clean_hab)
         if not habilidade:
@@ -859,14 +867,21 @@ class QuestionService:
         num_few_shot: int = 2,
         on_progress: Optional[Callable[[str, int, int, bool, Optional[str]], None]] = None
     ) -> BatchPopulationSummary:
-        """Gera lote de questões inéditas para as habilidades especificadas ou para todas as 30."""
+        """Gera lote de questões inéditas para as habilidades especificadas ou para todas as ativas (28)."""
         start_time = time.time()
 
         if not habilidades:
             all_habs = db.query(HabilidadeEnem).order_by(HabilidadeEnem.codigo).all()
-            target_codes = [h.codigo for h in all_habs]
+            target_codes = [h.codigo for h in all_habs if h.codigo not in HABILIDADES_DESABILITADAS]
         else:
-            target_codes = [h.strip().upper() for h in habilidades]
+            target_codes = []
+            for h in habilidades:
+                c = h.strip().upper()
+                if c.startswith("H") and c[1:].isdigit():
+                    c = f"H{int(c[1:]):02d}"
+                elif c.isdigit():
+                    c = f"H{int(c):02d}"
+                target_codes.append(c)
 
         results: List[BatchPopulationItemResult] = []
         total_success = 0
@@ -876,6 +891,11 @@ class QuestionService:
         failed_habilidades = []
 
         for hab_code in target_codes:
+            if hab_code in HABILIDADES_DESABILITADAS:
+                logger.warning(
+                    f"A habilidade {hab_code} está desabilitada para geração e registrará falha. "
+                    f"Motivo: {MOTIVOS_HABILIDADES_DESABILITADAS.get(hab_code, '')}"
+                )
             for item_idx in range(1, count_per_habilidade + 1):
                 current_op += 1
                 op_start = time.time()

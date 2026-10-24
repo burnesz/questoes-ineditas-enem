@@ -87,6 +87,7 @@ def test_cli_stats(capsys):
     captured = capsys.readouterr().out
     assert "ESTATÍSTICAS E STATUS DO SISTEMA" in captured
     assert "Habilidade" in captured
+    assert "28 ativas, 2 desabilitadas: H06, H20" in captured
 
 
 def test_cli_list(capsys):
@@ -174,3 +175,35 @@ def test_cli_generate_mock(capsys, monkeypatch):
         captured = capsys.readouterr().out
         assert "RELATÓRIO FINAL DE GERAÇÃO" in captured
         assert "Questões Geradas com Sucesso: 1" in captured
+
+
+def test_cli_generate_blocked_habilidade_fails(capsys):
+    """Verifica que solicitar geração de H06 ou H20 isoladamente cancela e retorna código 1."""
+    ret = main(["generate", "--habilidades", "H06", "--mock"])
+    assert ret == 1
+    captured = capsys.readouterr().out
+    assert "Geração bloqueada para a(s) habilidade(s): H06" in captured
+    assert "interpretação visual" in captured
+    assert "Operação cancelada" in captured
+
+    ret2 = main(["generate", "--habilidades", "H20", "--mock"])
+    assert ret2 == 1
+    captured2 = capsys.readouterr().out
+    assert "Geração bloqueada para a(s) habilidade(s): H20" in captured2
+
+
+def test_cli_generate_blocked_mixed_filters_and_continues(capsys):
+    """Verifica que solicitar H01 e H20 alerta sobre H20 mas continua a geração de H01."""
+    with patch("app.cli.ChromaVectorStore") as mock_vstore_cls:
+        mock_vstore = MagicMock()
+        mock_vstore.search.return_value = []
+        mock_vstore_cls.return_value = mock_vstore
+
+        ret = main(["generate", "--habilidades", "H01,H20", "--count", "1", "--mock", "--non-interactive"])
+        assert ret == 0
+        captured = capsys.readouterr().out
+        assert "Geração bloqueada para a(s) habilidade(s): H20" in captured
+        assert "Continuando a geração apenas para as habilidades ativas: H01" in captured
+        assert "RELATÓRIO FINAL DE GERAÇÃO" in captured
+        assert "Questões Geradas com Sucesso: 1" in captured
+

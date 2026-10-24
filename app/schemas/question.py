@@ -40,6 +40,35 @@ class PipelineValidationError(ValueError):
         self.message = message
 
 
+HABILIDADES_DESABILITADAS: frozenset[str] = frozenset({"H06", "H20"})
+
+MOTIVOS_HABILIDADES_DESABILITADAS: Dict[str, str] = {
+    "H06": (
+        "Habilidade H06 (localização e movimentação em mapas, croquis e representações bidimensionais) "
+        "desabilitada: requer interpretação visual e possui amostragem insuficiente sem imagem nos microdados históricos "
+        "extrapolando a delimitação deste projeto para LLMs exclusivamente textuais."
+    ),
+    "H20": (
+        "Habilidade H20 (interpretação de gráfico cartesiano representando relações entre grandezas) "
+        "desabilitada: requer interpretação visual de curvas e gráficos cartesianos e possui amostragem insuficiente sem imagem nos "
+        "microdados históricos, extrapolando a delimitação deste projeto para LLMs exclusivamente textuais."
+    ),
+}
+
+
+class HabilidadeDesabilitadaError(ValueError):
+    """Exceção levantada ao tentar gerar questões para habilidades desabilitadas (H06 ou H20)."""
+
+    def __init__(self, habilidade_codigo: str, message: Optional[str] = None):
+        self.habilidade_codigo = habilidade_codigo
+        msg = message or (
+            f"A geração de questões para a habilidade '{habilidade_codigo}' está desabilitada. "
+            f"Motivo: {MOTIVOS_HABILIDADES_DESABILITADAS.get(habilidade_codigo, 'Habilidade desabilitada por requerer interpretação visual e amostragem histórica insuficiente sem imagens.')}"
+        )
+        super().__init__(msg)
+        self.message = msg
+
+
 class QuestaoEnunciadoSolverOutput(BaseModel):
     """
     Schema estruturado para a Fase 1 da geração Program-Aided (PoT):
