@@ -101,11 +101,11 @@ def test_generate_single_questao_inedita_pot_success():
 
         # Validação Etapa 3: Auditoria Semântica
         resp_audit = json.dumps({
-            "possui_incoerencia": False,
-            "possui_ambiguidade": False,
-            "deficit_informacoes": False,
-            "erros_ou_vazamentos": False,
-            "duplicacao_tabelas": False
+            "analise": "Item adequado",
+            "incoerencia_ou_absurdo": False,
+            "comando_ambiguo_ou_incompativel": False,
+            "deficit_ou_contradicao": False,
+            "complexidade_insuficiente": False
         })
 
         mock_llm.generate.side_effect = [resp_fase1, resp_blind, resp_equiv, resp_audit]
@@ -161,11 +161,11 @@ def test_generate_single_questao_inedita_pot_retry_on_solver_error():
             "explicacao_equivalencia": "50 e 50 km/h são equivalentes."
         })
         resp_audit = json.dumps({
-            "possui_incoerencia": False,
-            "possui_ambiguidade": False,
-            "deficit_informacoes": False,
-            "erros_ou_vazamentos": False,
-            "duplicacao_tabelas": False
+            "analise": "Item adequado",
+            "incoerencia_ou_absurdo": False,
+            "comando_ambiguo_ou_incompativel": False,
+            "deficit_ou_contradicao": False,
+            "complexidade_insuficiente": False
         })
 
         mock_llm.generate.side_effect = [resp_fase1_erro, resp_fase1_ok, resp_blind, resp_equiv, resp_audit]
@@ -240,11 +240,11 @@ def test_generate_batch_success():
             "explicacao_equivalencia": "5600 coincide exatamente."
         })
         resp_audit = json.dumps({
-            "possui_incoerencia": False,
-            "possui_ambiguidade": False,
-            "deficit_informacoes": False,
-            "erros_ou_vazamentos": False,
-            "duplicacao_tabelas": False
+            "analise": "Item adequado",
+            "incoerencia_ou_absurdo": False,
+            "comando_ambiguo_ou_incompativel": False,
+            "deficit_ou_contradicao": False,
+            "complexidade_insuficiente": False
         })
         mock_llm.generate.side_effect = [resp_pot, resp_blind, resp_equiv, resp_audit]
 
@@ -289,11 +289,11 @@ def test_generate_pot_item_with_tabela_dados_clean_markdown():
             "explicacao_equivalencia": "35 e 35 m³ são equivalentes."
         })
         resp_audit = json.dumps({
-            "possui_incoerencia": False,
-            "possui_ambiguidade": False,
-            "deficit_informacoes": False,
-            "erros_ou_vazamentos": False,
-            "duplicacao_tabelas": False
+            "analise": "Item adequado",
+            "incoerencia_ou_absurdo": False,
+            "comando_ambiguo_ou_incompativel": False,
+            "deficit_ou_contradicao": False,
+            "complexidade_insuficiente": False
         })
         mock_llm.generate.side_effect = [resp_pot, resp_blind, resp_equiv, resp_audit]
 
@@ -345,11 +345,11 @@ def test_generate_pot_item_sanitizes_duplicate_inline_pseudo_table():
             "explicacao_equivalencia": "Ambos 10h00."
         })
         resp_audit = json.dumps({
-            "possui_incoerencia": False,
-            "possui_ambiguidade": False,
-            "deficit_informacoes": False,
-            "erros_ou_vazamentos": False,
-            "duplicacao_tabelas": False
+            "analise": "Item adequado",
+            "incoerencia_ou_absurdo": False,
+            "comando_ambiguo_ou_incompativel": False,
+            "deficit_ou_contradicao": False,
+            "complexidade_insuficiente": False
         })
         mock_llm.generate.side_effect = [resp_pot, resp_blind, resp_equiv, resp_audit]
 
@@ -400,11 +400,11 @@ def test_generate_pot_item_sanitizes_duplicate_bullet_list():
             "explicacao_equivalencia": "Ambos 0.8."
         })
         resp_audit = json.dumps({
-            "possui_incoerencia": False,
-            "possui_ambiguidade": False,
-            "deficit_informacoes": False,
-            "erros_ou_vazamentos": False,
-            "duplicacao_tabelas": False
+            "analise": "Item adequado",
+            "incoerencia_ou_absurdo": False,
+            "comando_ambiguo_ou_incompativel": False,
+            "deficit_ou_contradicao": False,
+            "complexidade_insuficiente": False
         })
         mock_llm.generate.side_effect = [resp_pot, resp_blind, resp_equiv, resp_audit]
 
@@ -460,11 +460,11 @@ def test_three_stage_validation_mismatch_triggers_early_exit():
             "explicacao_equivalencia": "15 e 15 são equivalentes."
         })
         t2_audit = json.dumps({
-            "possui_incoerencia": False,
-            "possui_ambiguidade": False,
-            "deficit_informacoes": False,
-            "erros_ou_vazamentos": False,
-            "duplicacao_tabelas": False
+            "analise": "Item adequado",
+            "incoerencia_ou_absurdo": False,
+            "comando_ambiguo_ou_incompativel": False,
+            "deficit_ou_contradicao": False,
+            "complexidade_insuficiente": False
         })
 
         mock_llm.generate.side_effect = [
@@ -508,11 +508,11 @@ def test_three_stage_validation_semantic_failure_rejects():
             "explicacao_equivalencia": "Equivalentes."
         })
         t1_audit = json.dumps({
-            "possui_incoerencia": False,
-            "possui_ambiguidade": False,
-            "deficit_informacoes": True,  # Defeito detectado!
-            "erros_ou_vazamentos": False,
-            "duplicacao_tabelas": False
+            "analise": "Falta tempo no enunciado",
+            "incoerencia_ou_absurdo": False,
+            "comando_ambiguo_ou_incompativel": False,
+            "deficit_ou_contradicao": True,  # Defeito detectado!
+            "complexidade_insuficiente": False
         })
 
         # 2ª tentativa: Sucesso pleno
@@ -529,11 +529,11 @@ def test_three_stage_validation_semantic_failure_rejects():
             "explicacao_equivalencia": "Equivalentes."
         })
         t2_audit = json.dumps({
-            "possui_incoerencia": False,
-            "possui_ambiguidade": False,
-            "deficit_informacoes": False,
-            "erros_ou_vazamentos": False,
-            "duplicacao_tabelas": False
+            "analise": "Item adequado",
+            "incoerencia_ou_absurdo": False,
+            "comando_ambiguo_ou_incompativel": False,
+            "deficit_ou_contradicao": False,
+            "complexidade_insuficiente": False
         })
 
         mock_llm.generate.side_effect = [

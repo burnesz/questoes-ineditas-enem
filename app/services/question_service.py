@@ -704,9 +704,9 @@ class QuestionService:
             if not audit.aprovada:
                 if audit.complexidade_insuficiente:
                     last_error_code = PipelineErrorCode.COMPLEXIDADE
-                elif audit.comando_ambiguo_ou_incompativel or audit.possui_ambiguidade or audit.desalinhamento_comando_grandeza:
+                elif audit.comando_ambiguo_ou_incompativel or audit.desalinhamento_comando_grandeza:
                     last_error_code = PipelineErrorCode.NAO_RESPONDIVEL
-                elif audit.deficit_ou_contradicao or audit.deficit_informacoes:
+                elif audit.deficit_ou_contradicao:
                     last_error_code = PipelineErrorCode.PREMISSA_OCULTA
                 else:
                     last_error_code = PipelineErrorCode.AUDITORIA
@@ -837,9 +837,7 @@ class QuestionService:
             parsed = json.loads(sanitized, strict=False)
             parsed = sanitize_parsed_dict_values(parsed)
 
-            if isinstance(parsed, dict) and "defeito" not in parsed and (
-                "incoerencia_ou_absurdo" in parsed or "possui_incoerencia" in parsed
-            ):
+            if isinstance(parsed, dict) and "defeito" not in parsed and "incoerencia_ou_absurdo" in parsed:
                 return QuestaoAuditoriaSemanticaOutput(**parsed)
 
             defeito = bool(parsed.get("defeito", False)) if isinstance(parsed, dict) else False

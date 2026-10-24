@@ -295,40 +295,25 @@ class QuestaoAuditoriaSemanticaOutput(BaseModel):
         description="True se o item for trivial demais para o ENEM (operação direta única)."
     )
 
-    # Campos legados mantidos para compatibilidade retroativa com testes
-    possui_incoerencia: Optional[bool] = None
-    possui_ambiguidade: Optional[bool] = None
-    deficit_informacoes: Optional[bool] = None
-    erros_ou_vazamentos: Optional[bool] = None
-    duplicacao_tabelas: Optional[bool] = None
-
     @property
     def aprovada(self) -> bool:
-        novas_flags = [
+        return not any([
             self.incoerencia_ou_absurdo,
             self.comando_ambiguo_ou_incompativel,
             self.deficit_ou_contradicao,
             self.desalinhamento_comando_grandeza,
             self.fuga_habilidade_alvo,
             self.complexidade_insuficiente
-        ]
-        flags_legadas = [
-            bool(self.possui_incoerencia),
-            bool(self.possui_ambiguidade),
-            bool(self.deficit_informacoes),
-            bool(self.erros_ou_vazamentos),
-            bool(self.duplicacao_tabelas)
-        ]
-        return not any(novas_flags) and not any(flags_legadas)
+        ])
 
     @property
     def motivo_rejeicao(self) -> Optional[str]:
         motivos = []
-        if self.incoerencia_ou_absurdo or self.possui_incoerencia:
+        if self.incoerencia_ou_absurdo:
             motivos.append("Incoerência semântica ou física na situação-problema.")
-        if self.comando_ambiguo_ou_incompativel or self.possui_ambiguidade:
+        if self.comando_ambiguo_ou_incompativel:
             motivos.append("Comando ambíguo, sem unidade clara ou incompatível com resposta numérica.")
-        if self.deficit_ou_contradicao or self.deficit_informacoes:
+        if self.deficit_ou_contradicao:
             motivos.append("Déficit de dados essenciais ou contradição entre texto e tabela.")
         if self.desalinhamento_comando_grandeza:
             motivos.append("Desalinhamento entre a grandeza definida no enunciado e o que o comando final pergunta.")
@@ -336,82 +321,9 @@ class QuestaoAuditoriaSemanticaOutput(BaseModel):
             motivos.append("A questão não exige a habilidade-alvo da Matriz de Referência do ENEM.")
         if self.complexidade_insuficiente:
             motivos.append("Complexidade insuficiente para o ENEM (item trivial de operação direta).")
-        if self.erros_ou_vazamentos:
-            motivos.append("Presença de erros gramaticais ou termos proibidos de código.")
-        if self.duplicacao_tabelas:
-            motivos.append("Redundância ou repetição de dados da tabela no enunciado.")
         if self.analise and not self.aprovada:
             motivos.append(f"Análise do Revisor: {self.analise}")
         return " | ".join(motivos) if motivos else None
-
-
-class QuestaoIneditaLLMOutput(BaseModel):
-    """
-    Schema estrito para a saída estruturada do LLM Qwen 2.5 via Ollama (format='json').
-    """
-    enunciado: str = Field(
-        ...,
-        description="Texto-base contextualizado e comando da questão, no padrão do ENEM."
-    )
-    tabela_dados: Optional[List[Dict[str, Any]]] = Field(
-        None,
-        description="Se o problema envolver tabela de dados, coloque-a aqui como uma lista de dicionários (cada dicionário é uma linha)."
-    )
-    alternativas: Dict[str, str] = Field(
-        ...,
-        description="Dicionário com exatamente 5 alternativas identificadas pelas chaves 'A', 'B', 'C', 'D' e 'E'."
-    )
-    gabarito: str = Field(
-        ...,
-        description="Letra da alternativa correta única ('A', 'B', 'C', 'D' ou 'E')."
-    )
-    justificativa: str = Field(
-        ...,
-        description="Resolução detalhada passo a passo e justificativa do porquê dos distratores estarem incorretos."
-    )
-    thought_scratchpad: Optional[str] = Field(
-        None,
-        description="Raciocínio Chain-of-Thought interno percorrido pelo modelo durante o planejamento do item."
-    )
-
-    @field_validator("gabarito")
-    @classmethod
-    def validate_gabarito(cls, v: str) -> str:
-        clean_v = v.strip().upper()
-        if clean_v not in {"A", "B", "C", "D", "E"}:
-            raise ValueError(f"Gabarito deve ser exatamente uma das letras A, B, C, D ou E. Recebido: '{v}'")
-        return clean_v
-
-    @field_validator("alternativas")
-    @classmethod
-    def validate_alternativas(cls, v: Dict[str, str]) -> Dict[str, str]:
-        expected_keys = {"A", "B", "C", "D", "E"}
-        normalized_keys = {k.strip().upper(): str(val).strip() for k, val in v.items()}
-        
-        if set(normalized_keys.keys()) != expected_keys:
-            raise ValueError(
-                f"As alternativas devem conter exatamente as chaves A, B, C, D, E. "
-                f"Chaves recebidas: {sorted(list(normalized_keys.keys()))}"
-            )
-
-        for letter, text in normalized_keys.items():
-            if not text:
-                raise ValueError(f"O texto da alternativa '{letter}' não pode ser vazio.")
-
-        # RN-Q01: Ausência de alternativas duplicadas
-        vals = [text.strip().lower() for text in normalized_keys.values()]
-        if len(set(vals)) != len(vals):
-            raise ValueError("RN-Q01 violada: foram encontradas alternativas com textos idênticos/duplicados.")
-
-        return normalized_keys
-
-    @field_validator("enunciado")
-    @classmethod
-    def validate_enunciado(cls, v: str) -> str:
-        clean = v.strip()
-        if len(clean) < 40:
-            raise ValueError(f"Enunciado muito curto ({len(clean)} caracteres) para o padrão contextualizado do ENEM.")
-        return clean
 
 
 class BatchPopulationItemResult(BaseModel):
