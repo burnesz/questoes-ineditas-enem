@@ -5,8 +5,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db.base import Base
 
 if TYPE_CHECKING:
+    from app.db.models.ciclo_geracao import CicloGeracao
     from app.db.models.questao_enem import QuestaoEnem
     from app.db.models.questao_inedita import QuestaoInedita
+    from app.db.models.tentativa_geracao import TentativaGeracao
 
 
 class HabilidadeEnem(Base):
@@ -28,6 +30,14 @@ class HabilidadeEnem(Base):
     )
     questoes_ineditas: Mapped[List["QuestaoInedita"]] = relationship(
         "QuestaoInedita",
+        back_populates="habilidade"
+    )
+    ciclos_geracao: Mapped[List["CicloGeracao"]] = relationship(
+        "CicloGeracao",
+        back_populates="habilidade"
+    )
+    tentativas_geracao: Mapped[List["TentativaGeracao"]] = relationship(
+        "TentativaGeracao",
         back_populates="habilidade"
     )
 

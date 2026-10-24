@@ -118,7 +118,14 @@ def cmd_generate(args: argparse.Namespace) -> int:
     for hab_code in habilidades_list:
         needed = args.count
         if args.skip_existing:
-            existing_count = db.query(QuestaoInedita).filter(QuestaoInedita.habilidade_codigo == hab_code).count()
+            existing_count = (
+                db.query(QuestaoInedita)
+                .filter(
+                    QuestaoInedita.habilidade_codigo == hab_code,
+                    QuestaoInedita.is_validated == True,  # noqa: E712
+                )
+                .count()
+            )
             needed = max(0, args.count - existing_count)
         metas_originais[hab_code] = needed
         metas_restantes[hab_code] = needed
@@ -198,7 +205,7 @@ def cmd_generate(args: argparse.Namespace) -> int:
             else:
                 break
 
-        total_no_banco = db.query(QuestaoInedita).count()
+        total_no_banco = db.query(QuestaoInedita).filter(QuestaoInedita.is_validated == True).count()  # noqa: E712
     finally:
         db.close()
 
@@ -227,7 +234,7 @@ def cmd_list(args: argparse.Namespace) -> int:
             limit=args.limit
         )
 
-        total_count = db.query(QuestaoInedita)
+        total_count = db.query(QuestaoInedita).filter(QuestaoInedita.is_validated == True)  # noqa: E712
         if args.habilidade:
             total_count = total_count.filter(QuestaoInedita.habilidade_codigo == args.habilidade.strip().upper())
         total_items = total_count.count()
@@ -342,7 +349,7 @@ def cmd_stats(args: argparse.Namespace) -> int:
         init_db(db)
         total_hab = db.query(HabilidadeEnem).count()
         total_enem = db.query(QuestaoEnem).count()
-        total_ineditas = db.query(QuestaoInedita).count()
+        total_ineditas = db.query(QuestaoInedita).filter(QuestaoInedita.is_validated == True).count()  # noqa: E712
 
         print("-" * 80)
         print("ACERVO NO BANCO RELACIONAL:")
@@ -355,6 +362,7 @@ def cmd_stats(args: argparse.Namespace) -> int:
             from sqlalchemy import func
             counts = (
                 db.query(QuestaoInedita.habilidade_codigo, func.count(QuestaoInedita.id))
+                .filter(QuestaoInedita.is_validated == True)  # noqa: E712
                 .group_by(QuestaoInedita.habilidade_codigo)
                 .order_by(QuestaoInedita.habilidade_codigo)
                 .all()

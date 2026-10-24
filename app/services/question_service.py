@@ -24,9 +24,11 @@ from app.core.prompts import (
     build_auditoria_criterio_prompt,
     sortear_contexto_criativo,
 )
+from app.db.models.ciclo_geracao import CicloGeracao
 from app.db.models.habilidade import HabilidadeEnem
 from app.db.models.questao_enem import QuestaoEnem
 from app.db.models.questao_inedita import QuestaoInedita
+from app.db.models.tentativa_geracao import TentativaGeracao
 from app.schemas.question import (
     BatchPopulationItemResult,
     BatchPopulationSummary,
@@ -305,7 +307,11 @@ class QuestionService:
             try:
                 recentes_rows = (
                     db.query(QuestaoInedita.enunciado)
-                    .filter(QuestaoInedita.habilidade_codigo == clean_hab)
+                    .filter(
+                        QuestaoInedita.habilidade_codigo == clean_hab,
+                        QuestaoInedita.is_validated == True,  # noqa: E712
+                        QuestaoInedita.enunciado.isnot(None),
+                    )
                     .order_by(QuestaoInedita.created_at.desc())
                     .limit(3)
                     .all()
@@ -324,11 +330,26 @@ class QuestionService:
             f"(Tema: '{tema}' | Abertura: '{abertura}' | {len(few_shot_dicts)} exemplos RAG para ancoragem)..."
         )
 
+        ciclo_t0 = time.time()
+        ciclo = CicloGeracao(
+            id=uuid.uuid4(),
+            habilidade_codigo=clean_hab,
+            max_attempts=max_attempts,
+            total_tentativas=0,
+            sucesso=False,
+            tempo_total_segundos=0.0,
+        )
+        if db is not None:
+            db.add(ciclo)
+            db.flush()
+
         last_error: Optional[str] = None
         last_error_code: Optional[PipelineErrorCode] = None
         curr_tipologia: Optional[str] = None
+        model_name = getattr(self.llm_client, "model_name", settings.LLM_MODEL)
 
         for attempt in range(1, max_attempts + 1):
+            attempt_t0 = time.time()
             retry_hint: Optional[str] = None
             attempt_seed = random.randint(1, 2_000_000_000)
             base_temp = min(temperature, 0.3)
@@ -357,6 +378,85 @@ class QuestionService:
                     f"(Tipologia: '{curr_tipologia}' | Temp: {curr_temp:.2f} | Seed: {attempt_seed})..."
                 )
 
+            tentativa = TentativaGeracao(
+                id=uuid.uuid4(),
+                ciclo_id=ciclo.id,
+                habilidade_codigo=clean_hab,
+                numero_tentativa=attempt,
+                modelo=model_name,
+                temperatura=curr_temp,
+                top_p=top_p,
+                seed=attempt_seed,
+                tema=curr_tema,
+                abertura=curr_abertura,
+                tipologia=curr_tipologia,
+                retry_hint=retry_hint,
+                few_shot_exemplos=curr_few_shot,
+                enunciados_recentes=enunciados_recentes,
+                duracao_segundos=0.0,
+            )
+            if db is not None:
+                db.add(tentativa)
+                db.flush()
+
+            partial_enunciado: Optional[str] = None
+            partial_planejamento: Optional[str] = None
+            partial_solver: Optional[str] = None
+            partial_alternativas: Optional[Dict[str, Any]] = None
+            partial_gabarito: Optional[str] = None
+            partial_justificativa: Optional[str] = None
+
+            def _persist_attempt_output(
+                is_validated: bool,
+                etapa_falha: Optional[str] = None,
+                codigo_erro: Optional[PipelineErrorCode] = None,
+                motivo_falha: Optional[str] = None,
+            ) -> QuestaoInedita:
+                tentativa.duracao_segundos = round(time.time() - attempt_t0, 2)
+                ciclo.total_tentativas = attempt
+                ciclo.tempo_total_segundos = round(time.time() - ciclo_t0, 2)
+                ciclo.sucesso = is_validated
+
+                scratchpad_val: Optional[str] = None
+                if partial_planejamento or partial_solver:
+                    header = (
+                        f"# Planejamento PoT:\n# {partial_planejamento}\n\n"
+                        if partial_planejamento
+                        else ""
+                    )
+                    solver_part = (
+                        f"# Solver Python validado via PoT:\n{partial_solver}"
+                        if partial_solver
+                        else ""
+                    )
+                    scratchpad_val = f"{header}{solver_part}".strip() or None
+
+                err_code_str = (
+                    codigo_erro.value
+                    if isinstance(codigo_erro, PipelineErrorCode)
+                    else (str(codigo_erro) if codigo_erro else None)
+                )
+                questao_out = QuestaoInedita(
+                    id=uuid.uuid4(),
+                    tentativa_id=tentativa.id,
+                    ciclo_id=ciclo.id,
+                    habilidade_codigo=clean_hab,
+                    enunciado=partial_enunciado,
+                    alternativas=partial_alternativas,
+                    gabarito=partial_gabarito,
+                    justificativa=partial_justificativa,
+                    thought_scratchpad=scratchpad_val,
+                    is_validated=is_validated,
+                    etapa_falha=etapa_falha,
+                    codigo_erro=err_code_str,
+                    motivo_falha=motivo_falha,
+                )
+                if db is not None:
+                    db.add(questao_out)
+                    db.commit()
+                    db.refresh(questao_out)
+                return questao_out
+
             prompt_1a = build_enunciado_plan_only_prompt(
                 habilidade_codigo=habilidade.codigo,
                 habilidade_descricao=habilidade.descricao,
@@ -369,6 +469,7 @@ class QuestionService:
                 enunciados_recentes=enunciados_recentes,
                 alerta_tentativa_anterior=retry_hint
             )
+            parsed_1a: Any = None
             try:
                 raw_1a = self.llm_client.generate(
                     prompt=prompt_1a,
@@ -380,7 +481,12 @@ class QuestionService:
                 )
                 json_1a = sanitize_latex_json_text(extract_json_from_text(raw_1a))
                 parsed_1a = sanitize_parsed_dict_values(json.loads(json_1a, strict=False))
+                if isinstance(parsed_1a, dict):
+                    partial_enunciado = parsed_1a.get("enunciado") if isinstance(parsed_1a.get("enunciado"), str) else None
+                    partial_planejamento = parsed_1a.get("planejamento") if isinstance(parsed_1a.get("planejamento"), str) else None
                 plan_out = QuestaoPlanejamentoEnunciadoOutput(**parsed_1a)
+                partial_enunciado = plan_out.enunciado
+                partial_planejamento = plan_out.planejamento
             except ValidationError as e:
                 err_locs = {loc_part for err in e.errors() for loc_part in err.get("loc", ())}
                 if "tabela_dados" in err_locs:
@@ -391,15 +497,18 @@ class QuestionService:
                     last_error_code = PipelineErrorCode.SINTAXE
                 last_error = f"Erro no schema da Etapa 1a (planejamento/enunciado): {e.errors()}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na Etapa 1a: {e}")
+                _persist_attempt_output(False, "1a_planejamento", last_error_code, last_error)
                 continue
             except Exception as e:
                 last_error_code = PipelineErrorCode.SINTAXE
                 last_error = f"Falha na Etapa 1a (planejamento/enunciado): {e}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na Etapa 1a: {e}")
+                _persist_attempt_output(False, "1a_planejamento", last_error_code, last_error)
                 continue
 
             if isinstance(parsed_1a, dict) and "solver" in parsed_1a and "def resolver" in str(parsed_1a.get("solver", "")):
                 solver_code = str(parsed_1a["solver"])
+                partial_solver = solver_code
             else:
                 prompt_1b = build_solver_only_prompt(
                     enunciado=plan_out.enunciado,
@@ -421,10 +530,12 @@ class QuestionService:
                     json_1b = sanitize_latex_json_text(extract_json_from_text(raw_1b))
                     parsed_1b = sanitize_parsed_dict_values(json.loads(json_1b, strict=False))
                     solver_code = parsed_1b.get("solver", "") if isinstance(parsed_1b, dict) else ""
+                    partial_solver = solver_code or None
                 except Exception as e:
                     last_error_code = PipelineErrorCode.SINTAXE
                     last_error = f"Falha na Etapa 1b (geração do solver): {e}"
                     logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na Etapa 1b: {e}")
+                    _persist_attempt_output(False, "1b_solver", last_error_code, last_error)
                     continue
 
             parsed_data = {
@@ -445,6 +556,9 @@ class QuestionService:
                         )
                     except Exception as e:
                         logger.warning(f"Aviso ao formatar tabela_dados para Markdown: {e}")
+                partial_enunciado = pot_output.enunciado
+                partial_planejamento = pot_output.planejamento
+                partial_solver = pot_output.solver
             except ValidationError as e:
                 err_locs = {loc_part for err in e.errors() for loc_part in err.get("loc", ())}
                 if "tabela_dados" in err_locs:
@@ -455,6 +569,7 @@ class QuestionService:
                     last_error_code = PipelineErrorCode.SINTAXE
                 last_error = f"Erro no schema do solver: {e.errors()}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou no schema Pydantic: {e}")
+                _persist_attempt_output(False, "2_schema_solver", last_error_code, last_error)
                 continue
 
             ok_terms, err_terms = check_prohibited_terms(pot_output.enunciado)
@@ -462,6 +577,7 @@ class QuestionService:
                 last_error_code = PipelineErrorCode.TERMO_PROIBIDO
                 last_error = err_terms
                 logger.warning(f"Tentativa {attempt}/{max_attempts} descartada por termo proibido: {err_terms}")
+                _persist_attempt_output(False, "2_termos_proibidos", last_error_code, last_error)
                 continue
 
             try:
@@ -475,6 +591,7 @@ class QuestionService:
                     last_error_code = PipelineErrorCode.SINTAXE
                 last_error = f"Erro na execução da função resolver(): {e}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na execução do código: {e}")
+                _persist_attempt_output(False, "3_execucao_solver", last_error_code, last_error)
                 continue
 
             try:
@@ -492,25 +609,31 @@ class QuestionService:
                     last_error_code = PipelineErrorCode.NEXO_NUMERICO
                 last_error = f"Erro de consistência matemática ou nexo numérico: {e}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na checagem de nexo/complexidade: {e}")
+                _persist_attempt_output(False, "3_nexo_complexidade", last_error_code, last_error)
                 continue
 
             alternativas, gabarito = assemble_alternatives_and_gabarito(formatted_values)
+            partial_alternativas = alternativas
+            partial_gabarito = gabarito
 
             try:
                 blind_sol = self._run_blind_solving(
                     enunciado=pot_output.enunciado,
                     tabela_dados=pot_output.tabela_dados
                 )
+                partial_justificativa = blind_sol.resolucao_passo_a_passo
             except Exception as e:
                 last_error_code = PipelineErrorCode.SINTAXE
                 last_error = f"Falha na resolução cega da LLM: {e}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na resolução cega: {e}")
+                _persist_attempt_output(False, "5.1_resolucao_cega", last_error_code, last_error)
                 continue
 
             if not getattr(blind_sol, "pergunta_respondivel", True):
                 last_error_code = PipelineErrorCode.NAO_RESPONDIVEL
                 last_error = "O resolvedor cego apontou que a pergunta não é respondível numericamente com os dados fornecidos."
                 logger.warning(f"Tentativa {attempt}/{max_attempts} descartada (pergunta não respondível): {last_error}")
+                _persist_attempt_output(False, "5.1_nao_respondivel", last_error_code, last_error)
                 continue
 
             premissas = getattr(blind_sol, "premissas_assumidas", [])
@@ -523,6 +646,7 @@ class QuestionService:
                     last_error_code = PipelineErrorCode.PREMISSA_OCULTA
                     last_error = f"Premissas implícitas assumidas na resolução: {'; '.join(premissas_reais)}"
                     logger.warning(f"Tentativa {attempt}/{max_attempts} descartada por premissa implícita: {last_error}")
+                    _persist_attempt_output(False, "5.1_premissa_oculta", last_error_code, last_error)
                     continue
 
             dados_ociosos = getattr(blind_sol, "dados_nao_utilizados", [])
@@ -535,6 +659,7 @@ class QuestionService:
                     last_error_code = PipelineErrorCode.DADOS_OCIOSOS
                     last_error = f"Dados ociosos em excesso no enunciado/tabela ({len(ociosos_reais)} não utilizados): {'; '.join(ociosos_reais)}"
                     logger.warning(f"Tentativa {attempt}/{max_attempts} descartada por excesso de dados ociosos: {last_error}")
+                    _persist_attempt_output(False, "5.1_dados_ociosos", last_error_code, last_error)
                     continue
 
             try:
@@ -546,6 +671,7 @@ class QuestionService:
                 last_error_code = PipelineErrorCode.NAO_EQUIVALENTE
                 last_error = f"Falha no confronto de equivalência: {e}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na equivalência: {e}")
+                _persist_attempt_output(False, "5.2_equivalencia", last_error_code, last_error)
                 continue
 
             if not equiv.equivalentes:
@@ -556,6 +682,7 @@ class QuestionService:
                     f"Tentativa {attempt}/{max_attempts} descartada por divergência: "
                     f"Solver='{solver_result['correta']}' vs LLM='{blind_sol.resultado_obtido}' | Motivo: {motivo}"
                 )
+                _persist_attempt_output(False, "5.2_equivalencia", last_error_code, last_error)
                 continue
 
             try:
@@ -571,6 +698,7 @@ class QuestionService:
                 last_error_code = PipelineErrorCode.AUDITORIA
                 last_error = f"Falha na auditoria semântica: {e}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na auditoria semântica: {e}")
+                _persist_attempt_output(False, "5.3_auditoria_b3", last_error_code, last_error)
                 continue
 
             if not audit.aprovada:
@@ -584,6 +712,7 @@ class QuestionService:
                     last_error_code = PipelineErrorCode.AUDITORIA
                 last_error = f"Rejeição semântica: {audit.motivo_rejeicao}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na auditoria semântica: {audit.motivo_rejeicao}")
+                _persist_attempt_output(False, "5.3_auditoria_b3", last_error_code, last_error)
                 continue
 
             logger.info(
@@ -591,24 +720,7 @@ class QuestionService:
                 f"Gabarito: {gabarito} ({alternativas[gabarito]})."
             )
 
-            scratchpad_header = (
-                f"# Planejamento PoT:\n# {pot_output.planejamento}\n\n"
-                if pot_output.planejamento
-                else ""
-            )
-            nova_questao = QuestaoInedita(
-                id=uuid.uuid4(),
-                habilidade_codigo=habilidade.codigo,
-                enunciado=pot_output.enunciado,
-                alternativas=alternativas,
-                gabarito=gabarito,
-                justificativa=blind_sol.resolucao_passo_a_passo,
-                thought_scratchpad=f"{scratchpad_header}# Solver Python validado via PoT:\n{pot_output.solver}",
-                is_validated=True
-            )
-            db.add(nova_questao)
-            db.commit()
-            db.refresh(nova_questao)
+            nova_questao = _persist_attempt_output(True, None, None, None)
             return nova_questao
 
         raise ValueError(
@@ -778,11 +890,16 @@ class QuestionService:
                     )
                     elapsed = round(time.time() - op_start, 2)
                     total_success += 1
+                    used_attempts = (
+                        questao.ciclo.total_tentativas
+                        if getattr(questao, "ciclo", None) and questao.ciclo.total_tentativas
+                        else 1
+                    )
                     result_item = BatchPopulationItemResult(
                         habilidade_codigo=hab_code,
                         questao_id=questao.id,
                         success=True,
-                        attempts=1,
+                        attempts=used_attempts,
                         elapsed_seconds=elapsed
                     )
                     results.append(result_item)
@@ -825,10 +942,13 @@ class QuestionService:
         db: Session,
         habilidade_codigo: Optional[str] = None,
         skip: int = 0,
-        limit: int = 50
+        limit: int = 50,
+        only_validated: bool = True,
     ) -> List[QuestaoInedita]:
         """Consulta questões inéditas persistidas com paginação e filtro por habilidade."""
         query = db.query(QuestaoInedita)
+        if only_validated:
+            query = query.filter(QuestaoInedita.is_validated == True)  # noqa: E712
         if habilidade_codigo:
             query = query.filter(QuestaoInedita.habilidade_codigo == habilidade_codigo.strip().upper())
         return query.order_by(QuestaoInedita.created_at.desc()).offset(skip).limit(limit).all()

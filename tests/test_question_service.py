@@ -945,3 +945,170 @@ def test_equivalence_check_deterministic_fast_path():
     assert eq3.equivalentes is True
     assert mock_llm.generate.call_count == 1
 
+
+def test_relational_persistence_retry_then_success():
+    """
+    Valida a arquitetura em 3 tabelas (ciclos_geracao, tentativas_geracao, questoes_ineditas)
+    quando a 1ª tentativa falha (NEXO_NUMERICO) e a 2ª tentativa é aprovada.
+    """
+    from app.db.models.ciclo_geracao import CicloGeracao
+    from app.db.models.tentativa_geracao import TentativaGeracao
+
+    db = TestingSessionLocal()
+    try:
+        mock_llm = MagicMock(spec=LLMClient)
+        mock_llm.model_name = "qwen2.5:7b-test"
+        mock_vs = MagicMock(spec=ChromaVectorStore)
+        mock_vs.search.return_value = []
+
+        # 1ª tentativa: usa número 999 não presente no enunciado -> NEXO_NUMERICO
+        t1_pot = json.dumps({
+            "planejamento": "Plano com número mágico 999.",
+            "enunciado": "Um atleta fez 50 pontos no sábado e 30 pontos no domingo. Qual a pontuação total no fim de semana?",
+            "erros_tipicos": ["Erro 1", "Erro 2", "Erro 3", "Erro 4"],
+            "solver": "def resolver():\n    a = 50\n    b = 30\n    correta = (a + b) * 999 - 0\n    erro_1 = a - b\n    erro_2 = a\n    erro_3 = b\n    erro_4 = a * b"
+        })
+
+        # 2ª tentativa: usa apenas números do enunciado e é aprovada
+        t2_pot = json.dumps({
+            "planejamento": "Plano válido.",
+            "enunciado": "Um atleta fez 50 pontos no sábado e 30 pontos no domingo. Qual a pontuação total no fim de semana?",
+            "erros_tipicos": ["Erro 1", "Erro 2", "Erro 3", "Erro 4"],
+            "solver": "def resolver():\n    a = 50\n    b = 30\n    correta = (a + b) * 1 - 0\n    erro_1 = a - b\n    erro_2 = a\n    erro_3 = b\n    erro_4 = a * b"
+        })
+        t2_blind = json.dumps({
+            "resolucao_passo_a_passo": "50 + 30 = 80.",
+            "premissas_assumidas": [],
+            "dados_nao_utilizados": [],
+            "pergunta_respondivel": True,
+            "resultado_obtido": 80
+        })
+        t2_audit = json.dumps({
+            "analise": "Item adequado",
+            "incoerencia_ou_absurdo": False,
+            "comando_ambiguo_ou_incompativel": False,
+            "deficit_ou_contradicao": False,
+            "complexidade_insuficiente": False
+        })
+
+        mock_llm.generate.side_effect = [t1_pot, t2_pot, t2_blind, t2_audit]
+
+        service = QuestionService(llm_client=mock_llm, vector_store=mock_vs)
+        questao_aprovada = service.generate_single_questao_inedita(
+            db=db,
+            habilidade_codigo="H01",
+            max_attempts=3,
+            temperature=0.2,
+            tema="esportes",
+            abertura="relato"
+        )
+
+        assert questao_aprovada is not None
+        assert questao_aprovada.is_validated is True
+        assert questao_aprovada.codigo_erro is None
+        assert questao_aprovada.etapa_falha is None
+        assert questao_aprovada.ciclo_id is not None
+        assert questao_aprovada.tentativa_id is not None
+
+        # Verifica CicloGeracao
+        ciclo = db.get(CicloGeracao, questao_aprovada.ciclo_id)
+        assert ciclo is not None
+        assert ciclo.habilidade_codigo == "H01"
+        assert ciclo.total_tentativas == 2
+        assert ciclo.sucesso is True
+        assert ciclo.tempo_total_segundos >= 0.0
+
+        # Verifica TentativaGeracao (inputs)
+        tentativas = (
+            db.query(TentativaGeracao)
+            .filter(TentativaGeracao.ciclo_id == ciclo.id)
+            .order_by(TentativaGeracao.numero_tentativa)
+            .all()
+        )
+        assert len(tentativas) == 2
+        assert tentativas[0].numero_tentativa == 1
+        assert tentativas[0].modelo == "qwen2.5:7b-test"
+        assert tentativas[0].temperatura == 0.2
+        assert tentativas[0].tema == "esportes"
+        assert tentativas[0].retry_hint is None
+        assert tentativas[0].duracao_segundos >= 0.0
+
+        assert tentativas[1].numero_tentativa == 2
+        assert tentativas[1].temperatura == 0.25
+        assert tentativas[1].retry_hint is not None
+        assert "Nexo numérico" in tentativas[1].retry_hint
+
+        # Verifica QuestaoInedita (outputs de cada tentativa do ciclo)
+        saidas = (
+            db.query(QuestaoInedita)
+            .filter(QuestaoInedita.ciclo_id == ciclo.id)
+            .all()
+        )
+        assert len(saidas) == 2
+
+        saida_t1 = tentativas[0].questao_saida
+        assert saida_t1 is not None
+        assert saida_t1.is_validated is False
+        assert saida_t1.etapa_falha == "3_nexo_complexidade"
+        assert saida_t1.codigo_erro == "NEXO_NUMERICO"
+        assert "999" in (saida_t1.motivo_falha or "")
+        assert saida_t1.enunciado is not None
+        assert saida_t1.alternativas is None
+        assert saida_t1.gabarito is None
+
+        saida_t2 = tentativas[1].questao_saida
+        assert saida_t2 is not None
+        assert saida_t2.id == questao_aprovada.id
+        assert saida_t2.is_validated is True
+        assert saida_t2.codigo_erro is None
+        assert saida_t2.alternativas is not None
+        assert saida_t2.gabarito in ["A", "B", "C", "D", "E"]
+    finally:
+        db.close()
+
+
+def test_relational_persistence_all_attempts_failed():
+    """
+    Valida que quando todas as tentativas de um ciclo falham, o CicloGeracao (sucesso=False),
+    todas as TentativaGeracao e todas as saídas reprovadas em QuestaoInedita (is_validated=False)
+    permanecem persistidos no banco relacional.
+    """
+    from app.db.models.ciclo_geracao import CicloGeracao
+
+    db = TestingSessionLocal()
+    try:
+        mock_llm = MagicMock(spec=LLMClient)
+        mock_vs = MagicMock(spec=ChromaVectorStore)
+        mock_vs.search.return_value = []
+
+        # Falha nas 2 tentativas por sintaxe JSON inválida na Etapa 1a
+        mock_llm.generate.return_value = "texto sem json valido"
+
+        ids_antes = {c.id for c in db.query(CicloGeracao).all()}
+
+        service = QuestionService(llm_client=mock_llm, vector_store=mock_vs)
+        with pytest.raises(ValueError, match=r"RN-Q01 \(PoT\)"):
+            service.generate_single_questao_inedita(
+                db=db,
+                habilidade_codigo="H01",
+                max_attempts=2
+            )
+
+        novos_ciclos = [c for c in db.query(CicloGeracao).all() if c.id not in ids_antes]
+        assert len(novos_ciclos) == 1
+
+        ultimo_ciclo = novos_ciclos[0]
+        assert ultimo_ciclo.sucesso is False
+        assert ultimo_ciclo.total_tentativas == 2
+        assert len(ultimo_ciclo.tentativas) == 2
+        assert len(ultimo_ciclo.questoes) == 2
+
+        for q_out in ultimo_ciclo.questoes:
+            assert q_out.is_validated is False
+            assert q_out.etapa_falha == "1a_planejamento"
+            assert q_out.codigo_erro == "SINTAXE"
+            assert q_out.enunciado is None
+    finally:
+        db.close()
+
+
