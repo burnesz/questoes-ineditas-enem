@@ -584,65 +584,6 @@ Responda EXCLUSIVAMENTE em formato JSON com o schema:
     return prompt
 
 
-def build_auditoria_semantica_prompt(
-    enunciado: str,
-    alternativas: Dict[str, str],
-    tabela_dados: Optional[List[Dict[str, Any]]] = None,
-    letra_gabarito: Optional[str] = None
-) -> str:
-    """
-    Constrói prompt para a Chamada 3 da Fase de Validação: Auditoria Semântica e Pedagógica consolidada.
-    Avalia a qualidade do item do ENEM através de 4 macro-critérios semânticos essenciais.
-    """
-    alts_formatted = "\n".join([f"  {k}) {v}" for k, v in sorted(alternativas.items())])
-    has_md_table = bool(re.search(r"\|(?:\s*:?-+:?\s*\|)+", enunciado or ""))
-    tabela_txt = "" if has_md_table else _formatar_tabela(tabela_dados)
-    bloco_tabela = f"\nTabela de Dados:\n{tabela_txt}\n" if tabela_txt else ""
-    bloco_gab = f"\nAlternativa correta segundo o sistema: {letra_gabarito} ({alternativas.get(letra_gabarito, '')})\n" if letra_gabarito else ""
-
-    prompt = f"""Você é um Revisor Técnico e Pedagógico Oficial do INEP para questões de Matemática do ENEM.
-Audite o item abaixo avaliando se ele cumpre os padrões de verossimilhança e qualidade pedagógica do exame.
-
-============================================================
-ITEM SUBMETIDO:
-============================================================
-Enunciado:
-{enunciado}
-{bloco_tabela}
-Alternativas:
-{alts_formatted}
-{bloco_gab}
-============================================================
-CRITÉRIOS DE AUDITORIA (true = o defeito EXISTE; false = o item está CORRETO):
-============================================================
-1. incoerencia_ou_absurdo: a situação é absurda, fisicamente impossível ou conceitualmente errada?
-   Exemplos de defeito: consumo irreal (ex.: 4 L de água por dia por família), velocidades ou tempos humanos biologicamente impossíveis, esporte e equipamento incompatíveis (ex.: capacete no futebol), ou "consumir calorias" durante um treino.
-
-2. comando_ambiguo_ou_incompativel: o comando final é dúbio, omite a unidade esperada ou pede algo incompatível com as alternativas?
-   Exemplos de defeito: omitir a unidade (reais, %, litros, km), comando com duplo sentido, ou perguntar "qual plano/opção é mais econômico?" quando todas as alternativas são números (o comando correto deve pedir um número, ex.: "qual é o custo total, em reais, do plano mais econômico?").
-
-3. deficit_ou_contradicao: faltam dados essenciais para o cálculo ou o texto contradiz frontalmente a tabela de dados?
-   Exemplos de defeito: o texto cita um total que não bate com a soma da tabela (ex.: texto diz 15 km e a tabela soma 14 km), ou omite uma base/taxa indispensável para deduzir a resposta.
-
-4. complexidade_insuficiente: o item é excessivamente trivial para o padrão ENEM?
-   Exemplos de defeito: a questão se resolve apenas lendo diretamente uma célula da tabela ou com uma única operação elementar sem encadeamento de raciocínio.
-
-PASSO 1: Em 'analise', escreva 1 frase curta citando evidências de qualquer problema detectado (ou declare 'Item adequado e verossímil').
-PASSO 2: Preencha as 4 flags booleanas. Em caso de dúvida fundamentada sobre um defeito, marque true.
-
-Responda EXCLUSIVAMENTE em formato JSON com o schema:
-{{
-  "analise": "Evidência curta dos problemas encontrados ou 'Item adequado'",
-  "incoerencia_ou_absurdo": bool,
-  "comando_ambiguo_ou_incompativel": bool,
-  "deficit_ou_contradicao": bool,
-  "desalinhamento_comando_grandeza": bool,
-  "fuga_habilidade_alvo": bool,
-  "complexidade_insuficiente": bool
-}}
-"""
-    return prompt
-
 
 AUDITORIA_CRITERIOS_B3: Dict[str, str] = {
     "incoerencia_ou_absurdo": (

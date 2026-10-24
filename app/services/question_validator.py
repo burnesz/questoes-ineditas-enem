@@ -6,9 +6,6 @@ import json
 import logging
 import re
 from typing import Any, Dict, List, Optional, Tuple, Union
-from pydantic import ValidationError
-
-from app.schemas.question import QuestaoIneditaLLMOutput
 
 logger = logging.getLogger(__name__)
 
@@ -67,58 +64,6 @@ def sanitize_parsed_dict_values(data: Any) -> Any:
     return data
 
 
-def check_command_gabarito_alignment(
-    enunciado: str,
-    alternativas: Dict[str, str],
-    gabarito: str,
-    justificativa: str,
-    scratchpad: Optional[str] = None
-) -> Tuple[bool, Optional[str]]:
-    """
-    Valida consistência entre o comando final e a alternativa selecionada.
-    Evita que valores unitários intermediários sejam marcados quando o total é solicitado.
-    """
-    clean_enunciado = enunciado.lower()
-    clean_just = justificativa.lower()
-    clean_scratch = (scratchpad or "").lower()
-    combined_reasoning = f"{clean_scratch}\n{clean_just}"
-
-    alt_escolhida = alternativas.get(gabarito, "").strip()
-
-    asks_for_total = any(k in clean_enunciado for k in ["valor total", "ao todo", "quantia total", "custo total", "total pago", "total arrecadado"])
-    if asks_for_total:
-        mult_match = re.search(r"(\d+)\s*(?:[xX*×]|vezes)\s*(\d+(?:[\.,]\d+)?)\s*=\s*(\d+(?:[\.,]\d+)?)", combined_reasoning)
-        if mult_match:
-            qtd, unit, total_val = mult_match.groups()
-
-            def norm_num(n_str: str) -> str:
-                return re.sub(r"[^\d]", "", n_str.split(",")[0].split(".")[0])
-
-            unit_norm = norm_num(unit)
-            total_norm = norm_num(total_val)
-            alt_norm = norm_num(alt_escolhida)
-
-            if alt_norm and unit_norm and total_norm:
-                if alt_norm == unit_norm and alt_norm != total_norm:
-                    msg = (
-                        f"Inconsistência semântica de comando (Shortcut Reasoning): O enunciado solicita o 'valor total' ({total_val}), "
-                        f"mas o gabarito selecionado ({gabarito}) aponta para o valor unitário intermediário ({alt_escolhida})."
-                    )
-                    logger.warning(msg)
-                    return False, msg
-
-    return True, None
-
-
-def _jaccard_similarity(text_a: str, text_b: str) -> float:
-    """Calcula a similaridade de Jaccard entre dois textos baseando-se no conjunto de palavras."""
-    words_a = set(re.findall(r"\w+", text_a.lower()))
-    words_b = set(re.findall(r"\w+", text_b.lower()))
-    if not words_a or not words_b:
-        return 0.0
-    intersection = len(words_a.intersection(words_b))
-    union = len(words_a.union(words_b))
-    return intersection / union if union > 0 else 0.0
 
 
 TABLE_INDICATOR_PATTERNS = [
@@ -207,77 +152,6 @@ def format_enunciado_with_table(
     return clean_enunciado + md_table
 
 
-def validate_questao_inedita(
-    raw_output: Union[str, Dict[str, Any]],
-    few_shot_exemplos: Optional[List[Dict[str, Any]]] = None
-) -> Tuple[bool, Optional[str], Optional[QuestaoIneditaLLMOutput]]:
-    """Valida formato estrutural, unicidade das alternativas, anti-plágio e tabelas da questão."""
-    if isinstance(raw_output, dict):
-        data = sanitize_parsed_dict_values(raw_output)
-    else:
-        json_str = extract_json_from_text(raw_output)
-        json_str = sanitize_latex_json_text(json_str)
-        try:
-            data = json.loads(json_str)
-            data = sanitize_parsed_dict_values(data)
-        except json.JSONDecodeError as e:
-            msg = f"Falha ao decodificar JSON gerado pelo LLM: {str(e)}"
-            logger.warning(msg)
-            return False, msg, None
-
-    if not isinstance(data, dict):
-        msg = f"O retorno do LLM não é um objeto JSON/dicionário. Tipo obtido: {type(data).__name__}"
-        logger.warning(msg)
-        return False, msg, None
-
-    try:
-        validated_item = QuestaoIneditaLLMOutput.model_validate(data)
-        if validated_item.tabela_dados:
-            try:
-                validated_item.enunciado = format_enunciado_with_table(
-                    enunciado=validated_item.enunciado,
-                    tabela_dados=validated_item.tabela_dados
-                )
-            except Exception as e:
-                logger.warning(f"Aviso ao converter tabela_dados para Markdown no modo tradicional: {e}")
-    except ValidationError as e:
-        error_details = []
-        for err in e.errors():
-            loc = " -> ".join(str(l) for l in err.get("loc", []))
-            msg = err.get("msg", "")
-            error_details.append(f"[{loc}]: {msg}")
-        msg = f"Erro de validação estrutural do item (RN-Q01/RN-Q02): {'; '.join(error_details)}"
-        logger.warning(msg)
-        return False, msg, None
-
-    if few_shot_exemplos:
-        enunciado_gerado = validated_item.enunciado
-        for ex in few_shot_exemplos:
-            ex_enunciado = ex.get("enunciado", "")
-            if not ex_enunciado:
-                continue
-            sim = _jaccard_similarity(enunciado_gerado, ex_enunciado)
-            if sim > 0.85:
-                msg = f"Item gerado é excessivamente similar a um exemplo histórico de treino (similaridade Jaccard={sim:.2f}). Item descartado por ineditismo."
-                logger.warning(msg)
-                return False, msg, None
-
-    is_aligned, align_error = check_command_gabarito_alignment(
-        enunciado=validated_item.enunciado,
-        alternativas=validated_item.alternativas,
-        gabarito=validated_item.gabarito,
-        justificativa=validated_item.justificativa,
-        scratchpad=validated_item.thought_scratchpad
-    )
-    if not is_aligned:
-        return False, align_error, None
-
-    is_table_valid, table_error = check_table_markdown_structure(validated_item.enunciado)
-    if not is_table_valid:
-        logger.warning(table_error)
-        return False, table_error, None
-
-    return True, None, validated_item
 
 
 def check_prohibited_terms(text: str) -> Tuple[bool, Optional[str]]:
