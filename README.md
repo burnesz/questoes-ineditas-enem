@@ -1,6 +1,8 @@
 # Geração de Questões Inéditas de Matemática no ENEM (PoT + ChromaDB)
 
-Projeto local para elaboração, validação e persistência de **questões inéditas de Matemática alinhadas à Matriz de Referência do ENEM** (Competências `C1` a `C7`, Habilidades `H01` a `H30`).
+Projeto local para elaboração, validação e persistência de **questões inéditas de Matemática alinhadas à Matriz de Referência do ENEM** (Competências `C1` a `C7`, Habilidades `H01` a `H30`, com **28 habilidades ativas** para geração).
+
+> **Aviso sobre Escopo de Habilidades (`H06` e `H20`)**: As habilidades **H06** (localização/movimentação em mapas e croquis) e **H20** (interpretação de gráficos cartesianos) foram desabilitadas para geração e removidas do acervo histórico (`questoes_enem` e ChromaDB). Como a grande maioria das questões dessas duas habilidades exige interpretação puramente visual e a raspagem dos microdados do ENEM resultou em apenas cinco itens sem imagem ao todo, a amostragem foi considerada insuficiente para contextualização RAG. Dada a delimitação técnica deste projeto para LLMs locais estritamente textuais (Qwen 2.5 7B), o sistema conta com uma proteção estática que rejeita imediatamente qualquer tentativa de geração para H06 ou H20 (`HabilidadeDesabilitadaError`).
 
 ---
 
@@ -105,7 +107,7 @@ python cli.py generate --habilidades H01
 # Gerar para múltiplas habilidades com 2 questões por habilidade:
 python cli.py generate --habilidades H01,H02,H03 --count 2
 
-# Gerar para todas as 30 habilidades do ENEM (H01 a H30):
+# Gerar para as 28 habilidades ativas do ENEM (H06 e H20 são ignoradas automaticamente):
 python cli.py generate --habilidades all
 ```
 

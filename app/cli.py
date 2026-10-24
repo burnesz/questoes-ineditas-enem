@@ -19,6 +19,7 @@ from app.db.models.habilidade import HabilidadeEnem
 from app.db.models.questao_enem import QuestaoEnem
 from app.db.models.questao_inedita import QuestaoInedita
 from app.db.session import engine, SessionLocal
+from app.schemas.question import HABILIDADES_DESABILITADAS, MOTIVOS_HABILIDADES_DESABILITADAS
 from app.services.llm_client import LLMClient
 from app.services.question_service import QuestionService
 from app.services.vectorstore import ChromaVectorStore, EmbeddingService
@@ -92,9 +93,37 @@ def cmd_generate(args: argparse.Namespace) -> int:
         print("[!] Modo MOCK ativado — inferência real do LLM desabilitada.")
 
     if args.habilidades.strip().lower() == "all":
-        habilidades_list = [f"H{i:02d}" for i in range(1, 31)]
+        habilidades_list = [f"H{i:02d}" for i in range(1, 31) if f"H{i:02d}" not in HABILIDADES_DESABILITADAS]
+        print(f"[*] Habilidades desabilitadas ignoradas na geração global: {', '.join(sorted(HABILIDADES_DESABILITADAS))} (dependência visual / amostragem insuficiente sem imagens).")
     else:
-        habilidades_list = [h.strip().upper() for h in args.habilidades.split(",") if h.strip()]
+        raw_list = [h.strip().upper() for h in args.habilidades.split(",") if h.strip()]
+        normalized_list = []
+        for h in raw_list:
+            if h.startswith("H") and h[1:].isdigit():
+                normalized_list.append(f"H{int(h[1:]):02d}")
+            elif h.isdigit():
+                normalized_list.append(f"H{int(h):02d}")
+            else:
+                normalized_list.append(h)
+
+        desabilitadas = [h for h in normalized_list if h in HABILIDADES_DESABILITADAS]
+        if desabilitadas:
+            print(f"\n[ERRO] Geração bloqueada para a(s) habilidade(s): {', '.join(sorted(desabilitadas))}")
+            for d in sorted(desabilitadas):
+                motivo = MOTIVOS_HABILIDADES_DESABILITADAS.get(
+                    d,
+                    "Habilidade desabilitada por requerer interpretação visual e amostragem insuficiente sem imagem."
+                )
+                print(f"       • {d}: {motivo}")
+
+            validas = [h for h in normalized_list if h not in HABILIDADES_DESABILITADAS]
+            if not validas:
+                print("\nNenhuma habilidade válida restante para geração. Operação cancelada.\n")
+                return 1
+            print(f"\n[AVISO] Continuando a geração apenas para as habilidades ativas: {', '.join(validas)}\n")
+            habilidades_list = validas
+        else:
+            habilidades_list = normalized_list
 
     print(f"[*] Total de habilidades a processar: {len(habilidades_list)}")
     print(f"[*] Questões por habilidade: {args.count}")
@@ -353,7 +382,7 @@ def cmd_stats(args: argparse.Namespace) -> int:
 
         print("-" * 80)
         print("ACERVO NO BANCO RELACIONAL:")
-        print(f"  • Habilidades cadastradas:      {total_hab} / 30")
+        print(f"  • Habilidades cadastradas:      {total_hab} / 30 (28 ativas, 2 desabilitadas: {', '.join(sorted(HABILIDADES_DESABILITADAS))})")
         print(f"  • Questões históricas do ENEM:  {total_enem}")
         print(f"  • Questões inéditas geradas:    {total_ineditas}")
 
@@ -494,7 +523,9 @@ Exemplos de uso:
 
     p_gen = subparsers.add_parser("generate", help="Gera questões inéditas através de Program-Aided Generation (PoT).")
     p_gen.add_argument("--habilidades", type=str, default="all",
-                       help="Códigos das habilidades separados por vírgula (ex: 'H01,H02') ou 'all'. Padrão: all.")
+                       help="Códigos das habilidades separados por vírgula (ex: 'H01,H02') ou 'all'. "
+                            "Observação: H06 e H20 estão desabilitadas para geração (exigem interpretação visual "
+                            "e contam com amostragem insuficiente sem imagem nos microdados). Padrão: all.")
     p_gen.add_argument("--count", type=int, default=1,
                        help="Quantidade de questões por habilidade a gerar. Padrão: 1.")
     p_gen.add_argument("--few-shot-k", type=int, default=2,

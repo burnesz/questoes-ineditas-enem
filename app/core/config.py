@@ -30,6 +30,9 @@ class Settings(BaseSettings):
     POT_MIN_OPERATIONS: int = 3
     POT_MIN_OPERATION_TYPES: int = 2
 
+    # Habilidades Desabilitadas para Geração (Necessidade visual / sem histórico)
+    HABILIDADES_DESABILITADAS: tuple[str, ...] = ("H06", "H20")
+
     # Banco Relacional (SQLite padrão / PostgreSQL opcional)
     DATABASE_URL: Optional[str] = None
     POSTGRES_SERVER: Optional[str] = None
