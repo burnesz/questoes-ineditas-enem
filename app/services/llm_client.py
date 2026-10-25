@@ -205,6 +205,9 @@ class LLMClient:
         if "auditoria binária de critério único" in prompt_lower:
             return json.dumps({"defeito": False, "evidencia": "Critério atendido."}, ensure_ascii=False)
 
+        if "juiz de mapeamento de resposta para alternativa" in prompt_lower:
+            return json.dumps({"letras_equivalentes": ["B"], "explicacao": "Resultado corresponde à alternativa B."}, ensure_ascii=False)
+
         if "juiz de equivalência matemática" in prompt_lower:
             return json.dumps({"equivalentes": True, "explicacao_equivalencia": "Resultados equivalentes comprovados."}, ensure_ascii=False)
 

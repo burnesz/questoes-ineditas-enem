@@ -2,8 +2,9 @@
 Schemas Pydantic para validação estrutural e dados de questões inéditas do ENEM.
 """
 
+import re
 from enum import Enum
-from typing import Dict, Optional, List, Any
+from typing import Dict, Optional, List, Any, Literal
 import uuid
 from pydantic import BaseModel, Field, field_validator
 
@@ -27,7 +28,12 @@ class PipelineErrorCode(str, Enum):
     PREMISSA_OCULTA = "PREMISSA_OCULTA"
     DADOS_OCIOSOS = "DADOS_OCIOSOS"
     NAO_EQUIVALENTE = "NAO_EQUIVALENTE"
+    ALTERNATIVAS_AMBIGUAS = "ALTERNATIVAS_AMBIGUAS"
     AUDITORIA = "AUDITORIA"
+
+
+PerfilAvaliacao = Literal["gerada", "enem"]
+"""Perfil da Etapa 4: 'gerada' (itens PoT com comando numérico) ou 'enem' (itens no formato do ENEM, inclusive alternativas não numéricas)."""
 
 
 class PipelineValidationError(ValueError):
@@ -290,6 +296,34 @@ class QuestaoEquivalenciaOutput(BaseModel):
     )
 
 
+class QuestaoMapeamentoAlternativaOutput(BaseModel):
+    """
+    Schema da Etapa 4.2 no perfil 'enem': mapeia a resolução cega para as alternativas do item.
+    """
+    letras_equivalentes: List[str] = Field(
+        default_factory=list,
+        description="Letras (A-E) cujas alternativas expressam o resultado da resolução cega. Lista vazia se nenhuma corresponde."
+    )
+    explicacao: Optional[str] = Field(
+        None,
+        description="Explicação objetiva do mapeamento."
+    )
+
+    @field_validator("letras_equivalentes", mode="before")
+    @classmethod
+    def normalizar_letras(cls, v: Any) -> List[str]:
+        if v is None:
+            return []
+        if isinstance(v, str):
+            v = re.findall(r"\b[A-Ea-e]\b", v)
+        letras = []
+        for item in v:
+            letra = str(item).strip().strip(")").upper()
+            if letra in ("A", "B", "C", "D", "E") and letra not in letras:
+                letras.append(letra)
+        return letras
+
+
 class QuestaoAuditoriaSemanticaOutput(BaseModel):
     """
     Schema para auditoria semântica e pedagógica da questão.
@@ -352,6 +386,18 @@ class QuestaoAuditoriaSemanticaOutput(BaseModel):
         if self.analise and not self.aprovada:
             motivos.append(f"Análise do Revisor: {self.analise}")
         return " | ".join(motivos) if motivos else None
+
+
+class AvaliacaoItemResult(BaseModel):
+    """Resultado da avaliação de um item pronto pela Etapa 4 (sem geração e sem solver)."""
+    perfil: str
+    aprovada: bool
+    etapa_falha: Optional[str] = None
+    codigo_erro: Optional[PipelineErrorCode] = None
+    motivo_falha: Optional[str] = None
+    resultado_obtido: Any = None
+    letras_mapeadas: Optional[List[str]] = None
+    resolucao_passo_a_passo: Optional[str] = None
 
 
 class BatchPopulationItemResult(BaseModel):

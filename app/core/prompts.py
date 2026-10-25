@@ -505,17 +505,28 @@ def _formatar_tabela(tabela_dados: Optional[List[Dict[str, Any]]]) -> str:
     return "\n".join(linhas)
 
 
+_CRITERIO_RESPONDIVEL_POR_PERFIL: Dict[str, str] = {
+    "gerada": """4. Em 'pergunta_respondivel', informe false se o comando final não puder ser respondido com um número a partir dos dados
+   (ex.: pergunta "qual plano?" ou faltam dados). Caso contrário, true.""",
+    "enem": """4. Em 'pergunta_respondivel', informe false se o comando final não puder ser respondido de forma única a partir dos dados
+   (ex.: faltam dados ou a pergunta é dúbia). A resposta pode ser um número, uma expressão, uma opção, uma faixa ou uma ordenação. Caso contrário, true.""",
+}
+
+
 def build_blind_solving_prompt(
     enunciado: str,
-    tabela_dados: Optional[List[Dict[str, Any]]] = None
+    tabela_dados: Optional[List[Dict[str, Any]]] = None,
+    perfil: str = "gerada"
 ) -> str:
     """
     Constrói prompt para a Chamada 1 da Fase de Validação: Resolução Cega.
     O LLM recebe o enunciado (e a tabela, se houver), sem alternativas e sem gabarito.
+    No perfil 'enem', a resposta não precisa ser numérica.
     """
     has_md_table = bool(re.search(r"\|(?:\s*:?-+:?\s*\|)+", enunciado or ""))
     tabela_txt = "" if has_md_table else _formatar_tabela(tabela_dados)
     bloco_tabela = f"\nTABELA DE DADOS:\n{tabela_txt}\n" if tabela_txt else ""
+    criterio_respondivel = _CRITERIO_RESPONDIVEL_POR_PERFIL.get(perfil, _CRITERIO_RESPONDIVEL_POR_PERFIL["gerada"])
 
     prompt = f"""Você é um estudante de alto desempenho resolvendo uma questão de Matemática do ENEM.
 Resolva usando EXCLUSIVAMENTE o que está escrito no enunciado e na tabela. Não complete lacunas por conta própria.
@@ -533,8 +544,7 @@ SUA TAREFA:
    (ex.: "assumi que cada parcela tem 1 hectare", "assumi que os grupos têm o mesmo tamanho", "assumi que a pontuação não depende do tempo").
    Se não precisou supor nada, use uma lista vazia [].
 3. Em 'dados_nao_utilizados', liste os números ou colunas fornecidos que NÃO entraram na sua resolução. Se todos foram usados, use [].
-4. Em 'pergunta_respondivel', informe false se o comando final não puder ser respondido com um número a partir dos dados
-   (ex.: pergunta "qual plano?" ou faltam dados). Caso contrário, true.
+{criterio_respondivel}
 5. Em 'resultado_obtido', dê o resultado final como TIPO PRIMÁRIO do Python:
    - valor numérico único: apenas o número (int ou float), sem texto nem unidade (ex.: 35.0, 30, 1.9);
    - conclusão conceitual: texto;
@@ -613,6 +623,68 @@ AUDITORIA_CRITERIOS_PEDAGOGICOS: Dict[str, str] = {
 }
 
 
+AUDITORIA_CRITERIOS_ENEM: Dict[str, str] = {
+    **AUDITORIA_CRITERIOS_PEDAGOGICOS,
+    "comando_ambiguo_ou_incompativel": (
+        "CRITÉRIO 2 (Comando Ambíguo ou Incompatível com as Alternativas): "
+        "O comando final é dúbio, admite mais de uma resposta, omite a unidade quando ela é necessária "
+        "ou faz uma pergunta que nenhuma das alternativas responde no formato pedido? "
+        "(Alternativas não numéricas, como expressões, opções, faixas ou ordenações, são válidas se forem compatíveis com o comando.)"
+    ),
+}
+"""Critérios da Etapa 4.3 no perfil 'enem': iguais aos pedagógicos, exceto o critério 2, que aceita alternativas não numéricas."""
+
+
+def criterios_auditoria_por_perfil(perfil: str = "gerada") -> Dict[str, str]:
+    """Retorna o dicionário de critérios da auditoria pedagógica para o perfil de avaliação."""
+    return AUDITORIA_CRITERIOS_ENEM if perfil == "enem" else AUDITORIA_CRITERIOS_PEDAGOGICOS
+
+
+def build_mapeamento_alternativa_prompt(
+    enunciado: str,
+    resultado_obtido: Any,
+    alternativas: Dict[str, str]
+) -> str:
+    """
+    Constrói prompt da Etapa 4.2 no perfil 'enem': mapeia o resultado da resolução cega para as alternativas.
+    O gabarito NÃO é informado; a comparação com a letra do gabarito é feita em Python.
+    """
+    alts_formatted = "\n".join([f"  {k}) {v}" for k, v in sorted(alternativas.items())])
+    return f"""Você é um Juiz de Mapeamento de Resposta para Alternativa.
+Um estudante resolveu a questão abaixo SEM ver as alternativas. Indique quais alternativas expressam o mesmo resultado que ele obteve.
+
+============================================================
+ENUNCIADO:
+============================================================
+{enunciado}
+
+============================================================
+RESULTADO OBTIDO PELO ESTUDANTE:
+============================================================
+{resultado_obtido}
+
+============================================================
+ALTERNATIVAS:
+============================================================
+{alts_formatted}
+
+============================================================
+DIRETRIZES:
+============================================================
+1. Normalize valores, notações, frações, decimais, unidades conversíveis e formas algébricas equivalentes antes de comparar.
+2. Uma faixa ou intervalo corresponde ao resultado se o contiver.
+3. Liste TODAS as letras equivalentes ao resultado (pode haver mais de uma) em 'letras_equivalentes'.
+4. Se nenhuma alternativa corresponder ao resultado, use uma lista vazia [].
+5. Não resolva a questão de novo e não escolha a alternativa "mais provável": apenas compare o resultado dado com as alternativas.
+
+Responda EXCLUSIVAMENTE em formato JSON com o schema:
+{{
+  "letras_equivalentes": ["B"],
+  "explicacao": "Explicação objetiva do mapeamento"
+}}
+"""
+
+
 def build_auditoria_criterio_prompt(
     criterio: str,
     enunciado: str,
@@ -620,10 +692,12 @@ def build_auditoria_criterio_prompt(
     tabela_dados: Optional[List[Dict[str, Any]]] = None,
     letra_gabarito: Optional[str] = None,
     habilidade_codigo: Optional[str] = None,
-    habilidade_descricao: Optional[str] = None
+    habilidade_descricao: Optional[str] = None,
+    perfil: str = "gerada"
 ) -> str:
     """
     Constrói prompt binário curto para auditoria de um único critério pedagógico ou semântico.
+    No perfil 'enem', o critério 2 aceita alternativas não numéricas.
     """
     alts_formatted = "\n".join([f"  {k}) {v}" for k, v in sorted(alternativas.items())])
     has_md_table = bool(re.search(r"\|(?:\s*:?-+:?\s*\|)+", enunciado or ""))
@@ -639,7 +713,7 @@ def build_auditoria_criterio_prompt(
         if habilidade_codigo or habilidade_descricao
         else ""
     )
-    pergunta_criterio = AUDITORIA_CRITERIOS_PEDAGOGICOS.get(
+    pergunta_criterio = criterios_auditoria_por_perfil(perfil).get(
         criterio,
         f"CRITÉRIO ({criterio}): O item apresenta este defeito pedagógico ou semântico?"
     )

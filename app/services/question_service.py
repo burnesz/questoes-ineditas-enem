@@ -9,19 +9,20 @@ import random
 import re
 import time
 import uuid
-from typing import Any, Callable, Dict, List, Optional, Union
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 from pydantic import ValidationError
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.core.prompts import (
-    AUDITORIA_CRITERIOS_PEDAGOGICOS,
     build_enunciado_plan_only_prompt,
     build_solver_only_prompt,
     build_blind_solving_prompt,
     build_equivalencia_gabarito_prompt,
     build_auditoria_criterio_prompt,
+    build_mapeamento_alternativa_prompt,
+    criterios_auditoria_por_perfil,
     sortear_contexto_criativo,
 )
 from app.db.models.ciclo_geracao import CicloGeracao
@@ -30,11 +31,13 @@ from app.db.models.questao_enem import QuestaoEnem
 from app.db.models.questao_inedita import QuestaoInedita
 from app.db.models.tentativa_geracao import TentativaGeracao
 from app.schemas.question import (
+    AvaliacaoItemResult,
     BatchPopulationItemResult,
     BatchPopulationSummary,
     HABILIDADES_DESABILITADAS,
     HabilidadeDesabilitadaError,
     MOTIVOS_HABILIDADES_DESABILITADAS,
+    PerfilAvaliacao,
     PipelineErrorCode,
     PipelineValidationError,
     POT_PHASE1A_JSON_SCHEMA,
@@ -43,6 +46,7 @@ from app.schemas.question import (
     QuestaoBlindSolvingOutput,
     QuestaoEnunciadoSolverOutput,
     QuestaoEquivalenciaOutput,
+    QuestaoMapeamentoAlternativaOutput,
     QuestaoPlanejamentoEnunciadoOutput,
 )
 from app.services.code_executor import (
@@ -96,6 +100,62 @@ def _classify_retry_hint(error: Union[PipelineErrorCode, PipelineValidationError
     else:
         return _RETRY_HINTS_BY_CODE[PipelineErrorCode.SINTAXE]
     return _RETRY_HINTS_BY_CODE.get(code, _RETRY_HINTS_BY_CODE[PipelineErrorCode.SINTAXE])
+
+
+def _check_blind_solving_flags(
+    blind_sol: QuestaoBlindSolvingOutput
+) -> Optional[Tuple[str, PipelineErrorCode, str]]:
+    """Etapa 4.1: aplica os early exits da resolução cega. Retorna (etapa_falha, código, motivo) ou None se passou."""
+    if not getattr(blind_sol, "pergunta_respondivel", True):
+        return (
+            "4.1_nao_respondivel",
+            PipelineErrorCode.NAO_RESPONDIVEL,
+            "O resolvedor cego apontou que a pergunta não é respondível com os dados fornecidos.",
+        )
+
+    premissas = getattr(blind_sol, "premissas_assumidas", [])
+    premissas_reais = [
+        p for p in premissas or []
+        if isinstance(p, str) and not re.search(r"^(nenhuma|n/a|nenhum|nada|sem premissas?)\b", p.strip(), re.I)
+    ]
+    if premissas_reais:
+        return (
+            "4.1_premissa_oculta",
+            PipelineErrorCode.PREMISSA_OCULTA,
+            f"Premissas implícitas assumidas na resolução: {'; '.join(premissas_reais)}",
+        )
+
+    dados_ociosos = getattr(blind_sol, "dados_nao_utilizados", [])
+    ociosos_reais = [
+        d for d in dados_ociosos or []
+        if isinstance(d, str) and not re.search(r"^(nenhum|nenhuma|n/a|nada|todos foram usados)\b", d.strip(), re.I)
+    ]
+    if len(ociosos_reais) > 1:
+        return (
+            "4.1_dados_ociosos",
+            PipelineErrorCode.DADOS_OCIOSOS,
+            f"Dados ociosos em excesso no enunciado/tabela ({len(ociosos_reais)} não utilizados): {'; '.join(ociosos_reais)}",
+        )
+    return None
+
+
+def _audit_error_code(audit: QuestaoAuditoriaSemanticaOutput) -> PipelineErrorCode:
+    """Etapa 4.3: converte o critério reprovado na auditoria em PipelineErrorCode."""
+    if audit.complexidade_insuficiente:
+        return PipelineErrorCode.COMPLEXIDADE
+    if audit.comando_ambiguo_ou_incompativel or audit.desalinhamento_comando_grandeza:
+        return PipelineErrorCode.NAO_RESPONDIVEL
+    if audit.deficit_ou_contradicao:
+        return PipelineErrorCode.PREMISSA_OCULTA
+    return PipelineErrorCode.AUDITORIA
+
+
+def _parse_float_br(value: Any) -> Optional[float]:
+    """Converte número puro (aceita vírgula decimal) em float; retorna None para qualquer outro texto."""
+    try:
+        return float(str(value).strip().replace(",", "."))
+    except (ValueError, TypeError):
+        return None
 
 
 class QuestionService:
@@ -636,38 +696,12 @@ class QuestionService:
                 _persist_attempt_output(False, "4.1_resolucao_cega", last_error_code, last_error)
                 continue
 
-            if not getattr(blind_sol, "pergunta_respondivel", True):
-                last_error_code = PipelineErrorCode.NAO_RESPONDIVEL
-                last_error = "O resolvedor cego apontou que a pergunta não é respondível numericamente com os dados fornecidos."
-                logger.warning(f"Tentativa {attempt}/{max_attempts} descartada (pergunta não respondível): {last_error}")
-                _persist_attempt_output(False, "4.1_nao_respondivel", last_error_code, last_error)
+            falha_cega = _check_blind_solving_flags(blind_sol)
+            if falha_cega:
+                etapa_cega, last_error_code, last_error = falha_cega
+                logger.warning(f"Tentativa {attempt}/{max_attempts} descartada na resolução cega ({etapa_cega}): {last_error}")
+                _persist_attempt_output(False, etapa_cega, last_error_code, last_error)
                 continue
-
-            premissas = getattr(blind_sol, "premissas_assumidas", [])
-            if premissas:
-                premissas_reais = [
-                    p for p in premissas
-                    if isinstance(p, str) and not re.search(r"^(nenhuma|n/a|nenhum|nada|sem premissas?)\b", p.strip(), re.I)
-                ]
-                if premissas_reais:
-                    last_error_code = PipelineErrorCode.PREMISSA_OCULTA
-                    last_error = f"Premissas implícitas assumidas na resolução: {'; '.join(premissas_reais)}"
-                    logger.warning(f"Tentativa {attempt}/{max_attempts} descartada por premissa implícita: {last_error}")
-                    _persist_attempt_output(False, "4.1_premissa_oculta", last_error_code, last_error)
-                    continue
-
-            dados_ociosos = getattr(blind_sol, "dados_nao_utilizados", [])
-            if dados_ociosos:
-                ociosos_reais = [
-                    d for d in dados_ociosos
-                    if isinstance(d, str) and not re.search(r"^(nenhum|nenhuma|n/a|nada|todos foram usados)\b", d.strip(), re.I)
-                ]
-                if len(ociosos_reais) > 1:
-                    last_error_code = PipelineErrorCode.DADOS_OCIOSOS
-                    last_error = f"Dados ociosos em excesso no enunciado/tabela ({len(ociosos_reais)} não utilizados): {'; '.join(ociosos_reais)}"
-                    logger.warning(f"Tentativa {attempt}/{max_attempts} descartada por excesso de dados ociosos: {last_error}")
-                    _persist_attempt_output(False, "4.1_dados_ociosos", last_error_code, last_error)
-                    continue
 
             try:
                 equiv = self._run_equivalence_check(
@@ -709,14 +743,7 @@ class QuestionService:
                 continue
 
             if not audit.aprovada:
-                if audit.complexidade_insuficiente:
-                    last_error_code = PipelineErrorCode.COMPLEXIDADE
-                elif audit.comando_ambiguo_ou_incompativel or audit.desalinhamento_comando_grandeza:
-                    last_error_code = PipelineErrorCode.NAO_RESPONDIVEL
-                elif audit.deficit_ou_contradicao:
-                    last_error_code = PipelineErrorCode.PREMISSA_OCULTA
-                else:
-                    last_error_code = PipelineErrorCode.AUDITORIA
+                last_error_code = _audit_error_code(audit)
                 last_error = f"Rejeição semântica: {audit.motivo_rejeicao}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na auditoria semântica: {audit.motivo_rejeicao}")
                 _persist_attempt_output(False, "4.3_auditoria_pedagogica", last_error_code, last_error)
@@ -739,12 +766,14 @@ class QuestionService:
         self,
         enunciado: str,
         tabela_dados: Optional[List[Dict[str, Any]]] = None,
-        temperature: float = 0.0
+        temperature: float = 0.0,
+        perfil: PerfilAvaliacao = "gerada"
     ) -> QuestaoBlindSolvingOutput:
         """Etapa 4.1: Resolução cega pelo modelo apenas a partir do enunciado e dados."""
         prompt = build_blind_solving_prompt(
             enunciado=enunciado,
-            tabela_dados=tabela_dados
+            tabela_dados=tabela_dados,
+            perfil=perfil
         )
         raw = self.llm_client.generate(
             prompt=prompt,
@@ -809,6 +838,40 @@ class QuestionService:
 
         return QuestaoEquivalenciaOutput(**parsed)
 
+    def _run_alternative_mapping(
+        self,
+        enunciado: str,
+        resultado_obtido: Any,
+        alternativas: Dict[str, str]
+    ) -> QuestaoMapeamentoAlternativaOutput:
+        """Etapa 4.2 (perfil 'enem'): identifica quais alternativas expressam o resultado da resolução cega."""
+        f_obtido = _parse_float_br(resultado_obtido)
+        floats_alts = {letra: _parse_float_br(texto) for letra, texto in alternativas.items()}
+        if f_obtido is not None and all(v is not None for v in floats_alts.values()):
+            letras = sorted(letra for letra, v in floats_alts.items() if abs(v - f_obtido) < 1e-4)
+            return QuestaoMapeamentoAlternativaOutput(
+                letras_equivalentes=letras,
+                explicacao=f"Mapeamento numérico determinístico em Python (0ms): {f_obtido} -> {letras or 'nenhuma'}."
+            )
+
+        prompt = build_mapeamento_alternativa_prompt(
+            enunciado=enunciado,
+            resultado_obtido=resultado_obtido,
+            alternativas=alternativas
+        )
+        raw = self.llm_client.generate(
+            prompt=prompt,
+            max_tokens=200,
+            temperature=0.0,
+            top_p=0.9,
+            format="json"
+        )
+        json_str = extract_json_from_text(raw)
+        sanitized = sanitize_latex_json_text(json_str)
+        parsed = json.loads(sanitized, strict=False)
+        parsed = sanitize_parsed_dict_values(parsed)
+        return QuestaoMapeamentoAlternativaOutput(**parsed)
+
     def _run_semantic_audit(
         self,
         enunciado: str,
@@ -816,13 +879,15 @@ class QuestionService:
         tabela_dados: Optional[List[Dict[str, Any]]] = None,
         letra_gabarito: Optional[str] = None,
         habilidade_codigo: Optional[str] = None,
-        habilidade_descricao: Optional[str] = None
+        habilidade_descricao: Optional[str] = None,
+        perfil: PerfilAvaliacao = "gerada"
     ) -> QuestaoAuditoriaSemanticaOutput:
         """Etapa 4.3: Auditoria semântica e pedagógica por critérios com interrupção rápida."""
-        flags: Dict[str, Any] = {c: False for c in AUDITORIA_CRITERIOS_PEDAGOGICOS}
+        criterios = criterios_auditoria_por_perfil(perfil)
+        flags: Dict[str, Any] = {c: False for c in criterios}
         evidencias: List[str] = []
 
-        for criterio in AUDITORIA_CRITERIOS_PEDAGOGICOS:
+        for criterio in criterios:
             prompt = build_auditoria_criterio_prompt(
                 criterio=criterio,
                 enunciado=enunciado,
@@ -830,7 +895,8 @@ class QuestionService:
                 tabela_dados=tabela_dados,
                 letra_gabarito=letra_gabarito,
                 habilidade_codigo=habilidade_codigo,
-                habilidade_descricao=habilidade_descricao
+                habilidade_descricao=habilidade_descricao,
+                perfil=perfil
             )
             raw = self.llm_client.generate(
                 prompt=prompt,
@@ -857,6 +923,102 @@ class QuestionService:
 
         flags["analise"] = " | ".join(evidencias) if evidencias else "Item adequado."
         return QuestaoAuditoriaSemanticaOutput(**flags)
+
+    def evaluate_item(
+        self,
+        enunciado: str,
+        alternativas: Dict[str, str],
+        gabarito: str,
+        habilidade_codigo: Optional[str] = None,
+        habilidade_descricao: Optional[str] = None,
+        tabela_dados: Optional[List[Dict[str, Any]]] = None,
+        perfil: PerfilAvaliacao = "enem"
+    ) -> AvaliacaoItemResult:
+        """
+        Avalia um item pronto (ex.: questão histórica do ENEM) apenas com a Etapa 4, sem geração e sem solver.
+        - 4.1: resolução cega com os mesmos early exits da geração.
+        - 4.2: perfil 'enem' mapeia a resolução cega para as alternativas e exige exatamente a letra do gabarito;
+          perfil 'gerada' confronta a resolução cega com o texto da alternativa do gabarito.
+        - 4.3: auditoria pedagógica com os critérios do perfil.
+        """
+        gabarito = gabarito.strip().upper()
+        if habilidade_codigo and not habilidade_descricao:
+            hab_info = self._habilidades_queries.get(habilidade_codigo.strip().upper(), {})
+            habilidade_descricao = hab_info.get("descricao_original") or hab_info.get("descricao")
+
+        def _falha(etapa: str, codigo: PipelineErrorCode, motivo: str, **extra: Any) -> AvaliacaoItemResult:
+            return AvaliacaoItemResult(
+                perfil=perfil, aprovada=False, etapa_falha=etapa, codigo_erro=codigo, motivo_falha=motivo, **extra
+            )
+
+        try:
+            blind_sol = self._run_blind_solving(enunciado=enunciado, tabela_dados=tabela_dados, perfil=perfil)
+        except Exception as e:
+            return _falha("4.1_resolucao_cega", PipelineErrorCode.SINTAXE, f"Falha na resolução cega da LLM: {e}")
+
+        extra: Dict[str, Any] = {
+            "resultado_obtido": blind_sol.resultado_obtido,
+            "resolucao_passo_a_passo": blind_sol.resolucao_passo_a_passo,
+        }
+        falha_cega = _check_blind_solving_flags(blind_sol)
+        if falha_cega:
+            return _falha(*falha_cega, **extra)
+
+        try:
+            if perfil == "enem":
+                mapeamento = self._run_alternative_mapping(
+                    enunciado=enunciado,
+                    resultado_obtido=blind_sol.resultado_obtido,
+                    alternativas=alternativas
+                )
+                letras = mapeamento.letras_equivalentes
+                extra["letras_mapeadas"] = letras
+                if len(letras) > 1:
+                    return _falha(
+                        "4.2_equivalencia", PipelineErrorCode.ALTERNATIVAS_AMBIGUAS,
+                        f"Mais de uma alternativa expressa o resultado da resolução cega: {letras}. {mapeamento.explicacao or ''}".strip(),
+                        **extra
+                    )
+                if letras != [gabarito]:
+                    return _falha(
+                        "4.2_equivalencia", PipelineErrorCode.NAO_EQUIVALENTE,
+                        f"Resolução cega corresponde a {letras or 'nenhuma alternativa'}, gabarito informado é {gabarito}. "
+                        f"{mapeamento.explicacao or ''}".strip(),
+                        **extra
+                    )
+            else:
+                equiv = self._run_equivalence_check(
+                    resultado_solver=alternativas.get(gabarito, ""),
+                    resultado_obtido=blind_sol.resultado_obtido
+                )
+                if not equiv.equivalentes:
+                    return _falha(
+                        "4.2_equivalencia", PipelineErrorCode.NAO_EQUIVALENTE,
+                        f"Divergência matemática no confronto: {equiv.explicacao_equivalencia or ''}".strip(),
+                        **extra
+                    )
+        except Exception as e:
+            return _falha("4.2_equivalencia", PipelineErrorCode.NAO_EQUIVALENTE, f"Falha no confronto de equivalência: {e}", **extra)
+
+        try:
+            audit = self._run_semantic_audit(
+                enunciado=enunciado,
+                alternativas=alternativas,
+                tabela_dados=tabela_dados,
+                letra_gabarito=gabarito,
+                habilidade_codigo=habilidade_codigo,
+                habilidade_descricao=habilidade_descricao,
+                perfil=perfil
+            )
+        except Exception as e:
+            return _falha("4.3_auditoria_pedagogica", PipelineErrorCode.AUDITORIA, f"Falha na auditoria semântica: {e}", **extra)
+
+        if not audit.aprovada:
+            return _falha(
+                "4.3_auditoria_pedagogica", _audit_error_code(audit), f"Rejeição semântica: {audit.motivo_rejeicao}", **extra
+            )
+
+        return AvaliacaoItemResult(perfil=perfil, aprovada=True, **extra)
 
     def generate_batch(
         self,

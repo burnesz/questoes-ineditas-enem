@@ -1194,3 +1194,115 @@ def test_migrate_etapa_falha_labels_renames_legacy_values_idempotently():
             assert db.get(QuestaoInedita, ids[antigo]).etapa_falha == novo
     finally:
         db.close()
+
+
+def _blind_json(resultado, premissas=None, ociosos=None, respondivel=True):
+    return json.dumps({
+        "resolucao_passo_a_passo": "Resolução.",
+        "premissas_assumidas": premissas or [],
+        "dados_nao_utilizados": ociosos or [],
+        "pergunta_respondivel": respondivel,
+        "resultado_obtido": resultado,
+    })
+
+
+_ALTS_PLANOS = {"A": "Plano A.", "B": "Plano B.", "C": "Plano C.", "D": "Plano D.", "E": "Plano E."}
+
+
+def test_perfil_enem_prompts_aceitam_resposta_nao_numerica():
+    """Perfil 'enem': 4.1 não exige resposta numérica e o critério 2 da 4.3 aceita alternativas não numéricas."""
+    from app.core.prompts import build_blind_solving_prompt, build_auditoria_criterio_prompt
+
+    gerada = build_blind_solving_prompt("Qual plano é mais barato?")
+    enem = build_blind_solving_prompt("Qual plano é mais barato?", perfil="enem")
+    assert "respondido com um número" in gerada
+    assert "respondido com um número" not in enem
+    assert "uma opção, uma faixa ou uma ordenação" in enem
+
+    crit_gerada = build_auditoria_criterio_prompt("comando_ambiguo_ou_incompativel", "E", _ALTS_PLANOS)
+    crit_enem = build_auditoria_criterio_prompt("comando_ambiguo_ou_incompativel", "E", _ALTS_PLANOS, perfil="enem")
+    assert "incompatível com alternativas numéricas" in crit_gerada
+    assert "Alternativas não numéricas" in crit_enem
+
+
+def test_evaluate_item_enem_aprova_alternativa_nao_numerica():
+    """Perfil 'enem': resolução cega -> mapeamento para a letra do gabarito -> 5 critérios aprovados."""
+    mock_llm = MagicMock(spec=LLMClient)
+    service = QuestionService(llm_client=mock_llm, vector_store=MagicMock(spec=ChromaVectorStore))
+    mock_llm.generate.side_effect = [
+        _blind_json("Plano B"),
+        json.dumps({"letras_equivalentes": ["B"], "explicacao": "Plano B."}),
+    ] + [json.dumps({"defeito": False, "evidencia": "OK"}) for _ in range(5)]
+
+    res = service.evaluate_item(
+        enunciado="Qual plano ele deverá escolher, a fim de pagar menos?",
+        alternativas=_ALTS_PLANOS,
+        gabarito="b",
+        habilidade_codigo="H16",
+    )
+    assert res.aprovada is True
+    assert res.letras_mapeadas == ["B"]
+    assert mock_llm.generate.call_count == 7
+    prompt_mapeamento = mock_llm.generate.call_args_list[1].kwargs["prompt"]
+    assert "Juiz de Mapeamento" in prompt_mapeamento
+    assert "gabarito" not in prompt_mapeamento.lower()
+
+
+def test_evaluate_item_enem_gabarito_errado_e_multiplas_corretas():
+    """Perfil 'enem': gabarito divergente -> NAO_EQUIVALENTE; resultado em 2 alternativas -> ALTERNATIVAS_AMBIGUAS."""
+    from app.schemas.question import PipelineErrorCode
+
+    mock_llm = MagicMock(spec=LLMClient)
+    service = QuestionService(llm_client=mock_llm, vector_store=MagicMock(spec=ChromaVectorStore))
+
+    mock_llm.generate.side_effect = [_blind_json("Plano B"), json.dumps({"letras_equivalentes": ["B"]})]
+    res = service.evaluate_item("Qual plano?", _ALTS_PLANOS, gabarito="D")
+    assert res.aprovada is False
+    assert res.etapa_falha == "4.2_equivalencia"
+    assert res.codigo_erro == PipelineErrorCode.NAO_EQUIVALENTE
+
+    mock_llm.generate.side_effect = [_blind_json(0.5), json.dumps({"letras_equivalentes": ["A", "c"]})]
+    res = service.evaluate_item("Qual a fração?", {"A": "1/2", "B": "1/3", "C": "50%", "D": "1/4", "E": "1/5"}, gabarito="A")
+    assert res.aprovada is False
+    assert res.codigo_erro == PipelineErrorCode.ALTERNATIVAS_AMBIGUAS
+    assert res.letras_mapeadas == ["A", "C"]
+
+
+def test_evaluate_item_enem_fast_path_numerico_e_early_exit_cego():
+    """Alternativas puramente numéricas são mapeadas em Python sem LLM; premissa oculta interrompe na 4.1."""
+    from app.schemas.question import PipelineErrorCode
+
+    mock_llm = MagicMock(spec=LLMClient)
+    service = QuestionService(llm_client=mock_llm, vector_store=MagicMock(spec=ChromaVectorStore))
+    alts = {"A": "10", "B": "12,5", "C": "15", "D": "20", "E": "25"}
+
+    mock_llm.generate.side_effect = [_blind_json(12.5)] + [json.dumps({"defeito": False}) for _ in range(5)]
+    res = service.evaluate_item("Quanto?", alts, gabarito="B")
+    assert res.aprovada is True
+    assert mock_llm.generate.call_count == 6
+
+    mock_llm.reset_mock()
+    mock_llm.generate.side_effect = [_blind_json(12.5, premissas=["assumi que os grupos têm o mesmo tamanho"])]
+    res = service.evaluate_item("Quanto?", alts, gabarito="B")
+    assert res.etapa_falha == "4.1_premissa_oculta"
+    assert res.codigo_erro == PipelineErrorCode.PREMISSA_OCULTA
+    assert mock_llm.generate.call_count == 1
+
+
+def test_evaluate_item_perfil_gerada_confronta_texto_do_gabarito():
+    """Perfil 'gerada' em item pronto: confronta a resolução cega com o texto da alternativa do gabarito."""
+    mock_llm = MagicMock(spec=LLMClient)
+    service = QuestionService(llm_client=mock_llm, vector_store=MagicMock(spec=ChromaVectorStore))
+    mock_llm.generate.side_effect = [_blind_json(40)] + [json.dumps({"defeito": False}) for _ in range(5)]
+    res = service.evaluate_item(
+        "Em quantos minutos?", {"A": "30", "B": "40", "C": "50", "D": "60", "E": "80"}, gabarito="B", perfil="gerada"
+    )
+    assert res.aprovada is True
+    assert res.letras_mapeadas is None
+
+
+def test_evaluate_item_enem_mock_mode():
+    """LLMClient em mock_mode percorre a Etapa 4 completa no perfil 'enem'."""
+    service = QuestionService(llm_client=LLMClient(mock_mode=True), vector_store=MagicMock(spec=ChromaVectorStore))
+    res = service.evaluate_item("Qual plano?", _ALTS_PLANOS, gabarito="B", habilidade_codigo="H16")
+    assert res.aprovada is True
