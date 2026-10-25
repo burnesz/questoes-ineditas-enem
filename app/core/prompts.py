@@ -1,6 +1,6 @@
 """
 Módulo de prompts, schemas e contextos criativos para a arquitetura
-Program-Aided Generation (PoT) e Validação Modular em 3 Etapas de Questões do ENEM.
+Program-Aided Generation (PoT) e Validação Cega em 3 sub-etapas (Etapa 4) de Questões do ENEM.
 """
 
 import re
@@ -428,7 +428,7 @@ def build_enunciado_plan_only_prompt(
     alerta_tentativa_anterior: Optional[str] = None
 ) -> str:
     """
-    Fase 1a da decomposição PoT:
+    Fase 2A da decomposição PoT:
     Gera apenas 'planejamento', 'enunciado', 'tabela_dados' (opcional, máx 6 linhas) e 'erros_tipicos' (4 itens).
     """
     base = build_enunciado_solver_prompt(
@@ -459,8 +459,8 @@ def build_solver_only_prompt(
     alerta_tentativa_anterior: Optional[str] = None
 ) -> str:
     """
-    Fase 1b da decomposição PoT:
-    Gera apenas o 'solver' (`def resolver(): ...`) condicionado ao enunciado, tabela, planejamento e 4 erros típicos da Etapa 1a.
+    Fase 2B da decomposição PoT:
+    Gera apenas o 'solver' (`def resolver(): ...`) condicionado ao enunciado, tabela, planejamento e 4 erros típicos da Fase 2A.
     """
     tabela_json = json.dumps(tabela_dados, ensure_ascii=False) if tabela_dados else "null"
     erros_json = json.dumps(erros_tipicos, ensure_ascii=False)
@@ -585,7 +585,7 @@ Responda EXCLUSIVAMENTE em formato JSON com o schema:
 
 
 
-AUDITORIA_CRITERIOS_B3: Dict[str, str] = {
+AUDITORIA_CRITERIOS_PEDAGOGICOS: Dict[str, str] = {
     "incoerencia_ou_absurdo": (
         "CRITÉRIO 1 (Incoerência ou Absurdo Físico/Semântico): "
         "A situação descrita é absurda, fisicamente impossível ou conceitualmente errada? "
@@ -639,7 +639,7 @@ def build_auditoria_criterio_prompt(
         if habilidade_codigo or habilidade_descricao
         else ""
     )
-    pergunta_criterio = AUDITORIA_CRITERIOS_B3.get(
+    pergunta_criterio = AUDITORIA_CRITERIOS_PEDAGOGICOS.get(
         criterio,
         f"CRITÉRIO ({criterio}): O item apresenta este defeito pedagógico ou semântico?"
     )

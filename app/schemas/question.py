@@ -26,7 +26,6 @@ class PipelineErrorCode(str, Enum):
     NAO_RESPONDIVEL = "NAO_RESPONDIVEL"
     PREMISSA_OCULTA = "PREMISSA_OCULTA"
     DADOS_OCIOSOS = "DADOS_OCIOSOS"
-    INCONSISTENCIA_CEGA = "INCONSISTENCIA_CEGA"
     NAO_EQUIVALENTE = "NAO_EQUIVALENTE"
     AUDITORIA = "AUDITORIA"
 
@@ -173,7 +172,7 @@ POT_PHASE1_JSON_SCHEMA: Dict[str, Any] = {
 
 class QuestaoPlanejamentoEnunciadoOutput(BaseModel):
     """
-    Schema para a Etapa 1a da decomposição da Fase 1:
+    Schema para a Fase 2A da decomposição PoT (Etapa 2):
     planejamento + enunciado + tabela_dados (opcional) + 4 erros_tipicos (sem solver).
     """
     planejamento: Optional[str] = Field(

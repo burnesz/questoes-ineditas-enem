@@ -11,4 +11,5 @@ test_chroma_data/
 .coverage
 htmlcov/
 AGENTS.md
+CLAUDE.md
 docs/*.md

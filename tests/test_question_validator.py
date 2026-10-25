@@ -166,8 +166,8 @@ def test_a4_erros_tipicos_schema_and_pydantic_validation():
     assert len(valid_out.erros_tipicos) == 4
 
 
-def test_b3_questao_auditoria_semantica_new_criteria():
-    """B3: Verifica os novos critérios desalinhamento_comando_grandeza e fuga_habilidade_alvo no schema."""
+def test_auditoria_pedagogica_new_criteria():
+    """Auditoria pedagógica (Etapa 4.3): verifica os novos critérios desalinhamento_comando_grandeza e fuga_habilidade_alvo no schema."""
     from app.schemas.question import QuestaoAuditoriaSemanticaOutput
 
     audit_desalinhado = QuestaoAuditoriaSemanticaOutput(

@@ -92,11 +92,41 @@ def _migrate_questoes_ineditas_if_needed(db: Session) -> None:
         logger.warning(f"Aviso ao verificar/migrar schema de 'questoes_ineditas': {e}")
 
 
+_ETAPA_FALHA_RENOMEADAS = {
+    "1a_planejamento": "2a_planejamento",
+    "1b_solver": "2b_solver",
+    "5.1_resolucao_cega": "4.1_resolucao_cega",
+    "5.1_nao_respondivel": "4.1_nao_respondivel",
+    "5.1_premissa_oculta": "4.1_premissa_oculta",
+    "5.1_dados_ociosos": "4.1_dados_ociosos",
+    "5.2_equivalencia": "4.2_equivalencia",
+    "5.3_auditoria_b3": "4.3_auditoria_pedagogica",
+}
+
+
+def _migrate_etapa_falha_labels(db: Session) -> None:
+    """
+    Converte os rótulos de 'etapa_falha' gravados com a numeração antiga do pipeline
+    (Fases 1a/1b, Validação 5.x, auditoria 'b3') para a numeração atual em 5 etapas.
+    """
+    try:
+        for antigo, novo in _ETAPA_FALHA_RENOMEADAS.items():
+            db.execute(
+                text("UPDATE questoes_ineditas SET etapa_falha = :novo WHERE etapa_falha = :antigo"),
+                {"novo": novo, "antigo": antigo}
+            )
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        logger.warning(f"Aviso ao migrar rótulos de 'etapa_falha' em 'questoes_ineditas': {e}")
+
+
 def init_db(db: Session) -> None:
     """Cria tabelas no banco de dados e assegura o cadastro inicial das 30 habilidades do ENEM."""
     bind = db.get_bind() or engine
     Base.metadata.create_all(bind=bind)
     _migrate_questoes_ineditas_if_needed(db)
+    _migrate_etapa_falha_labels(db)
 
     count = db.query(HabilidadeEnem).count()
     if count == 0:

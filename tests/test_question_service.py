@@ -556,7 +556,7 @@ def test_three_stage_validation_semantic_failure_rejects():
 
 
 def test_stage_1b_rejects_excessive_unused_data_and_injects_retry_hint():
-    """Valida se a Etapa 1b reprova quando dados_nao_utilizados tem > 1 item e passa alerta_tentativa_anterior no retry."""
+    """Valida se a Etapa 4.1 (resolução cega) reprova quando dados_nao_utilizados tem > 1 item e passa alerta_tentativa_anterior no retry."""
     from app.services.question_service import _classify_retry_hint
     from app.schemas.question import PipelineErrorCode
 
@@ -569,7 +569,7 @@ def test_stage_1b_rejects_excessive_unused_data_and_injects_retry_hint():
         mock_vs = MagicMock(spec=ChromaVectorStore)
         mock_vs.search.return_value = []
 
-        # 1ª tentativa: Blind solving aponta 2 dados não utilizados -> Early Exit na Etapa 1b!
+        # 1ª tentativa: Blind solving aponta 2 dados não utilizados -> Early Exit na Etapa 4.1!
         t1_pot = json.dumps({
             "planejamento": "Plano inicial com dados extras.",
             "enunciado": "Um atleta correu em 10 s e 20 s, e ganhou 50 pontos fixos mais 30 de bônus. Qual sua pontuação total?",
@@ -609,7 +609,7 @@ def test_stage_1b_rejects_excessive_unused_data_and_injects_retry_hint():
         })
 
         mock_llm.generate.side_effect = [
-            t1_pot, t1_blind,  # 2 chamadas na 1ª tentativa (Early Exit na Etapa 1b)
+            t1_pot, t1_blind,  # 2 chamadas na 1ª tentativa (Early Exit na Etapa 4.1)
             t2_pot, t2_blind, t2_equiv, t2_audit
         ]
 
@@ -834,8 +834,8 @@ def resolver():
     assert len(metrics["operation_types"]) >= 2
 
 
-def test_b3_separate_yes_no_audit_calls_and_early_exit():
-    """B3: Etapa 3 executa chamadas sim/não separadas com temperature=0.0 por critério e faz early exit no 1º defeito."""
+def test_auditoria_pedagogica_separate_yes_no_calls_and_early_exit():
+    """Auditoria pedagógica (Etapa 4.3): executa chamadas sim/não separadas com temperature=0.0 por critério e faz early exit no 1º defeito."""
     db = TestingSessionLocal()
     try:
         mock_llm = MagicMock(spec=LLMClient)
@@ -1081,7 +1081,7 @@ def test_relational_persistence_all_attempts_failed():
         mock_vs = MagicMock(spec=ChromaVectorStore)
         mock_vs.search.return_value = []
 
-        # Falha nas 2 tentativas por sintaxe JSON inválida na Etapa 1a
+        # Falha nas 2 tentativas por sintaxe JSON inválida na Fase 2A
         mock_llm.generate.return_value = "texto sem json valido"
 
         ids_antes = {c.id for c in db.query(CicloGeracao).all()}
@@ -1105,7 +1105,7 @@ def test_relational_persistence_all_attempts_failed():
 
         for q_out in ultimo_ciclo.questoes:
             assert q_out.is_validated is False
-            assert q_out.etapa_falha == "1a_planejamento"
+            assert q_out.etapa_falha == "2a_planejamento"
             assert q_out.codigo_erro == "SINTAXE"
             assert q_out.enunciado is None
     finally:
@@ -1165,3 +1165,32 @@ def test_generate_batch_excludes_disabled_habilidades_by_default():
 
 
 
+
+
+def test_migrate_etapa_falha_labels_renames_legacy_values_idempotently():
+    """Converte rótulos antigos de etapa_falha (1a/1b, 5.x, auditoria_b3) para a numeração atual e é idempotente."""
+    from app.db.init_db import _migrate_etapa_falha_labels
+
+    db = TestingSessionLocal()
+    try:
+        legados = {
+            "1a_planejamento": "2a_planejamento",
+            "5.1_premissa_oculta": "4.1_premissa_oculta",
+            "5.3_auditoria_b3": "4.3_auditoria_pedagogica",
+            "3_nexo_complexidade": "3_nexo_complexidade",
+        }
+        ids = {}
+        for antigo in legados:
+            q = QuestaoInedita(id=uuid.uuid4(), habilidade_codigo="H01", is_validated=False, etapa_falha=antigo)
+            db.add(q)
+            ids[antigo] = q.id
+        db.commit()
+
+        _migrate_etapa_falha_labels(db)
+        _migrate_etapa_falha_labels(db)
+        db.expire_all()
+
+        for antigo, novo in legados.items():
+            assert db.get(QuestaoInedita, ids[antigo]).etapa_falha == novo
+    finally:
+        db.close()

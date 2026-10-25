@@ -16,7 +16,7 @@ from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.core.prompts import (
-    AUDITORIA_CRITERIOS_B3,
+    AUDITORIA_CRITERIOS_PEDAGOGICOS,
     build_enunciado_plan_only_prompt,
     build_solver_only_prompt,
     build_blind_solving_prompt,
@@ -80,7 +80,6 @@ _RETRY_HINTS_BY_CODE: Dict[PipelineErrorCode, str] = {
     PipelineErrorCode.NAO_RESPONDIVEL: "Comando numérico inequívoco: a pergunta final deve pedir um número com unidade explícita (nunca pergunte 'qual plano/opção').",
     PipelineErrorCode.PREMISSA_OCULTA: "Premissas e dados completos: declare todas as bases, áreas, pesos ou convenções no enunciado e garanta que a soma da tabela bata com o texto.",
     PipelineErrorCode.DADOS_OCIOSOS: "Dados com função: todo número citado no enunciado ou tabela deve entrar no cálculo (máximo de 1 dado extra contextual).",
-    PipelineErrorCode.INCONSISTENCIA_CEGA: "Clareza na resolução: redija enunciado e comando inequívocos para que o problema admita uma única interpretação e resultado.",
     PipelineErrorCode.NAO_EQUIVALENTE: "Alinhamento enunciado-solver: garanta que a fórmula de 'correta' em def resolver() calcule exatamente o que o comando final pede.",
     PipelineErrorCode.AUDITORIA: "Verossimilhança: utilize ordens de grandeza e contextos fisicamente realistas.",
 }
@@ -503,15 +502,15 @@ class QuestionService:
                     last_error_code = PipelineErrorCode.ERROS_TIPICOS_INVALIDOS
                 else:
                     last_error_code = PipelineErrorCode.SINTAXE
-                last_error = f"Erro no schema da Etapa 1a (planejamento/enunciado): {e.errors()}"
-                logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na Etapa 1a: {e}")
-                _persist_attempt_output(False, "1a_planejamento", last_error_code, last_error)
+                last_error = f"Erro no schema da Fase 2A (planejamento/enunciado): {e.errors()}"
+                logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na Fase 2A: {e}")
+                _persist_attempt_output(False, "2a_planejamento", last_error_code, last_error)
                 continue
             except Exception as e:
                 last_error_code = PipelineErrorCode.SINTAXE
-                last_error = f"Falha na Etapa 1a (planejamento/enunciado): {e}"
-                logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na Etapa 1a: {e}")
-                _persist_attempt_output(False, "1a_planejamento", last_error_code, last_error)
+                last_error = f"Falha na Fase 2A (planejamento/enunciado): {e}"
+                logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na Fase 2A: {e}")
+                _persist_attempt_output(False, "2a_planejamento", last_error_code, last_error)
                 continue
 
             if isinstance(parsed_1a, dict) and "solver" in parsed_1a and "def resolver" in str(parsed_1a.get("solver", "")):
@@ -541,9 +540,9 @@ class QuestionService:
                     partial_solver = solver_code or None
                 except Exception as e:
                     last_error_code = PipelineErrorCode.SINTAXE
-                    last_error = f"Falha na Etapa 1b (geração do solver): {e}"
-                    logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na Etapa 1b: {e}")
-                    _persist_attempt_output(False, "1b_solver", last_error_code, last_error)
+                    last_error = f"Falha na Fase 2B (geração do solver): {e}"
+                    logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na Fase 2B: {e}")
+                    _persist_attempt_output(False, "2b_solver", last_error_code, last_error)
                     continue
 
             parsed_data = {
@@ -634,14 +633,14 @@ class QuestionService:
                 last_error_code = PipelineErrorCode.SINTAXE
                 last_error = f"Falha na resolução cega da LLM: {e}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na resolução cega: {e}")
-                _persist_attempt_output(False, "5.1_resolucao_cega", last_error_code, last_error)
+                _persist_attempt_output(False, "4.1_resolucao_cega", last_error_code, last_error)
                 continue
 
             if not getattr(blind_sol, "pergunta_respondivel", True):
                 last_error_code = PipelineErrorCode.NAO_RESPONDIVEL
                 last_error = "O resolvedor cego apontou que a pergunta não é respondível numericamente com os dados fornecidos."
                 logger.warning(f"Tentativa {attempt}/{max_attempts} descartada (pergunta não respondível): {last_error}")
-                _persist_attempt_output(False, "5.1_nao_respondivel", last_error_code, last_error)
+                _persist_attempt_output(False, "4.1_nao_respondivel", last_error_code, last_error)
                 continue
 
             premissas = getattr(blind_sol, "premissas_assumidas", [])
@@ -654,7 +653,7 @@ class QuestionService:
                     last_error_code = PipelineErrorCode.PREMISSA_OCULTA
                     last_error = f"Premissas implícitas assumidas na resolução: {'; '.join(premissas_reais)}"
                     logger.warning(f"Tentativa {attempt}/{max_attempts} descartada por premissa implícita: {last_error}")
-                    _persist_attempt_output(False, "5.1_premissa_oculta", last_error_code, last_error)
+                    _persist_attempt_output(False, "4.1_premissa_oculta", last_error_code, last_error)
                     continue
 
             dados_ociosos = getattr(blind_sol, "dados_nao_utilizados", [])
@@ -667,7 +666,7 @@ class QuestionService:
                     last_error_code = PipelineErrorCode.DADOS_OCIOSOS
                     last_error = f"Dados ociosos em excesso no enunciado/tabela ({len(ociosos_reais)} não utilizados): {'; '.join(ociosos_reais)}"
                     logger.warning(f"Tentativa {attempt}/{max_attempts} descartada por excesso de dados ociosos: {last_error}")
-                    _persist_attempt_output(False, "5.1_dados_ociosos", last_error_code, last_error)
+                    _persist_attempt_output(False, "4.1_dados_ociosos", last_error_code, last_error)
                     continue
 
             try:
@@ -679,7 +678,7 @@ class QuestionService:
                 last_error_code = PipelineErrorCode.NAO_EQUIVALENTE
                 last_error = f"Falha no confronto de equivalência: {e}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na equivalência: {e}")
-                _persist_attempt_output(False, "5.2_equivalencia", last_error_code, last_error)
+                _persist_attempt_output(False, "4.2_equivalencia", last_error_code, last_error)
                 continue
 
             if not equiv.equivalentes:
@@ -690,7 +689,7 @@ class QuestionService:
                     f"Tentativa {attempt}/{max_attempts} descartada por divergência: "
                     f"Solver='{solver_result['correta']}' vs LLM='{blind_sol.resultado_obtido}' | Motivo: {motivo}"
                 )
-                _persist_attempt_output(False, "5.2_equivalencia", last_error_code, last_error)
+                _persist_attempt_output(False, "4.2_equivalencia", last_error_code, last_error)
                 continue
 
             try:
@@ -706,7 +705,7 @@ class QuestionService:
                 last_error_code = PipelineErrorCode.AUDITORIA
                 last_error = f"Falha na auditoria semântica: {e}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na auditoria semântica: {e}")
-                _persist_attempt_output(False, "5.3_auditoria_b3", last_error_code, last_error)
+                _persist_attempt_output(False, "4.3_auditoria_pedagogica", last_error_code, last_error)
                 continue
 
             if not audit.aprovada:
@@ -720,7 +719,7 @@ class QuestionService:
                     last_error_code = PipelineErrorCode.AUDITORIA
                 last_error = f"Rejeição semântica: {audit.motivo_rejeicao}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na auditoria semântica: {audit.motivo_rejeicao}")
-                _persist_attempt_output(False, "5.3_auditoria_b3", last_error_code, last_error)
+                _persist_attempt_output(False, "4.3_auditoria_pedagogica", last_error_code, last_error)
                 continue
 
             logger.info(
@@ -742,7 +741,7 @@ class QuestionService:
         tabela_dados: Optional[List[Dict[str, Any]]] = None,
         temperature: float = 0.0
     ) -> QuestaoBlindSolvingOutput:
-        """Etapa 1: Resolução cega pelo modelo apenas a partir do enunciado e dados."""
+        """Etapa 4.1: Resolução cega pelo modelo apenas a partir do enunciado e dados."""
         prompt = build_blind_solving_prompt(
             enunciado=enunciado,
             tabela_dados=tabela_dados
@@ -768,7 +767,7 @@ class QuestionService:
         return QuestaoBlindSolvingOutput(**parsed)
 
     def _run_equivalence_check(self, resultado_solver: Any, resultado_obtido: Any) -> QuestaoEquivalenciaOutput:
-        """Etapa 2: Confronto de equivalência matemática entre solver e resolução cega."""
+        """Etapa 4.2: Confronto de equivalência matemática entre solver e resolução cega."""
         s_solver = str(resultado_solver).strip()
         s_obtido = str(resultado_obtido).strip()
         if s_solver == s_obtido:
@@ -819,11 +818,11 @@ class QuestionService:
         habilidade_codigo: Optional[str] = None,
         habilidade_descricao: Optional[str] = None
     ) -> QuestaoAuditoriaSemanticaOutput:
-        """Etapa 3: Auditoria semântica e pedagógica por critérios com interrupção rápida."""
-        flags: Dict[str, Any] = {c: False for c in AUDITORIA_CRITERIOS_B3}
+        """Etapa 4.3: Auditoria semântica e pedagógica por critérios com interrupção rápida."""
+        flags: Dict[str, Any] = {c: False for c in AUDITORIA_CRITERIOS_PEDAGOGICOS}
         evidencias: List[str] = []
 
-        for criterio in AUDITORIA_CRITERIOS_B3:
+        for criterio in AUDITORIA_CRITERIOS_PEDAGOGICOS:
             prompt = build_auditoria_criterio_prompt(
                 criterio=criterio,
                 enunciado=enunciado,
