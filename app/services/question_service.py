@@ -279,6 +279,10 @@ def _valores_alternativa(texto: Any) -> Optional[List[float]]:
     return [valor[0], valor[0] / 100] if valor[1] else [valor[0]]
 
 
+# etapa_falha provisória de questões geradas com ate_etapa3=True, que aguardam a Etapa 4 feita depois, com outro modelo
+ETAPA_PENDENTE_AVALIACAO = "4_pendente"
+
+
 class QuestionService:
     """Orquestrador de geração, validação e persistência de questões inéditas."""
 
@@ -441,9 +445,14 @@ class QuestionService:
         temperature: float = 0.2,
         top_p: float = 0.9,
         tema: Optional[str] = None,
-        abertura: Optional[str] = None
+        abertura: Optional[str] = None,
+        ate_etapa3: bool = False
     ) -> QuestaoInedita:
-        """Gera uma questão inédita validada para a habilidade informada via pipeline PoT."""
+        """
+        Gera uma questão inédita validada para a habilidade informada via pipeline PoT.
+        Com ate_etapa3=True, para depois da Etapa 3 e grava a questão como pendente (ETAPA_PENDENTE_AVALIACAO),
+        para que a Etapa 4 seja feita depois por outro modelo com avaliar_questao_pendente().
+        """
         clean_hab = habilidade_codigo.strip().upper()
         if clean_hab.startswith("H") and clean_hab[1:].isdigit():
             clean_hab = f"H{int(clean_hab[1:]):02d}"
@@ -474,7 +483,8 @@ class QuestionService:
             temperature=temperature,
             top_p=top_p,
             tema=tema,
-            abertura=abertura
+            abertura=abertura,
+            ate_etapa3=ate_etapa3
         )
 
     def _generate_pot_item(
@@ -486,7 +496,8 @@ class QuestionService:
         temperature: float = 0.2,
         top_p: float = 0.9,
         tema: Optional[str] = None,
-        abertura: Optional[str] = None
+        abertura: Optional[str] = None,
+        ate_etapa3: bool = False
     ) -> QuestaoInedita:
         """Executa o ciclo iterativo de geração, execução do solver e validação em 3 etapas."""
         clean_hab = habilidade.codigo
@@ -816,6 +827,10 @@ class QuestionService:
             partial_alternativas = alternativas
             partial_gabarito = gabarito
 
+            if ate_etapa3:
+                logger.info(f"Item PoT para {clean_hab} passou da Etapa 3; Etapa 4 fica pendente (gabarito {gabarito}).")
+                return _persist_attempt_output(False, ETAPA_PENDENTE_AVALIACAO, None, None)
+
             try:
                 blind_sol = self._run_blind_solving(
                     enunciado=pot_output.enunciado,
@@ -1102,6 +1117,35 @@ class QuestionService:
 
         flags["analise"] = " | ".join(evidencias) if evidencias else "Item adequado."
         return QuestaoAuditoriaSemanticaOutput(**flags)
+
+    def avaliar_questao_pendente(self, db: Session, questao: QuestaoInedita) -> AvaliacaoItemResult:
+        """
+        Faz a Etapa 4 (perfil 'gerada') de uma questão gerada com ate_etapa3=True, com o modelo deste serviço,
+        e grava o veredito na própria questão e no ciclo. Falha de conexão com o Ollama sobe sem gravar nada.
+        """
+        if questao.etapa_falha != ETAPA_PENDENTE_AVALIACAO:
+            raise ValueError(f"Questão {questao.id} não está pendente de avaliação (etapa_falha={questao.etapa_falha}).")
+        habilidade = db.get(HabilidadeEnem, questao.habilidade_codigo)
+        resultado = self.evaluate_item(
+            enunciado=questao.enunciado,
+            alternativas=questao.alternativas,
+            gabarito=questao.gabarito,
+            habilidade_codigo=questao.habilidade_codigo,
+            habilidade_descricao=habilidade.descricao if habilidade else None,
+            perfil="gerada",
+        )
+        questao.is_validated = resultado.aprovada
+        questao.etapa_falha = resultado.etapa_falha
+        questao.codigo_erro = (
+            resultado.codigo_erro.value if hasattr(resultado.codigo_erro, "value")
+            else (str(resultado.codigo_erro) if resultado.codigo_erro else None)
+        )
+        questao.motivo_falha = resultado.motivo_falha
+        questao.justificativa = resultado.resolucao_passo_a_passo
+        if questao.ciclo is not None:
+            questao.ciclo.sucesso = resultado.aprovada
+        db.commit()
+        return resultado
 
     def evaluate_item(
         self,

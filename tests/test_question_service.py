@@ -1542,3 +1542,69 @@ def test_saturacao_por_modelo_ignora_questoes_de_outros_modelos():
         assert "ENUNCIADO DO MODELO Y" in compartilhado and "ENUNCIADO DO MODELO X" in compartilhado
     finally:
         db.close()
+
+
+def test_geracao_ate_etapa3_grava_questao_pendente_sem_chamar_a_etapa4():
+    """Com ate_etapa3=True, a questão que passa da Etapa 3 é gravada como pendente e o LLM não é chamado para a Etapa 4."""
+    from app.services.question_service import ETAPA_PENDENTE_AVALIACAO
+
+    db = TestingSessionLocal()
+    try:
+        mock_llm = MagicMock(spec=LLMClient)
+        mock_vs = MagicMock(spec=ChromaVectorStore)
+        mock_vs.search.return_value = []
+        mock_llm.generate.side_effect = [json.dumps({
+            "enunciado": "Uma loja vendeu 15 camisetas pela manhã e 20 à tarde, a 3 reais de lucro cada. Qual o lucro total, em reais?",
+            "solver": "def resolver():\n    total = (15 + 20) * 3 - 0\n    return {'correta': total, 'distratores': [35, 60, 45, 100]}"
+        })]
+        service = QuestionService(llm_client=mock_llm, vector_store=mock_vs)
+        questao = service.generate_single_questao_inedita(db=db, habilidade_codigo="H01", max_attempts=1, ate_etapa3=True)
+
+        assert mock_llm.generate.call_count == 1
+        assert questao.etapa_falha == ETAPA_PENDENTE_AVALIACAO
+        assert questao.is_validated is False
+        assert questao.alternativas[questao.gabarito] == "105"
+    finally:
+        db.close()
+
+
+def test_avaliar_questao_pendente_grava_veredito_na_questao_e_no_ciclo():
+    """A Etapa 4 feita depois, por outro modelo, grava o veredito na questão pendente e no ciclo."""
+    from app.db.models.ciclo_geracao import CicloGeracao
+    from app.schemas.question import AvaliacaoItemResult, PipelineErrorCode
+    from app.services.question_service import ETAPA_PENDENTE_AVALIACAO
+
+    db = TestingSessionLocal()
+    try:
+        ciclo = CicloGeracao(id=uuid.uuid4(), habilidade_codigo="H01", max_attempts=1, total_tentativas=1, sucesso=False)
+        db.add(ciclo)
+        db.flush()
+        questao = QuestaoInedita(id=uuid.uuid4(), ciclo_id=ciclo.id, habilidade_codigo="H01", enunciado="Quanto é 2 + 3?",
+                                 alternativas={"A": "5", "B": "6", "C": "4", "D": "7", "E": "8"}, gabarito="A",
+                                 is_validated=False, etapa_falha=ETAPA_PENDENTE_AVALIACAO)
+        db.add(questao)
+        db.commit()
+
+        service = QuestionService(llm_client=MagicMock(spec=LLMClient), vector_store=MagicMock(spec=ChromaVectorStore))
+        with patch.object(service, "evaluate_item", return_value=AvaliacaoItemResult(
+                perfil="gerada", aprovada=True, resolucao_passo_a_passo="2 + 3 = 5")) as avaliar:
+            service.avaliar_questao_pendente(db, questao)
+        assert avaliar.call_args.kwargs["perfil"] == "gerada"
+        db.refresh(questao)
+        assert questao.is_validated is True and questao.etapa_falha is None and questao.justificativa == "2 + 3 = 5"
+        assert db.get(CicloGeracao, ciclo.id).sucesso is True
+
+        with pytest.raises(ValueError):  # já avaliada: não pode ser avaliada de novo
+            service.avaliar_questao_pendente(db, questao)
+
+        questao.is_validated, questao.etapa_falha = False, ETAPA_PENDENTE_AVALIACAO
+        db.commit()
+        with patch.object(service, "evaluate_item", return_value=AvaliacaoItemResult(
+                perfil="gerada", aprovada=False, etapa_falha="4.2_equivalencia",
+                codigo_erro=PipelineErrorCode.NAO_EQUIVALENTE, motivo_falha="divergiu")):
+            service.avaliar_questao_pendente(db, questao)
+        db.refresh(questao)
+        assert questao.is_validated is False and questao.etapa_falha == "4.2_equivalencia"
+        assert questao.codigo_erro == PipelineErrorCode.NAO_EQUIVALENTE.value
+    finally:
+        db.close()
