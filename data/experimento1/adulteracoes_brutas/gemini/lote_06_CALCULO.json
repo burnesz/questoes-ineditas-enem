@@ -1,0 +1,70 @@
+[
+  {
+    "id": "86027",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Para apagar os focos A e B de um incêndio, que estavam a uma distância de 36 m um do outro, os bombeiros de um quartel decidiram se posicionar de modo que a distância de um bombeiro ao foco A, de temperatura mais elevada, fosse sempre o dobro da distância desse bombeiro ao foco B, de temperatura menos elevada. Nestas condições, a maior distância, em metro, que dois bombeiros poderiam ter entre eles é",
+    "alternativas": {
+      "A": "30.",
+      "B": "40.",
+      "C": "45.",
+      "D": "60.",
+      "E": "68."
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "Alteração da distância inicial entre os focos de 30 m para 36 m, alterando o raio e o diâmetro da circunferência de Apolônio resultante.",
+    "trecho_original": "distância de 30 m",
+    "trecho_adulterado": "distância de 36 m",
+    "resposta_correta_apos_adulteracao": "48 metros, o que não coincide com nenhuma das alternativas."
+  },
+  {
+    "id": "87525",
+    "tipo_erro": "CALCULO",
+    "enunciado": "O dono de dois cachorrinhos, um shitzu e um poodle, fez uma pesquisa na internet sobre preços de banho para seus cães em cinco lojas próximas à sua casa. Ele pretendia levar os dois cachorrinhos a um mesmo petshop naquela semana para tomar banho.\n| Petshop | Shitzu | Poodle | Promoção da semana |\n|---|---|---|---|\n| I | R$ 29,00 | R$ 18,00 | Banho para cães da raça poodle: R$ 15,00 |\n| II | R$ 23,00 | R$ 20,00 | 10% de desconto no valor do banho para cães da raça poodle |\n| III | R$ 28,00 | R$ 20,00 | Traga dois cachorrinhos para tomar banho e ganhe R$ 5,00 de desconto no valor total |\n| IV | R$ 22,00 | R$ 28,00 | Traga dois cachorrinhos para tomar banho e ganhe 10% de desconto no valor total |\n| V | R$ 30,00 | R$ 24,00 | 20% de desconto no valor do banho para cães da raça shitzu |\nO local escolhido foi o que apresentou o menor preço para banho dos dois cachorrinhos. O petshop escolhido foi o",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V."
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "Modificação do preço do banho do shitzu no petshop III de R$ 25,00 para R$ 28,00, alterando o valor total promocional desse estabelecimento.",
+    "trecho_original": "R$ 25,00",
+    "trecho_adulterado": "R$ 28,00",
+    "resposta_correta_apos_adulteracao": "Petshop II (R$ 41,00), o que coincide com a alternativa B."
+  },
+  {
+    "id": "71238",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Uma equipe de especialistas do centro meteorológico de uma cidade mediu a temperatura do ambiente, sempre no mesmo horário, durante 15 dias intercalados, a partir do primeiro dia de um mês. Esse tipo de procedimento é frequente, uma vez que os dados coletados servem de referência para estudos e verificação de tendências climáticas ao longo dos meses e anos. As medições ocorridas nesse período foram as seguintes: \\bullet dia primeiro: 15,5 ºC; \\bullet dia 3: 14 ºC; \\bullet dia 5: 13,5 ºC; \\bullet dia 7: 16 ºC; \\bullet dia 9: 19,5 ºC; \\bullet dia 11: 20 ºC; \\bullet dia 13: 13,5 ºC; \\bullet dia 15: 13,5 ºC; \\bullet dia 17: 18 ºC; \\bullet dia 19: 20 ºC; \\bullet dia 21: 18,5 ºC; \\bullet dia 23: 13,5 ºC; \\bullet dia 25: 21,5 ºC; \\bullet dia 27: 20 ºC; \\bullet dia 29: 16 ºC. Em relação à temperatura, os valores da média, mediana e moda são, respectivamente, iguais a",
+    "alternativas": {
+      "A": "$17 ^\\circ C, 17 ^\\circ C e 13,5 ^\\circ C$",
+      "B": "$17 ^\\circ C, 18 ^\\circ C e 13,5 ^\\circ C$",
+      "C": "$17 ^\\circ C, 13,5 ^\\circ C e 18 ^\\circ C$",
+      "D": "$17 ^\\circ C, 18 ^\\circ C e 21,5 ^\\circ C$",
+      "E": "$17 ^\\circ C, 13,5 ^\\circ C e 21,5 ^\\circ C$"
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "Alteração da medição do dia 7 de 18 ºC para 16 ºC, modificando o valor da mediana do conjunto de dados ordenado.",
+    "trecho_original": "\\bullet dia 7: 18 ºC;",
+    "trecho_adulterado": "\\bullet dia 7: 16 ºC;",
+    "resposta_correta_apos_adulteracao": "Média aproximadamente 17 ºC, mediana 16 ºC e moda 13,5 ºC, o que não coincide com nenhuma das alternativas."
+  },
+  {
+    "id": "32469",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Um programa de televisão criou um perfil em uma rede social, e a ideia era que esse perfil fosse sorteado para um dos seguidores, quando esses fossem em número de um milhão. Agora que essa quantidade de seguidores foi atingida, os organizadores perceberam que apenas 80% deles são realmente fãs do programa. Por conta disso, resolveram que todos os seguidores farão um teste, com perguntas objetivas referentes ao programa, e só poderão participar do sorteio aqueles que forem aprovados. Estatísticas revelam que, num teste dessa natureza, a taxa de aprovação é de 90% dos fãs e de 10% dos que não são fãs. De acordo com essas informações, a razão entre a probabilidade de que um fã seja sorteado e a probabilidade de que o sorteado seja alguém que não é fã do programa é igual a",
+    "alternativas": {
+      "A": "1.",
+      "B": "4.",
+      "C": "6.",
+      "D": "24.",
+      "E": "96."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Modificação da taxa de aprovação dos não fãs de 15% para 10%, alterando o quantitativo de aprovados não fãs e, por conseguinte, a razão entre as probabilidades.",
+    "trecho_original": "15%",
+    "trecho_adulterado": "10%",
+    "resposta_correta_apos_adulteracao": "36, o que não coincide com nenhuma das alternativas."
+  }
+]

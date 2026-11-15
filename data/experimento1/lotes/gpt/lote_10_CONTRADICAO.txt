@@ -1,0 +1,104 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: CONTRADICAO (inconsistência interna).
+- Altere UM trecho do enunciado (ou da tabela contida nele) para que ele contradiga
+  outra informação já presente no próprio texto, de forma que os dados não possam ser
+  todos verdadeiros ao mesmo tempo (ex.: "3 horas" em um ponto e "as 4 horas de
+  percurso" em outro; parcelas cuja soma difere do total informado; "metade dos 40
+  alunos, ou seja, 25"; porcentagens de uma distribuição somando mais de 100%).
+- A contradição deve ser verificável apenas lendo o texto, sem conhecimento externo.
+- Não altere a pergunta final. Mantenha as alternativas e o campo "gabarito"
+  idênticos ao original.
+- Em "resposta_correta_apos_adulteracao", cite os dois trechos que se contradizem e
+  explique por que não podem ser ambos verdadeiros.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "70038",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Atualmente existem muitos aplicativos de fazendas virtuais que, apesar de críticas, possuem uma enorme quantidade de usuários. Embora apresentem algumas diferenças de funcionamento, as fazendas virtuais possuem a mesma concepção: cada vez que o usuário cuida de sua fazenda ou da de seus amigos, ganha pontos, e, quanto mais pontos acumula, maior é seu nível de experiência. Em um aplicativo de fazenda virtual, o usuário precisa de 1 000 pontos para atingir o nível 1. Acumulando mais 1 200 pontos, atinge o nível 2; acumulando mais 1 400 pontos, atinge o nível 3 e assim por diante, sempre com esse padrão. Um usuário que está no nível 15 de experiência acumulou",
+    "alternativas": {
+      "A": "3 800 pontos.",
+      "B": "15 200 pontos.",
+      "C": "32 200 pontos.",
+      "D": "35 000 pontos.",
+      "E": "36 000 pontos."
+    },
+    "gabarito": "E"
+  },
+  {
+    "id": "28085",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "O hábito cristalino é um termo utilizado por mineralogistas para descrever a aparência típica de um cristal em termos de tamanho e forma. A granada é um mineral cujo hábito cristalino é um poliedro com 30 arestas e 20 vértices. Um mineralogista construiu um modelo ilustrativo de um cristal de granada pela junção dos polígonos correspondentes às faces. Supondo que o poliedro ilustrativo de um cristal de granada é convexo, então a quantidade de faces utilizadas na montagem do modelo ilustrativo desse cristal é igual a",
+    "alternativas": {
+      "A": "10.",
+      "B": "12.",
+      "C": "25.",
+      "D": "42.",
+      "E": "50."
+    },
+    "gabarito": "B"
+  },
+  {
+    "id": "81332",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma empresa de transporte disponibiliza, para embalagem de encomendas, caixas de papelão no formato de paralelepípedo retoretângulo, conforme dimensões no quadro.\n| Modelo da caixa | Comprimento (cm) | Largura (cm) | Altura (cm) |\n|---|---|---|---|\n| 1 | 12 | 12 | 13 |\n| 2 | 23 | 20 | 25 |\n| 3 | 25 | 25 | 25 |\n| 4 | 26 | 25 | 24 |\n| 5 | 23 | 26 | 26 |\nPara embalar uma encomenda, contendo um objeto esférico com 11 cm de raio, essa empresa adota como critério a utilização da caixa, dentre os modelos disponíveis, que comporte, quando fechada e sem deformá-la, a encomenda e que possua a menor área de superfície total. Desconsidere a espessura da caixa. Nessas condições, qual dos modelos apresentados deverá ser o escolhido pela empresa?",
+    "alternativas": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4",
+      "E": "5"
+    },
+    "gabarito": "E"
+  },
+  {
+    "id": "25236",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Um engenheiro fará um projeto de uma casa cujo terreno tem o formato de um retângulo de 36 m de comprimento por 9 m de largura. Para isso, ele fará um desenho de um retângulo de 24 cm de comprimento por 6 cm de largura. Qual deve ser a escala utilizada pelo engenheiro?",
+    "alternativas": {
+      "A": "150 : 1",
+      "B": "225 : 1",
+      "C": "600 : 1",
+      "D": "2,25 : 1",
+      "E": "1,5 : 1"
+    },
+    "gabarito": "A"
+  }
+]

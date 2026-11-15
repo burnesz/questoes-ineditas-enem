@@ -1,0 +1,19 @@
+[
+  {
+    "id": "70698",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Uma indústria fabrica brindes promocionais em forma de pirâmide, que é obtida a partir de quatro cortes feitos em um sólido que tem a forma de um cubo, cujos vértices da face inferior são indicados pelas letras A, B, C e D e o ponto central da face superior é indicado pela letra O. A cada corte, é descartada a parte que não comporá a pirâmide. Os cortes são feitos da seguinte maneira: \\bullet o primeiro corte é feito pelo plano que passa pelo ponto O e pela aresta AD ; \\bullet o segundo corte é feito pelo plano que passa pelo ponto O e pela aresta AB ; \\bullet o terceiro corte é feito pelo plano que passa pelo ponto O e pela aresta BC , paralela à aresta AD ; \\bullet o quarto corte é feito pelo plano que passa pelo ponto O e pela aresta CD, paralela à aresta AB . Os formatos dos sólidos descartados são",
+    "alternativas": {
+      "A": "todos iguais.",
+      "B": "todos diferentes.",
+      "C": "três iguais e um diferente.",
+      "D": "apenas dois iguais.",
+      "E": "iguais dois a dois."
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "Inverte a ordem do segundo e do terceiro cortes, fazendo com que o segundo corte ocorra em uma aresta adjacente (AB) em vez de oposta (BC). Isso altera a geometria dos descartes sucessivos.",
+    "trecho_original": "o segundo corte é feito pelo plano que passa pelo ponto O e pela aresta BC , paralela à aresta AD ; \\bullet o terceiro corte é feito pelo plano que passa pelo ponto O e pela aresta AB ;",
+    "trecho_adulterado": "o segundo corte é feito pelo plano que passa pelo ponto O e pela aresta AB ; \\bullet o terceiro corte é feito pelo plano que passa pelo ponto O e pela aresta BC , paralela à aresta AD ;",
+    "resposta_correta_apos_adulteracao": "Alternativa D (apenas dois iguais). O 1º descarte é um prisma triangular completo (sem cantos chanfrados); o 2º e o 3º descartes perdem exatamente um canto cada, sendo congruentes entre si; e o 4º descarte perde dois cantos, resultando em apenas dois sólidos com formatos iguais."
+  }
+]

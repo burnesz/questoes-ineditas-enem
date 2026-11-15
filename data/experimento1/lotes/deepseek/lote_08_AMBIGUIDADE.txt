@@ -1,0 +1,101 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: AMBIGUIDADE (comando ou dados com mais de uma leitura).
+- Altere o enunciado para que a pergunta admita duas ou mais interpretações razoáveis
+  que levem a respostas diferentes, ou para que falte uma informação essencial
+  (por exemplo: remover a unidade pedida, uma restrição, um período de tempo, ou
+  tornar ambígua a grandeza solicitada).
+- Mantenha as alternativas e o campo "gabarito" idênticos ao original.
+- Em "resposta_correta_apos_adulteracao", descreva as leituras possíveis e a resposta
+  a que cada uma leva.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "72821",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Um hexágono regular é invariante por rotações, em torno de seu centro, de",
+    "alternativas": {
+      "A": "15º.",
+      "B": "30º.",
+      "C": "45º.",
+      "D": "60º.",
+      "E": "75º."
+    },
+    "gabarito": "D"
+  },
+  {
+    "id": "60238",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Um artesão construiu peças de artesanato interceptando uma pirâmide de base quadrada com um plano. Após fazer um estudo das diferentes peças que poderia obter, ele concluiu que uma delas poderia ter uma das faces pentagonal. Qual dos argumentos a seguir justifica a conclusão do artesão?",
+    "alternativas": {
+      "A": "Uma pirâmide de base quadrada tem 4 arestas laterais e a interseção de um plano com a pirâmide intercepta suas arestas laterais. Assim, esses pontos formam um polígono de 4 lados.",
+      "B": "Uma pirâmide de base quadrada tem 4 faces triangulares e, quando um plano intercepta essa pirâmide, divide cada face em um triângulo e um trapézio. Logo, um dos polígonos tem 4 lados.",
+      "C": "Uma pirâmide de base quadrada tem 5 faces e a interseção de uma face com um plano é um segmento de reta. Assim, se o plano interceptar todas as faces, o polígono obtido nessa interseção tem 5 lados.",
+      "D": "O número de lados de qualquer polígono obtido como interseção de uma pirâmide com um plano é igual ao número de faces da pirâmide. Como a pirâmide tem 5 faces, o polígono tem 5 lados.",
+      "E": "O número de lados de qualquer polígono obtido interceptando-se uma pirâmide por um plano é igual ao número de arestas laterais da pirâmide. Como a pirâmide tem 4 arestas laterais, o polígono tem 4 lados."
+    },
+    "gabarito": "C"
+  },
+  {
+    "id": "117845",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Comum em lançamentos de empreendimentos imobiliários, as maquetes de condomínios funcionam como uma ótima ferramenta de marketing para as construtoras, pois, além de encantar clientes, auxiliam de maneira significativa os corretores na negociação e venda de imóveis. Um condomínio está sendo lançado em um novo bairro de uma cidade. Na maquete projetada pela construtora, em escala de 1 : 200, existe um reservatório de água com capacidade de 45 $cm^{3}$. Quando todas as famílias estiverem residindo no condomínio, a estimativa é que, por dia, sejam consumidos 30 000 litros de água. Em uma eventual falta de água, o reservatório cheio será suficiente para abastecer o condomínio por quantos dias?",
+    "alternativas": {
+      "A": "30",
+      "B": "15",
+      "C": "12",
+      "D": "6",
+      "E": "3"
+    },
+    "gabarito": "C"
+  },
+  {
+    "id": "22976",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma operadora de telefonia oferece cinco planos de serviços. Em cada plano, para cada mês, o cliente paga um valor V que lhe dá direito a telefonar por M minutos para clientes da mesma operadora. Quando a duração total das chamadas para clientes da mesma operadora excede M minutos, é cobrada uma tarifa T1 por cada minuto excedente nesse tipo de chamada. Além disso, é cobrado um valor T2, por minuto, nas chamadas para clientes de outras operadoras, independentemente do fato de os M minutos terem ou não sido usados. A tabela apresenta o valor de V, M, T1 e T2 para cada um dos cinco planos.\n|  | V | M | T1 | T2 |\n|---|---|---|---|---|\n| Plano A | R$ 25,00 | 20 min | R$ 1,50/min | R$ 2,00/min |\n| Plano B | R$ 60,00 | 65 min | R$ 1,00/min | R$ 1,20/min |\n| Plano C | R$ 60,00 | 75 min | R$ 1,00/min | R$ 1,50/min |\n| Plano D | R$ 120,00 | 160 min | R$ 0,80/min | R$ 0,90/min |\n| Plano E | R$ 120,00 | 180 min | R$ 0,80/min | R$ 1,20/min |\nSe um cliente dessa operadora planeja telefonar durante 75 minutos para amigos da mesma operadora e 50 minutos para amigos de outras operadoras, o plano que ele deverá escolher, a fim de pagar menos, é o",
+    "alternativas": {
+      "A": "Plano A.",
+      "B": "Plano B.",
+      "C": "Plano C.",
+      "D": "Plano D.",
+      "E": "Plano E."
+    },
+    "gabarito": "B"
+  }
+]

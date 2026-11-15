@@ -1,0 +1,70 @@
+[
+  {
+    "id": "29531",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Um hotel de 3 andares está sendo construído. Cada andar terá 100 quartos. Os quartos serão numerados de 100 a 399 e cada um terá seu número afixado à porta. Cada número será composto por peças individuais, cada uma simbolizando um único algarismo. Qual a quantidade mínima de peças, simbolizando o algarismo 0, necessárias para identificar o número de todos os quartos?",
+    "alternativas": {
+      "A": "160",
+      "B": "157",
+      "C": "130",
+      "D": "120",
+      "E": "60"
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "O algarismo solicitado foi alterado de 2 para 0. Entre os números de 100 a 399, são necessárias 60 peças que representam o algarismo 0, correspondendo à alternativa E.",
+    "trecho_original": "algarismo 2",
+    "trecho_adulterado": "algarismo 0",
+    "resposta_correta_apos_adulteracao": "60 peças. O resultado coincide com a alternativa E."
+  },
+  {
+    "id": "11456",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Um reservatório de uma cidade estava com 30 $m^{3}$ de água no momento em que iniciou um vazamento estimado em 30 litros por minuto. Depois de 20 minutos, a partir do início do vazamento, uma equipe técnica chegou ao local e gastou exatamente 1 hora para consertar o sistema e parar o vazamento. O reservatório não foi reabastecido durante todo o período que esteve com o vazamento. Qual foi o volume de água que sobrou no reservatório, em $m^{3}$, no momento em que parou o vazamento?",
+    "alternativas": {
+      "A": "3,6",
+      "B": "4,2",
+      "C": "25,8",
+      "D": "26,4",
+      "E": "27,6"
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "O tempo de reparo foi alterado de 2 horas para 1 hora. Considerando os 20 minutos iniciais mais os 60 minutos de reparo, o vazamento dura 80 minutos e o volume restante passa a ser 27,6 m³.",
+    "trecho_original": "gastou exatamente 2 horas para consertar o sistema",
+    "trecho_adulterado": "gastou exatamente 1 hora para consertar o sistema",
+    "resposta_correta_apos_adulteracao": "27,6 m³. O resultado coincide com a alternativa E."
+  },
+  {
+    "id": "97059",
+    "tipo_erro": "CALCULO",
+    "enunciado": "O colesterol total de uma pessoa é obtido pela soma da taxa do seu “colesterol bom” com a taxa do seu “colesterol ruim”. Os exames periódicos, realizados em um paciente adulto, apresentaram taxa normal de “colesterol bom”, porém, taxa do “colesterol ruim” (também chamado LDL) de 260 mg/dL. O quadro apresenta uma classificação de acordo com as taxas de LDL em adultos.\nTaxa de LDL (mg/dL)\n| Ótima | Menor do que 100 |\n|---|---|\n| Próxima de ótima | De 100 a 129 |\n| Limite | De 130 a 159 |\n| Alta | De 160 a 189 |\n| Muito alta | 190 ou mais |\nDisponível em: www.minhavida.com.br. Acesso em: 15 out. 2015 (adaptado). O paciente, seguindo as recomendações médicas sobre estilo de vida e alimentação, realizou o exame logo após o primeiro mês, e a taxa de LDL reduziu 25%. No mês seguinte, realizou novo exame e constatou uma redução de mais 20% na taxa de LDL. De acordo com o resultado do segundo exame, a classificação da taxa de LDL do paciente é",
+    "alternativas": {
+      "A": "ótima.",
+      "B": "próxima de ótima.",
+      "C": "limite.",
+      "D": "alta.",
+      "E": "muito alta."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "A taxa inicial de LDL foi alterada de 280 para 260 mg/dL. Após as duas reduções percentuais sucessivas, a taxa final passa a ser 156 mg/dL, classificada como limite, correspondente à alternativa C.",
+    "trecho_original": "taxa do “colesterol ruim” (também chamado LDL) de 280 mg/dL.",
+    "trecho_adulterado": "taxa do “colesterol ruim” (também chamado LDL) de 260 mg/dL.",
+    "resposta_correta_apos_adulteracao": "156 mg/dL, classificado como limite. O resultado corresponde à alternativa C."
+  },
+  {
+    "id": "86499",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Uma montadora de automóveis divulgou que oferta a seus clientes mais de 1 000 configurações diferentes de carro, variando o modelo, a motorização, os opcionais e a cor do veículo. Atualmente, ela oferece 8 modelos de carros com 2 tipos de motores: 1.0 e 1.6. Já em relação aos opcionais, existem 3 escolhas possíveis: central multimídia, rodas de liga leve e bancos de couro, podendo o cliente optar por incluir um, dois, três ou nenhum dos opcionais disponíveis. Para ser fiel à divulgação feita, a quantidade mínima de cores que a montadora deverá disponibilizar a seus clientes é",
+    "alternativas": {
+      "A": "8.",
+      "B": "9.",
+      "C": "11.",
+      "D": "18.",
+      "E": "24."
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "A quantidade de modelos foi alterada de 7 para 8. Com 128 configurações por cor, são necessárias no mínimo 8 cores para ultrapassar 1 000 configurações, correspondendo à alternativa A.",
+    "trecho_original": "oferece 7 modelos de carros",
+    "trecho_adulterado": "oferece 8 modelos de carros",
+    "resposta_correta_apos_adulteracao": "8 cores, totalizando 1 024 configurações. O resultado coincide com a alternativa A."
+  }
+]

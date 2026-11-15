@@ -1,0 +1,101 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: AMBIGUIDADE (comando ou dados com mais de uma leitura).
+- Altere o enunciado para que a pergunta admita duas ou mais interpretações razoáveis
+  que levem a respostas diferentes, ou para que falte uma informação essencial
+  (por exemplo: remover a unidade pedida, uma restrição, um período de tempo, ou
+  tornar ambígua a grandeza solicitada).
+- Mantenha as alternativas e o campo "gabarito" idênticos ao original.
+- Em "resposta_correta_apos_adulteracao", descreva as leituras possíveis e a resposta
+  a que cada uma leva.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "70183",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "O medidor de energia elétrica das residências, conhecido por “relógio de luz”, é constituído de quatro pequenos relógios, dispostos lado a lado, correspondentes, respectivamente, às posições MILHAR, CENTENA, DEZENA e UNIDADE. Em cada um desses relógios, há um único ponteiro, que gira no sentido crescente da numeração. A medida é expressa em kWh. O número obtido na leitura é composto por quatro algarismos, sendo cada posição desse número formada pelo último algarismo ultrapassado pelo ponteiro do relógio correspondente àquela posição. Em determinado momento, o relógio de luz de uma residência apresentava a seguinte sequência: \\bullet relógio correspondente à posição MILHAR: ponteiro entre os algarismos 2 e 3; \\bullet relógio correspondente à posição CENTENA: ponteiro entre os algarismos 6 e 7; \\bullet relógio correspondente à posição DEZENA: ponteiro entre os algarismos 1 e 2; \\bullet relógio correspondente à posição UNIDADE: ponteiro entre os algarismos 4 e 5. De acordo com essa descrição, o número obtido, em kWh, pela leitura do relógio de luz dessa residência é",
+    "alternativas": {
+      "A": "2 614.",
+      "B": "3 624.",
+      "C": "2 715.",
+      "D": "3 725.",
+      "E": "4 162."
+    },
+    "gabarito": "A"
+  },
+  {
+    "id": "72128",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Por falta de tratamentos simples, mais de 1 bilhão de pessoas pobres no mundo acordam doentes todos os dias. Entre essas doenças está a ancilostomose, que aflige 600 milhões de pessoas e causa anemia severa e desnutrição proteica. Para fornecer tratamento a essas pessoas, estima-se um gasto anual de cinquenta centavos de dólar por paciente. Hortez, P. J. Um plano para derrotar Doenças Tropicais Negligenciadas. Scientific American Brasil. Ano 8, $n^{o}$ 33 (adaptado). Uma organização está disposta a lançar uma campanha internacional a fim de obter recursos suficientes para cobrir o tratamento das pessoas com ancilostomose por um ano. Segundo seu planejamento, estima-se um valor médio de US$ 3,00 por doador. De acordo com o planejamento dessa organização, para arrecadar o total de recursos necessários para cobrir o tratamento das pessoas com ancilostomose, por um ano, o número mínimo de contribuintes necessários é de",
+    "alternativas": {
+      "A": "200 milhões.",
+      "B": "120 milhões.",
+      "C": "36 milhões.",
+      "D": "40 milhões.",
+      "E": "100 milhões."
+    },
+    "gabarito": "E"
+  },
+  {
+    "id": "111524",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Numa atividade de treinamento realizada no Exército de um determinado país, três equipes – Alpha, Beta e Gama – foram designadas a percorrer diferentes caminhos, todos com os mesmos pontos de partida e de chegada. \\bullet A equipe Alpha realizou seu percurso em 90 minutos com uma velocidade média de 6,0 km/h. \\bullet A equipe Beta também percorreu sua trajetória em 90 minutos, mas sua velocidade média foi de 5,0 km/h. \\bullet Com uma velocidade média de 6,5 km/h, a equipe Gama concluiu seu caminho em 60 minutos. Com base nesses dados, foram comparadas as distâncias $d_{Beta}$; $d_{Alpha}$ e $d_{Gama}$ percorridas pelas três equipes. A ordem das distâncias percorridas pelas equipes Alpha, Beta e Gama é",
+    "alternativas": {
+      "A": "$d_{Gama} < d_{Beta} < d_{Alpha}$",
+      "B": "$d_{Alpha} = d_{Beta} < d_{Gama}$",
+      "C": "$d_{Gama} < d_{Beta} = d_{Alpha}$",
+      "D": "$d_{Beta} < d_{Alpha} < d_{Gama}$",
+      "E": "$d_{Gama} < d_{Alpha} < d_{Beta}$"
+    },
+    "gabarito": "A"
+  },
+  {
+    "id": "82581",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Definem-se o dia e o ano de um planeta de um sistema solar como sendo, respectivamente, o tempo que o planeta leva para dar 1 volta completa em torno de seu próprio eixo de rotação e o tempo para dar 1 volta completa em torno de seu Sol. Suponha que exista um planeta Z, em algum sistema solar, onde um dia corresponda a 73 dias terrestres e que 2 de seus anos correspondam a 1 ano terrestre. Considere que 1 ano terrestre tem 365 de seus dias. No planeta Z, seu ano corresponderia a quantos de seus dias?",
+    "alternativas": {
+      "A": "2,5",
+      "B": "10,0",
+      "C": "730,0",
+      "D": "13 322,5",
+      "E": "53 290,0"
+    },
+    "gabarito": "A"
+  }
+]

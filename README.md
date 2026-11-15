@@ -77,7 +77,7 @@ flowchart LR
 6. **Rastreabilidade e Retry com Feedback (Etapa 5)**:
    - Cada ciclo (`CicloGeracao`) e cada tentativa (`TentativaGeracao`) são registrados, inclusive as saídas reprovadas com `etapa_falha` e `codigo_erro`; falhas geram uma diretriz corretiva para a próxima tentativa.
 7. **Acervo Histórico e ChromaDB Local**:
-   - Acompanha o dataset bruto `data/itens_prova_2009_2024_enriquecido.csv` com mais de 400 questões históricas do ENEM (2009–2024).
+   - Acompanha o dataset bruto `data/itens_prova_2009_2024_llm_texto.csv` com mais de 400 questões históricas do ENEM (2009–2024).
    - Banco vetorial local **ChromaDB** persistido em disco (`./chroma_db`), indexado com o modelo `intfloat/multilingual-e5-large`.
 
 ---
@@ -94,7 +94,7 @@ questoes-ineditas-enem/
 │   └── services/                # CodeExecutor, QuestionService, LLMClient, ChromaVectorStore
 ├── data/
 │   ├── habilidades_queries.json                # 30 habilidades com queries expandidas e tipologias
-│   └── itens_prova_2009_2024_enriquecido.csv   # Dataset raw de questões históricas do ENEM
+│   └── itens_prova_2009_2024_llm_texto.csv   # Dataset raw de questões históricas do ENEM
 ├── scripts/
 │   ├── seed_habilidades.py           # Popula H01 a H30 no banco
 │   ├── seed_questoes.py              # Popula acervo histórico no banco relacional

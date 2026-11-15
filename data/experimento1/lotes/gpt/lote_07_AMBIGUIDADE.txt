@@ -1,0 +1,101 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: AMBIGUIDADE (comando ou dados com mais de uma leitura).
+- Altere o enunciado para que a pergunta admita duas ou mais interpretações razoáveis
+  que levem a respostas diferentes, ou para que falte uma informação essencial
+  (por exemplo: remover a unidade pedida, uma restrição, um período de tempo, ou
+  tornar ambígua a grandeza solicitada).
+- Mantenha as alternativas e o campo "gabarito" idênticos ao original.
+- Em "resposta_correta_apos_adulteracao", descreva as leituras possíveis e a resposta
+  a que cada uma leva.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "39361",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "A associação de comerciantes varejistas de uma cidade, a fim de incrementar as vendas para o Natal, decidiu promover um fim de semana de descontos e promoções, no qual produtos e serviços estariam com valores reduzidos. Antes do período promocional, um celular custava R$ 300,00 e teve seu preço reajustado, passando a custar R$ 315,00. Durante o fim de semana de descontos e promoções, o preço desse celular recebeu um desconto de 20%. O desconto dado no preço do celular, em porcentagem, com base no valor dele anteriormente ao aumento sofrido antes da promoção, foi de",
+    "alternativas": {
+      "A": "15,24%",
+      "B": "16,00%",
+      "C": "19,04%",
+      "D": "21,00%",
+      "E": "25,00%"
+    },
+    "gabarito": "B"
+  },
+  {
+    "id": "11343",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "A capacidade mínima, em BTU/h, de um aparelho de ar-condicionado, para ambientes sem exposição ao sol, pode ser determinada da seguinte forma: \\bullet 600 BTU/h por $m^{2}$, considerando-se até duas pessoas no ambiente; \\bullet para cada pessoa adicional nesse ambiente, acrescentar 600 BTU/h; \\bullet acrescentar mais 600 BTU/h para cada equipamento eletroeletrônico em funcionamento no ambiente. Será instalado um aparelho de ar-condicionado em uma sala, sem exposição ao sol, de dimensões 4 m x 5 m, em que permaneçam quatro pessoas e possua um aparelho de televisão em funcionamento. A capacidade mínima, em BTU/h, desse aparelho de ar- condicionado deve ser",
+    "alternativas": {
+      "A": "12 000.",
+      "B": "12 600.",
+      "C": "13 200.",
+      "D": "13 800.",
+      "E": "15 000."
+    },
+    "gabarito": "D"
+  },
+  {
+    "id": "117832",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Um automóvel apresenta um desempenho médio de 16 km/L. Um engenheiro desenvolveu um novo motor a combustão que economiza, em relação ao consumo do motor anterior, 0,1 L de combustível a cada 20 km percorridos. O valor do desempenho médio do automóvel com o novo motor, em quilômetro por litro, expresso com uma casa decimal, é",
+    "alternativas": {
+      "A": "15,9.",
+      "B": "16,1.",
+      "C": "16,4.",
+      "D": "17,4.",
+      "E": "18,0."
+    },
+    "gabarito": "D"
+  },
+  {
+    "id": "75935",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Fabiana Murer garante mais uma medalha de ouro na Noruega. A atleta brasileira saltou 4,60 m na etapa da Diamond League e terminou em primeiro lugar na disputa. Ela ainda é detentora da melhor marca do ano. Ao final da prova, a classificação dos quatro melhores resultados foi: 1º lugar: Fabiana Murer (BRA) – 4,60 m 2º lugar: Aleksandra Kiryashiva (RUS) – 4,50 m 3º lugar: Anna Rogowska (POL) – 4,40 m 4º lugar: Monika Pyrek (POL) – 4,30 m Disponível em: http://www.globoesporte.globo.com. Acesso em: 24 jun. 2011 (adaptado). A diferença entre as marcas da 1ª e da 4ª colocadas pode ser comparada com a altura de um animal adulto. Que animal é esse?",
+    "alternativas": {
+      "A": "Gato.",
+      "B": "Leão.",
+      "C": "Pulga.",
+      "D": "Elefante.",
+      "E": "Gafanhoto."
+    },
+    "gabarito": "A"
+  }
+]

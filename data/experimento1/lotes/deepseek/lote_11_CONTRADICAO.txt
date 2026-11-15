@@ -1,0 +1,104 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: CONTRADICAO (inconsistência interna).
+- Altere UM trecho do enunciado (ou da tabela contida nele) para que ele contradiga
+  outra informação já presente no próprio texto, de forma que os dados não possam ser
+  todos verdadeiros ao mesmo tempo (ex.: "3 horas" em um ponto e "as 4 horas de
+  percurso" em outro; parcelas cuja soma difere do total informado; "metade dos 40
+  alunos, ou seja, 25"; porcentagens de uma distribuição somando mais de 100%).
+- A contradição deve ser verificável apenas lendo o texto, sem conhecimento externo.
+- Não altere a pergunta final. Mantenha as alternativas e o campo "gabarito"
+  idênticos ao original.
+- Em "resposta_correta_apos_adulteracao", cite os dois trechos que se contradizem e
+  explique por que não podem ser ambos verdadeiros.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "70201",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Para forrar a mesa de jantar, uma senhora verificou que só possuía uma toalha limpa, pois todas as outras estavam na máquina de lavar. O tampo da mesa tem o formato de um quadrado de lado 1, 20 m, mas a única toalha disponível para forrar a mesa é redonda, com a forma de um círculo. Para que essa toalha redonda cubra a área total do tampo da mesa quadrada, qual deve ser a medida aproximada do seu diâmetro, em metros?",
+    "alternativas": {
+      "A": "1,20 m",
+      "B": "1,70 m",
+      "C": "1,60 m",
+      "D": "0,80 m",
+      "E": "0,60 m"
+    },
+    "gabarito": "B"
+  },
+  {
+    "id": "72052",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Um mecânico de uma equipe de corrida necessita que as seguintes medidas realizadas em um carro sejam obtidas em metros: a) distância a entre os eixos dianteiro e traseiro: 2 300 mm; b) altura b entre o solo e o encosto do piloto: 160 cm. Ao optar pelas medidas a e b em metros, obtêm-se, respectivamente,",
+    "alternativas": {
+      "A": "0,23 e 0,16.",
+      "B": "2,3 e 1,6.",
+      "C": "23 e 16.",
+      "D": "230 e 160.",
+      "E": "2 300 e 1 600."
+    },
+    "gabarito": "B"
+  },
+  {
+    "id": "117717",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Em um supermercado, uma marca de papel higiênico é comercializada em cinco diferentes tipos de pacotes, contendo quantidades distintas de rolos em cada um. Todos os rolos são de mesma largura e com metragens lineares diversas. Os preços de cada tipo de pacote são distintos, e as especificações são estas: \\bullet tipo I: pacote contendo 4 rolos, com metragem linear de 60 m por rolo, ao preço de R$ 4,90; \\bullet tipo II: pacote contendo 12 rolos, com metragem linear de 20 m por rolo, ao preço de R$ 4,50; \\bullet tipo III: pacote contendo 16 rolos, com metragem linear de 30 m por rolo, ao preço de R$ 8,60; \\bullet tipo IV: pacote contendo 20 rolos, com metragem linear de 30 m por rolo, ao preço de R$ 11,00; \\bullet tipo V: pacote contendo 24 rolos, com metragem linear de 20 m por rolo, ao preço de R$ 8,70. Um cliente vai a esse supermercado, avalia cada uma das especificações e resolve adquirir um pacote de papel higiênico que tenha o menor preço por metro linear. Qual foi o tipo de pacote adquirido por esse cliente?",
+    "alternativas": {
+      "A": "I",
+      "B": "II",
+      "C": "III",
+      "D": "IV",
+      "E": "V"
+    },
+    "gabarito": "C"
+  },
+  {
+    "id": "39806",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma fábrica de sorvetes utiliza embalagens plásticas no formato de paralelepípedo retangular reto. Internamente, a embalagem tem 10 cm de altura e base de 20 cm por 10 cm. No processo de confecção do sorvete, uma mistura é colocada na embalagem no estado líquido e, quando levada ao congelador, tem seu volume aumentado em 25%, ficando com consistência cremosa. Inicialmente é colocada na embalagem uma mistura sabor chocolate com volume de 1 000 $cm^{3}$ e, após essa mistura ficar cremosa, será adicionada uma mistura sabor morango, de modo que, ao final do processo de congelamento, a embalagem fique completamente preenchida com sorvete, sem transbordar. O volume máximo, em $cm^3$, da mistura sabor morango que deverá ser colocado na embalagem é",
+    "alternativas": {
+      "A": "450.",
+      "B": "500.",
+      "C": "600.",
+      "D": "750.",
+      "E": "1 000."
+    },
+    "gabarito": "C"
+  }
+]

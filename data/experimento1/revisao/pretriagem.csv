@@ -1,0 +1,31 @@
+id,sinal,comentario
+141567,atencao,"Resposta vira agosto (C), mas a variação de II deixou de ser constante (−20, depois −50) e o texto diz que 'a variação se manteve'. Nas duas leituras dá agosto, mas o item ganhou uma inconsistência extra."
+76177,suspeito,"Sem 'percentual', '135,25%' continua tendo representação decimal única (1,3525). A segunda leitura (135,25) é fraca; a ambiguidade não se sustenta."
+29359,suspeito,Todos os dados são mensais; a leitura 'anual' é forçada e não corresponde a nenhuma alternativa. Ambiguidade fraca.
+28646,suspeito,"'Cada face' só pode se referir ao troféu (poliedro P), que é o objeto pintado. A leitura 'faces do cubo' é fraca."
+72821,atencao,Polígono sem número de lados ⇒ falta um dado essencial (válido). Atenção: o enunciado original já está truncado ('...de').
+117785,atencao,"Sem 'a mais' a leitura natural é única (630, E), não uma ambiguidade. O gabarito A fica errado, o que lembra CALCULO/GABARITO."
+111738,atencao,A definição no texto ainda diz 'mediana'; trocar só na pergunta por 'medida de tendência central' cria pouca ambiguidade.
+39880,atencao,"'Quer o menor desconto' × pergunta pelo maior: o comando continua respondível (D). Contradição fraca, mais uma incoerência de intenção."
+44243,atencao,"Base pentagonal: cortes planos podem gerar hexágonos, e E diz 'apenas'. Defeito válido, mas exige conhecimento geométrico (não é um dado numérico simples) e o modelo não demonstrou."
+70698,suspeito,"Não é CALCULO: 'três cortes' contradiz os quatro cortes listados. Pelos cortes descritos, a resposta continua E. É uma CONTRADICAO; reclassificar ou refazer."
+71130,atencao,"Defeito correto: 3·4·12 = 144 mL, água = 120 mL (D). Mas houve uma alteração extra: 'deixá-la' virou 'deix- la'. Restaurar."
+117865,atencao,"Com duas semanas nas duas edições a resposta vira 'igual e igual' (C), mas o texto ainda fala em 'aumento no tempo de organização', o que agora é falso. Há um defeito extra."
+70183,suspeito,"Os marcadores rotulam explicitamente cada relógio (MILHAR, CENTENA...). Sem 'respectivamente' não surge ambiguidade."
+72128,suspeito,'Por um ano' continua na frase anterior do texto; o período segue definido. Ambiguidade inexistente.
+111524,suspeito,"'90' sem unidade, mas Beta 'também ... em 90 minutos' fixa a unidade; ler como horas é absurdo."
+82581,suspeito,"A leitura alternativa (182,5) não corresponde a nenhuma alternativa, e 'quantos dias' no planeta Z é natural. Ambiguidade fraca."
+84374,suspeito,"Tirar 'Hz' de f = 0,2 não muda o cálculo; o leitor usa 0,2 de qualquer forma. Ambiguidade fraca."
+49022,atencao,Mudar t = 0 para 'o dia da primeira infecção' desloca a contagem (o resultado vira o 21º dia). É mais uma mudança de dado (CALCULO) do que uma ambiguidade.
+60227,suspeito,'x corresponde aos anos a partir de 2000' ainda define x = 30 para 2030; a leitura x = 2030 é absurda.
+38212,suspeito,O cabeçalho da tabela ainda traz '(em meses)'; a unidade continua definida.
+12922,suspeito,Tirar 'de pontos' não cria uma leitura alternativa plausível.
+25028,atencao,"A contradição só aparece resolvendo o sistema (estante negativa), não apenas lendo o texto."
+117622,suspeito,"Não há contradição: o texto só fala em 8 000 cópias. É uma mudança de dado (CALCULO): com 8 000, V = 3 000 é o menor ⇒ E. Reclassificar ou refazer."
+29531,atencao,"Trocou o algarismo perguntado (2 → 0), ou seja, alterou o comando, não um dado. A resposta passa a ser 60 (E). Defeito válido, mas fora da regra 'altere um dado numérico'."
+5977,atencao,"Alterou a regra (porcentagem = metade das moedas) e o exemplo, de forma coerente: o máximo é 50 em n = 100 (C). Defeito válido, mas mexe em 3 pontos, não em um dado só."
+39361,atencao,"A leitura de 20% está no próprio texto e não é alternativa. Há alguma ambiguidade, mas fraca."
+117832,atencao,"A leitura 'desempenho inicial' (16,0) não é alternativa. Ambiguidade moderada."
+40459,suspeito,'Paralelo a um dos lados' vale para qualquer orientação; o maior lucro continua 48 lotes (B). Ambiguidade não demonstrada.
+48921,atencao,"A sobreposição de ouvintes entre anúncios é uma leitura sutil; ambiguidade fraca, mas defensável."
+70038,suspeito,"1 000, 1 200, 1 500 'sempre com esse padrão' não é contraditório: os incrementos podem crescer de 100 em 100. Vira ambiguidade, não contradição."

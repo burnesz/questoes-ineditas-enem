@@ -1,0 +1,86 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: GABARITO (gabarito incorreto).
+- Altere SOMENTE o campo "gabarito" para a letra de uma alternativa incorreta.
+- Prefira o distrator mais plausível, que corresponda a um erro típico de raciocínio.
+- O "enunciado" e as "alternativas" devem ser devolvidos idênticos ao original.
+- Em "trecho_original" e "trecho_adulterado", informe apenas a letra (ex.: "C" e "A").
+- Em "resposta_correta_apos_adulteracao", informe a letra correta (a original).
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "61172",
+    "tipo_erro": "GABARITO",
+    "enunciado": "O salto ornamental é um esporte em que cada competidor realiza seis saltos. A nota em cada salto é calculada pela soma das notas dos juízes, multiplicada pela nota de partida (o grau de dificuldade de cada salto). Fica em primeiro lugar o atleta que obtiver a maior soma das seis notas recebidas. O atleta 10 irá realizar o último salto da final. Ele observa no Quadro 1, antes de executar o salto, o recorte do quadro parcial de notas com a sua classificação e a dos três primeiros lugares até aquele momento. Quadro 1\n| Classificação | Atleta | 6º Salto | Total |\n|---|---|---|---|\n| 1º | 3 | 135,0 | 829,0 |\n| 2º | 4 | 140,0 | 825,2 |\n| 3º | 8 | 140,4 | 824,2 |\n| 6º | 10 |  | 687,5 |\nEle precisa decidir com seu treinador qual salto deverá realizar. Os dados dos possíveis tipos de salto estão no Quadro 2. Quadro 2\n| Tipo de salto | Nota de partida | Estimativa da soma das notas dos juízes | Probabilidade de obter a nota |\n|---|---|---|---|\n| T1 | 2,2 | 57 | 89,76% |\n| T2 | 2,4 | 58 | 93,74% |\n| T3 | 2,6 | 55 | 91,88% |\n| T4 | 2,8 | 50 | 95,38% |\n| T5 | 3,0 | 53 | 87,34% |\nO atleta optará pelo salto com a maior probabilidade de obter a nota estimada, de maneira que lhe permita alcançar o primeiro lugar. Considerando essas condições, o salto que o atleta deverá escolher é o de tipo",
+    "alternativas": {
+      "A": "T1.",
+      "B": "T2.",
+      "C": "T3.",
+      "D": "T4.",
+      "E": "T5."
+    },
+    "gabarito": "C"
+  },
+  {
+    "id": "72056",
+    "tipo_erro": "GABARITO",
+    "enunciado": "A participação dos estudantes na Olimpíada Brasileira de Matemática das Escolas Públicas (OBMEP) aumenta a cada ano. O percentual de medalhistas de ouro, por região, nas edições da OBMEP de 2005 a 2009 foi o seguinte: \\bullet Região Norte: em 2005, 2%; em 2006, 2%; em 2007, 1%; em 2008, 2%; em 2009, 1%; \\bullet Região Nordeste: em 2005, 18%; em 2006, 19%; em 2007, 21%; em 2008, 15%; em 2009, 19%; \\bullet Região Centro-Oeste: em 2005, 5%; em 2006, 6%; em 2007, 7%; em 2008, 8%; em 2009, 9%; \\bullet Região Sudeste: em 2005, 55%; em 2006, 61%; em 2007, 58%; em 2008, 66%; em 2009, 60%; \\bullet Região Sul: em 2005, 21%; em 2006, 12%; em 2007, 13%; em 2008, 9%; em 2009, 11%. Em relação às edições de 2005 a 2009 da OBMEP, qual o percentual médio de medalhistas de ouro da região Nordeste?",
+    "alternativas": {
+      "A": "14,6%",
+      "B": "18,2%",
+      "C": "18,4%",
+      "D": "19,0%",
+      "E": "21,0%"
+    },
+    "gabarito": "C"
+  },
+  {
+    "id": "15460",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Em um jogo há duas urnas com 10 bolas de mesmo tamanho em cada urna. A tabela a seguir indica as quantidades de bolas de cada cor em cada urna.\n| Cor | Urna 1 | Urna 2 |\n|---|---|---|\n| Amarela | 4 | 0 |\n| Azul | 3 | 1 |\n| Branca | 2 | 2 |\n| Verde | 1 | 3 |\n| Vermelha | 0 | 4 |\nUma jogada consiste em: 1º) o jogador apresenta um palpite sobre a cor da bola que será retirada por ele da urna 2; 2º) ele retira, aleatoriamente, uma bola da urna 1 e a coloca na urna 2, misturando-a com as que lá estão; 3º) em seguida ele retira, também aleatoriamente, uma bola da urna 2; 4º) se a cor da última bola retirada for a mesma do palpite inicial, ele ganha o jogo. Qual cor deve ser escolhida pelo jogador para que ele tenha a maior probabilidade de ganhar?",
+    "alternativas": {
+      "A": "Azul.",
+      "B": "Amarela.",
+      "C": "Branca.",
+      "D": "Verde.",
+      "E": "Vermelha."
+    },
+    "gabarito": "E"
+  }
+]

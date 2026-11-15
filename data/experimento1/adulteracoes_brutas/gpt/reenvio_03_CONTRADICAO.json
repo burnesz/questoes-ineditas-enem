@@ -1,0 +1,36 @@
+[
+  {
+    "id": "70038",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Atualmente existem muitos aplicativos de fazendas virtuais que, apesar de críticas, possuem uma enorme quantidade de usuários. Embora apresentem algumas diferenças de funcionamento, as fazendas virtuais possuem a mesma concepção: cada vez que o usuário cuida de sua fazenda ou da de seus amigos, ganha pontos, e, quanto mais pontos acumula, menor é seu nível de experiência. Em um aplicativo de fazenda virtual, o usuário precisa de 1 000 pontos para atingir o nível 1. Acumulando mais 1 200 pontos, atinge o nível 2; acumulando mais 1 400 pontos, atinge o nível 3 e assim por diante, sempre com esse padrão. Um usuário que está no nível 15 de experiência acumulou",
+    "alternativas": {
+      "A": "3 800 pontos.",
+      "B": "15 200 pontos.",
+      "C": "32 200 pontos.",
+      "D": "35 000 pontos.",
+      "E": "36 000 pontos."
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "A relação entre o acúmulo de pontos e o nível de experiência foi invertida: o texto afirma que acumular mais pontos diminui o nível, mas os exemplos seguintes estabelecem que pontos adicionais levam aos níveis 2 e 3, superiores ao nível 1.",
+    "trecho_original": "quanto mais pontos acumula, maior é seu nível de experiência",
+    "trecho_adulterado": "quanto mais pontos acumula, menor é seu nível de experiência",
+    "resposta_correta_apos_adulteracao": "O trecho \"quanto mais pontos acumula, menor é seu nível de experiência\" contradiz os trechos \"Acumulando mais 1 200 pontos, atinge o nível 2\" e \"acumulando mais 1 400 pontos, atinge o nível 3\". Não podem ser verdadeiras simultaneamente uma relação em que o aumento de pontos diminui o nível e outra em que o acúmulo de pontos adicionais eleva o nível de experiência."
+  },
+  {
+    "id": "53461",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Ao analisar os dados de uma epidemia em uma cidade, peritos obtiveram um modelo que avalia a quantidade de pessoas infectadas a cada mês, ao longo de um ano. O modelo é dado por p(t) = −t ^{2} + 10t + 24, sendo t um número natural, variando de 1 a 12, que representa os meses do ano, e p(t) a quantidade de pessoas não infectadas no mês t do ano. Para tentar diminuir o número de infectados no próximo ano, a Secretaria Municipal de Saúde decidiu intensificar a propaganda oficial sobre os cuidados com a epidemia. Foram apresentadas cinco propostas (I, II, III, IV e V), com diferentes períodos de intensificação das propagandas: \\bullet I: 1 \\le t \\le 2; \\bullet II: 3 \\le t \\le 4; \\bullet III: 5 \\le t \\le 6; \\bullet IV: 7 \\le t \\le 9; \\bullet V: 10 \\le t \\le 12. A sugestão dos peritos é que seja escolhida a proposta cujo período de intensificação da propaganda englobe o mês em que, segundo o modelo, há a maior quantidade de infectados. A sugestão foi aceita. A proposta escolhida foi a",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V."
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "A definição de p(t) foi alterada para indicar a quantidade de pessoas não infectadas, contradizendo a descrição anterior do modelo, que afirma avaliar a quantidade de pessoas infectadas.",
+    "trecho_original": "p(t) a quantidade de pessoas infectadas no mês t do ano",
+    "trecho_adulterado": "p(t) a quantidade de pessoas não infectadas no mês t do ano",
+    "resposta_correta_apos_adulteracao": "O trecho \"modelo que avalia a quantidade de pessoas infectadas a cada mês\" contradiz o trecho \"p(t) a quantidade de pessoas não infectadas no mês t do ano\". A função p(t) não pode representar simultaneamente a quantidade de pessoas infectadas e a quantidade de pessoas não infectadas no mesmo mês."
+  }
+]

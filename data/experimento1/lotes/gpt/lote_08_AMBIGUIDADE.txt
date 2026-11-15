@@ -1,0 +1,101 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: AMBIGUIDADE (comando ou dados com mais de uma leitura).
+- Altere o enunciado para que a pergunta admita duas ou mais interpretações razoáveis
+  que levem a respostas diferentes, ou para que falte uma informação essencial
+  (por exemplo: remover a unidade pedida, uma restrição, um período de tempo, ou
+  tornar ambígua a grandeza solicitada).
+- Mantenha as alternativas e o campo "gabarito" idênticos ao original.
+- Em "resposta_correta_apos_adulteracao", descreva as leituras possíveis e a resposta
+  a que cada uma leva.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "40459",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma empresa de construção comprou um terreno de formato retangular por R$ 700 000,00. O terreno tem 90 m de comprimento e 240 m de largura. O engenheiro da empresa elaborou três projetos diferentes para serem avaliados pela direção da construtora, da seguinte maneira: Projeto 1: dividir o terreno em lotes iguais de 45 m \\times 10 m, sem ruas entre os lotes, e vender cada lote por R$ 23 000,00; Projeto 2: dividir o terreno em lotes iguais de 20 m \\times 30 m, deixando entre lotes ruas de 10 m de largura e 240 m de comprimento, e vender cada lote por R$ 35 000,00; Projeto 3: dividir o terreno em lotes iguais de 35 m \\times 20 m, deixando entre lotes ruas de 20 m de largura e 240 m de comprimento, e vender cada lote por R$ 45 000,00. A direção da empresa decidiu dividir o terreno e utilizar o projeto que permitirá o maior lucro, sendo que este será igual ao valor obtido pela venda dos lotes, menos o valor da compra do terreno. Nesse caso, o lucro da construtora, em real, será de",
+    "alternativas": {
+      "A": "380 000,00.",
+      "B": "404 000,00.",
+      "C": "1 104 000,00.",
+      "D": "1 120 000,00.",
+      "E": "1 460 000,00."
+    },
+    "gabarito": "B"
+  },
+  {
+    "id": "61248",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "A luminosidade L de uma estrela está relacionada com o raio R e com a temperatura T dessa estrela segundo a Lei de Stefan-Boltzmann: L = c \\cdot R ^{2} \\cdot T ^{4}, em que c é uma constante igual para todas as estrelas. Disponível em: http://ciencia.hsw.uol.com.br. Acesso em: 22 nov. 2013 (adaptado). Considere duas estrelas E e F, sendo que a estrela E tem metade do raio da estrela F e o dobro da temperatura de F. Indique por $L_{E}$ e $L_{F}$ suas respectivas luminosidades. A relação entre as luminosidades dessas duas estrelas é dada por",
+    "alternativas": {
+      "A": "$L_{E} =\\frac{L_{F}}{2}$",
+      "B": "$L_{E} =\\frac{L_{F}}{4}$",
+      "C": "$L_{E} = L_{F}$",
+      "D": "$L_{E} = 4L_{F}$",
+      "E": "$L_{E} = 8L_{F}$"
+    },
+    "gabarito": "D"
+  },
+  {
+    "id": "48921",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma empresa deseja iniciar uma campanha publicitária divulgando uma promoção para seus possíveis consumidores. Para esse tipo de campanha, os meios mais viáveis são a distribuição de panfletos na rua e anúncios na rádio local. Considera-se que a população alcançada pela distribuição de panfletos seja igual à quantidade de panfletos distribuídos, enquanto que a alcançada por um anúncio na rádio seja igual à quantidade de ouvintes desse anúncio. O custo de cada anúncio na rádio é de R$ 120,00, e a estimativa é de que seja ouvido por 1 500 pessoas. Já a produção e a distribuição dos panfletos custam R$ 180,00 cada 1 000 unidades. Considerando que cada pessoa será alcançada por um único desses meios de divulgação, a empresa pretende investir em ambas as mídias. Considere X e Y os valores (em real) gastos em anúncios na rádio e com panfletos, respectivamente. O número de pessoas alcançadas pela campanha será dado pela expressão",
+    "alternativas": {
+      "A": "$\\frac{50X}{4} + \\frac{50Y}{9}$",
+      "B": "$\\frac{50X}{9} + \\frac{50Y}{4}$",
+      "C": "$\\frac{4X}{50} + \\frac{4Y}{50}$",
+      "D": "$\\frac{50}{4X} + \\frac{50}{9Y}$",
+      "E": "$\\frac{50}{9X} + \\frac{50Y}{4Y}$"
+    },
+    "gabarito": "A"
+  },
+  {
+    "id": "86783",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "A exposição a alguns níveis sonoros pode causar lesões auditivas. Por isso, em uma indústria, são adotadas medidas preventivas de acordo com a máquina que o funcionário opera e o nível N de intensidade do som, medido em decibel (dB), a que o operário é exposto, sendo N = log_{10}I^{10} - log_{10}I _{0}^{10}, I a intensidade do som e $I_{0}$ = $10^{- 12}$ W/$m^{2}$. Disponível em: www.sofisica.com.br. Acesso em: 8 jul. 2015 (adaptado). Quando o som é considerado baixo, ou seja, N = 48 dB ou menos, deve ser utilizada a medida preventiva I. No caso de o som ser moderado, quando N está no intervalo (48 dB, 55 dB), deve ser utilizada a medida preventiva II. Quando o som é moderado alto, que equivale a N no intervalo (55 dB, 80 dB), a medida preventiva a ser usada é a III. Se N estiver no intervalo (80 dB, 115 dB), quando o som é considerado alto, deve ser utilizada a medida preventiva IV. E se o som é considerado muito alto, com N maior que 115 dB, deve-se utilizar a medida preventiva V. Uma nova máquina, com I= 8 \\times $10^{- 8}$ W/$m^{2}$, foi adquirida e será classificada de acordo com o nível de ruído que produz. Considere 0,3 como aproximação para log_{10}2. O funcionário que operará a nova máquina deverá adotar a medida preventiva",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V."
+    },
+    "gabarito": "B"
+  }
+]

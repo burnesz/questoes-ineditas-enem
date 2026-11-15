@@ -1,0 +1,91 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: CONTRADICAO (inconsistência interna).
+- Altere UM trecho do enunciado (ou da tabela contida nele) para que ele contradiga
+  outra informação já presente no próprio texto, de forma que os dados não possam ser
+  todos verdadeiros ao mesmo tempo (ex.: "3 horas" em um ponto e "as 4 horas de
+  percurso" em outro; parcelas cuja soma difere do total informado; "metade dos 40
+  alunos, ou seja, 25"; porcentagens de uma distribuição somando mais de 100%).
+- A contradição deve ser verificável apenas lendo o texto, sem conhecimento externo.
+- Não altere a pergunta final. Mantenha as alternativas e o campo "gabarito"
+  idênticos ao original.
+- Em "resposta_correta_apos_adulteracao", cite os dois trechos que se contradizem e
+  explique por que não podem ser ambos verdadeiros.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "95676",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma pessoa precisa contratar um operário para fazer um serviço em sua casa. Para isso, ela postou um anúncio em uma rede social. Cinco pessoas responderam informando preços por hora trabalhada, gasto diário com transporte e tempo necessário para conclusão do serviço, conforme valores apresentados no quadro.\n| Operário | Preço por hora (real) | Preço do transporte (real) | Tempo até conclusão (hora) |\n|---|---|---|---|\n| I | 120 | 0,00 | 8 |\n| II | 180 | 0,00 | 6 |\n| III | 170 | 20,00 | 6 |\n| IV | 110 | 10,00 | 9 |\n| V | 110 | 0,00 | 10 |\nSe a pessoa pretende gastar o mínimo possível com essa contratação, irá contratar o operário",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V."
+    },
+    "gabarito": "A"
+  },
+  {
+    "id": "71837",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "O quadro indica a quantidade de pontos marcados, em quatro partidas, por cinco jogadores de uma mesma equipe de basquete.\n| jogador | 1ª partida | 2ª partida | 3ª partida | 4ª partida |\n|---|---|---|---|---|\n| A | 31 | 22 | 18 | 9 |\n| B | 15 | 25 | 25 | 15 |\n| C | 20 | 23 | 19 | 18 |\n| D | 18 | 22 | 24 | 16 |\n| E | 17 | 19 | 20 | 24 |\nComo todos os jogadores obtiveram a mesma média de pontos por partida, para definir quem, entre os cinco atletas, foi o de melhor rendimento, o técnico da equipe resolveu escolher aquele de maior regularidade. Dessa forma, ele escolheu o jogador",
+    "alternativas": {
+      "A": "A.",
+      "B": "B.",
+      "C": "C.",
+      "D": "D.",
+      "E": "E."
+    },
+    "gabarito": "C"
+  },
+  {
+    "id": "40864",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Um casal, ambos com 30 anos de idade, pretende fazer um plano de previdência privada. A seguradora pesquisada, para definir o valor do recolhimento mensal, estima a probabilidade de que pelo menos um deles esteja vivo daqui a 50 anos, tomando por base dados da população, que indicam que 20% dos homens e 30% das mulheres de hoje alcançarão a idade de 80 anos. Qual é essa probabilidade?",
+    "alternativas": {
+      "A": "50%",
+      "B": "44%",
+      "C": "38%",
+      "D": "25%",
+      "E": "6%"
+    },
+    "gabarito": "B"
+  }
+]

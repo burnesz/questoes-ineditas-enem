@@ -1,0 +1,104 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: CONTRADICAO (inconsistência interna).
+- Altere UM trecho do enunciado (ou da tabela contida nele) para que ele contradiga
+  outra informação já presente no próprio texto, de forma que os dados não possam ser
+  todos verdadeiros ao mesmo tempo (ex.: "3 horas" em um ponto e "as 4 horas de
+  percurso" em outro; parcelas cuja soma difere do total informado; "metade dos 40
+  alunos, ou seja, 25"; porcentagens de uma distribuição somando mais de 100%).
+- A contradição deve ser verificável apenas lendo o texto, sem conhecimento externo.
+- Não altere a pergunta final. Mantenha as alternativas e o campo "gabarito"
+  idênticos ao original.
+- Em "resposta_correta_apos_adulteracao", cite os dois trechos que se contradizem e
+  explique por que não podem ser ambos verdadeiros.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "10783",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "O sistema de numeração romana, hoje em desuso, já foi o principal sistema de numeração da Europa. Nos dias atuais, a numeração romana é usada no nosso cotidiano essencialmente para designar os séculos, mas já foi necessário fazer contas e descrever números bastante grandes nesse sistema de numeração. Para isto, os romanos colocavam um traço sobre o número para representar que esse número deveria ser multiplicado por 1 000. Por exemplo, o número X representa o número 10 \\times 1 000, ou seja, 10 000. De acordo com essas informações, os números MCCV e XLIII são, respectivamente, iguais aW",
+    "alternativas": {
+      "A": "1 205 000 e 43 000.",
+      "B": "1 205 000 e 63 000.",
+      "C": "1 205 000 e 493 000.",
+      "D": "1 250 000 e 43 000.",
+      "E": "1 250 000 e 63 000."
+    },
+    "gabarito": "A"
+  },
+  {
+    "id": "9593",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Alguns países têm regulamentos que obrigam a misturar 5%, 10% ou 20% de etanol com a gasolina regular. Esta mistura recebe o nome de gasool. E20, por exemplo, é o gasool que contém a mistura de 20% de etanol com 80% de gasolina. Em agosto de 2011, o governo decidiu reduzir a mistura de etanol na gasolina de 25% para 20%, isto é, nossos postos de gasolina, a partir daquele mês, não puderam mais vender o combustível do tipo E25. Disponível em: http://g1.globo.com (adaptado). Uma distribuidora possuía 40 mil litros de combustível do tipo E25, disponíveis em um dos tanques de seu estoque antigo. Quantos litros de gasolina precisam ser adicionados de modo a obter uma mistura E20?",
+    "alternativas": {
+      "A": "32 000",
+      "B": "16 000",
+      "C": "10 000",
+      "D": "8 000",
+      "E": "2 000"
+    },
+    "gabarito": "C"
+  },
+  {
+    "id": "117877",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Um borrifador de atuação automática libera, a cada acionamento, uma mesma quantidade de inseticida. O recipiente desse produto, quando cheio, contém 360 mL de inseticida, que duram 60 dias se o borrifador permanecer ligado ininterruptamente e for acionado a cada 48 minutos. A quantidade de inseticida que é liberada a cada acionamento do borrifador, em mililitro, é",
+    "alternativas": {
+      "A": "0,125.",
+      "B": "0,200.",
+      "C": "4,800.",
+      "D": "6,000.",
+      "E": "12,000."
+    },
+    "gabarito": "B"
+  },
+  {
+    "id": "71864",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma empresa de telefonia fixa oferece dois planos aos seus clientes: no plano K, o cliente paga R$ 29,90 por 200 minutos mensais e R$ 0,20 por minuto excedente; no plano Z, paga R$ 49,90 por 300 minutos mensais e R$ 0,10 por minuto excedente. Os gráficos das funções correspondentes aos planos K e Z foram representados em um plano cartesiano, em que no eixo das abscissas estão representados os minutos, de 0 a 500, em intervalos de 100, e no eixo das ordenadas estão representados os seguintes valores em reais: 29,90; 39,90; 49,90; 59,90; 69,90; 79,90 e 89,90. A descrição dos gráficos que representam os valores pagos, em reais, em cada um dos planos K e Z, em função dos minutos utilizados, é",
+    "alternativas": {
+      "A": "gráfico do plano K: para x entre 0 e 200, segmento de reta horizontal de altura inferior a R$ 29,90; para x entre 200 e 500, segmento de reta com inclinação positiva; gráfico do plano Z: para x entre 0 e 300, segmento de reta horizontal de altura igual a R$ 49,90; para x entre 300 e 500, segmento de reta com inclinação positiva, idêntica à inclinação do segmento de reta K(x), para x entre 300 e 500.",
+      "B": "gráfico do plano K: para x entre 0 e 200, segmento de reta horizontal de altura igual a R$ 29,90; para x entre 200 e 500, segmento de reta com inclinação positiva; gráfico do plano Z: para x entre 0 e 200, segmento de reta horizontal de altura igual a R$ 49,90; para x entre 200 e 500, segmento de reta com inclinação positiva e inferior à inclinação do segmento de reta K(x), para x entre 200 e 500.",
+      "C": "gráfico do plano K: para x entre 0 e 200, segmento de reta horizontal de altura igual a R$ 29,90; para x entre 200 e 500, segmento de reta com inclinação positiva; gráfico do plano Z: para x entre 0 e 300, segmento de reta horizontal de altura igual a R$ 49,90; para x entre 300 e 500, mesmo segmento de reta correspondente ao gráfico de K(x), para x entre 300 e 500.",
+      "D": "gráfico do plano K: para x entre 0 e 200, segmento de reta horizontal de altura igual a R$ 29,90; para x entre 200 e 500,  segmento de reta com inclinação positiva; gráfico do plano Z: para x entre 0 e 300, segmento de reta horizontal de altura igual a R$ 49,90; para x entre 300 e 500, segmento de reta com inclinação positiva e inferior à inclinação do segmento de reta K(x), para x entre 300 e 500.",
+      "E": "gráfico do plano K: para x entre 0 e 300, segmento de reta horizontal de altura igual a R$ 29,90; para x entre 300 e 500, segmento de reta com inclinação positiva; gráfico do plano Z: para x entre 0 e 300, segmento de reta horizontal de altura igual a R$ 49,90; para x entre 300 e 500, segmento de reta com inclinação positiva e inferior à inclinação do segmento de reta K(x), para x entre 300 e 500."
+    },
+    "gabarito": "D"
+  }
+]

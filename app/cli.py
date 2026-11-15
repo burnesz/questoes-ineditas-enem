@@ -44,6 +44,7 @@ def cmd_seed(args: argparse.Namespace) -> int:
 
     db = SessionLocal()
     try:
+        init_db(db)
         if args.target in ("all", "db"):
             print("\n[*] Semeando habilidades e acervo histórico no banco relacional...")
             inserted, updated = seed_questoes(csv_path=args.csv, db=db)
@@ -198,6 +199,7 @@ def cmd_generate(args: argparse.Namespace) -> int:
                         print(f"    - Gabarito: {questao.gabarito}")
                         print(f"    - Enunciado: {enunciado_resumo}")
                     except Exception as e:
+                        db.rollback()  # descarta a tentativa interrompida (ex.: queda do Ollama) que ficou pendente na sessão
                         tempo_gasto = time.time() - t0
                         falhas += 1
                         print(f"    [FALHA] Não foi possível gerar para {hab_code} após {tempo_gasto:.1f}s: {e}")
@@ -513,7 +515,7 @@ Exemplos de uso:
     p_seed = subparsers.add_parser("seed", help="Povoa habilidades, acervo histórico no banco relacional e ChromaDB.")
     p_seed.add_argument("-t", "--target", choices=["all", "db", "chroma"], default="all",
                         help="Alvo do povoamento: 'all' (ambos), 'db' (relacional) ou 'chroma' (vetorial). Padrão: all.")
-    p_seed.add_argument("--csv", default="data/itens_prova_2009_2024_enriquecido.csv",
+    p_seed.add_argument("--csv", default="data/itens_prova_2009_2024_llm_texto.csv",
                         help="Caminho do CSV com o acervo histórico do ENEM.")
     p_seed.add_argument("--batch-size", type=int, default=50,
                         help="Tamanho do lote para indexação no ChromaDB. Padrão: 50.")

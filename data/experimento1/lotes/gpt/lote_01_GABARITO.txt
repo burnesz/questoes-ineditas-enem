@@ -1,0 +1,99 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: GABARITO (gabarito incorreto).
+- Altere SOMENTE o campo "gabarito" para a letra de uma alternativa incorreta.
+- Prefira o distrator mais plausível, que corresponda a um erro típico de raciocínio.
+- O "enunciado" e as "alternativas" devem ser devolvidos idênticos ao original.
+- Em "trecho_original" e "trecho_adulterado", informe apenas a letra (ex.: "C" e "A").
+- Em "resposta_correta_apos_adulteracao", informe a letra correta (a original).
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "68369",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Em uma loja, o preço promocional de uma geladeira é de R$ 1 000,00 para pagamento somente em dinheiro. Seu preço normal, fora da promoção, é 10% maior. Para pagamento feito com o cartão de crédito da loja, é dado um desconto de 2% sobre o preço normal. Uma cliente decidiu comprar essa geladeira, optando pelo pagamento com o cartão de crédito da loja. Ela calculou que o valor a ser pago seria o preço promocional acrescido de 8%. Ao ser informada pela loja do valor a pagar, segundo sua opção, percebeu uma diferença entre seu cálculo e o valor que lhe foi apresentado. O valor apresentado pela loja, comparado ao valor calculado pela cliente, foi",
+    "alternativas": {
+      "A": "R$ 2,00 menor.",
+      "B": "R$ 100,00 menor.",
+      "C": "R$ 200,00 menor.",
+      "D": "R$ 42,00 maior.",
+      "E": "R$ 80,00 maior."
+    },
+    "gabarito": "A"
+  },
+  {
+    "id": "85357",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Uma pessoa tem massa corporal de 167 kg. Sob orientação de um nutricionista, submeteu-se a um regime alimentar, em que se projeta que a perda de quilos mensais seja inferior a 5 kg. Após iniciar o regime, observou-se, nos três primeiros meses, uma perda de 4 kg por mês, e nos quatro meses seguintes, uma perda mensal de 3 kg. Daí em diante, segundo as recomendações do nutricionista, deveria haver uma perda mensal fixa em cada um dos meses subsequentes, objetivando alcançar a massa corporal de 71 kg ao final do regime. Segundo as projeções e recomendações do nutricionista, para alcançar seu objetivo, a duração mínima, em mês, que essa pessoa deverá manter o seu regime será de",
+    "alternativas": {
+      "A": "15.",
+      "B": "20.",
+      "C": "21.",
+      "D": "22.",
+      "E": "25."
+    },
+    "gabarito": "D"
+  },
+  {
+    "id": "73124",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Um treinador de um time de basquete utilizou um plano cartesiano, cuja origem coincide com o centro da quadra de basquete e as cestas estão dispostas no eixo x, para montar um esquema estratégico para orientar suas jogadoras. Nesse esquema, as distâncias nos eixos x e y são dadas em metros e o time ataca no sentido positivo do eixo x. De acordo com essa estratégia, uma jogadora posicionada na quadra no local correspondente ao ponto R = (2, –2), de frente para o ataque, recebeu a orientação para se deslocar 2 metros para a sua esquerda, e, em seguida, 3 metros em direção ao ataque. Nessa situação, a nova posição dessa jogadora corresponderá, no plano cartesiano, ao ponto",
+    "alternativas": {
+      "A": "(2, –4).",
+      "B": "(4, –5).",
+      "C": "(4, 1).",
+      "D": "(–1, 0).",
+      "E": "(5, 0)."
+    },
+    "gabarito": "E"
+  },
+  {
+    "id": "111733",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Pretende-se comprar uma mesa capaz de acomodar 6 pessoas, de modo que, assentadas em torno da mesa, cada pessoa disponha de, pelo menos, 60 cm de espaço livre na borda do tampo da mesa, que deverá ter a menor área possível. Na loja visitada há mesas com tampos nas formas e dimensões especificadas: \\bullet Mesa I: hexágono regular, com lados medindo 60 cm; \\bullet Mesa II: retângulo, com lados medindo 130 cm e 60 cm; \\bullet Mesa III: retângulo, com lados medindo 120 cm e 60 cm; \\bullet Mesa IV: quadrado, com lados medindo 60 cm; \\bullet Mesa V: triângulo equilátero, com lados medindo 120 cm. A mesa que atende aos critérios especificados é a",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V."
+    },
+    "gabarito": "E"
+  }
+]

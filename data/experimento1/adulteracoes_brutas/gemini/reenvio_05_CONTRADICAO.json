@@ -1,0 +1,53 @@
+[
+  {
+    "id": "25028",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Visando atingir metas econômicas previamente estabelecidas, é comum no final do mês algumas lojas colocarem certos produtos em promoção. Uma determinada loja de departamentos colocou em oferta os seguintes produtos: televisão, sofá e estante. Na compra da televisão mais o sofá, o cliente pagaria R$ 3 800,00. Se ele levasse o sofá mais a estante, pagaria R$ 3 400,00. A televisão mais o sofá sairiam por R$ 4 200,00. Um cliente resolveu levar duas televisões e um sofá que estavam na promoção, conseguindo ainda mais 5% de desconto pelo pagamento à vista. O valor total, em real, pago pelo cliente foi de",
+    "alternativas": {
+      "A": "3 610,00.",
+      "B": "5 035,00.",
+      "C": "5 415,00.",
+      "D": "5 795,00.",
+      "E": "6 100,00."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Substituiu-se 'a estante' por 'o sofá' no terceiro pacote promocional, gerando dois preços distintos e incompatíveis para a mesma combinação de televisão e sofá.",
+    "trecho_original": "A televisão mais a estante sairiam por R$ 4 200,00.",
+    "trecho_adulterado": "A televisão mais o sofá sairiam por R$ 4 200,00.",
+    "resposta_correta_apos_adulteracao": "Os trechos que se contradizem são: \"Na compra da televisão mais o sofá, o cliente pagaria R$ 3 800,00\" e \"A televisão mais o sofá sairiam por R$ 4 200,00\". Ambos não podem ser verdadeiros ao mesmo tempo porque atribuem valores diferentes (R$ 3 800,00 e R$ 4 200,00) para a compra exatamente dos mesmos dois produtos dentro da mesma promoção."
+  },
+  {
+    "id": "117622",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma escola analisou as propostas de quatro empresas para alugar uma máquina fotocopiadora que atenda à demanda de 12 000 cópias mensais. Cada empresa cobra um valor fixo pelo aluguel mensal da máquina, mais um valor proporcional ao número de cópias realizadas, ambos em real. Assim, o custo total C, do aluguel de uma máquina, que atenda a uma demanda de x cópias mensais, em cada uma das cinco empresas, pode ser dado pelas expressões: \\bullet empresa I: C = 500 + 0,40x; \\bullet empresa II: C = 800 + 0,50x; \\bullet empresa III: C = 2 000 + 0,20x; \\bullet empresa IV: C = 1 100 + 0,25x; \\bullet empresa V: C = 600 + 0,30x. A escola escolheu a empresa que apresentou a proposta que fornecia o serviço necessário pelo menor custo mensal. A empresa escolhida foi a",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Alterou-se o número de empresas analisadas no primeiro período de 'cinco' para 'quatro', criando uma contradição direta com a menção subsequente a cinco empresas e à apresentação de cinco propostas.",
+    "trecho_original": "propostas de cinco empresas",
+    "trecho_adulterado": "propostas de quatro empresas",
+    "resposta_correta_apos_adulteracao": "Os trechos que se contradizem são: \"analisou as propostas de quatro empresas\" e \"em cada uma das cinco empresas, pode ser dado pelas expressões: \\bullet empresa I: [...] \\bullet empresa V:\". Ambas as afirmações não podem ser verdadeiras simultaneamente, pois o texto declara inicialmente a análise de propostas de quatro empresas, mas em seguida lista e define funções de custo para cinco empresas distintas (I, II, III, IV e V)."
+  },
+  {
+    "id": "40864",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Um casal, ambos com 30 anos de idade, pretende fazer um plano de previdência privada. A seguradora pesquisada, para definir o valor do recolhimento mensal, estima a probabilidade de que pelo menos um dos três esteja vivo daqui a 50 anos, tomando por base dados da população, que indicam que 20% dos homens e 30% das mulheres de hoje alcançarão a idade de 80 anos. Qual é essa probabilidade?",
+    "alternativas": {
+      "A": "50%",
+      "B": "44%",
+      "C": "38%",
+      "D": "25%",
+      "E": "6%"
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "Alterou-se 'um deles' para 'um dos três' na estimativa da seguradora, gerando incompatibilidade numérica direta entre os membros do plano (um casal) e a quantidade de indivíduos considerados no cálculo.",
+    "trecho_original": "pelo menos um deles esteja vivo",
+    "trecho_adulterado": "pelo menos um dos três esteja vivo",
+    "resposta_correta_apos_adulteracao": "Os trechos que se contradizem são: \"Um casal, ambos com 30 anos de idade\" e \"pelo menos um dos três esteja vivo daqui a 50 anos\". Não podem ser ambos verdadeiros porque o enunciado estabelece que o plano envolve um casal (exatamente duas pessoas, reforçado pelo uso de \"ambos\"), enquanto o trecho seguinte estabelece o cálculo probabilístico da seguradora sobre um grupo de três pessoas (\"um dos três\")."
+  }
+]

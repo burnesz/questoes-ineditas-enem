@@ -13,6 +13,7 @@ from app.db.base import Base
 from app.db.session import engine, SessionLocal
 from app.db.models.habilidade import HabilidadeEnem
 from app.db.models.questao_enem import QuestaoEnem
+from app.schemas.question import HABILIDADES_DESABILITADAS
 from scripts.seed_habilidades import seed_habilidades
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -24,6 +25,7 @@ def parse_csv_rows(csv_path: str) -> List[Dict[str, Any]]:
         raise FileNotFoundError(f"Arquivo CSV não encontrado: {csv_path}")
 
     items = []
+    skipped_desabilitadas = 0
     with open(csv_path, mode="r", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f, delimiter=";")
         for line_num, row in enumerate(reader, start=2):
@@ -32,6 +34,9 @@ def parse_csv_rows(csv_path: str) -> List[Dict[str, Any]]:
                 ano = int(row["ANO_APLICACAO"].strip())
                 hab_num = int(row["CO_HABILIDADE"].strip())
                 hab_code = f"H{hab_num:02d}"
+                if hab_code in HABILIDADES_DESABILITADAS:
+                    skipped_desabilitadas += 1
+                    continue
                 gabarito = row["TX_GABARITO"].strip().upper()
                 enunciado = row["DESC_ENUNCIADO"].strip()
 
@@ -57,6 +62,7 @@ def parse_csv_rows(csv_path: str) -> List[Dict[str, Any]]:
                     "nu_param_a": parse_float(row.get("NU_PARAM_A")),
                     "nu_param_b": parse_float(row.get("NU_PARAM_B")),
                     "nu_param_c": parse_float(row.get("NU_PARAM_C")),
+                    "in_item_tabela": row.get("IN_ITEM_TABELA", "").strip() == "1",
                 }
 
                 items.append({
@@ -70,11 +76,13 @@ def parse_csv_rows(csv_path: str) -> List[Dict[str, Any]]:
                 })
             except Exception as e:
                 logger.warning(f"Erro ao processar linha {line_num}: {e}. Linha ignorada.")
+    if skipped_desabilitadas:
+        logger.info(f"{skipped_desabilitadas} itens de habilidades desabilitadas ({', '.join(sorted(HABILIDADES_DESABILITADAS))}) ignorados.")
     return items
 
 
 def seed_questoes(
-    csv_path: str = "data/itens_prova_2009_2024_enriquecido.csv",
+    csv_path: str = "data/itens_prova_2009_2024_llm_texto.csv",
     db: Optional[Session] = None
 ) -> Tuple[int, int]:
     should_close = False
@@ -125,6 +133,6 @@ def seed_questoes(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Seed do acervo histórico de questões do ENEM.")
-    parser.add_argument("--csv", default="data/itens_prova_2009_2024_enriquecido.csv", help="Caminho do CSV")
+    parser.add_argument("--csv", default="data/itens_prova_2009_2024_llm_texto.csv", help="Caminho do CSV")
     args = parser.parse_args()
     seed_questoes(args.csv)

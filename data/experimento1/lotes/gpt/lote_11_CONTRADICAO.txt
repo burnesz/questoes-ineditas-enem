@@ -1,0 +1,104 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: CONTRADICAO (inconsistência interna).
+- Altere UM trecho do enunciado (ou da tabela contida nele) para que ele contradiga
+  outra informação já presente no próprio texto, de forma que os dados não possam ser
+  todos verdadeiros ao mesmo tempo (ex.: "3 horas" em um ponto e "as 4 horas de
+  percurso" em outro; parcelas cuja soma difere do total informado; "metade dos 40
+  alunos, ou seja, 25"; porcentagens de uma distribuição somando mais de 100%).
+- A contradição deve ser verificável apenas lendo o texto, sem conhecimento externo.
+- Não altere a pergunta final. Mantenha as alternativas e o campo "gabarito"
+  idênticos ao original.
+- Em "resposta_correta_apos_adulteracao", cite os dois trechos que se contradizem e
+  explique por que não podem ser ambos verdadeiros.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "40363",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Um pintor pretende fazer uma reprodução do quadro Guernica em uma tela de dimensões 20 cm por 30 cm. Essa obra, de autoria do espanhol Pablo Picasso, é uma pintura com 3,6 m de altura e 7,8 m de comprimento. A reprodução a ser feita deverá preencher a maior área possível da tela, mantendo a proporção entre as dimensões da obra original. A escala que deve ser empregada para essa reprodução é",
+    "alternativas": {
+      "A": "1 : 12.",
+      "B": "1 : 18.",
+      "C": "1 : 21.",
+      "D": "1 : 23.",
+      "E": "1 : 26."
+    },
+    "gabarito": "E"
+  },
+  {
+    "id": "58784",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "A rampa de um hospital tem na sua parte mais elevada uma altura de 2,2 metros. Um paciente ao caminhar sobre a rampa percebe que se deslocou 3,2 metros e alcançou uma altura de 0,8 metro. A distância em metros que o paciente ainda deve caminhar para atingir o ponto mais alto da rampa é",
+    "alternativas": {
+      "A": "1,16 metros.",
+      "B": "3,0 metros.",
+      "C": "5,4 metros.",
+      "D": "5,6 metros.",
+      "E": "7,04 metros."
+    },
+    "gabarito": "D"
+  },
+  {
+    "id": "13654",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "No primeiro ano do ensino médio de uma escola, é hábito os alunos dançarem quadrilha na festa junina. Neste ano, há 12 meninas e 13 meninos na turma, e para a quadrilha foram formados 12 pares distintos, compostos por uma menina e um menino. Considere que as meninas sejam os elementos que compõem o conjunto A e os meninos, o conjunto B, de modo que os pares formados representem uma função f de A em B. Com base nessas informações, a classificação do tipo de função que está presente nessa relação é",
+    "alternativas": {
+      "A": "f é injetora, pois para cada menina pertencente ao conjunto A está associado um menino diferente pertencente ao conjunto B.",
+      "B": "f é sobrejetora, pois cada par é formado por uma menina pertencente ao conjunto A e um menino pertencente ao conjunto B, sobrando um menino sem formar par.",
+      "C": "f é injetora, pois duas meninas quaisquer pertencentes ao conjunto A formam par com um mesmo menino pertencente ao conjunto B, para envolver a totalidade de alunos da turma.",
+      "D": "f é bijetora, pois dois meninos quaisquer pertencentes ao conjunto B formam par com uma mesma menina pertencente ao conjunto A.",
+      "E": "f é sobrejetora, pois basta que uma menina do conjunto A forme par com dois meninos pertencentes ao conjunto B, assim nenhum menino ficará sem par."
+    },
+    "gabarito": "A"
+  },
+  {
+    "id": "75890",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Observe as dicas para calcular a quantidade certa de alimentos e bebidas para as festas de fim de ano: \\bullet Para o prato principal, estime 250 gramas de carne para cada pessoa. \\bullet Um copo americano cheio de arroz rende o suficiente para quatro pessoas. \\bullet Para a farofa, calcule quatro colheres de sopa por convidado. \\bullet Uma garrafa de vinho serve seis pessoas. \\bullet Uma garrafa de cerveja serve duas. \\bullet Uma garrafa de espumante serve três convidados. Quem organiza festas faz esses cálculos em cima do total de convidados, independente do gosto de cada um. Um anfitrião decidiu seguir essas dicas ao se preparar para receber 30 convidados para a ceia de Natal. Para seguir essas orientações à risca, o anfitrião deverá dispor de",
+    "alternativas": {
+      "A": "120 kg de carne, 7 copos americanos e meio de arroz, 120 colheres de sopa de farofa, 5 garrafas de vinho, 15 de cerveja e 10 de espumante.",
+      "B": "120 kg de carne, 7 copos americanos e meio de arroz, 120 colheres de sopa de farofa, 5 garrafas de vinho, 30 de cerveja e 10 de espumante.",
+      "C": "75 kg de carne, 7 copos americanos e meio de arroz, 120 colheres de sopa de farofa, 5 garrafas de vinho, 15 de cerveja e 10 de espumante.",
+      "D": "7,5 kg de carne, 7 copos americanos, 120 colheres de sopa de farofa, 5 garrafas de vinho, 30 de cerveja e 10 de espumante.",
+      "E": "7,5 kg de carne, 7 copos americanos e meio de arroz, 120 colheres de sopa de farofa, 5 garrafas de vinho, 15 de cerveja e 10 de espumante."
+    },
+    "gabarito": "E"
+  }
+]

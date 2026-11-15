@@ -1,0 +1,70 @@
+[
+  {
+    "id": "39631",
+    "tipo_erro": "CALCULO",
+    "enunciado": "A densidade demográfica de uma região é definida como sendo a razão entre o número de habitantes dessa região e sua área, expressa na unidade habitantes por quilômetro quadrado. Uma região R é subdividida em várias outras, sendo uma delas a região Q. A área de Q é igual a dois terços da área de R, e o número de habitantes de Q é igual à metade do número de habitantes de R. As densidades demográficas correspondentes a essas regiões são denotadas por d(Q) e d(R). A expressão que relaciona d(Q) e d(R) é",
+    "alternativas": {
+      "A": "$d (Q) = \\frac{1}{4}d (R)$",
+      "B": "$d (Q) = \\frac{1}{2}d (R)$",
+      "C": "$d (Q) = \\frac{3}{4}d (R)$",
+      "D": "$d (Q) = \\frac{3}{2}d (R)$",
+      "E": "$d (Q) = \\frac{2}{3}d (R)$"
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "A fração que representa a área de Q foi alterada de três quartos para dois terços da área de R. Com esse dado, a relação entre as densidades passa a ser d(Q) = 3/4 d(R), correspondente à alternativa C.",
+    "trecho_original": "A área de Q é igual a três quartos da área de R",
+    "trecho_adulterado": "A área de Q é igual a dois terços da área de R",
+    "resposta_correta_apos_adulteracao": "d(Q) = 3/4 d(R). Coincide com a alternativa C."
+  },
+  {
+    "id": "5977",
+    "tipo_erro": "CALCULO",
+    "enunciado": "O apresentador de um programa de auditório propôs aos participantes de uma competição a seguinte tarefa: cada participante teria 10 minutos para recolher moedas douradas colocadas aleatoriamente em um terreno destinado à realização da competição. A pontuação dos competidores seria calculada ao final do tempo destinado a cada um dos participantes, no qual as moedas coletadas por eles seriam contadas e a pontuação de cada um seria calculada, subtraindo do número de moedas coletadas uma porcentagem de valor igual à metade do número de moedas coletadas. Dessa forma, um participante que coletasse 60 moedas teria sua pontuação calculada da seguinte forma: pontuação = 60 – 18 (30% de 60) = 42. O vencedor da prova seria o participante que alcançasse a maior pontuação. Qual será o limite máximo de pontos que um competidor pode alcançar nessa prova?",
+    "alternativas": {
+      "A": "0",
+      "B": "25",
+      "C": "50",
+      "D": "75",
+      "E": "100"
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "O percentual descontado foi alterado de um percentual igual ao número de moedas coletadas para um percentual igual à metade desse número, com a conta ilustrativa ajustada para permanecer consistente. A pontuação máxima passa a ser 50 pontos, correspondente à alternativa C.",
+    "trecho_original": "subtraindo do número de moedas coletadas uma porcentagem de valor igual ao número de moedas coletadas. Dessa forma, um participante que coletasse 60 moedas teria sua pontuação calculada da seguinte forma: pontuação = 60 – 36 (60% de 60) = 24.",
+    "trecho_adulterado": "subtraindo do número de moedas coletadas uma porcentagem de valor igual à metade do número de moedas coletadas. Dessa forma, um participante que coletasse 60 moedas teria sua pontuação calculada da seguinte forma: pontuação = 60 – 18 (30% de 60) = 42.",
+    "resposta_correta_apos_adulteracao": "50 pontos, alcançados ao coletar 100 moedas. Coincide com a alternativa C."
+  },
+  {
+    "id": "77429",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Querendo reduzir custos na limpeza da área de estacionamento de um prédio, o síndico resolveu comprar uma lavadora de alta pressão. Sabe-se que, na utilização desse equipamento, o consumo de água é menor, entretanto, existe o gasto com energia elétrica. O síndico coletou os dados de cinco modelos de lavadora com mesmo preço, e cujos consumos de água e de energia são os fornecidos no quadro.\n| Modelo de lavadora | Gasto médio de água (litro/hora) | Consumo de energia em uma hora (kWh) |\n|---|---|---|\n| I | 300 | 1,3 |\n| II | 264 | 2,0 |\n| III | 320 | 1,5 |\n| IV | 300 | 1,7 |\n| V | 276 | 1,8 |\nAs tarifas de água e de energia elétrica são, respectivamente, R$ 0,0025 por litro de água e R$ 0,30 por quilowatt-hora. O modelo de lavadora que o síndico deve adquirir para gastar menos com a limpeza do estacionamento é",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V."
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "O gasto médio de água do modelo I foi alterado de 350 para 300 litros por hora. Com esse valor, o custo total por hora desse modelo passa a ser R$ 1,14, inferior ao dos demais modelos, tornando a alternativa A correta.",
+    "trecho_original": "350",
+    "trecho_adulterado": "300",
+    "resposta_correta_apos_adulteracao": "Modelo I, com custo de R$ 1,14 por hora. Coincide com a alternativa A."
+  },
+  {
+    "id": "66986",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Em 2012, o PNUD Brasil, o Ipea e a Fundação João Pinheiro assumiram o desafio de adaptar a metodologia do Índice de Desenvolvimento Humano (IDH) global para calcular o Índice de Desenvolvimento Humano Municipal (IDHM) dos 5 565 municípios brasileiros com base nos dados do Censo Demográfico de 2010. Também se recalculou o IDHM, pela metodologia adotada, para os anos de 1990 e 2000, para permitir a comparabilidade temporal e espacial entre os municípios. No quadro são apresentados os dados de cinco cidades brasileiras.\n| Município | IDHM - 1990 | IDHM - 2000 | IDHM - 2010 |\n|---|---|---|---|\n| São Caetano do Sul (SP) | 0,77 | 0,77 | 0,92 |\n| Águas de São Pedro (SP) | 0,67 | 0,76 | 0,85 |\n| Florianópolis (SC) | 0,65 | 0,80 | 0,80 |\n| Balneário Camboriú (SC) | 0,79 | 0,79 | 0,79 |\n| Vitória (ES) | 0,73 | 0,78 | 0,70 |\nDisponível em: http://atlasbrasil.org.br. Acesso em: 26 abr. 2014 (adaptado). Uma ONG decide fazer um trabalho de acompanhamento com a cidade que teve a menor média aritmética dos IDHM das três últimas décadas dentre as cinco cidades analisadas. Com base nos dados fornecidos, qual foi o município escolhido pela ONG?",
+    "alternativas": {
+      "A": "Florianópolis.",
+      "B": "Águas de São Pedro.",
+      "C": "Balneário Camboriú.",
+      "D": "São Caetano do Sul.",
+      "E": "Vitória."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "O IDHM de Vitória em 2010 foi alterado de 0,77 para 0,70. A média aritmética dessa cidade passa a ser aproximadamente 0,737, inferior à das demais cidades, tornando a alternativa E correta.",
+    "trecho_original": "Vitória (ES) | 0,73 | 0,78 | 0,77 |",
+    "trecho_adulterado": "Vitória (ES) | 0,73 | 0,78 | 0,70 |",
+    "resposta_correta_apos_adulteracao": "Vitória, com média aritmética (0,73 + 0,78 + 0,70) / 3 = 0,7366... . Coincide com a alternativa E."
+  }
+]

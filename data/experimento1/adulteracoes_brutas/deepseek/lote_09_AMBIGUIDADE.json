@@ -1,0 +1,70 @@
+[
+  {
+    "id": "117785",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma confecção de roupas pretende contratar novos funcionários e, para treiná-los, dispõe de duas opções: \\bullet ela própria realizar o treinamento que teria custo de R$ 9 000,00 por funcionário. Nesse caso, ao fim do treinamento, as coleções de peças de roupas confeccionadas por funcionário serão vendidas por R$ 1 500,00 pela confecção, valor que será abatido do investimento com o treinamento de cada funcionário; \\bullet contratar uma empresa especializada que cobra R$ 4 000,00 por funcionário. Nesse caso, as peças produzidas no treinamento não poderão ser comercializadas pela confecção. A confecção investirá um total de R$ 2 520 000,00 no treinamento desses futuros funcionários. Quantos funcionários essa confecção conseguirá treinar se optar pela empresa especializada em vez de ela própria realizar o treinamento?",
+    "alternativas": {
+      "A": "294",
+      "B": "336",
+      "C": "390",
+      "D": "504",
+      "E": "630"
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Foi removido o termo \"a mais\" da pergunta, tornando ambíguo se o item pede o total treinado pela empresa especializada ou a diferença em relação ao treinamento próprio.",
+    "trecho_original": "Quantos funcionários essa confecção conseguirá treinar a mais se optar pela empresa especializada em vez de ela própria realizar o treinamento?",
+    "trecho_adulterado": "Quantos funcionários essa confecção conseguirá treinar se optar pela empresa especializada em vez de ela própria realizar o treinamento?",
+    "resposta_correta_apos_adulteracao": "Leitura 1 (total treinado pela empresa especializada): 2 520 000 ÷ 4 000 = 630 funcionários, alternativa E. Leitura 2 (quantidade a mais em relação ao treinamento próprio): próprio = 2 520 000 ÷ (9 000 − 1 500) = 336; diferença = 630 − 336 = 294, alternativa A."
+  },
+  {
+    "id": "29575",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Em um jogo de tabuleiro, a pontuação é marcada com fichas coloridas. Cada ficha vale um ponto. Três fichas vermelhas podem ser trocadas por uma azul, três fichas azuis podem ser trocadas por uma branca, e três fichas brancas podem ser trocadas por uma verde. Ao final do jogo, os jogadores A, B e C terminaram, cada um, com as quantidades de fichas, conforme a tabela seguinte:\n|  | Fichas verdes | Fichas brancas | Fichas azuis | Fichas vermelhas |\n|---|---|---|---|---|\n| Jogador A | 3 | 1 | 1 | 4 |\n| Jogador B | 2 | 4 | 0 | 9 |\n| Jogador C | 1 | 5 | 8 | 2 |\nDe acordo com essa tabela, as classificações em primeiro, segundo e terceiro lugares ficaram, respectivamente, para os jogadores",
+    "alternativas": {
+      "A": "A, B e C.",
+      "B": "B, A e C.",
+      "C": "C, B e A.",
+      "D": "B, C e A.",
+      "E": "C, A e B."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Foi removido o termo \"vermelha\" da frase que atribuía valor apenas às fichas vermelhas, permitindo duas leituras: todas as fichas valem 1 ponto ou os valores são inferidos pelas trocas entre cores.",
+    "trecho_original": "Cada ficha vermelha vale um ponto.",
+    "trecho_adulterado": "Cada ficha vale um ponto.",
+    "resposta_correta_apos_adulteracao": "Leitura 1 (todas as fichas valem 1 ponto): totais A = 9, B = 15 e C = 16; classificação C, B e A, alternativa C. Leitura 2 (valores implícitos nas trocas: vermelha = 1, azul = 3, branca = 9, verde = 27): totais A = 97, B = 99 e C = 98; classificação B, C e A, alternativa D."
+  },
+  {
+    "id": "111738",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma das informações que pode auxiliar no dimensionamento do número de pediatras que devem atender em uma Unidade Básica de Saúde (UBS) é o número que representa a medida de tendência central da quantidade de crianças por família existente na região sob sua responsabilidade. O quadro mostra a distribuição das frequências do número de crianças por família na região de responsabilidade de uma UBS.\n| Número de crianças por família | Frequência |\n|---|---|\n| 0 | 100 |\n| 1 | 400 |\n| 2 | 200 |\n| 3 | 150 |\n| 4 | 100 |\n| 5 | 50 |\nO número que representa a medida de tendência central da quantidade de crianças por família nessa região é",
+    "alternativas": {
+      "A": "1,0.",
+      "B": "1,5.",
+      "C": "1,9.",
+      "D": "2,1.",
+      "E": "2,5."
+    },
+    "gabarito": "B",
+    "ajuste_manual": "A troca também foi aplicada ao 1º parágrafo, que ainda dizia 'mediana' e desfazia a ambiguidade.", "descricao_modificacao": "Trocou-se \"mediana\" por \"medida de tendência central\" no primeiro parágrafo e na pergunta final, sem indicar qual medida usar.",
+    "trecho_original": "a mediana da quantidade de crianças por família",
+    "trecho_adulterado": "a medida de tendência central da quantidade de crianças por família",
+    "resposta_correta_apos_adulteracao": "Leitura moda: 1 (A). Leitura mediana: 500ª e 501ª posições, 1,5 (B). Leitura média: 1 900 ÷ 1 000 = 1,9 (C)."
+  },
+  {
+    "id": "32369",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Em uma universidade, atuam professores que estão enquadrados funcionalmente pela sua maior titulação: mestre ou doutor. Nela há, atualmente, 60 mestres e 40 doutores. Os salários mensais dos professores mestres e dos doutores são, respectivamente, R$ 8 000,00 e R$ 12 000,00. A diretoria da instituição pretende proporcionar um aumento salarial diferenciado para o ano seguinte, de tal forma que a média entre os salários mensais de mestres e de doutores não ultrapasse R$ 12 240,00. A universidade já estabeleceu que o aumento salarial será de 25% para os mestres e precisa ainda definir o percentual de reajuste para os doutores. Mantido o número atual de professores com suas atuais titulações, o aumento salarial, em porcentagem, a ser concedido aos doutores deverá ser de, no máximo,",
+    "alternativas": {
+      "A": "14,4.",
+      "B": "20,7.",
+      "C": "22,0.",
+      "D": "30,0.",
+      "E": "37,5."
+    },
+    "gabarito": "D",
+    "ajuste_manual": "Removido 'por categoria', que abria uma 3ª leitura (2%, sem alternativa) e deixava o texto confuso.", "descricao_modificacao": "\"O salário médio mensal dos professores dessa instituição\" virou \"a média entre os salários mensais de mestres e de doutores\", que admite média ponderada pelo número de professores ou média simples entre as duas categorias.",
+    "trecho_original": "o salário médio mensal dos professores dessa instituição",
+    "trecho_adulterado": "a média entre os salários mensais de mestres e de doutores",
+    "resposta_correta_apos_adulteracao": "Leitura ponderada (60 mestres e 40 doutores): aumento máximo de 30,0% (D). Leitura simples, (10 000 + 12 000(1 + i))/2 ≤ 12 240: 20,7% (B)."
+  }
+]

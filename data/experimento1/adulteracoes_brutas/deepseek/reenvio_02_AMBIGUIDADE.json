@@ -1,0 +1,53 @@
+[
+  {
+    "id": "60238",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Um artesão construiu peças de artesanato interceptando uma pirâmide de base quadrada com um plano. Após fazer um estudo das diferentes peças que poderia obter, ele chegou a uma conclusão sobre o número de lados de uma das faces de uma dessas peças. Qual dos argumentos a seguir justifica a conclusão do artesão?",
+    "alternativas": {
+      "A": "Uma pirâmide de base quadrada tem 4 arestas laterais e a interseção de um plano com a pirâmide intercepta suas arestas laterais. Assim, esses pontos formam um polígono de 4 lados.",
+      "B": "Uma pirâmide de base quadrada tem 4 faces triangulares e, quando um plano intercepta essa pirâmide, divide cada face em um triângulo e um trapézio. Logo, um dos polígonos tem 4 lados.",
+      "C": "Uma pirâmide de base quadrada tem 5 faces e a interseção de uma face com um plano é um segmento de reta. Assim, se o plano interceptar todas as faces, o polígono obtido nessa interseção tem 5 lados.",
+      "D": "O número de lados de qualquer polígono obtido como interseção de uma pirâmide com um plano é igual ao número de faces da pirâmide. Como a pirâmide tem 5 faces, o polígono tem 5 lados.",
+      "E": "O número de lados de qualquer polígono obtido interceptando-se uma pirâmide por um plano é igual ao número de arestas laterais da pirâmide. Como a pirâmide tem 4 arestas laterais, o polígono tem 4 lados."
+    },
+    "gabarito": "C",
+    "ajuste_manual": "'ele concluiu.' parecia frase truncada; reescrito para 'ele chegou a uma conclusão sobre o número de lados de uma das faces de uma dessas peças', mantendo a conclusão omitida.", "descricao_modificacao": "Removeu-se a conclusão do artesão, de modo que o enunciado não informa qual número de lados a face da peça deveria ter. Sem esse dado essencial, a pergunta não determina qual argumento justifica a conclusão.",
+    "trecho_original": "ele concluiu que uma delas poderia ter uma das faces pentagonal.",
+    "trecho_adulterado": "ele concluiu.",
+    "resposta_correta_apos_adulteracao": "Sem a conclusão, não há resposta determinada. Se a conclusão fosse que a peça poderia ter uma face de 4 lados, o argumento A (ou B/E) seria pertinente; se fosse que poderia ter uma face de 5 lados, o argumento C seria pertinente. Como o alvo foi omitido, a questão fica sem alternativa única."
+  },
+  {
+    "id": "22976",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma operadora de telefonia oferece cinco planos de serviços. Em cada plano, para cada mês, o cliente paga um valor V que lhe dá direito a telefonar por M minutos para clientes da mesma operadora. Quando a duração total das chamadas para clientes da mesma operadora excede M minutos, é cobrada uma tarifa T1 por cada minuto nesse tipo de chamada. Além disso, é cobrado um valor T2, por minuto, nas chamadas para clientes de outras operadoras, independentemente do fato de os M minutos terem ou não sido usados. A tabela apresenta o valor de V, M, T1 e T2 para cada um dos cinco planos.\n|  | V | M | T1 | T2 |\n|---|---|---|---|---|\n| Plano A | R$ 25,00 | 20 min | R$ 1,50/min | R$ 2,00/min |\n| Plano B | R$ 60,00 | 65 min | R$ 1,00/min | R$ 1,20/min |\n| Plano C | R$ 60,00 | 75 min | R$ 1,00/min | R$ 1,50/min |\n| Plano D | R$ 120,00 | 160 min | R$ 0,80/min | R$ 0,90/min |\n| Plano E | R$ 120,00 | 180 min | R$ 0,80/min | R$ 1,20/min |\nSe um cliente dessa operadora planeja telefonar durante 75 minutos para amigos da mesma operadora e 50 minutos para amigos de outras operadoras, o plano que ele deverá escolher, a fim de pagar menos, é o",
+    "alternativas": {
+      "A": "Plano A.",
+      "B": "Plano B.",
+      "C": "Plano C.",
+      "D": "Plano D.",
+      "E": "Plano E."
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "Foi removida a palavra \"excedente\" da regra de cobrança de T1. Assim, quando a franquia M é ultrapassada, fica ambíguo se T1 incide apenas sobre os minutos excedentes ou sobre todos os minutos falados para a mesma operadora.",
+    "trecho_original": "tarifa T1 por cada minuto excedente nesse tipo de chamada",
+    "trecho_adulterado": "tarifa T1 por cada minuto nesse tipo de chamada",
+    "resposta_correta_apos_adulteracao": "Leitura 1, T1 apenas sobre os minutos excedentes: os custos são A=207,50, B=130,00, C=135,00, D=165,00 e E=180,00; o mais barato é o Plano B. Leitura 2, T1 sobre todos os minutos para a mesma operadora quando M é ultrapassado: os custos são A=237,50, B=195,00, C=135,00, D=225,00 e E=240,00; o mais barato passa a ser o Plano C."
+  },
+  {
+    "id": "117785",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma confecção de roupas pretende contratar novos funcionários e, para treiná-los, dispõe de duas opções: \\bullet ela própria realizar o treinamento que teria custo de R$ 9 000,00 por funcionário. Nesse caso, ao fim do treinamento, as coleções de peças de roupas confeccionadas por funcionário serão vendidas por R$ 1 500,00 pela confecção, valor que será abatido do investimento com o treinamento de cada funcionário; \\bullet contratar uma empresa especializada que cobra R$ 4 000,00 por funcionário. Nesse caso, as peças produzidas no treinamento não poderão ser comercializadas pela confecção. Quantos funcionários essa confecção conseguirá treinar a mais se optar pela empresa especializada em vez de ela própria realizar o treinamento?",
+    "alternativas": {
+      "A": "294",
+      "B": "336",
+      "C": "390",
+      "D": "504",
+      "E": "630"
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Removeu-se a frase que informava o valor total a ser investido pela confecção. Sem esse dado essencial, não é possível calcular quantos funcionários cada opção permite treinar.",
+    "trecho_original": "A confecção investirá um total de R$ 2 520 000,00 no treinamento desses futuros funcionários.",
+    "trecho_adulterado": "",
+    "resposta_correta_apos_adulteracao": "Com o valor original de R$ 2 520 000,00, a diferença seria 294 funcionários (alternativa A). Sem o valor total do investimento, a pergunta fica sem resposta determinada; dependendo do total, a diferença poderia recair em outras alternativas, e nenhuma leitura fixa uma única resposta."
+  }
+]

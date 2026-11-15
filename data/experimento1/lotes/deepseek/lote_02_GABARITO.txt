@@ -1,0 +1,99 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: GABARITO (gabarito incorreto).
+- Altere SOMENTE o campo "gabarito" para a letra de uma alternativa incorreta.
+- Prefira o distrator mais plausível, que corresponda a um erro típico de raciocínio.
+- O "enunciado" e as "alternativas" devem ser devolvidos idênticos ao original.
+- Em "trecho_original" e "trecho_adulterado", informe apenas a letra (ex.: "C" e "A").
+- Em "resposta_correta_apos_adulteracao", informe a letra correta (a original).
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "32010",
+    "tipo_erro": "GABARITO",
+    "enunciado": "O recinto das provas de natação olímpica utiliza a mais avançada tecnologia para proporcionar aos nadadores condições ideais. Isso passa por reduzir o impacto da ondulação e das correntes provocadas pelos nadadores no seu deslocamento. Para conseguir isso, a piscina de competição tem uma profundidade uniforme de 3 m, que ajuda a diminuir a “reflexão” da água (o movimento contra uma superfície e o regresso no sentido contrário, atingindo os nadadores), além dos já tradicionais 50 m de comprimento e 25 m de largura. Um clube deseja reformar sua piscina de 50 m de comprimento, 20 m de largura e 2 m de profundidade de forma que passe a ter as mesmas dimensões das piscinas olímpicas. Disponível em: http://desporto.publico.pt. Acesso em: 6 ago. 2012. Após a reforma, a capacidade dessa piscina superará a capacidade da piscina original em um valor mais próximo de",
+    "alternativas": {
+      "A": "20%.",
+      "B": "25%.",
+      "C": "47%.",
+      "D": "50%.",
+      "E": "88%."
+    },
+    "gabarito": "E"
+  },
+  {
+    "id": "15479",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Em um terreno, deseja-se instalar uma piscina com formato de um bloco retangular de altura 1 m e base de dimensões 20 m x 10 m. Nas faces laterais e no fundo desta piscina será aplicado um líquido para a impermeabilização. Esse líquido deve ser aplicado na razão de 1 L para cada 1 $m^{2}$ de área a ser impermeabilizada. O fornecedor A vende cada lata de impermeabilizante de 10 L por R$ 100,00, e o B vende cada lata de 15 L por R$ 145,00. Determine a quantidade de latas de impermeabilizante que deve ser comprada e o fornecedor a ser escolhido, de modo a se obter o menor custo.",
+    "alternativas": {
+      "A": "Fabricante A, 26 latas.",
+      "B": "Fabricante A, 46 latas.",
+      "C": "Fabricante B, 17 latas.",
+      "D": "Fabricante B, 18 latas.",
+      "E": "Fabricante B, 31 latas."
+    },
+    "gabarito": "A"
+  },
+  {
+    "id": "16795",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Alguns estudos comprovam que os carboidratos fornecem energia ao corpo, preservam as proteínas estruturais dos músculos durante a prática de atividade física e ainda dão força para o cérebro coordenar os movimentos, o que de fato tem impacto positivo no desenvolvimento do praticante. O ideal é consumir 1 grama de carboidrato para cada minuto de caminhada. CIRINO, C. Boa pergunta: consumir carboidratos antes dos exercícios melhora o desempenho do atleta? Revista Saúde! É Vital, n. 330, nov. 2010 (adaptado). Um casal realizará diariamente 30 minutos de caminhada, ingerindo, antes dessa atividade, a quantidade ideal de carboidratos recomendada. Para ter o consumo ideal apenas por meio do consumo de pão de fôrma integral, o casal planeja garantir o suprimento de pães para um período de 30 dias ininterruptos. Sabe-se que cada pacote desse pão vem com 18 fatias, e que cada uma delas tem 15 gramas de carboidratos. A quantidade mínima de pacotes de pão de fôrma necessários para prover o suprimento a esse casal é",
+    "alternativas": {
+      "A": "1.",
+      "B": "4.",
+      "C": "6.",
+      "D": "7.",
+      "E": "8."
+    },
+    "gabarito": "D"
+  },
+  {
+    "id": "27330",
+    "tipo_erro": "GABARITO",
+    "enunciado": "A cada bimestre, a diretora de uma escola compra uma quantidade de folhas de papel ofício proporcional ao número de alunos matriculados. No bimestre passado, ela comprou 6 000 folhas para serem utilizadas pelos 1 200 alunos matriculados. Neste bimestre, alguns alunos cancelaram suas matrículas e a escola tem, agora, 1 150 alunos. A diretora só pode gastar R$ 220,00 nessa compra, e sabe que o fornecedor da escola vende as folhas de papel ofício em embalagens de 100 unidades a R$ 4,00 a embalagem. Assim, será preciso convencer o fornecedor a dar um desconto à escola, de modo que seja possível comprar a quantidade total de papel ofício necessária para o bimestre. O desconto necessário no preço final da compra, em porcentagem, pertence ao intervalo",
+    "alternativas": {
+      "A": "(5,0 ; 5,5).",
+      "B": "(8,0 ; 8,5).",
+      "C": "(11,5 ; 12,5).",
+      "D": "(19,5 ; 20,5).",
+      "E": "(3,5 ; 4,0)."
+    },
+    "gabarito": "A"
+  }
+]

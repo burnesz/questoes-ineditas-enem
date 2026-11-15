@@ -1,0 +1,70 @@
+[
+  {
+    "id": "40459",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma empresa de construção comprou um terreno de formato retangular por R$ 700 000,00. O terreno tem 90 m de comprimento e 240 m de largura. O engenheiro da empresa elaborou três projetos diferentes para serem avaliados pela direção da construtora, da seguinte maneira: Projeto 1: dividir o terreno em lotes iguais de 45 m \\times 10 m, com o lado de 45 m paralelo a um dos lados do terreno, sem ruas entre os lotes, e vender cada lote por R$ 23 000,00; Projeto 2: dividir o terreno em lotes iguais de 20 m \\times 30 m, deixando entre lotes ruas de 10 m de largura e 240 m de comprimento, e vender cada lote por R$ 35 000,00; Projeto 3: dividir o terreno em lotes iguais de 35 m \\times 20 m, deixando entre lotes ruas de 20 m de largura e 240 m de comprimento, e vender cada lote por R$ 45 000,00. A direção da empresa decidiu dividir o terreno e utilizar o projeto que permitirá o maior lucro, sendo que este será igual ao valor obtido pela venda dos lotes, menos o valor da compra do terreno. Nesse caso, o lucro da construtora, em real, será de",
+    "alternativas": {
+      "A": "380 000,00.",
+      "B": "404 000,00.",
+      "C": "1 104 000,00.",
+      "D": "1 120 000,00.",
+      "E": "1 460 000,00."
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "A orientação do lado de 45 m foi relacionada a um dos lados do terreno, sem especificar qual deles. As duas orientações possíveis permitem quantidades diferentes de lotes e podem levar à escolha de projetos distintos.",
+    "trecho_original": "Projeto 1: dividir o terreno em lotes iguais de 45 m \\times 10 m, sem ruas entre os lotes",
+    "trecho_adulterado": "Projeto 1: dividir o terreno em lotes iguais de 45 m \\times 10 m, com o lado de 45 m paralelo a um dos lados do terreno, sem ruas entre os lotes",
+    "resposta_correta_apos_adulteracao": "Se o lado de 45 m ficar paralelo ao lado de 90 m do terreno, cabem 48 lotes, gerando lucro de 48 × 23 000 − 700 000 = R$ 404 000,00, alternativa B. Se ficar paralelo ao lado de 240 m, cabem 45 lotes, gerando lucro de R$ 335 000,00 no Projeto 1; nessa leitura, o Projeto 3 pode proporcionar lucro de R$ 380 000,00, alternativa A. Assim, as duas orientações podem levar às alternativas B e A, respectivamente."
+  },
+  {
+    "id": "61248",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "A luminosidade L de uma estrela está relacionada com o raio R e com a temperatura T dessa estrela segundo a Lei de Stefan-Boltzmann: L = c \\cdot R ^{2} \\cdot T ^{4}, em que c é uma constante igual para todas as estrelas. Disponível em: http://ciencia.hsw.uol.com.br. Acesso em: 22 nov. 2013 (adaptado). Considere duas estrelas E e F, sendo que a estrela E tem metade do raio da estrela F e o dobro da temperatura de F, medida em graus Celsius. Indique por $L_{E}$ e $L_{F}$ suas respectivas luminosidades. A relação entre as luminosidades dessas duas estrelas é dada por",
+    "alternativas": {
+      "A": "$L_{E} =\\frac{L_{F}}{2}$",
+      "B": "$L_{E} =\\frac{L_{F}}{4}$",
+      "C": "$L_{E} = L_{F}$",
+      "D": "$L_{E} = 4L_{F}$",
+      "E": "$L_{E} = 8L_{F}$"
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Foi especificado que a temperatura está medida em graus Celsius, embora a relação de Stefan-Boltzmann dependa da temperatura absoluta. Dobrar o valor em Celsius não equivale a dobrar a temperatura absoluta, e falta a temperatura inicial para determinar a relação entre as luminosidades.",
+    "trecho_original": "o dobro da temperatura de F",
+    "trecho_adulterado": "o dobro da temperatura de F, medida em graus Celsius",
+    "resposta_correta_apos_adulteracao": "Se a expressão for interpretada como uma relação direta entre temperaturas absolutas, T_E = 2T_F, então L_E/L_F = (1/2)^2 × 2^4 = 4, alternativa D. Se o dobro se referir aos valores medidos em graus Celsius, a conversão para Kelvin faz com que a razão entre as temperaturas absolutas dependa da temperatura de F, que não foi informada. Nessa leitura, não é possível determinar uma relação única entre as luminosidades."
+  },
+  {
+    "id": "48921",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma empresa deseja iniciar uma campanha publicitária divulgando uma promoção para seus possíveis consumidores. Para esse tipo de campanha, os meios mais viáveis são a distribuição de panfletos na rua e anúncios na rádio local. Considera-se que a população alcançada pela distribuição de panfletos seja igual à quantidade de panfletos distribuídos, enquanto que a alcançada por anúncios na rádio seja igual à quantidade de ouvintes desses anúncios. O custo de cada anúncio na rádio é de R$ 120,00, e a estimativa é de que seja ouvido por 1 500 pessoas. Já a produção e a distribuição dos panfletos custam R$ 180,00 cada 1 000 unidades. Considerando que cada pessoa será alcançada por um único desses meios de divulgação, a empresa pretende investir em ambas as mídias. Considere X e Y os valores (em real) gastos em anúncios na rádio e com panfletos, respectivamente. O número de pessoas alcançadas pela campanha será dado pela expressão",
+    "alternativas": {
+      "A": "$\\frac{50X}{4} + \\frac{50Y}{9}$",
+      "B": "$\\frac{50X}{9} + \\frac{50Y}{4}$",
+      "C": "$\\frac{4X}{50} + \\frac{4Y}{50}$",
+      "D": "$\\frac{50}{4X} + \\frac{50}{9Y}$",
+      "E": "$\\frac{50}{9X} + \\frac{50Y}{4Y}$"
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "A referência à audiência do rádio foi alterada para o plural, sem esclarecer se o número de ouvintes representa a soma das audiências de cada anúncio ou a quantidade de pessoas distintas alcançadas pela campanha. Como ouvintes podem escutar mais de um anúncio, as duas leituras não levam necessariamente ao mesmo resultado.",
+    "trecho_original": "enquanto que a alcançada por um anúncio na rádio seja igual à quantidade de ouvintes desse anúncio.",
+    "trecho_adulterado": "enquanto que a alcançada por anúncios na rádio seja igual à quantidade de ouvintes desses anúncios.",
+    "resposta_correta_apos_adulteracao": "Se os 1 500 ouvintes de cada anúncio forem considerados públicos distintos, sem repetição entre anúncios, o rádio alcança 1 500 × X/120 = 50X/4 pessoas, e os panfletos alcançam 1 000 × Y/180 = 50Y/9 pessoas. A expressão correspondente é a alternativa A. Se houver ouvintes repetidos entre anúncios, a soma das audiências não corresponde necessariamente ao número de pessoas distintas alcançadas; como não há informação sobre essa sobreposição, não é possível determinar uma expressão única para o total de pessoas."
+  },
+  {
+    "id": "86783",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "A exposição a alguns níveis sonoros pode causar lesões auditivas. Por isso, em uma indústria, são adotadas medidas preventivas de acordo com a máquina que o funcionário opera e o nível N de intensidade do som, medido em decibel (dB), a que o operário é exposto, sendo N = log_{10}I^{10} - log_{10}I _{0}^{10}, I a intensidade do som e $I_{0}$ = $10^{- 12}$ W/$m^{2}$. Disponível em: www.sofisica.com.br. Acesso em: 8 jul. 2015 (adaptado). Quando o som é considerado baixo, ou seja, N = 49 dB ou menos, deve ser utilizada a medida preventiva I. No caso de o som ser moderado, quando N está no intervalo (48 dB, 55 dB), deve ser utilizada a medida preventiva II. Quando o som é moderado alto, que equivale a N no intervalo (55 dB, 80 dB), a medida preventiva a ser usada é a III. Se N estiver no intervalo (80 dB, 115 dB), quando o som é considerado alto, deve ser utilizada a medida preventiva IV. E se o som é considerado muito alto, com N maior que 115 dB, deve-se utilizar a medida preventiva V. Uma nova máquina, com I= 8 \\times $10^{- 8}$ W/$m^{2}$, foi adquirida e será classificada de acordo com o nível de ruído que produz. Considere 0,3 como aproximação para log_{10}2. O funcionário que operará a nova máquina deverá adotar a medida preventiva",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V."
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "O limite superior da faixa de som baixo foi alterado de 48 dB para 49 dB. Como o nível calculado para a máquina é 49 dB, ele passa a atender simultaneamente aos critérios de som baixo e som moderado.",
+    "trecho_original": "Quando o som é considerado baixo, ou seja, N = 48 dB ou menos",
+    "trecho_adulterado": "Quando o som é considerado baixo, ou seja, N = 49 dB ou menos",
+    "resposta_correta_apos_adulteracao": "Com a aproximação fornecida, N = 10(log_{10}8 + 4) = 10(3 × 0,3 + 4) = 49 dB. Pela primeira classificação, N = 49 dB ou menos corresponde à medida preventiva I, alternativa A. Pela segunda classificação, 49 está no intervalo (48 dB, 55 dB), que corresponde à medida preventiva II, alternativa B. Portanto, duas medidas preventivas são compatíveis com o nível calculado."
+  }
+]

@@ -513,6 +513,15 @@ _CRITERIO_RESPONDIVEL_POR_PERFIL: Dict[str, str] = {
 }
 
 
+_BLOCO_CODIGO_RESOLUCAO_CEGA = """6. Em 'codigo', escreva uma função Python `def resolver():` que refaça as contas da sua resolução:
+   todos os dados do enunciado como variáveis locais, sem import e sem return, terminando com o resultado
+   final numérico atribuído à variável `correta`. As contas do código substituem as contas feitas de cabeça.
+   Use só números e as operações + - * / ** (sem math, sem combinations, sem π de biblioteca: se o enunciado
+   der um valor para π, use esse valor; senão, 3.14). Toda letra usada no código precisa receber um valor antes.
+   Se a resposta não for um número (ex.: uma opção, uma expressão ou uma ordenação), use "" em 'codigo'.
+"""
+
+
 def build_blind_solving_prompt(
     enunciado: str,
     tabela_dados: Optional[List[Dict[str, Any]]] = None,
@@ -527,6 +536,8 @@ def build_blind_solving_prompt(
     tabela_txt = "" if has_md_table else _formatar_tabela(tabela_dados)
     bloco_tabela = f"\nTABELA DE DADOS:\n{tabela_txt}\n" if tabela_txt else ""
     criterio_respondivel = _CRITERIO_RESPONDIVEL_POR_PERFIL.get(perfil, _CRITERIO_RESPONDIVEL_POR_PERFIL["gerada"])
+    bloco_codigo = _BLOCO_CODIGO_RESOLUCAO_CEGA if perfil == "enem" else ""
+    campo_codigo = ',\n  "codigo": "def resolver():\\n    ..."' if perfil == "enem" else ""
 
     prompt = f"""Você é um estudante de alto desempenho resolvendo uma questão de Matemática do ENEM.
 Resolva usando EXCLUSIVAMENTE o que está escrito no enunciado e na tabela. Não complete lacunas por conta própria.
@@ -540,8 +551,11 @@ ENUNCIADO DA QUESTÃO:
 SUA TAREFA:
 ============================================================
 1. Resolva passo a passo, com rigor, em 'resolucao_passo_a_passo'.
-2. Em 'premissas_assumidas', liste TODA suposição que você precisou fazer porque o texto não informa
-   (ex.: "assumi que cada parcela tem 1 hectare", "assumi que os grupos têm o mesmo tamanho", "assumi que a pontuação não depende do tempo").
+2. Em 'premissas_assumidas', liste apenas as suposições que você precisou fazer porque o texto NÃO informa
+   um dado necessário e que poderiam mudar o resultado (ex.: "assumi que cada parcela tem 1 hectare",
+   "assumi que os grupos têm o mesmo tamanho", "assumi que a pontuação não depende do tempo").
+   NÃO liste: o que o próprio enunciado ou a tabela afirmam; convenções matemáticas usuais
+   (arredondamento, unidades padrão, fórmulas conhecidas); nem a leitura natural da pergunta.
    Se não precisou supor nada, use uma lista vazia [].
 3. Em 'dados_nao_utilizados', liste os números ou colunas fornecidos que NÃO entraram na sua resolução. Se todos foram usados, use [].
 {criterio_respondivel}
@@ -549,14 +563,14 @@ SUA TAREFA:
    - valor numérico único: apenas o número (int ou float), sem texto nem unidade (ex.: 35.0, 30, 1.9);
    - conclusão conceitual: texto;
    - vários valores: dict (ex.: {{"media": 135.0, "moda": None}}).
-
+{bloco_codigo}
 Responda EXCLUSIVAMENTE em formato JSON com o schema abaixo:
 {{
   "resolucao_passo_a_passo": "Resolução detalhada...",
   "premissas_assumidas": [],
   "dados_nao_utilizados": [],
   "pergunta_respondivel": true,
-  "resultado_obtido": "Valor numérico ou conclusão final"
+  "resultado_obtido": "Valor numérico ou conclusão final"{campo_codigo}
 }}
 """
     return prompt
@@ -631,8 +645,16 @@ AUDITORIA_CRITERIOS_ENEM: Dict[str, str] = {
         "ou faz uma pergunta que nenhuma das alternativas responde no formato pedido? "
         "(Alternativas não numéricas, como expressões, opções, faixas ou ordenações, são válidas se forem compatíveis com o comando.)"
     ),
+    "desalinhamento_comando_grandeza": (
+        "CRITÉRIO 4 (Alinhamento Comando-Grandeza): "
+        "O comando final pede uma grandeza diferente daquela que as alternativas expressam "
+        "(ex.: a pergunta pede o preço final, mas as alternativas trazem valores de desconto)?"
+    ),
 }
-"""Critérios da Etapa 4.3 no perfil 'enem': iguais aos pedagógicos, exceto o critério 2, que aceita alternativas não numéricas."""
+"""
+Critérios da Etapa 4.3 no perfil 'enem': iguais aos pedagógicos, exceto o critério 2, que aceita alternativas
+não numéricas, e o critério 4, que compara o comando com as alternativas (o auditor não vê o gabarito).
+"""
 
 
 def criterios_auditoria_por_perfil(perfil: str = "gerada") -> Dict[str, str]:
@@ -643,23 +665,31 @@ def criterios_auditoria_por_perfil(perfil: str = "gerada") -> Dict[str, str]:
 def build_mapeamento_alternativa_prompt(
     enunciado: str,
     resultado_obtido: Any,
-    alternativas: Dict[str, str]
+    alternativas: Dict[str, str],
+    resolucao: Optional[str] = None
 ) -> str:
     """
-    Constrói prompt da Etapa 4.2 no perfil 'enem': mapeia o resultado da resolução cega para as alternativas.
-    O gabarito NÃO é informado; a comparação com a letra do gabarito é feita em Python.
+    Constrói prompt da Etapa 4.2 no perfil 'enem': a partir da própria resolução cega, o modelo escolhe
+    a alternativa que expressa a conclusão obtida. O gabarito NÃO é informado; a comparação com a letra
+    do gabarito é feita em Python. O exemplo do schema não traz uma letra concreta para não ancorar a resposta.
     """
     alts_formatted = "\n".join([f"  {k}) {v}" for k, v in sorted(alternativas.items())])
+    bloco_resolucao = f"""
+============================================================
+RESOLUÇÃO DO ESTUDANTE:
+============================================================
+{resolucao}
+""" if resolucao else ""
     return f"""Você é um Juiz de Mapeamento de Resposta para Alternativa.
-Um estudante resolveu a questão abaixo SEM ver as alternativas. Indique quais alternativas expressam o mesmo resultado que ele obteve.
+Um estudante resolveu a questão abaixo SEM ver as alternativas. Indique qual alternativa expressa a conclusão a que ele chegou.
 
 ============================================================
 ENUNCIADO:
 ============================================================
 {enunciado}
-
+{bloco_resolucao}
 ============================================================
-RESULTADO OBTIDO PELO ESTUDANTE:
+RESULTADO FINAL DO ESTUDANTE:
 ============================================================
 {resultado_obtido}
 
@@ -671,15 +701,18 @@ ALTERNATIVAS:
 ============================================================
 DIRETRIZES:
 ============================================================
-1. Normalize valores, notações, frações, decimais, unidades conversíveis e formas algébricas equivalentes antes de comparar.
-2. Uma faixa ou intervalo corresponde ao resultado se o contiver.
-3. Liste TODAS as letras equivalentes ao resultado (pode haver mais de uma) em 'letras_equivalentes'.
-4. Se nenhuma alternativa corresponder ao resultado, use uma lista vazia [].
-5. Não resolva a questão de novo e não escolha a alternativa "mais provável": apenas compare o resultado dado com as alternativas.
+1. Use a resolução do estudante: se o resultado final for um valor intermediário (ex.: um número quando as
+   alternativas são opções, meses ou ordenações), identifique a alternativa que corresponde a esse valor
+   segundo a própria resolução (ex.: a opção que tem esse valor, ou a que a resolução apontou como resposta).
+2. Normalize valores, notações, frações, decimais, unidades conversíveis e formas algébricas equivalentes antes de comparar.
+3. Uma faixa ou intervalo corresponde ao resultado se o contiver.
+4. Não refaça a questão e não escolha a alternativa "mais provável": se a conclusão do estudante não estiver
+   em nenhuma alternativa, use uma lista vazia [].
+5. Liste mais de uma letra só se duas alternativas expressarem exatamente a mesma conclusão.
 
 Responda EXCLUSIVAMENTE em formato JSON com o schema:
 {{
-  "letras_equivalentes": ["B"],
+  "letras_equivalentes": ["<letra de A a E>"],
   "explicacao": "Explicação objetiva do mapeamento"
 }}
 """
@@ -703,11 +736,13 @@ def build_auditoria_criterio_prompt(
     has_md_table = bool(re.search(r"\|(?:\s*:?-+:?\s*\|)+", enunciado or ""))
     tabela_txt = "" if has_md_table else _formatar_tabela(tabela_dados)
     bloco_tabela = f"\nTabela de Dados:\n{tabela_txt}\n" if tabela_txt else ""
+    # No perfil 'enem' o auditor não vê o gabarito, para não ser induzido a concordar com ele
     bloco_gab = (
         f"\nAlternativa correta segundo o sistema: {letra_gabarito} ({alternativas.get(letra_gabarito, '')})\n"
-        if letra_gabarito
+        if letra_gabarito and perfil != "enem"
         else ""
     )
+    exemplo_defeito = "<true ou false>" if perfil == "enem" else "false"
     bloco_hab = (
         f"\nHabilidade-Alvo: {habilidade_codigo} — {habilidade_descricao}\n"
         if habilidade_codigo or habilidade_descricao
@@ -731,7 +766,7 @@ PERGUNTA DE AUDITORIA (true = o defeito EXISTE; false = o item está CORRETO nes
 
 Responda EXCLUSIVAMENTE em JSON curto:
 {{
-  "defeito": false,
+  "defeito": {exemplo_defeito},
   "evidencia": "1 frase curta justificando"
 }}
 """

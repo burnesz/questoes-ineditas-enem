@@ -184,3 +184,14 @@ def test_auditoria_pedagogica_new_criteria():
     assert audit_fuga.aprovada is False
     assert "habilidade-alvo" in audit_fuga.motivo_rejeicao
 
+
+
+def test_sanitizacao_preserva_barra_ja_escapada_no_json():
+    """Barra já escapada seguida de comando LaTeX ("\\\\cdot", "\\\\sqrt") continua JSON válido; barra solta é duplicada."""
+    import json
+    from app.services.question_validator import sanitize_latex_json_text
+
+    assert json.loads(sanitize_latex_json_text(r'{"a": "x \\cdot y"}'))["a"] == r"x \cdot y"
+    assert json.loads(sanitize_latex_json_text(r'{"a": "\\sqrt{2} e \\(x\\)"}'))["a"] == r"\sqrt{2} e \(x\)"
+    assert json.loads(sanitize_latex_json_text(r'{"a": "\cdot"}'))["a"] == r"\cdot"
+    assert json.loads(sanitize_latex_json_text('{"a": "l1\\nl2"}'))["a"] == "l1\nl2"

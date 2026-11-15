@@ -280,6 +280,18 @@ class QuestaoBlindSolvingOutput(BaseModel):
         True,
         description="False se o comando final não puder ser respondido numericamente com os dados fornecidos."
     )
+    codigo: Optional[str] = Field(
+        None,
+        description="Perfil 'enem': def resolver() que refaz as contas da resolução e atribui o resultado a 'correta'."
+    )
+    resultado_texto: Any = Field(
+        None,
+        description="Resposta em texto do resolvedor quando o resultado calculado pelo código a substituiu."
+    )
+    erro_codigo: Optional[str] = Field(
+        None,
+        description="Erro da execução do código da resolução cega, quando houver (o resultado em texto é mantido)."
+    )
 
 
 class QuestaoEquivalenciaOutput(BaseModel):
@@ -398,6 +410,10 @@ class AvaliacaoItemResult(BaseModel):
     resultado_obtido: Any = None
     letras_mapeadas: Optional[List[str]] = None
     resolucao_passo_a_passo: Optional[str] = None
+    resultado_texto: Any = None
+    codigo_resolucao: Optional[str] = None
+    erro_codigo: Optional[str] = None
+    dados_nao_utilizados: Optional[List[str]] = None
 
 
 class BatchPopulationItemResult(BaseModel):

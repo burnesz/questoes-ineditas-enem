@@ -1,0 +1,124 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: CONTRADICAO (inconsistência interna).
+- Altere UM trecho do enunciado (ou da tabela contida nele) para que ele contradiga
+  outra informação já presente no próprio texto, de forma que os dados não possam ser
+  todos verdadeiros ao mesmo tempo (ex.: "3 horas" em um ponto e "as 4 horas de
+  percurso" em outro; parcelas cuja soma difere do total informado; "metade dos 40
+  alunos, ou seja, 25"; porcentagens de uma distribuição somando mais de 100%).
+- A contradição deve ser verificável apenas lendo o texto, sem conhecimento externo.
+- Não altere a pergunta final. Mantenha as alternativas e o campo "gabarito"
+  idênticos ao original.
+- Em "resposta_correta_apos_adulteracao", cite os dois trechos que se contradizem e
+  explique por que não podem ser ambos verdadeiros.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+REENVIO: estas questões já foram adulteradas uma vez, e a revisão reprovou o defeito inserido. Faça uma nova adulteração do mesmo tipo, partindo da questão original abaixo (não da versão anterior), e evite o problema apontado em cada item. Pode escolher outro trecho para alterar.
+
+Critérios adicionais da revisão:
+- Dois trechos explícitos do texto devem ser logicamente incompatíveis (não podem ser
+  ambos verdadeiros), verificável lendo o texto e, no máximo, com uma conta simples.
+- Não basta trocar um dado (isso é CALCULO) nem incluir um dado que apenas deixa de se
+  aplicar ao caso.
+
+Tentativas anteriores reprovadas:
+[
+  {
+    "id": "25028",
+    "descricao_anterior": "Alterou-se o preço combinado da televisão e do sofá de R$ 3 800,00 para R$ 8 000,00, gerando uma inconsistência matemática com os demais valores da questão.",
+    "trecho_original_anterior": "Na compra da televisão mais o sofá, o cliente pagaria R$ 3 800,00.",
+    "trecho_adulterado_anterior": "Na compra da televisão mais o sofá, o cliente pagaria R$ 8 000,00.",
+    "motivo_da_reprovacao": "É mudança de dado (CALCULO), não contradição: 3 800 → 8 000 leva a estante = −200, mas isso só aparece resolvendo o sistema e choca com uma premissa implícita (preço positivo), não com outro trecho do texto. A resposta vira 11 780, fora das alternativas."
+  },
+  {
+    "id": "117622",
+    "descricao_anterior": "Alterou-se a demanda mensal de cópias no primeiro parágrafo de 12 000 para 8 000, contradizendo a quantidade de cópias utilizada nas expressões de custo e na resolução do problema.",
+    "trecho_original_anterior": "atenda à demanda de 12 000 cópias mensais.",
+    "trecho_adulterado_anterior": "atenda à demanda de 8 000 cópias mensais.",
+    "motivo_da_reprovacao": "Não há contradição: o texto só fala em 8 000 cópias (as expressões usam x). É mudança de dado (CALCULO): com 8 000, V = 3 000 é o menor custo e a resposta vira E."
+  },
+  {
+    "id": "40864",
+    "descricao_anterior": "Alteração da idade inicial do casal de 30 para 35 anos, gerando uma contradição com a idade final de 80 anos informada para daqui a 50 anos.",
+    "trecho_original_anterior": "Um casal, ambos com 30 anos de idade",
+    "trecho_adulterado_anterior": "Um casal, ambos com 35 anos de idade",
+    "motivo_da_reprovacao": "Não há dois trechos incompatíveis: os 80 anos referem-se à população (\"homens e mulheres de hoje\"), não ao casal. Com 35 anos o dado só deixa de se aplicar (o casal teria 85), o que é falta de dado, não contradição."
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "25028",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Visando atingir metas econômicas previamente estabelecidas, é comum no final do mês algumas lojas colocarem certos produtos em promoção. Uma determinada loja de departamentos colocou em oferta os seguintes produtos: televisão, sofá e estante. Na compra da televisão mais o sofá, o cliente pagaria R$ 3 800,00. Se ele levasse o sofá mais a estante, pagaria R$ 3 400,00. A televisão mais a estante sairiam por R$ 4 200,00. Um cliente resolveu levar duas televisões e um sofá que estavam na promoção, conseguindo ainda mais 5% de desconto pelo pagamento à vista. O valor total, em real, pago pelo cliente foi de",
+    "alternativas": {
+      "A": "3 610,00.",
+      "B": "5 035,00.",
+      "C": "5 415,00.",
+      "D": "5 795,00.",
+      "E": "6 100,00."
+    },
+    "gabarito": "D"
+  },
+  {
+    "id": "117622",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma escola analisou as propostas de cinco empresas para alugar uma máquina fotocopiadora que atenda à demanda de 12 000 cópias mensais. Cada empresa cobra um valor fixo pelo aluguel mensal da máquina, mais um valor proporcional ao número de cópias realizadas, ambos em real. Assim, o custo total C, do aluguel de uma máquina, que atenda a uma demanda de x cópias mensais, em cada uma das cinco empresas, pode ser dado pelas expressões: \\bullet empresa I: C = 500 + 0,40x; \\bullet empresa II: C = 800 + 0,50x; \\bullet empresa III: C = 2 000 + 0,20x; \\bullet empresa IV: C = 1 100 + 0,25x; \\bullet empresa V: C = 600 + 0,30x. A escola escolheu a empresa que apresentou a proposta que fornecia o serviço necessário pelo menor custo mensal. A empresa escolhida foi a",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V."
+    },
+    "gabarito": "D"
+  },
+  {
+    "id": "40864",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Um casal, ambos com 30 anos de idade, pretende fazer um plano de previdência privada. A seguradora pesquisada, para definir o valor do recolhimento mensal, estima a probabilidade de que pelo menos um deles esteja vivo daqui a 50 anos, tomando por base dados da população, que indicam que 20% dos homens e 30% das mulheres de hoje alcançarão a idade de 80 anos. Qual é essa probabilidade?",
+    "alternativas": {
+      "A": "50%",
+      "B": "44%",
+      "C": "38%",
+      "D": "25%",
+      "E": "6%"
+    },
+    "gabarito": "B"
+  }
+]

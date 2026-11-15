@@ -16,6 +16,13 @@ class Settings(BaseSettings):
     LLM_TIMEOUT_SECONDS: float = 300.0
     LLM_MAX_TOKENS: int = 1024
     LLM_NUM_CTX: int = 4096
+    # Threads de CPU do Ollama por chamada; None usa o padrão dele. Em servidor compartilhado com o modelo
+    # inteiro na GPU, poucas threads (ex.: 4) evitam disputa de CPU e geram mais rápido
+    LLM_NUM_THREAD: Optional[int] = None
+    # Modelos com raciocínio (think=True): os tokens do "pensamento" contam no num_predict do Ollama,
+    # então cada chamada ganha esta folga extra e um contexto maior para não ser cortada antes da resposta
+    LLM_THINK_BUDGET_TOKENS: int = 8192
+    LLM_THINK_NUM_CTX: int = 16384
 
     # Banco Vetorial (ChromaDB)
     CHROMA_PERSIST_DIRECTORY: str = "./chroma_db"

@@ -1,0 +1,70 @@
+[
+  {
+    "id": "60227",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Suponha que o modelo exponencial y = 363e^{0,03 x}, em que x corresponde aos anos a partir de 2000, e que y é a população em milhões de habitantes no ano x, seja usado para estimar essa população com 60 anos ou mais de idade nos países em desenvolvimento entre 2010 e 2050. Desse modo, considerando $e^{0,3}$ = 1,35, estima-se que a população com 60 anos ou mais estará, em 2030, entre",
+    "alternativas": {
+      "A": "490 e 510 milhões.",
+      "B": "550 e 620 milhões.",
+      "C": "780 e 800 milhões.",
+      "D": "810 e 860 milhões.",
+      "E": "870 e 910 milhões."
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "A alteração na definição da variável x remove a especificação explícita de que x representa o tempo decorrido, tornando ambígua a sua atribuição para o ano de 2030 (se como o ano civil ou como o número de anos decorridos).",
+    "trecho_original": "em que x = 0 corresponde ao ano 2000, x = 1 corresponde ao ano 2001, e assim sucessivamente,",
+    "trecho_adulterado": "em que x corresponde aos anos a partir de 2000,",
+    "resposta_correta_apos_adulteracao": "Se interpretado como o tempo decorrido (x = 30), obtém-se o gabarito original (E). Se interpretado como o ano civil (x = 2030), o valor de x torna-se 2030, resultando em um cálculo inviável e incompatível com as alternativas."
+  },
+  {
+    "id": "38212",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "O índice de eficiência utilizado por um produtor de leite para qualificar suas vacas é dado pelo produto do tempo de lactação (em dias) pela produção média diária de leite (em kg), dividido pelo intervalo entre partos. Para esse produtor, a vaca é qualificada como eficiente quando esse índice é, no mínimo, 281 quilogramas por mês, mantendo sempre as mesmas condições de manejo (alimentação, vacinação e outros). Na comparação de duas ou mais vacas, a mais eficiente é a que tem maior índice. A tabela apresenta os dados coletados de cinco vacas: Dados relativos à produção das vacas\n| Vaca | Tempo de lactação (em dias) | Produção média diária de leite (em kg) | Intervalo entre partos (em meses) |\n|---|---|---|---|\n| Malhada | 360 | 12,0 | 15 |\n| Mamona | 310 | 11,0 | 12 |\n| Maravilha | 260 | 14,0 | 12 |\n| Mateira | 310 | 13,0 | 13 |\n| Mimosa | 270 | 12,0 | 11 |\nApós a análise dos dados, o produtor avaliou que a vaca mais eficiente é a",
+    "alternativas": {
+      "A": "Malhada.",
+      "B": "Mamona.",
+      "C": "Maravilha.",
+      "D": "Mateira.",
+      "E": "Mimosa."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "A remoção da unidade de medida do denominador no texto do enunciado torna ambígua a grandeza temporal do intervalo entre partos, que passa a poder ser interpretada em meses ou em anos.",
+    "trecho_original": "dividido pelo intervalo entre partos (em meses).",
+    "trecho_adulterado": "dividido pelo intervalo entre partos.",
+    "resposta_correta_apos_adulteracao": "Se o intervalo for interpretado em meses (conforme a tabela), obtém-se o gabarito original (Mateira). Se interpretado em anos, os índices calculados mudam completamente de escala, alterando a resposta correta da questão."
+  },
+  {
+    "id": "12922",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Os alunos da disciplina de estatística, em um curso universitário, realizam quatro avaliações por semestre com os pesos de 20%, 10%, 30% e 40%, respectivamente. No final do semestre, precisam obter uma média nas quatro avaliações de, no mínimo, 60 pontos para serem aprovados. Um estudante dessa disciplina obteve os seguintes pontos nas três primeiras avaliações: 46, 60 e 50, respectivamente. O mínimo que esse estudante precisa obter na quarta avaliação para ser aprovado é",
+    "alternativas": {
+      "A": "29,8.",
+      "B": "71,0.",
+      "C": "74,5.",
+      "D": "75,5.",
+      "E": "84,0."
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "A remoção da palavra 'pontos' no comando final torna ambígua a grandeza solicitada para a quarta avaliação, gerando dúvida entre a nota bruta na escala de 0 a 100 ou a contribuição ponderada percentual para a média final.",
+    "trecho_original": "O mínimo de pontos que esse estudante precisa obter",
+    "trecho_adulterado": "O mínimo que esse estudante precisa obter",
+    "resposta_correta_apos_adulteracao": "Se interpretado como a nota bruta na avaliação, obtém-se o gabarito original (C). Se interpretado como a contribuição ponderada em pontos percentuais para a nota final, o valor exigido difere por um fator de escala associado ao peso da avaliação."
+  },
+  {
+    "id": "141582",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Visando atrair mais clientes, o gerente de uma loja anunciou uma promoção em que cada cliente que realizar uma compra pode ganhar um voucher para ser usado em sua próxima compra. Para ganhar seu voucher, o cliente precisa retirar, ao acaso, uma bolinha de dentro de cada uma das duas urnas A e B disponibilizadas pelo gerente, nas quais há apenas bolinhas pretas e brancas. Atualmente, a probabilidade de se escolher, ao acaso, uma bolinha preta na urna A é igual a 20% e a probabilidade de se escolher uma bolinha preta na urna B é 25%. Ganha o voucher o cliente que retirar duas bolinhas pretas, uma de cada urna. Com o passar dos dias, o gerente percebeu que, para a promoção ser viável aos negócios, era preciso alterar a probabilidade de acerto do cliente sem alterar a regra da promoção. Para isso, resolveu alterar a quantidade de bolinhas brancas na urna B de forma que a probabilidade de um cliente ganhar o voucher passasse a ser menor ou igual a 1%. Sabe-se que a urna B tem 4 bolinhas pretas e que, em ambas as urnas, todas as bolinhas têm a mesma probabilidade de serem retiradas. Qual é a quantidade de bolinhas brancas na urna B?",
+    "alternativas": {
+      "A": "20",
+      "B": "60",
+      "C": "64",
+      "D": "68",
+      "E": "80"
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "A alteração na pergunta final remove a indicação de que se trata do acréscimo de bolinhas, tornando ambígua a interpretação entre o total de bolinhas brancas final na urna ou apenas a quantidade adicional a ser inserida.",
+    "trecho_original": "Qual é o número mínimo de bolinhas brancas que o gerente deve adicionar à urna B?",
+    "trecho_adulterado": "Qual é a quantidade de bolinhas brancas na urna B?",
+    "resposta_correta_apos_adulteracao": "Se interpretado como o total de bolinhas brancas na urna após a modificação, o valor correto corresponderia ao total final. Se interpretado como o acréscimo necessário (como pretendido originalmente), a leitura coincide com a lógica do gabarito, mas a ambiguidade na formulação invalida a clareza do item."
+  }
+]

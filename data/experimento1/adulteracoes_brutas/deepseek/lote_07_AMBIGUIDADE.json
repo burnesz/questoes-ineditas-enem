@@ -1,0 +1,70 @@
+[
+  {
+    "id": "76177",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Um instituto de pesquisa constatou que, nos últimos dez anos, o crescimento populacional de uma cidade foi de 135,25%. Qual é a representação decimal da taxa desse crescimento populacional?",
+    "alternativas": {
+      "A": "13 525,0",
+      "B": "135,25",
+      "C": "13,525",
+      "D": "1,3525",
+      "E": "0,13525"
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Foi removido o termo percentual do trecho da taxa, deixando a expressão taxa desse crescimento populacional ambígua entre a taxa percentual e o valor numérico do crescimento.",
+    "trecho_original": "da taxa percentual desse crescimento populacional",
+    "trecho_adulterado": "da taxa desse crescimento populacional",
+    "resposta_correta_apos_adulteracao": "Leitura 1: taxa percentual de 135,25% convertida para decimal resulta em 1,3525 (alternativa D). Leitura 2: taxa tomada como o valor 135,25, sem conversão percentual, resulta em 135,25 (alternativa B)."
+  },
+  {
+    "id": "60257",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Doze times se inscreveram em um torneio de futebol amador. O jogo de abertura do torneio foi escolhido da seguinte forma: primeiro foram sorteados 4 times para compor o Grupo A. Em seguida, entre os times do Grupo A, foram sorteados 2 times para realizar o jogo de abertura do torneio. A quantidade total de escolhas possíveis para o Grupo A e a quantidade total de escolhas dos times do jogo de abertura podem ser calculadas através de",
+    "alternativas": {
+      "A": "uma combinação e um arranjo, respectivamente.",
+      "B": "um arranjo e uma combinação, respectivamente.",
+      "C": "um arranjo e uma permutação, respectivamente.",
+      "D": "duas combinações.",
+      "E": "dois arranjos."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Foi removida a informação de que o primeiro time sorteado jogaria em seu próprio campo e o segundo seria visitante, deixando ambíguo se a escolha dos dois times do jogo de abertura considera ou não a ordem.",
+    "trecho_original": "torneio, sendo que o primeiro deles jogaria em seu próprio campo, e o segundo seria o time visitante. A quantidade",
+    "trecho_adulterado": "torneio. A quantidade",
+    "resposta_correta_apos_adulteracao": "Leitura 1: a escolha dos dois times do jogo de abertura é não ordenada, pois não se especifica mando de campo; assim, Grupo A por combinação e jogo de abertura por combinação, alternativa D. Leitura 2: a escolha é ordenada, pois um jogo de abertura ainda pode ter mandante e visitante; assim, Grupo A por combinação e jogo de abertura por arranjo, alternativa A."
+  },
+  {
+    "id": "29359",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Segundo dados apurados no Censo 2010, para uma população de 101,8 milhões de brasileiros com 10 anos ou mais de idade e que teve algum tipo de rendimento em 2010, a renda média mensal apurada foi de R$ 1 202,00. A soma dos rendimentos mensais dos 10% mais pobres correspondeu a apenas 1,1% do total de rendimentos dessa população considerada, enquanto que a soma dos rendimentos mensais dos 10% mais ricos correspondeu a 44,5% desse total. Disponível em: www.estadao.com.br. Acesso em: 16 nov. 2011(adaptado). Qual foi a diferença, em reais, entre a renda média de um brasileiro que estava na faixa dos 10% mais ricos e de um brasileiro que estava na faixa dos 10% mais pobres?",
+    "alternativas": {
+      "A": "240,40",
+      "B": "548,11",
+      "C": "1 723,67",
+      "D": "4 026,70",
+      "E": "5 216,68"
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "Foi removido o termo mensal do comando final, deixando ambíguo o período de tempo a que se refere a renda média solicitada.",
+    "trecho_original": "entre a renda média mensal de um brasileiro que estava na faixa dos 10% mais ricos e de um brasileiro que estava na faixa dos 10% mais pobres",
+    "trecho_adulterado": "entre a renda média de um brasileiro que estava na faixa dos 10% mais ricos e de um brasileiro que estava na faixa dos 10% mais pobres",
+    "resposta_correta_apos_adulteracao": "Leitura 1: renda média mensal, coerente com os dados mensais, leva a R$ 5 216,68 (alternativa E). Leitura 2: renda média anual, obtida multiplicando a diferença mensal por 12, leva a R$ 62 600,16."
+  },
+  {
+    "id": "28646",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Para o modelo de um troféu foi escolhido um poliedro P, obtido a partir de cortes nos vértices de um cubo. Com um corte plano em cada um dos cantos do cubo, retira-se o canto, que é um tetraedro de arestas menores do que metade da aresta do cubo. Cada face, então, é pintada usando uma cor distinta das demais faces. Com base nas informações, qual é a quantidade de cores que serão utilizadas na pintura das faces do troféu?",
+    "alternativas": {
+      "A": "6",
+      "B": "8",
+      "C": "14",
+      "D": "24",
+      "E": "30"
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "Foi removida a expressão do poliedro P após Cada face, deixando ambíguo se as faces a serem pintadas são as do poliedro P ou as do cubo original.",
+    "trecho_original": "Cada face do poliedro P, então,",
+    "trecho_adulterado": "Cada face, então,",
+    "resposta_correta_apos_adulteracao": "Leitura 1: cada face do poliedro P, que tem 6 faces quadradas remanescentes do cubo mais 8 faces triangulares criadas nos cortes, totalizando 14 faces, leva à alternativa C. Leitura 2: cada face do cubo original, que tem 6 faces, leva à alternativa A."
+  }
+]

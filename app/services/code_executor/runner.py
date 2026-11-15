@@ -88,8 +88,11 @@ def _instrument_resolver_ast(clean_code: str) -> str:
     return ast.unparse(tree)
 
 
-def execute_solver_code(code: str, timeout: int = 5) -> Dict[str, Any]:
-    """Executa a função resolver() em subprocesso isolado com timeout estrito."""
+def execute_solver_code(code: str, timeout: int = 5, exigir_distratores: bool = True) -> Dict[str, Any]:
+    """
+    Executa a função resolver() em subprocesso isolado com timeout estrito.
+    Com exigir_distratores=False (resolução cega PoT da Etapa 4.1), basta definir 'correta' e o retorno é {"correta": valor}.
+    """
     clean_code = sanitize_solver_code(code)
     check_code_safety(clean_code)
 
@@ -197,6 +200,11 @@ except Exception as e:
 
     if not isinstance(data, dict):
         raise ValueError(f"O retorno de resolver() deve ser um dicionário. Obtido: {type(data).__name__}")
+
+    if not exigir_distratores:
+        if "correta" not in data:
+            raise ValueError("resolver() não definiu a variável 'correta'.")
+        return {"correta": data["correta"]}
 
     if "correta" not in data or "distratores" not in data:
         raise ValueError("O dicionário retornado por resolver() deve conter as chaves 'correta' e 'distratores'.")

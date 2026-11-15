@@ -1,0 +1,70 @@
+[
+  {
+    "id": "70201",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Para forrar a mesa de jantar, uma senhora verificou que só possuía uma toalha limpa, pois todas as outras estavam na máquina de lavar. O tampo da mesa tem o formato de um quadrado de lado 1, 20 m e diagonal de 1, 20 m, mas a única toalha disponível para forrar a mesa é redonda, com a forma de um círculo. Para que essa toalha redonda cubra a área total do tampo da mesa quadrada, qual deve ser a medida aproximada do seu diâmetro, em metros?",
+    "alternativas": {
+      "A": "1,20 m",
+      "B": "1,70 m",
+      "C": "1,60 m",
+      "D": "0,80 m",
+      "E": "0,60 m"
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "Foi acrescentada ao enunciado a informação de que a diagonal do quadrado mede 1,20 m, contradizendo o lado 1,20 m já informado.",
+    "trecho_original": "O tampo da mesa tem o formato de um quadrado de lado 1, 20 m, mas a única toalha disponível",
+    "trecho_adulterado": "O tampo da mesa tem o formato de um quadrado de lado 1, 20 m e diagonal de 1, 20 m, mas a única toalha disponível",
+    "resposta_correta_apos_adulteracao": "O texto afirma que o tampo é um quadrado de lado 1,20 m e também que sua diagonal mede 1,20 m; em um quadrado, a diagonal mede lado·√2, portanto não pode ser igual ao lado. Os dois dados não podem ser verdadeiros simultaneamente."
+  },
+  {
+    "id": "72052",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Um mecânico de uma equipe de corrida necessita que as seguintes medidas realizadas em um carro sejam obtidas em metros: a) distância a entre os eixos dianteiro e traseiro: 2 300 mm, ou seja, 23 m; b) altura b entre o solo e o encosto do piloto: 160 cm. Ao optar pelas medidas a e b em metros, obtêm-se, respectivamente,",
+    "alternativas": {
+      "A": "0,23 e 0,16.",
+      "B": "2,3 e 1,6.",
+      "C": "23 e 16.",
+      "D": "230 e 160.",
+      "E": "2 300 e 1 600."
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "Foi inserida a equivalência incorreta de que 2 300 mm correspondem a 23 m, contradizendo a conversão correta para metros.",
+    "trecho_original": "a) distância a entre os eixos dianteiro e traseiro: 2 300 mm;",
+    "trecho_adulterado": "a) distância a entre os eixos dianteiro e traseiro: 2 300 mm, ou seja, 23 m;",
+    "resposta_correta_apos_adulteracao": "O texto informa que a distância é 2 300 mm e, no mesmo trecho, que isso equivale a 23 m; porém 2 300 mm = 2,3 m, não 23 m. Assim, as duas informações não podem ser ambas verdadeiras."
+  },
+  {
+    "id": "117717",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Em um supermercado, uma marca de papel higiênico é comercializada em cinco diferentes tipos de pacotes, contendo quantidades distintas de rolos em cada um. Todos os rolos são de mesma largura e com metragens lineares diversas. Os preços de cada tipo de pacote são distintos, e as especificações são estas: \\bullet tipo I: pacote contendo 4 rolos, com metragem linear de 60 m por rolo, totalizando 180 m, ao preço de R$ 4,90; \\bullet tipo II: pacote contendo 12 rolos, com metragem linear de 20 m por rolo, ao preço de R$ 4,50; \\bullet tipo III: pacote contendo 16 rolos, com metragem linear de 30 m por rolo, ao preço de R$ 8,60; \\bullet tipo IV: pacote contendo 20 rolos, com metragem linear de 30 m por rolo, ao preço de R$ 11,00; \\bullet tipo V: pacote contendo 24 rolos, com metragem linear de 20 m por rolo, ao preço de R$ 8,70. Um cliente vai a esse supermercado, avalia cada uma das especificações e resolve adquirir um pacote de papel higiênico que tenha o menor preço por metro linear. Qual foi o tipo de pacote adquirido por esse cliente?",
+    "alternativas": {
+      "A": "I",
+      "B": "II",
+      "C": "III",
+      "D": "IV",
+      "E": "V"
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "Foi acrescentado ao tipo I um total de 180 m, contradizendo a quantidade de rolos e a metragem por rolo já informadas.",
+    "trecho_original": "\\bullet tipo I: pacote contendo 4 rolos, com metragem linear de 60 m por rolo, ao preço de R$ 4,90;",
+    "trecho_adulterado": "\\bullet tipo I: pacote contendo 4 rolos, com metragem linear de 60 m por rolo, totalizando 180 m, ao preço de R$ 4,90;",
+    "resposta_correta_apos_adulteracao": "O tipo I afirma 4 rolos com 60 m por rolo, o que totaliza 240 m, mas também informa totalizando 180 m; como 4 × 60 = 240, os dois valores não podem ser verdadeiros ao mesmo tempo."
+  },
+  {
+    "id": "39806",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma fábrica de sorvetes utiliza embalagens plásticas no formato de cubo. Internamente, a embalagem tem 10 cm de altura e base de 20 cm por 10 cm. No processo de confecção do sorvete, uma mistura é colocada na embalagem no estado líquido e, quando levada ao congelador, tem seu volume aumentado em 25%, ficando com consistência cremosa. Inicialmente é colocada na embalagem uma mistura sabor chocolate com volume de 1 000 $cm^{3}$ e, após essa mistura ficar cremosa, será adicionada uma mistura sabor morango, de modo que, ao final do processo de congelamento, a embalagem fique completamente preenchida com sorvete, sem transbordar. O volume máximo, em $cm^3$, da mistura sabor morango que deverá ser colocado na embalagem é",
+    "alternativas": {
+      "A": "450.",
+      "B": "500.",
+      "C": "600.",
+      "D": "750.",
+      "E": "1 000."
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "O formato da embalagem foi alterado para cubo, contradizendo as dimensões internas informadas em seguida.",
+    "trecho_original": "no formato de paralelepípedo retangular reto",
+    "trecho_adulterado": "no formato de cubo",
+    "resposta_correta_apos_adulteracao": "O texto diz que a embalagem tem formato de cubo e também que suas dimensões internas são 10 cm de altura e base de 20 cm por 10 cm; um cubo tem todas as arestas iguais, mas as dimensões informadas não são todas iguais. Os dois dados não podem ser verdadeiros simultaneamente."
+  }
+]

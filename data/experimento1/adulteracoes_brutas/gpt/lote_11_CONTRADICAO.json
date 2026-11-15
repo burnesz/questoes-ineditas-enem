@@ -1,0 +1,70 @@
+[
+  {
+    "id": "40363",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Um pintor pretende fazer uma reprodução do quadro Guernica em uma tela de dimensões 20 cm por 30 cm. Essa obra, de autoria do espanhol Pablo Picasso, é uma pintura com 3,6 m de altura e 7,8 m de altura. A reprodução a ser feita deverá preencher a maior área possível da tela, mantendo a proporção entre as dimensões da obra original. A escala que deve ser empregada para essa reprodução é",
+    "alternativas": {
+      "A": "1 : 12.",
+      "B": "1 : 18.",
+      "C": "1 : 21.",
+      "D": "1 : 23.",
+      "E": "1 : 26."
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "A palavra \"comprimento\" foi substituída por \"altura\", fazendo o texto atribuir duas alturas diferentes à mesma obra.",
+    "trecho_original": "3,6 m de altura e 7,8 m de comprimento",
+    "trecho_adulterado": "3,6 m de altura e 7,8 m de altura",
+    "resposta_correta_apos_adulteracao": "Os trechos \"3,6 m de altura\" e \"7,8 m de altura\" se contradizem porque atribuem duas medidas diferentes à altura da mesma pintura, de modo que não podem ser ambos verdadeiros."
+  },
+  {
+    "id": "58784",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "A rampa de um hospital tem na sua parte mais elevada uma altura de 0,2 metros. Um paciente ao caminhar sobre a rampa percebe que se deslocou 3,2 metros e alcançou uma altura de 0,8 metro. A distância em metros que o paciente ainda deve caminhar para atingir o ponto mais alto da rampa é",
+    "alternativas": {
+      "A": "1,16 metros.",
+      "B": "3,0 metros.",
+      "C": "5,4 metros.",
+      "D": "5,6 metros.",
+      "E": "7,04 metros."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "A altura máxima da rampa foi alterada de 2,2 metros para 0,2 metros, tornando incompatível a altura já alcançada pelo paciente.",
+    "trecho_original": "2,2 metros",
+    "trecho_adulterado": "0,2 metros",
+    "resposta_correta_apos_adulteracao": "Os trechos \"na sua parte mais elevada uma altura de 0,2 metros\" e \"alcançou uma altura de 0,8 metro\" se contradizem, pois o paciente já teria alcançado uma altura quatro vezes maior que a altura máxima da rampa."
+  },
+  {
+    "id": "13654",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "No primeiro ano do ensino médio de uma escola, é hábito os alunos dançarem quadrilha na festa junina. Neste ano, há 12 meninas e 13 meninos na turma, e para a quadrilha foram formados 13 pares distintos, compostos por uma menina e um menino. Considere que as meninas sejam os elementos que compõem o conjunto A e os meninos, o conjunto B, de modo que os pares formados representem uma função f de A em B. Com base nessas informações, a classificação do tipo de função que está presente nessa relação é",
+    "alternativas": {
+      "A": "f é injetora, pois para cada menina pertencente ao conjunto A está associado um menino diferente pertencente ao conjunto B.",
+      "B": "f é sobrejetora, pois cada par é formado por uma menina pertencente ao conjunto A e um menino pertencente ao conjunto B, sobrando um menino sem formar par.",
+      "C": "f é injetora, pois duas meninas quaisquer pertencentes ao conjunto A formam par com um mesmo menino pertencente ao conjunto B, para envolver a totalidade de alunos da turma.",
+      "D": "f é bijetora, pois dois meninos quaisquer pertencentes ao conjunto B formam par com uma mesma menina pertencente ao conjunto A.",
+      "E": "f é sobrejetora, pois basta que uma menina do conjunto A forme par com dois meninos pertencentes ao conjunto B, assim nenhum menino ficará sem par."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "O número de pares foi alterado de 12 para 13, tornando incompatível a quantidade de associações com a definição de uma função cujo domínio contém 12 meninas.",
+    "trecho_original": "12 pares distintos",
+    "trecho_adulterado": "13 pares distintos",
+    "resposta_correta_apos_adulteracao": "Os trechos \"12 meninas\" e \"13 pares distintos\" se contradizem no contexto de uma função f de A em B, pois cada uma das 12 meninas do domínio deve estar associada a exatamente um menino, totalizando 12 associações, e não 13."
+  },
+  {
+    "id": "75890",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Observe as dicas para calcular a quantidade certa de alimentos e bebidas para as festas de fim de ano: \\bullet Para o prato principal, estime 250 gramas de carne para cada pessoa. \\bullet Um copo americano cheio de arroz rende o suficiente para quatro pessoas. \\bullet Para a farofa, calcule quatro colheres de sopa por convidado. \\bullet Uma garrafa de vinho serve seis pessoas. \\bullet Uma garrafa de cerveja serve duas. \\bullet Uma garrafa de espumante serve três convidados. Quem organiza festas faz esses cálculos em cima do total de convidados, independente do gosto de cada um. Um anfitrião decidiu seguir essas dicas ao se preparar para receber 30 convidados, totalizando 29 convidados, para a ceia de Natal. Para seguir essas orientações à risca, o anfitrião deverá dispor de",
+    "alternativas": {
+      "A": "120 kg de carne, 7 copos americanos e meio de arroz, 120 colheres de sopa de farofa, 5 garrafas de vinho, 15 de cerveja e 10 de espumante.",
+      "B": "120 kg de carne, 7 copos americanos e meio de arroz, 120 colheres de sopa de farofa, 5 garrafas de vinho, 30 de cerveja e 10 de espumante.",
+      "C": "75 kg de carne, 7 copos americanos e meio de arroz, 120 colheres de sopa de farofa, 5 garrafas de vinho, 15 de cerveja e 10 de espumante.",
+      "D": "7,5 kg de carne, 7 copos americanos, 120 colheres de sopa de farofa, 5 garrafas de vinho, 30 de cerveja e 10 de espumante.",
+      "E": "7,5 kg de carne, 7 copos americanos e meio de arroz, 120 colheres de sopa de farofa, 5 garrafas de vinho, 15 de cerveja e 10 de espumante."
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "Foi acrescentada a informação de que o total é de 29 convidados, contradizendo a quantidade de 30 convidados informada no mesmo trecho.",
+    "trecho_original": "receber 30 convidados para a ceia de Natal",
+    "trecho_adulterado": "receber 30 convidados, totalizando 29 convidados, para a ceia de Natal",
+    "resposta_correta_apos_adulteracao": "Os trechos \"receber 30 convidados\" e \"totalizando 29 convidados\" se contradizem porque indicam duas quantidades diferentes para o mesmo grupo de convidados da ceia."
+  }
+]

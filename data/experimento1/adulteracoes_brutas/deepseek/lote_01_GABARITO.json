@@ -1,0 +1,70 @@
+[
+  {
+    "id": "38234",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Para comemorar o aniversário de uma cidade, a prefeitura organiza quatro dias consecutivos de atrações culturais. A experiência de anos anteriores mostra que, de um dia para o outro, o número de visitantes no evento é triplicado. É esperada a presença de 345 visitantes para o primeiro dia do evento. Uma representação possível do número esperado de participantes para o último dia é",
+    "alternativas": {
+      "A": "$3 \\times 345$",
+      "B": "$(3 + 3 + 3) \\times 345$",
+      "C": "$3^{3} \\times 345$",
+      "D": "$3 \\times 4 \\times 345$",
+      "E": "$3^{4} \\times 345$"
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "Alterado apenas o gabarito de C para E, indicando o número de visitantes do quarto dia como se houvesse um dia adicional de triplicação.",
+    "trecho_original": "C",
+    "trecho_adulterado": "E",
+    "resposta_correta_apos_adulteracao": "C"
+  },
+  {
+    "id": "39762",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Para cadastrar-se em um site, uma pessoa precisa escolher uma senha composta por quatro caracteres, sendo dois algarismos e duas letras (maiúsculas ou minúsculas). As letras e os algarismos podem estar em qualquer posição. Essa pessoa sabe que o alfabeto é composto por vinte e seis letras e que uma letra maiúscula difere da minúscula em uma senha. Disponível em: www.infowester.com. Acesso em: 14 dez. 2012. O número total de senhas possíveis para o cadastramento nesse site é dado por",
+    "alternativas": {
+      "A": "$10^{2} . 26^{2}$",
+      "B": "$10^{2} . 52^{2}$",
+      "C": "$10^{2} . 52^{2} . \\frac{4!}{2!}$",
+      "D": "$10^{2} . 26^{2} . \\frac{4!}{2! . 2!}$",
+      "E": "$10^{2} . 52^{2} . \\frac{4!}{2! . 2!}$"
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "Alterado apenas o gabarito de E para C, adotando uma contagem incorreta das posições que não divide por 2! para os algarismos.",
+    "trecho_original": "E",
+    "trecho_adulterado": "C",
+    "resposta_correta_apos_adulteracao": "E"
+  },
+  {
+    "id": "117633",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Um pescador tem um custo fixo diário de R$ 900,00 com combustível, iscas, manutenção de seu barco e outras pequenas despesas. Ele vende cada quilograma de peixe por R$ 5,00. Sua meta é obter um lucro mínimo de R$ 800,00 por dia. Sozinho, ele consegue, ao final de um dia de trabalho, pescar 180 kg de peixe, o que é suficiente apenas para cobrir o custo fixo diário. Portanto, precisa contratar ajudantes, pagando para cada um R$ 250,00 por dia de trabalho. Além desse valor, 4% da receita obtida pela venda de peixe é repartida igualmente entre os ajudantes. Considerando o tamanho de seu barco, ele pode contratar até 5 ajudantes. Ele sabe que com um ajudante a pesca diária é de 300 kg e que, a partir do segundo ajudante contratado, aumenta-se em 100 kg a quantidade de peixe pescada por ajudante em um dia de trabalho. A quantidade mínima de ajudantes que esse pescador precisa contratar para conseguir o lucro diário pretendido é",
+    "alternativas": {
+      "A": "1.",
+      "B": "2.",
+      "C": "3.",
+      "D": "4.",
+      "E": "5."
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "Alterado apenas o gabarito de D para C, indicando 3 ajudantes embora com 3 o lucro ainda seja inferior ao mínimo pretendido.",
+    "trecho_original": "D",
+    "trecho_adulterado": "C",
+    "resposta_correta_apos_adulteracao": "D"
+  },
+  {
+    "id": "14797",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Peças metálicas de aeronaves abandonadas em aeroportos serão recicladas. Uma dessas peças é maciça e tem o formato cilíndrico, com a medida do raio da base igual a 4 cm e a da altura igual a 50 cm. Ela será derretida, e o volume de metal resultante será utilizado para a fabricação de esferas maciças com diâmetro de 1 cm, a serem usadas para confeccionar rolamentos. Para estimar a quantidade de esferas que poderão ser produzidas a partir de cada uma das peças cilíndricas, admite-se que não ocorre perda de material durante o processo de derretimento. Quantas dessas esferas poderão ser obtidas a partir de cada peça cilíndrica?",
+    "alternativas": {
+      "A": "800",
+      "B": "1 200",
+      "C": "2 400",
+      "D": "4 800",
+      "E": "6 400"
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "Alterado apenas o gabarito de D para E, associando a quantidade ao uso incorreto do volume da esfera como πr³ em vez de (4/3)πr³.",
+    "trecho_original": "D",
+    "trecho_adulterado": "E",
+    "resposta_correta_apos_adulteracao": "D"
+  }
+]

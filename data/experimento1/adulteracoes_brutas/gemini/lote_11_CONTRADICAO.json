@@ -1,0 +1,70 @@
+[
+  {
+    "id": "25028",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Visando atingir metas econômicas previamente estabelecidas, é comum no final do mês algumas lojas colocarem certos produtos em promoção. Uma determinada loja de departamentos colocou em oferta os seguintes produtos: televisão, sofá e estante. Na compra da televisão mais o sofá, o cliente pagaria R$ 8 000,00. Se ele levasse o sofá mais a estante, pagaria R$ 3 400,00. A televisão mais a estante sairiam por R$ 4 200,00. Um cliente resolveu levar duas televisões e um sofá que estavam na promoção, conseguindo ainda mais 5% de desconto pelo pagamento à vista. O valor total, em real, pago pelo cliente foi de",
+    "alternativas": {
+      "A": "3 610,00.",
+      "B": "5 035,00.",
+      "C": "5 415,00.",
+      "D": "5 795,00.",
+      "E": "6 100,00."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Alterou-se o preço combinado da televisão e do sofá de R$ 3 800,00 para R$ 8 000,00, gerando uma inconsistência matemática com os demais valores da questão.",
+    "trecho_original": "Na compra da televisão mais o sofá, o cliente pagaria R$ 3 800,00.",
+    "trecho_adulterado": "Na compra da televisão mais o sofá, o cliente pagaria R$ 8 000,00.",
+    "resposta_correta_apos_adulteracao": "Com o novo valor de R$ 8 000,00 para a televisão mais o sofá, somado aos preços dos outros pares (sofá mais estante = R$ 3 400,00; televisão mais estante = R$ 4 200,00), a soma total das três equações seria 15 600,00, implicando que a estante custaria R$ -200,00 ($7 800 - 8 000$). Isso contradiz a premissa de que os produtos possuem preços reais positivos em uma loja."
+  },
+  {
+    "id": "117622",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma escola analisou as propostas de cinco empresas para alugar uma máquina fotocopiadora que atenda à demanda de 8 000 cópias mensais. Cada empresa cobra um valor fixo pelo aluguel mensal da máquina, mais um valor proporcional ao número de cópias realizadas, ambos em real. Assim, o custo total C, do aluguel de uma máquina, que atenda a uma demanda de x cópias mensais, em cada uma das cinco empresas, pode ser dado pelas expressões: \\bullet empresa I: C = 500 + 0,40x; \\bullet empresa II: C = 800 + 0,50x; \\bullet empresa III: C = 2 000 + 0,20x; \\bullet empresa IV: C = 1 100 + 0,25x; \\bullet empresa V: C = 600 + 0,30x. A escola escolheu a empresa que apresentou a proposta que fornecia o serviço necessário pelo menor custo mensal. A empresa escolhida foi a",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Alterou-se a demanda mensal de cópias no primeiro parágrafo de 12 000 para 8 000, contradizendo a quantidade de cópias utilizada nas expressões de custo e na resolução do problema.",
+    "trecho_original": "atenda à demanda de 12 000 cópias mensais.",
+    "trecho_adulterado": "atenda à demanda de 8 000 cópias mensais.",
+    "resposta_correta_apos_adulteracao": "O texto inicial afirma que a máquina deve atender a uma demanda de 8 000 cópias mensais, mas o restante do enunciado exige o cálculo para $x$ cópias nas expressões algébricas cujo valor aplicado é de 12 000 cópias, gerando uma contradição direta na definição da demanda a ser atendida pela escola."
+  },
+  {
+    "id": "72909",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "A cor de uma estrela tem relação com a temperatura em sua superfície. Estrelas não muito quentes (cerca de 3 000 K) parecem avermelhadas. Já as estrelas amarelas, como o Sol, possuem temperatura em torno dos 4 000 K; as mais quentes são brancas ou azuis porque sua temperatura fica acima dos 10 000 K. De acordo com os parâmetros temperatura e luminosidade, as estrelas recebem a seguinte classificação, tomando-se a luminosidade do Sol como unidade: \\bullet classe espectral M0 – temperatura: 3 480 K; luminosidade: 0,06; \\bullet classe espectral G2 – temperatura: 5 770 K; luminosidade: 1; \\bullet classe espectral A0 – temperatura: 9 900 K; luminosidade: 80; \\bullet classe espectral B0 – temperatura: 28 000 K; luminosidade: 2 \\times $10^{4}$; \\bullet classe espectral O5 – temperatura: 40 000 K; luminosidade: 5 \\times $10^{5}$. Se tomarmos uma estrela que tenha temperatura da ordem de 5 vezes a temperatura do Sol, qual será a ordem de grandeza de sua luminosidade?",
+    "alternativas": {
+      "A": "20 000 vezes a luminosidade do Sol.",
+      "B": "28 000 vezes a luminosidade do Sol.",
+      "C": "28 850 vezes a luminosidade do Sol.",
+      "D": "30 000 vezes a luminosidade do Sol.",
+      "E": "50 000 vezes a luminosidade do Sol."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Alterou-se a temperatura estimada das estrelas amarelas (como o Sol) no texto introdutório de 6 000 K para 4 000 K, contradizendo o valor de 5 770 K atribuído ao Sol (classe espectral G2) na tabela subsequente.",
+    "trecho_original": "Já as estrelas amarelas, como o Sol, possuem temperatura em torno dos 6 000 K;",
+    "trecho_adulterado": "Já as estrelas amarelas, como o Sol, possuem temperatura em torno dos 4 000 K;",
+    "resposta_correta_apos_adulteracao": "O texto introdutório passa a afirmar que o Sol possui temperatura em torno de 4 000 K, o que contradiz diretamente os dados da tabela em que a classe espectral G2 (correspondente ao Sol) apresenta temperatura de 5 770 K."
+  },
+  {
+    "id": "71504",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma campanha de vacinação contra um tipo específico de vírus, que causa uma gripe com alto índice de mortalidade, deverá ser realizada em uma cidade que tem uma população de 186 000 habitantes. A Secretaria de Saúde do município tem os dados que evidenciam os grupos de pessoas mais afetadas pela doença e pretende estabelecer como critério de prioridade de vacinação as porcentagens de casos de morte, em decorrência da contaminação pelo vírus, em ordem decrescente. Observe os dados na tabela: Número de pessoas que foram contaminadas pelo vírus, curadas e mortas, discriminadas por grupos característicos\n| Número de pessoas | Contaminadas pelo vírus | Curadas | Mortas |\n|---|---|---|---|\n| Recém-nascidos | 280 | 140 | 140 |\n| Mulheres gestantes | 1 020 | 900 | 255 |\n| Crianças com idade entre 3 e 10 anos | 2 340 | 819 | 1 521 |\n| Idosos com idade entre 60 e 80 anos | 3 500 | 2 520 | 980 |\n| Pessoas com alto nível de obesidade | 800 | 560 | 240 |\nTomando como base os dados da tabela, os especialistas em saúde pública do município podem verificar que o grupo com maior prioridade de vacinação é o de",
+    "alternativas": {
+      "A": "crianças entre 3 e 10 anos, porque a porcentagem de mortos é a de maior valor em relação aos outros grupos.",
+      "B": "idosos com idade entre 60 e 80 anos, pois foi o grupo que registrou o maior número de casos de pessoas contaminadas pelo vírus.",
+      "C": "mulheres gestantes, porque a porcentagem de curadas é de 75%.",
+      "D": "recém-nascidos, porque eles têm uma maior expectativa de vida.",
+      "E": "pessoas com alto nível de obesidade, pois são do grupo com maior risco de doenças."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Alterou-se o número de mulheres gestantes curadas de 765 para 900 na tabela, fazendo com que a soma das pessoas curadas e mortas ultrapasse o total de contaminadas do grupo.",
+    "trecho_original": "| Mulheres gestantes | 1 020 | 765 | 255 |",
+    "trecho_adulterado": "| Mulheres gestantes | 1 020 | 900 | 255 |",
+    "resposta_correta_apos_adulteracao": "Para o grupo de mulheres gestantes, a soma do número de curadas (900) com o de mortas (255) resulta em 1 155, valor que excede o total de pessoas contaminadas (1 020) informado na mesma linha, gerando uma contradição aritmética interna na tabela."
+  }
+]

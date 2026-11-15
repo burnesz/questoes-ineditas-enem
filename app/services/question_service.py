@@ -2,8 +2,10 @@
 Serviço orquestrador para geração, validação e persistência de questões inéditas do ENEM via RAG e PoT.
 """
 
+import ast
 import json
 import logging
+import math
 import os
 import random
 import re
@@ -55,7 +57,7 @@ from app.services.code_executor import (
     validate_solver_complexity,
     validate_solver_consistency,
 )
-from app.services.llm_client import LLMClient
+from app.services.llm_client import LLMClient, LLMConnectionError, LLMError, LLMTimeoutError
 from app.services.question_validator import (
     check_prohibited_terms,
     extract_json_from_text,
@@ -66,6 +68,12 @@ from app.services.question_validator import (
 from app.services.vectorstore import ChromaVectorStore
 
 logger = logging.getLogger(__name__)
+
+# Limites de saída das chamadas da Etapa 4: folgados o bastante para o JSON não ser cortado no meio
+MAX_TOKENS_RESOLUCAO_CEGA = 2000
+MAX_TOKENS_EQUIVALENCIA = 400
+MAX_TOKENS_MAPEAMENTO = 400
+MAX_TOKENS_AUDITORIA_CRITERIO = 400
 
 _RETRY_HINTS_BY_CODE: Dict[PipelineErrorCode, str] = {
     PipelineErrorCode.SINTAXE: "Sintaxe estrita: retorne JSON válido com 'planejamento', 'enunciado', 'tabela_dados' (opcional), 'erros_tipicos' (4 itens) e função def resolver().",
@@ -103,9 +111,14 @@ def _classify_retry_hint(error: Union[PipelineErrorCode, PipelineValidationError
 
 
 def _check_blind_solving_flags(
-    blind_sol: QuestaoBlindSolvingOutput
+    blind_sol: QuestaoBlindSolvingOutput,
+    perfil: PerfilAvaliacao = "gerada"
 ) -> Optional[Tuple[str, PipelineErrorCode, str]]:
-    """Etapa 4.1: aplica os early exits da resolução cega. Retorna (etapa_falha, código, motivo) ou None se passou."""
+    """
+    Etapa 4.1: aplica os early exits da resolução cega. Retorna (etapa_falha, código, motivo) ou None se passou.
+    No perfil 'enem' dados ociosos não reprovam: itens da prova trazem fonte, rótulos e opções de comparação
+    que não entram na conta, e isso não é defeito.
+    """
     if not getattr(blind_sol, "pergunta_respondivel", True):
         return (
             "4.1_nao_respondivel",
@@ -125,6 +138,8 @@ def _check_blind_solving_flags(
             f"Premissas implícitas assumidas na resolução: {'; '.join(premissas_reais)}",
         )
 
+    if perfil == "enem":
+        return None
     dados_ociosos = getattr(blind_sol, "dados_nao_utilizados", [])
     ociosos_reais = [
         d for d in dados_ociosos or []
@@ -150,12 +165,118 @@ def _audit_error_code(audit: QuestaoAuditoriaSemanticaOutput) -> PipelineErrorCo
     return PipelineErrorCode.AUDITORIA
 
 
-def _parse_float_br(value: Any) -> Optional[float]:
-    """Converte número puro (aceita vírgula decimal) em float; retorna None para qualquer outro texto."""
+# Unidades que podem ser descartadas no fim de uma alternativa sem mudar o valor; palavras como
+# "milhões", "maior" ou "menor" mudam o sentido, então mandam o item para o juiz LLM
+_UNIDADES_NEUTRAS = {
+    "m", "cm", "mm", "km", "m²", "cm²", "km²", "m³", "cm³", "ml", "l", "litro", "litros", "metro", "metros",
+    "kg", "g", "unidade", "unidades", "ponto", "pontos", "dia", "dias", "hora", "horas", "minuto", "minutos",
+    "ano", "anos", "º", "ª", "°", "°c", "ºc", "kwh", "km/h", "reais",
+}
+_SUFIXO_PALAVRAS = re.compile(r"\s*([A-Za-zÀ-ÿ°ºª²³/]+(?:\s+[A-Za-zÀ-ÿ°ºª²³/]+)*)$")
+_OPERADORES_AST = (ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Pow, ast.USub, ast.UAdd)
+
+
+def _avaliar_aritmetica(expr: str) -> Optional[float]:
+    """Avalia uma expressão só com números, + - * / ** e fatorial (fat(n)); qualquer outro nó invalida."""
     try:
-        return float(str(value).strip().replace(",", "."))
-    except (ValueError, TypeError):
+        arvore = ast.parse(expr, mode="eval")
+    except SyntaxError:
         return None
+
+    def avaliar(no: ast.AST) -> float:
+        if isinstance(no, ast.Expression):
+            return avaliar(no.body)
+        if isinstance(no, ast.Constant) and isinstance(no.value, (int, float)):
+            return float(no.value)
+        if isinstance(no, ast.UnaryOp) and isinstance(no.op, _OPERADORES_AST):
+            v = avaliar(no.operand)
+            return -v if isinstance(no.op, ast.USub) else v
+        if isinstance(no, ast.BinOp) and isinstance(no.op, _OPERADORES_AST):
+            a, b = avaliar(no.left), avaliar(no.right)
+            if isinstance(no.op, ast.Add):
+                return a + b
+            if isinstance(no.op, ast.Sub):
+                return a - b
+            if isinstance(no.op, ast.Mult):
+                return a * b
+            if isinstance(no.op, ast.Div):
+                return a / b
+            if abs(b) > 64:
+                raise ValueError("expoente grande demais")
+            return a ** b
+        if (isinstance(no, ast.Call) and isinstance(no.func, ast.Name) and no.func.id == "fat"
+                and len(no.args) == 1 and not no.keywords):
+            n = avaliar(no.args[0])
+            if n < 0 or n > 20 or n != int(n):
+                raise ValueError("fatorial inválido")
+            return float(math.factorial(int(n)))
+        raise ValueError("expressão não aritmética")
+
+    try:
+        return avaliar(arvore)
+    except (ValueError, ZeroDivisionError, OverflowError, TypeError):
+        return None
+
+
+def _valor_numerico(value: Any) -> Optional[Tuple[float, bool]]:
+    """
+    Lê um valor numérico escrito como no ENEM, para o mapeamento determinístico da Etapa 4.2.
+    Aceita moeda (R$ 3 610,00), milhar com espaço, vírgula decimal, ponto final, unidade no fim
+    ("15 m", "16,00%") e expressões aritméticas em LaTeX ou texto ("10^{2} . 52^{2} . \\frac{4!}{2!}").
+    Retorna (valor, é_percentual) ou None se o texto não for um número/expressão puramente aritmética.
+    """
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, (int, float)):
+        return float(value), False
+    s = str(value).strip().replace("$", "")
+    s = re.sub(r"\b(?:R|US|U)\s*(?=\d)", "", s)            # "R 3 610,00" (o $ já saiu)
+    percentual = "%" in s
+    s = s.replace("%", "")
+    s = re.sub(r"\b(c?m|km)\s*\^\s*\{?([23])\}?", lambda m: m.group(1) + "²³"[int(m.group(2)) - 2], s)
+    s = s.rstrip(" .")
+    sufixo = _SUFIXO_PALAVRAS.search(s)
+    if sufixo:
+        if sufixo.group(1).lower() not in _UNIDADES_NEUTRAS:
+            return None
+        s = s[:sufixo.start()].rstrip(" .")
+    s = re.sub(r"\\(?:left|right)", "", s)
+    s = re.sub(r"\\(?:d|t)?frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}", r"((\1)/(\2))", s)
+    s = re.sub(r"\\(?:cdot|times)|×|·|(?<=[\d}\)!])\s+\.\s+(?=[\d\\({])", "*", s)
+    s = s.replace("{", "(").replace("}", ")").replace("^", "**")
+    if not s or re.search(r"[A-Za-zÀ-ÿ\\=:;]", s):          # sobrou variável, palavra, '=' ou intervalo
+        return None
+    s = re.sub(r"(?<=\d) (?=\d{3}(?!\d))", "", s)           # milhar com espaço: 1 205 000
+    if "," in s:                                            # vírgula decimal; ponto vira separador de milhar
+        s = s.replace(".", "").replace(",", ".")
+    s = re.sub(r"(\d+(?:\.\d+)?|\([^()]*\))!", r"fat(\1)", s)
+    valor = _avaliar_aritmetica(s)
+    return (valor, percentual) if valor is not None else None
+
+
+def _mesmo_valor(obtido: float, alternativa: Tuple[float, bool]) -> bool:
+    """Compara o resultado da resolução cega com uma alternativa; percentual aceita 0,16 ou 16 para '16%'."""
+    valor, percentual = alternativa
+    candidatos = [obtido, obtido * 100] if percentual else [obtido]
+    return any(math.isclose(c, valor, rel_tol=1e-6, abs_tol=1e-4) for c in candidatos)
+
+
+def _valores_alternativa(texto: Any) -> Optional[List[float]]:
+    """
+    Valores numéricos que uma alternativa aceita no mapeamento determinístico: o próprio número, o percentual
+    também como fração ("16%" aceita 16 e 0,16) e razões "a : b" (aceitam a/b e b/a, pois a resolução costuma
+    devolver só a escala, ex.: 100 para "1 : 100"). None se a alternativa não for numérica.
+    """
+    if isinstance(texto, str) and texto.count(":") == 1:
+        lados = [_valor_numerico(p) for p in texto.strip().rstrip(" .").split(":")]
+        if all(l is not None and not l[1] and l[0] for l in lados):
+            a, b = lados[0][0], lados[1][0]
+            return [a / b, b / a]
+        return None
+    valor = _valor_numerico(texto)
+    if valor is None:
+        return None
+    return [valor[0], valor[0] / 100] if valor[1] else [valor[0]]
 
 
 class QuestionService:
@@ -165,9 +286,12 @@ class QuestionService:
         self,
         llm_client: Optional[LLMClient] = None,
         vector_store: Optional[ChromaVectorStore] = None,
-        queries_path: str = "data/habilidades_queries.json"
+        queries_path: str = "data/habilidades_queries.json",
+        saturacao_por_modelo: bool = False
     ):
         self.llm_client = llm_client or LLMClient()
+        # Barreira anti-saturação só com as questões do próprio modelo (comparação entre modelos no mesmo banco)
+        self.saturacao_por_modelo = saturacao_por_modelo
         self.vector_store = vector_store or ChromaVectorStore()
         self.queries_path = queries_path
         self._habilidades_queries = self._load_habilidades_queries()
@@ -372,8 +496,13 @@ class QuestionService:
         enunciados_recentes: List[str] = []
         if db is not None:
             try:
+                consulta_recentes = db.query(QuestaoInedita.enunciado)
+                if self.saturacao_por_modelo:
+                    consulta_recentes = consulta_recentes.join(
+                        TentativaGeracao, QuestaoInedita.tentativa_id == TentativaGeracao.id
+                    ).filter(TentativaGeracao.modelo == getattr(self.llm_client, "model_name", settings.LLM_MODEL))
                 recentes_rows = (
-                    db.query(QuestaoInedita.enunciado)
+                    consulta_recentes
                     .filter(
                         QuestaoInedita.habilidade_codigo == clean_hab,
                         QuestaoInedita.is_validated == True,  # noqa: E712
@@ -567,6 +696,8 @@ class QuestionService:
                 _persist_attempt_output(False, "2a_planejamento", last_error_code, last_error)
                 continue
             except Exception as e:
+                if isinstance(e, (LLMConnectionError, LLMTimeoutError)):  # queda de conexão com o Ollama: interrompe o ciclo em vez de gastar tentativas
+                    raise
                 last_error_code = PipelineErrorCode.SINTAXE
                 last_error = f"Falha na Fase 2A (planejamento/enunciado): {e}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na Fase 2A: {e}")
@@ -599,6 +730,8 @@ class QuestionService:
                     solver_code = parsed_1b.get("solver", "") if isinstance(parsed_1b, dict) else ""
                     partial_solver = solver_code or None
                 except Exception as e:
+                    if isinstance(e, (LLMConnectionError, LLMTimeoutError)):  # queda de conexão com o Ollama: interrompe o ciclo em vez de gastar tentativas
+                        raise
                     last_error_code = PipelineErrorCode.SINTAXE
                     last_error = f"Falha na Fase 2B (geração do solver): {e}"
                     logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na Fase 2B: {e}")
@@ -690,6 +823,8 @@ class QuestionService:
                 )
                 partial_justificativa = blind_sol.resolucao_passo_a_passo
             except Exception as e:
+                if isinstance(e, (LLMConnectionError, LLMTimeoutError)):  # queda de conexão com o Ollama: interrompe o ciclo em vez de gastar tentativas
+                    raise
                 last_error_code = PipelineErrorCode.SINTAXE
                 last_error = f"Falha na resolução cega da LLM: {e}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na resolução cega: {e}")
@@ -709,6 +844,8 @@ class QuestionService:
                     resultado_obtido=blind_sol.resultado_obtido
                 )
             except Exception as e:
+                if isinstance(e, (LLMConnectionError, LLMTimeoutError)):  # queda de conexão com o Ollama: interrompe o ciclo em vez de gastar tentativas
+                    raise
                 last_error_code = PipelineErrorCode.NAO_EQUIVALENTE
                 last_error = f"Falha no confronto de equivalência: {e}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na equivalência: {e}")
@@ -736,6 +873,8 @@ class QuestionService:
                     habilidade_descricao=habilidade.descricao
                 )
             except Exception as e:
+                if isinstance(e, (LLMConnectionError, LLMTimeoutError)):  # queda de conexão com o Ollama: interrompe o ciclo em vez de gastar tentativas
+                    raise
                 last_error_code = PipelineErrorCode.AUDITORIA
                 last_error = f"Falha na auditoria semântica: {e}"
                 logger.warning(f"Tentativa {attempt}/{max_attempts} falhou na auditoria semântica: {e}")
@@ -777,7 +916,7 @@ class QuestionService:
         )
         raw = self.llm_client.generate(
             prompt=prompt,
-            max_tokens=600,
+            max_tokens=MAX_TOKENS_RESOLUCAO_CEGA,
             temperature=temperature,
             top_p=0.9,
             format="json"
@@ -792,8 +931,35 @@ class QuestionService:
                 parsed["resolucao_passo_a_passo"] = parsed.get("resolucao") or parsed.get("justificativa") or "Resolução detalhada."
             if "resultado_obtido" not in parsed:
                 parsed["resultado_obtido"] = parsed.get("resultado", parsed.get("correta", ""))
+            for campo in ("premissas_assumidas", "dados_nao_utilizados"):
+                if isinstance(parsed.get(campo), list):
+                    parsed[campo] = [v if isinstance(v, str) else json.dumps(v, ensure_ascii=False) for v in parsed[campo]]
+            if perfil == "enem":
+                self._aplicar_resolucao_pot(parsed)
 
         return QuestaoBlindSolvingOutput(**parsed)
+
+    @staticmethod
+    def _aplicar_resolucao_pot(parsed: Dict[str, Any]) -> None:
+        """
+        Etapa 4.1 (perfil 'enem'): executa no sandbox o `def resolver():` escrito pelo resolvedor cego.
+        Se ele produzir um número e a resposta em texto também for numérica (ou vazia), o número calculado
+        em Python substitui o texto, eliminando erros de conta; a resposta em texto fica em 'resultado_texto'.
+        """
+        codigo = parsed.get("codigo")
+        if not isinstance(codigo, str) or "def resolver" not in codigo:
+            parsed["codigo"] = None
+            return
+        texto = parsed.get("resultado_obtido")
+        try:
+            correta = execute_solver_code(codigo, exigir_distratores=False)["correta"]
+        except Exception as e:
+            parsed["erro_codigo"] = f"{type(e).__name__}: {e}"[:300]
+            return
+        numerico = isinstance(correta, (int, float)) and not isinstance(correta, bool) and math.isfinite(correta)
+        if numerico and (texto in (None, "") or _valor_numerico(texto) is not None):
+            parsed["resultado_texto"] = texto
+            parsed["resultado_obtido"] = correta
 
     def _run_equivalence_check(self, resultado_solver: Any, resultado_obtido: Any) -> QuestaoEquivalenciaOutput:
         """Etapa 4.2: Confronto de equivalência matemática entre solver e resolução cega."""
@@ -822,7 +988,7 @@ class QuestionService:
         )
         raw = self.llm_client.generate(
             prompt=prompt,
-            max_tokens=200,
+            max_tokens=MAX_TOKENS_EQUIVALENCIA,
             temperature=0.0,
             top_p=0.9,
             format="json"
@@ -842,26 +1008,37 @@ class QuestionService:
         self,
         enunciado: str,
         resultado_obtido: Any,
-        alternativas: Dict[str, str]
+        alternativas: Dict[str, str],
+        resolucao: Optional[str] = None
     ) -> QuestaoMapeamentoAlternativaOutput:
-        """Etapa 4.2 (perfil 'enem'): identifica quais alternativas expressam o resultado da resolução cega."""
-        f_obtido = _parse_float_br(resultado_obtido)
-        floats_alts = {letra: _parse_float_br(texto) for letra, texto in alternativas.items()}
-        if f_obtido is not None and all(v is not None for v in floats_alts.values()):
-            letras = sorted(letra for letra, v in floats_alts.items() if abs(v - f_obtido) < 1e-4)
-            return QuestaoMapeamentoAlternativaOutput(
-                letras_equivalentes=letras,
-                explicacao=f"Mapeamento numérico determinístico em Python (0ms): {f_obtido} -> {letras or 'nenhuma'}."
+        """
+        Etapa 4.2 (perfil 'enem'): identifica qual alternativa expressa o resultado da resolução cega.
+        Decide em Python quando o resultado é numérico e todas as alternativas são numéricas (inclusive com
+        nenhuma ou várias letras), ou quando exatamente uma alternativa numérica coincide. Senão, o modelo
+        escolhe a alternativa a partir da própria resolução, sem ver o gabarito.
+        """
+        obtido = _valor_numerico(resultado_obtido)
+        valores_alts = {letra: _valores_alternativa(texto) for letra, texto in alternativas.items()}
+        if obtido is not None:
+            letras = sorted(
+                letra for letra, valores in valores_alts.items()
+                if valores and any(math.isclose(obtido[0], v, rel_tol=1e-6, abs_tol=1e-4) for v in valores)
             )
+            if all(v is not None for v in valores_alts.values()) or len(letras) == 1:
+                return QuestaoMapeamentoAlternativaOutput(
+                    letras_equivalentes=letras,
+                    explicacao=f"Mapeamento numérico determinístico em Python (0ms): {obtido[0]} -> {letras or 'nenhuma'}."
+                )
 
         prompt = build_mapeamento_alternativa_prompt(
             enunciado=enunciado,
             resultado_obtido=resultado_obtido,
-            alternativas=alternativas
+            alternativas=alternativas,
+            resolucao=resolucao
         )
         raw = self.llm_client.generate(
             prompt=prompt,
-            max_tokens=200,
+            max_tokens=MAX_TOKENS_MAPEAMENTO,
             temperature=0.0,
             top_p=0.9,
             format="json"
@@ -870,6 +1047,8 @@ class QuestionService:
         sanitized = sanitize_latex_json_text(json_str)
         parsed = json.loads(sanitized, strict=False)
         parsed = sanitize_parsed_dict_values(parsed)
+        if isinstance(parsed, dict) and isinstance(parsed.get("letras_equivalentes"), list):
+            parsed["letras_equivalentes"] = sorted({str(l).strip().upper()[:1] for l in parsed["letras_equivalentes"] if str(l).strip()})
         return QuestaoMapeamentoAlternativaOutput(**parsed)
 
     def _run_semantic_audit(
@@ -900,7 +1079,7 @@ class QuestionService:
             )
             raw = self.llm_client.generate(
                 prompt=prompt,
-                max_tokens=160,
+                max_tokens=MAX_TOKENS_AUDITORIA_CRITERIO,
                 temperature=0.0,
                 top_p=0.9,
                 format="json"
@@ -954,13 +1133,19 @@ class QuestionService:
         try:
             blind_sol = self._run_blind_solving(enunciado=enunciado, tabela_dados=tabela_dados, perfil=perfil)
         except Exception as e:
+            if isinstance(e, LLMError):  # falha de infraestrutura (conexão, timeout): não é veredito
+                raise
             return _falha("4.1_resolucao_cega", PipelineErrorCode.SINTAXE, f"Falha na resolução cega da LLM: {e}")
 
         extra: Dict[str, Any] = {
             "resultado_obtido": blind_sol.resultado_obtido,
             "resolucao_passo_a_passo": blind_sol.resolucao_passo_a_passo,
+            "resultado_texto": blind_sol.resultado_texto,
+            "codigo_resolucao": blind_sol.codigo,
+            "erro_codigo": blind_sol.erro_codigo,
+            "dados_nao_utilizados": blind_sol.dados_nao_utilizados,
         }
-        falha_cega = _check_blind_solving_flags(blind_sol)
+        falha_cega = _check_blind_solving_flags(blind_sol, perfil=perfil)
         if falha_cega:
             return _falha(*falha_cega, **extra)
 
@@ -969,7 +1154,8 @@ class QuestionService:
                 mapeamento = self._run_alternative_mapping(
                     enunciado=enunciado,
                     resultado_obtido=blind_sol.resultado_obtido,
-                    alternativas=alternativas
+                    alternativas=alternativas,
+                    resolucao=blind_sol.resolucao_passo_a_passo
                 )
                 letras = mapeamento.letras_equivalentes
                 extra["letras_mapeadas"] = letras
@@ -998,6 +1184,8 @@ class QuestionService:
                         **extra
                     )
         except Exception as e:
+            if isinstance(e, LLMError):  # falha de infraestrutura (conexão, timeout): não é veredito
+                raise
             return _falha("4.2_equivalencia", PipelineErrorCode.NAO_EQUIVALENTE, f"Falha no confronto de equivalência: {e}", **extra)
 
         try:
@@ -1011,6 +1199,8 @@ class QuestionService:
                 perfil=perfil
             )
         except Exception as e:
+            if isinstance(e, LLMError):  # falha de infraestrutura (conexão, timeout): não é veredito
+                raise
             return _falha("4.3_auditoria_pedagogica", PipelineErrorCode.AUDITORIA, f"Falha na auditoria semântica: {e}", **extra)
 
         if not audit.aprovada:

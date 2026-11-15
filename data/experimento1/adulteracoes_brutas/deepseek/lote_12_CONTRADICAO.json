@@ -1,0 +1,70 @@
+[
+  {
+    "id": "16331",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Para pintar um automóvel, cuja cor é personalizada, a oficina encarregada de fazer o serviço terá de, por meio de uma mistura adequada de tintas, compor tons de azul e de branco. O tom azul representa 40% dessa mistura, e o tom branco representa 70% dessa mistura. Sabe-se, ainda, que a oficina deverá adquirir somente a tinta de tom azul, pois já possui, em seus estoques, 6 litros da tinta de tom branco, que serão totalmente utilizados na referida composição. A quantidade, em litro, de tinta de tom azul que a oficina deverá adquirir para compor essa mistura, sem que haja sobras, é",
+    "alternativas": {
+      "A": "2,4.",
+      "B": "3,6.",
+      "C": "4,0.",
+      "D": "9,0.",
+      "E": "10,0."
+    },
+    "gabarito": "C",
+    "ajuste_manual": "A versão do LLM também trocava o azul de 40% para 60%, um segundo defeito (de cálculo).", "descricao_modificacao": "Acrescentou-se que o tom branco representa 70% da mistura, com o azul mantido em 40%: os percentuais da mesma mistura somam 110%.",
+    "trecho_original": "O tom azul representa 40% dessa mistura.",
+    "trecho_adulterado": "O tom azul representa 40% dessa mistura, e o tom branco representa 70% dessa mistura.",
+    "resposta_correta_apos_adulteracao": "\"O tom azul representa 40%\" e \"o tom branco representa 70%\" não podem ser ambos verdadeiros: a mistura só tem azul e branco, e a soma daria 110%."
+  },
+  {
+    "id": "126030",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma câmara de resfriamento de um laboratório tem um dispositivo que, ao ser ajustado, alterará a temperatura, em grau Celsius, de um líquido ao final de cada minuto. Nessa câmara, existem dois visores, o primeiro indicando o quanto a temperatura do líquido deve ser diminuída ao final de cada minuto, e o segundo indicando a temperatura do líquido na câmara naquele instante. Foi iniciado um teste nessa câmara quando um líquido, à temperatura de 30 ^\\circ C, foi colocado em seu interior, embora o mesmo líquido estivesse a 20 ^\\circ C no instante inicial. Ela estava programada no primeiro visor em 1,4 ^\\circ C. No final de 5 minutos, foi alterada a temperatura, e o valor da mudança que aparecia no primeiro visor foi diminuído em 0,5 ^\\circ C. Ao final de 15 minutos do início do teste, a temperatura registrada no primeiro visor foi aumentada em 0,3 ^\\circ C em relação à última marcação. Um dos objetivos desse teste é que, ao final de 30 minutos, a temperatura do líquido seja de 0 ^\\circ C. Assim, após 25 minutos relativamente ao início do teste, novo ajuste deve ser feito na numeração do primeiro visor. Que alteração deverá ser feita na numeração do primeiro visor ao final de 25 minutos do início do teste?",
+    "alternativas": {
+      "A": "Aumentar 4,0 ^\\circ C.",
+      "B": "Aumentar 3,0 ^\\circ C.",
+      "C": "Aumentar 1,0 ^\\circ C.",
+      "D": "Diminuir 0,8 ^\\circ C.",
+      "E": "Diminuir 3,0 ^\\circ C."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Acrescentei ao enunciado a informação de que o mesmo líquido estaria a 20 ^\\circ C no instante inicial, contradizendo a temperatura de 30 ^\\circ C já informada para esse mesmo instante.",
+    "trecho_original": "Foi iniciado um teste nessa câmara quando um líquido, à temperatura de 30 ^\\circ C, foi colocado em seu interior.",
+    "trecho_adulterado": "Foi iniciado um teste nessa câmara quando um líquido, à temperatura de 30 ^\\circ C, foi colocado em seu interior, embora o mesmo líquido estivesse a 20 ^\\circ C no instante inicial.",
+    "resposta_correta_apos_adulteracao": "Os trechos \"à temperatura de 30 ^\\circ C\" e \"o mesmo líquido estivesse a 20 ^\\circ C no instante inicial\" não podem ser ambos verdadeiros, pois o mesmo líquido não pode estar simultaneamente a 30 ^\\circ C e a 20 ^\\circ C no instante inicial."
+  },
+  {
+    "id": "81329",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Um tipo de célula se reproduz constantemente por divisão celular, triplicando sua quantidade a cada duas horas, ou seja, quadruplicando sua quantidade no mesmo intervalo, sob condições ideais de proliferação. Suponha uma quantidade inicial $Q_{0}$ dessas células sob as condições ideais de proliferação durante um certo período. Qual a representação algébrica da quantidade Q dessas células em função do tempo t, em hora, nesse período?",
+    "alternativas": {
+      "A": "$Q(t) = Q_{0} \\cdot 3^{t}$",
+      "B": "$Q(t) = Q_{0} \\cdot 3^{2t}$",
+      "C": "$Q(t) = Q_{0} \\cdot 2^{\\frac{t}{3}}$",
+      "D": "$Q(t) = Q_{0} \\cdot 3^{\\frac{t}{2}}$",
+      "E": "$Q(t) = Q_{0} \\cdot 3^{\\frac{t}{2}-1}$"
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Acrescentei ao enunciado a informação de que a quantidade quadruplica no mesmo intervalo em que já foi dito que ela triplica.",
+    "trecho_original": "triplicando sua quantidade a cada duas horas",
+    "trecho_adulterado": "triplicando sua quantidade a cada duas horas, ou seja, quadruplicando sua quantidade no mesmo intervalo",
+    "resposta_correta_apos_adulteracao": "Os trechos \"triplicando sua quantidade a cada duas horas\" e \"quadruplicando sua quantidade no mesmo intervalo\" não podem ser ambos verdadeiros, pois a mesma quantidade não pode triplicar e quadruplicar no mesmo intervalo de duas horas."
+  },
+  {
+    "id": "30327",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma instituição de ensino superior ofereceu vagas em um processo seletivo de acesso a seus cursos. Finalizadas as inscrições, foi divulgada a relação do número de candidatos por vaga em cada um dos cursos oferecidos. Esses dados são apresentados no quadro, que totaliza 210 vagas oferecidas.\n| Curso | Número de vagas oferecidas | Número de candidatos por vaga |\n|---|---|---|\n| Administração | 30 | 6 |\n| Ciências Contábeis | 40 | 6 |\n| Engenharia Elétrica | 50 | 7 |\n| História | 30 | 8 |\n| Letras | 25 | 4 |\n| Pedagogia | 25 | 5 |\nQual foi o número total de candidatos inscritos nesse processo seletivo?",
+    "alternativas": {
+      "A": "200",
+      "B": "400",
+      "C": "1 200",
+      "D": "1 235",
+      "E": "7 200"
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Inseri no enunciado a informação de que o quadro totaliza 210 vagas oferecidas, contradizendo a soma das vagas listadas no próprio quadro.",
+    "trecho_original": "Esses dados são apresentados no quadro.",
+    "trecho_adulterado": "Esses dados são apresentados no quadro, que totaliza 210 vagas oferecidas.",
+    "resposta_correta_apos_adulteracao": "O trecho \"que totaliza 210 vagas oferecidas\" contradiz a soma das vagas do quadro (30 + 40 + 50 + 30 + 25 + 25 = 200), que não pode ser ao mesmo tempo 200 e 210."
+  }
+]

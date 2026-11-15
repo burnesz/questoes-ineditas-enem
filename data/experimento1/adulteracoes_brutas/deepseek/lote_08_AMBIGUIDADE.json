@@ -1,0 +1,70 @@
+[
+  {
+    "id": "72821",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Um polígono regular é invariante por rotações, em torno de seu centro, de",
+    "alternativas": {
+      "A": "15º.",
+      "B": "30º.",
+      "C": "45º.",
+      "D": "60º.",
+      "E": "75º."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Substituiu-se 'hexágono' por 'polígono', omitindo o número de lados; sem essa informação, o menor ângulo de rotação que deixa a figura invariante não é único.",
+    "trecho_original": "Um hexágono regular é invariante por rotações, em torno de seu centro, de",
+    "trecho_adulterado": "Um polígono regular é invariante por rotações, em torno de seu centro, de",
+    "resposta_correta_apos_adulteracao": "Leitura 1: se o polígono for o hexágono regular, o menor ângulo é 60º (D). Leitura 2: se for o octógono regular, é 45º (C); se for o dodecágono regular, é 30º (B); se for o icositetrágono regular, é 15º (A). Assim, a resposta depende do número de lados não informado."
+  },
+  {
+    "id": "60238",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Um artesão construiu peças de artesanato interceptando uma pirâmide com um plano. Após fazer um estudo das diferentes peças que poderia obter, ele concluiu que uma delas poderia ter uma das faces pentagonal. Qual dos argumentos a seguir justifica a conclusão do artesão?",
+    "alternativas": {
+      "A": "Uma pirâmide de base quadrada tem 4 arestas laterais e a interseção de um plano com a pirâmide intercepta suas arestas laterais. Assim, esses pontos formam um polígono de 4 lados.",
+      "B": "Uma pirâmide de base quadrada tem 4 faces triangulares e, quando um plano intercepta essa pirâmide, divide cada face em um triângulo e um trapézio. Logo, um dos polígonos tem 4 lados.",
+      "C": "Uma pirâmide de base quadrada tem 5 faces e a interseção de uma face com um plano é um segmento de reta. Assim, se o plano interceptar todas as faces, o polígono obtido nessa interseção tem 5 lados.",
+      "D": "O número de lados de qualquer polígono obtido como interseção de uma pirâmide com um plano é igual ao número de faces da pirâmide. Como a pirâmide tem 5 faces, o polígono tem 5 lados.",
+      "E": "O número de lados de qualquer polígono obtido interceptando-se uma pirâmide por um plano é igual ao número de arestas laterais da pirâmide. Como a pirâmide tem 4 arestas laterais, o polígono tem 4 lados."
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "Removeu-se a especificação 'de base quadrada' da pirâmide, informação essencial para o argumento; sem ela, a conclusão pode ser justificada por raciocínios ligados a bases diferentes.",
+    "trecho_original": "interceptando uma pirâmide de base quadrada com um plano",
+    "trecho_adulterado": "interceptando uma pirâmide com um plano",
+    "resposta_correta_apos_adulteracao": "Leitura 1: se a pirâmide for de base quadrada, ela tem 5 faces e o argumento C justifica a face pentagonal (C). Leitura 2: se a base não for quadrada, por exemplo pentagonal, a pirâmide tem 6 faces e o argumento C não se aplica; a justificativa dependeria do número de faces da base, não informado."
+  },
+  {
+    "id": "117845",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Comum em lançamentos de empreendimentos imobiliários, as maquetes de condomínios funcionam como uma ótima ferramenta de marketing para as construtoras, pois, além de encantar clientes, auxiliam de maneira significativa os corretores na negociação e venda de imóveis. Um condomínio está sendo lançado em um novo bairro de uma cidade. Na maquete projetada pela construtora, em escala de 1 : 200, existe um reservatório de água com capacidade de 45 $cm^{3}$. Quando todas as famílias estiverem residindo no condomínio, a estimativa é que sejam consumidos 30 000 litros de água. Em uma eventual falta de água, o reservatório cheio será suficiente para abastecer o condomínio por quantos dias?",
+    "alternativas": {
+      "A": "30",
+      "B": "15",
+      "C": "12",
+      "D": "6",
+      "E": "3"
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "Removeu-se o período 'por dia' do consumo estimado, deixando ambíguo se os 30 000 litros se referem a um dia, a uma semana, a um mês etc.",
+    "trecho_original": "por dia, sejam consumidos 30 000 litros de água",
+    "trecho_adulterado": "sejam consumidos 30 000 litros de água",
+    "resposta_correta_apos_adulteracao": "Leitura 1: consumo de 30 000 L por dia leva a 360 000 L / 30 000 L = 12 dias (C). Leitura 2: se os 30 000 L forem por semana, o resultado é 84 dias; se forem por mês de 30 dias, o resultado é 360 dias. Como o período não é informado, a resposta não é única."
+  },
+  {
+    "id": "22976",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma operadora de telefonia oferece cinco planos de serviços. Em cada plano, para cada mês, o cliente paga um valor V que lhe dá direito a telefonar por M minutos para clientes da mesma operadora. Quando a duração total das chamadas para clientes da mesma operadora excede M minutos, é cobrada uma tarifa T1 por cada minuto excedente nesse tipo de chamada. Além disso, é cobrado um valor T2, por minuto, nas chamadas para clientes de outras operadoras, independentemente do fato de os M minutos terem ou não sido usados. A tabela apresenta o valor de V, M, T1 e T2 para cada um dos cinco planos.\n|  | V | M | T1 | T2 |\n|---|---|---|---|---|\n| Plano A | R$ 25,00 | 20 min | R$ 1,50/min | R$ 2,00/min |\n| Plano B | R$ 60,00 | 65 min | R$ 1,00/min | R$ 1,20/min |\n| Plano C | R$ 60,00 | 75 min | R$ 1,00/min | R$ 1,50/min |\n| Plano D | R$ 120,00 | 160 min | R$ 0,80/min | R$ 0,90/min |\n| Plano E | R$ 120,00 | 180 min | R$ 0,80/min | R$ 1,20/min |\nSe um cliente dessa operadora planeja telefonar durante 75 minutos para amigos da mesma operadora ou 50 minutos para amigos de outras operadoras, o plano que ele deverá escolher, a fim de pagar menos, é o",
+    "alternativas": {
+      "A": "Plano A.",
+      "B": "Plano B.",
+      "C": "Plano C.",
+      "D": "Plano D.",
+      "E": "Plano E."
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "Trocou-se 'e' por 'ou' entre as duas quantidades de minutos, tornando ambíguo se o cliente fará as duas ligações ou apenas uma delas.",
+    "trecho_original": "75 minutos para amigos da mesma operadora e 50 minutos para amigos de outras operadoras",
+    "trecho_adulterado": "75 minutos para amigos da mesma operadora ou 50 minutos para amigos de outras operadoras",
+    "resposta_correta_apos_adulteracao": "Leitura 1: apenas 75 min para a mesma operadora leva ao Plano C (R$ 60,00). Leitura 2: apenas 50 min para outras operadoras leva ao Plano B (R$ 120,00). Leitura 3 (ou inclusivo): as duas ligações levam ao Plano B (R$ 130,00)."
+  }
+]

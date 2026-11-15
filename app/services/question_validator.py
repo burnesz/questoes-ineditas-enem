@@ -45,7 +45,12 @@ def sanitize_latex_json_text(text: str) -> str:
     text = re.sub(r"(?<!\\)\\bar", r"\\\\bar", text)
     text = re.sub(r"(?<!\\)\\beta", r"\\\\beta", text)
 
-    text = re.sub(r'\\(?!["\\/bfnrt]|u[0-9a-fA-F]{4})', r"\\\\", text)
+    # Escapes válidos, inclusive a barra já escapada (duas barras), são consumidos em par; só a barra solta é duplicada
+    text = re.sub(
+        r'\\(\\|["/bfnrt]|u[0-9a-fA-F]{4})|\\',
+        lambda m: m.group(0) if m.group(1) else "\\\\",
+        text,
+    )
     text = re.sub(r"(?<![\\a-zA-Z])rac\{", r"\\frac{", text)
 
     return text

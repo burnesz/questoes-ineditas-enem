@@ -1,0 +1,53 @@
+[
+  {
+    "id": "54184",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "A expressão “Fórmula de Young” é utilizada para calcular a dose infantil de um medicamento, dada a dose do adulto: $\\text{dose de criança} = \\frac{\\text{idade da criança (em anos)}}{\\text{idade da criança (em anos)} + 12} \\cdot \\text{dose do adulto}$ Uma enfermeira deve administrar um medicamento X a uma criança inconsciente, cuja dosagem de adulto é de 60 mg. A enfermeira não consegue descobrir onde está registrada a idade da criança no prontuário, mas identifica que, algumas horas antes, foi administrada a ela uma dose de 14 mg de um medicamento Y, cuja dosagem de adulto é 42 mg. Não se sabe se a dose da medicação Y administrada à criança estava correta. Então, a enfermeira deverá ministrar uma dosagem do medicamento X, em miligramas, igual a",
+    "alternativas": {
+      "A": "15.",
+      "B": "20.",
+      "C": "30.",
+      "D": "36.",
+      "E": "40."
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "A informação que garantia a correção da dose anterior foi substituída por uma afirmação de incerteza. Assim, a dose do medicamento Y não permite determinar necessariamente a idade da criança nem a dose do medicamento X.",
+    "trecho_original": "Sabe-se que a dose da medicação Y administrada à criança estava correta.",
+    "trecho_adulterado": "Não se sabe se a dose da medicação Y administrada à criança estava correta.",
+    "resposta_correta_apos_adulteracao": "Se a dose de 14 mg do medicamento Y estava correta, então 14/42 = idade/(idade + 12), resultando em idade de 6 anos e dose de X igual a 60 × 6/(6 + 12) = 20 mg, alternativa B. Se a dose de Y estava incorreta, não é possível determinar a idade da criança com os dados disponíveis, de modo que a dose de X não pode ser calculada univocamente."
+  },
+  {
+    "id": "24145",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "O quadro apresenta a ordem de colocação dos seis primeiros países em um dia de disputa nas Olimpíadas. A ordenação é feita de acordo com as medalhas obtidas.\n| País | Ouro | Prata | Bronze | Total |\n|---|---|---|---|---|\n| 1º China | 9 | 5 | 3 | 17 |\n| 2º EUA | 5 | 7 | 4 | 16 |\n| 3º França | 3 | 1 | 3 | 7 |\n| 4º Argentina | 3 | 2 | 2 | 7 |\n| 5º Itália | 2 | 6 | 2 | 10 |\n| 6º Brasil | 2 | 5 | 3 | 10 |\nSe as medalhas obtidas por Brasil e Argentina fossem reunidas para formar um único país hipotético, qual a posição ocupada por esse país?",
+    "alternativas": {
+      "A": "1ª",
+      "B": "2ª",
+      "C": "3ª",
+      "D": "4ª",
+      "E": "5ª"
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "O critério de ordenação foi generalizado, sem especificar se a classificação considera prioritariamente as medalhas de ouro, prata e bronze ou a quantidade total de medalhas. Esses critérios podem produzir posições diferentes para o país hipotético.",
+    "trecho_original": "A ordenação é feita de acordo com as quantidades de medalhas de ouro, prata e bronze, respectivamente.",
+    "trecho_adulterado": "A ordenação é feita de acordo com as medalhas obtidas.",
+    "resposta_correta_apos_adulteracao": "Pela ordem de prioridade de ouro, prata e bronze, o país hipotético teria 5 medalhas de ouro, 7 de prata e 5 de bronze, ficando em 2º lugar, alternativa B. Se a classificação considerar o total de medalhas, o país hipotético terá 17 medalhas, empatando com a China, que também tem 17; nesse critério, poderá ocupar a 1ª posição em empate com a China, alternativa A. Portanto, o critério não especificado impede uma resposta única."
+  },
+  {
+    "id": "54142",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Um curso preparatório para concursos tem duas turmas, A e B. Do total de alunos, parte está na turma A. A direção do curso decidiu pagar um bônus salarial aos professores dessas turmas, de acordo com a probabilidade de um aluno do curso, escolhido ao acaso, ser aprovado no concurso. Foi estabelecida a tabela que indica como o bônus seria definido.\n| Probabilidade de aprovação (%) | Bônus |\n|---|---|\n| $0 < P < 10$ | I |\n| $10 < P < 20$ | II |\n| $20 < P < 35$ | III |\n| $35 < P < 50$ | IV |\n| $50 < P < 100$ | V |\nPara calcular a probabilidade desejada, foi aplicado um simulado anterior ao concurso. Nele, o percentual de aprovados da turma A foi de 25%, enquanto houve uma aprovação de 40% para os alunos da turma B. Dessa forma, os professores desse curso devem receber o bônus",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V"
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "O percentual de alunos pertencentes à turma A foi substituído por uma indicação vaga, sem informar a proporção de alunos em cada turma. Como as taxas de aprovação diferem entre A e B, a probabilidade total depende dessa proporção e pode corresponder a diferentes bônus.",
+    "trecho_original": "Do total de alunos, 54% estão na turma A.",
+    "trecho_adulterado": "Do total de alunos, parte está na turma A.",
+    "resposta_correta_apos_adulteracao": "A probabilidade total depende da proporção de alunos da turma A. Se 40% dos alunos estiverem na turma A e 60% na turma B, a probabilidade será 0,40 × 25% + 0,60 × 40% = 34%, correspondente ao bônus III, alternativa C. Se 20% estiverem na turma A e 80% na turma B, a probabilidade será 0,20 × 25% + 0,80 × 40% = 37%, correspondente ao bônus IV, alternativa D. Como a proporção não foi informada, não há resposta única."
+  }
+]

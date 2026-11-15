@@ -1,0 +1,70 @@
+[
+  {
+    "id": "39361",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "A associação de comerciantes varejistas de uma cidade, a fim de incrementar as vendas para o Natal, decidiu promover um fim de semana de descontos e promoções, no qual produtos e serviços estariam com valores reduzidos. Antes do período promocional, um celular teve seu preço reajustado, passando a custar R$ 315,00. Durante o fim de semana de descontos e promoções, o preço desse celular recebeu um desconto de 20%. O desconto dado no preço do celular, em porcentagem, com base no valor dele anteriormente ao aumento sofrido antes da promoção, foi de",
+    "alternativas": {
+      "A": "15,24%",
+      "B": "16,00%",
+      "C": "19,04%",
+      "D": "21,00%",
+      "E": "25,00%"
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "Foi suprimido o preço do celular antes do reajuste. Sem esse valor, não é possível calcular o desconto percentual tomando a quantia anterior ao aumento como base.",
+    "trecho_original": "um celular custava R$ 300,00 e",
+    "trecho_adulterado": "um celular",
+    "resposta_correta_apos_adulteracao": "Não há resposta determinada. O desconto de 20% sobre R$ 315,00 corresponde a R$ 63,00, mas não é possível calcular qual porcentagem esse valor representa em relação ao preço anterior ao reajuste, pois esse preço não foi informado."
+  },
+  {
+    "id": "117832",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Um automóvel apresenta um desempenho médio. Um engenheiro desenvolveu um novo motor a combustão que economiza, em relação ao consumo do motor anterior, 0,1 L de combustível a cada 20 km percorridos. O valor do desempenho médio do automóvel com o novo motor, em quilômetro por litro, expresso com uma casa decimal, é",
+    "alternativas": {
+      "A": "15,9.",
+      "B": "16,1.",
+      "C": "16,4.",
+      "D": "17,4.",
+      "E": "18,0."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Foi suprimido o valor numérico do desempenho médio inicial do automóvel. Sem essa informação, não é possível determinar o consumo do motor anterior nem calcular o desempenho do novo motor.",
+    "trecho_original": "Um automóvel apresenta um desempenho médio de 16 km/L.",
+    "trecho_adulterado": "Um automóvel apresenta um desempenho médio.",
+    "resposta_correta_apos_adulteracao": "Não há resposta determinada. A economia de 0,1 L a cada 20 km permite calcular o novo consumo somente quando o consumo do motor anterior é conhecido. Como o desempenho inicial não foi informado, diferentes valores iniciais poderiam levar a diferentes desempenhos para o novo motor."
+  },
+  {
+    "id": "75935",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Fabiana Murer garante mais uma medalha de ouro na Noruega. A atleta brasileira saltou 4,60 m na etapa da Diamond League e terminou em primeiro lugar na disputa. Ela ainda é detentora da melhor marca do ano. Ao final da prova, a classificação dos quatro melhores resultados foi: 1º lugar: Fabiana Murer (BRA) – 4,60 m 2º lugar: Aleksandra Kiryashiva (RUS) – 4,50 m 3º lugar: Anna Rogowska (POL) – 4,40 m 4º lugar: Monika Pyrek (POL) Disponível em: http://www.globoesporte.globo.com. Acesso em: 24 jun. 2011 (adaptado). A diferença entre as marcas da 1ª e da 4ª colocadas pode ser comparada com a altura de um animal adulto. Que animal é esse?",
+    "alternativas": {
+      "A": "Gato.",
+      "B": "Leão.",
+      "C": "Pulga.",
+      "D": "Elefante.",
+      "E": "Gafanhoto."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Foi suprimida a marca alcançada pela quarta colocada. Sem esse resultado, não é possível calcular a diferença entre as marcas solicitadas.",
+    "trecho_original": "4º lugar: Monika Pyrek (POL) – 4,30 m",
+    "trecho_adulterado": "4º lugar: Monika Pyrek (POL)",
+    "resposta_correta_apos_adulteracao": "Não há resposta determinada. A marca da primeira colocada é informada como 4,60 m, mas a marca da quarta colocada não foi apresentada. Os resultados das demais atletas não determinam matematicamente o resultado ausente, impossibilitando o cálculo da diferença e a identificação do animal correspondente."
+  },
+  {
+    "id": "40459",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma empresa de construção comprou um terreno de formato retangular por R$ 700 000,00. O terreno tem 240 m de largura. O engenheiro da empresa elaborou três projetos diferentes para serem avaliados pela direção da construtora, da seguinte maneira: Projeto 1: dividir o terreno em lotes iguais de 45 m \\times 10 m, sem ruas entre os lotes, e vender cada lote por R$ 23 000,00; Projeto 2: dividir o terreno em lotes iguais de 20 m \\times 30 m, deixando entre lotes ruas de 10 m de largura e 240 m de comprimento, e vender cada lote por R$ 35 000,00; Projeto 3: dividir o terreno em lotes iguais de 35 m \\times 20 m, deixando entre lotes ruas de 20 m de largura e 240 m de comprimento, e vender cada lote por R$ 45 000,00. A direção da empresa decidiu dividir o terreno e utilizar o projeto que permitirá o maior lucro, sendo que este será igual ao valor obtido pela venda dos lotes, menos o valor da compra do terreno. Nesse caso, o lucro da construtora, em real, será de",
+    "alternativas": {
+      "A": "380 000,00.",
+      "B": "404 000,00.",
+      "C": "1 104 000,00.",
+      "D": "1 120 000,00.",
+      "E": "1 460 000,00."
+    },
+    "gabarito": "B",
+    "ajuste_manual": "A versão do LLM omitia os 240 m, mas as ruas 'de 240 m de comprimento' dos projetos 2 e 3 recuperam essa medida; passou-se a omitir os 90 m, que não podem ser deduzidos.", "descricao_modificacao": "Foi suprimida a medida de um dos lados do terreno. Sem as duas dimensões do terreno, não é possível determinar a quantidade de lotes que cada projeto comporta nem comparar os lucros.",
+    "trecho_original": "O terreno tem 90 m de comprimento e 240 m de largura.",
+    "trecho_adulterado": "O terreno tem 90 m de comprimento.",
+    "resposta_correta_apos_adulteracao": "Não há resposta determinada. A medida de apenas um lado do terreno não permite calcular sua área nem estabelecer quantos lotes podem ser distribuídos em cada projeto. As dimensões das ruas e dos lotes, isoladamente, não determinam a dimensão ausente do terreno, portanto não é possível comparar os lucros e selecionar uma alternativa."
+  }
+]

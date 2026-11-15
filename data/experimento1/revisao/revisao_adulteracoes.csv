@@ -1,0 +1,141 @@
+﻿id,llm,lote,tipo_erro,impressao,decisao,checklist_marcados,observacao,data_revisao
+38234,deepseek,lote_01_GABARITO,GABARITO,18522382777c,aprovado,,,2026-10-27T20:23:46.543Z
+39762,deepseek,lote_01_GABARITO,GABARITO,b44f0db3d506,aprovado,,,2026-10-27T21:42:10.395Z
+117633,deepseek,lote_01_GABARITO,GABARITO,33a2c6ddb0c6,aprovado,,,2026-10-27T22:01:00.479Z
+14797,deepseek,lote_01_GABARITO,GABARITO,5bc3dfda3dfc,aprovado,,,2026-10-27T22:01:02.723Z
+32010,deepseek,lote_02_GABARITO,GABARITO,19dd61c40871,aprovado,,,2026-10-27T22:01:04.482Z
+15479,deepseek,lote_02_GABARITO,GABARITO,9818464be69a,aprovado,,,2026-10-27T22:01:05.733Z
+16795,deepseek,lote_02_GABARITO,GABARITO,fe1f468f183c,aprovado,,,2026-10-27T22:01:06.109Z
+27330,deepseek,lote_02_GABARITO,GABARITO,f6f1336500ce,aprovado,,,2026-10-27T22:01:06.477Z
+40302,deepseek,lote_03_GABARITO,GABARITO,382c1873a636,aprovado,,,2026-10-27T22:01:06.947Z
+15890,deepseek,lote_03_GABARITO,GABARITO,99f370aa9049,aprovado,,,2026-10-27T22:01:07.882Z
+141540,deepseek,lote_03_GABARITO,GABARITO,1771a77a2335,aprovado,,,2026-10-27T22:01:08.482Z
+41047,deepseek,lote_03_GABARITO,GABARITO,3b17e4c290be,aprovado,,,2026-10-27T22:01:08.952Z
+70709,deepseek,lote_04_CALCULO,CALCULO,70536b40afba,aprovado,"Com o dado novo, a alternativa do gabarito deixou de ser a correta | O novo valor é plausível no contexto",,2026-10-27T22:02:50.323Z
+62736,deepseek,lote_04_CALCULO,CALCULO,bdc2024f409a,aprovado,,,2026-10-27T22:08:10.444Z
+63862,deepseek,lote_04_CALCULO,CALCULO,21ad756c2d04,aprovado,,,2026-10-27T22:11:48.543Z
+7685,deepseek,lote_04_CALCULO,CALCULO,9c473799526d,aprovado,,,2026-10-27T22:11:50.611Z
+125917,deepseek,lote_05_CALCULO,CALCULO,3b3151ba9888,aprovado,,,2026-10-27T22:11:53.147Z
+15292,deepseek,lote_05_CALCULO,CALCULO,e67c5254e88a,aprovado,,,2026-10-27T22:11:56.919Z
+125935,deepseek,lote_05_CALCULO,CALCULO,302013646d55,aprovado,,,2026-10-27T22:12:20.083Z
+125993,deepseek,lote_05_CALCULO,CALCULO,755162960bb3,aprovado,,,2026-10-27T22:12:21.691Z
+141567,deepseek,lote_06_CALCULO,CALCULO,85abc0cc2be4,aprovado,,"Linha de II trocada de 190 | 170 | 120 (variação não constante, que contradizia 'a variação se manteve') para 190 | 160 | 130. Conferir e aprovar.",2026-11-11T20:42:29.289Z
+32092,deepseek,lote_06_CALCULO,CALCULO,00f9961bf723,aprovado,,,2026-10-27T22:51:52.855Z
+70445,deepseek,lote_06_CALCULO,CALCULO,2fae3c10ee0b,aprovado,,,2026-10-27T22:52:15.980Z
+76177,deepseek,reenvio_01_AMBIGUIDADE,AMBIGUIDADE,2eb5a925fe7d,aprovado,,"Reenvio: ""o número que expressa a taxa"" admite 135,25 (B) ou 1,3525 (D); duas leituras nas alternativas.",2026-11-11T14:00:32Z
+60257,deepseek,lote_07_AMBIGUIDADE,AMBIGUIDADE,65d69c497851,aprovado,,,2026-10-27T23:44:22.831Z
+29359,deepseek,reenvio_01_AMBIGUIDADE,AMBIGUIDADE,0e0563f7911f,aprovado,,"Reenvio: sem os 44,5% dos 10% mais ricos a diferença não pode ser calculada; dado essencial ausente e não dedutível.",2026-11-11T14:00:32Z
+28646,deepseek,reenvio_01_AMBIGUIDADE,AMBIGUIDADE,79e7ee99554d,aprovado,,"qReenvio ainda fraco: sem a restrição das arestas, cortes de qualquer tamanho até o limite continuam gerando 14 faces (C); só o caso degenerado (pernas iguais à aresta, octaedro) dá 8. Na prática a leitura é única.",2026-11-11T20:48:11.057Z
+72821,deepseek,lote_08_AMBIGUIDADE,AMBIGUIDADE,262abfb87e26,aprovado,,,2026-10-29T11:24:23.316Z
+60238,deepseek,reenvio_02_AMBIGUIDADE,AMBIGUIDADE,b33df8ddfb92,aprovado,,"Reenvio válido (conclusão do artesão omitida: 4 lados → A/B/E, 5 lados → C), mas 'ele concluiu.' parecia frase truncada; reescrito como 'chegou a uma conclusão sobre o número de lados de uma das faces de uma dessas peças'. Conferir e aprovar.",2026-11-11T20:42:52.281Z
+117845,deepseek,lote_08_AMBIGUIDADE,AMBIGUIDADE,e7c4e3d8ebf9,aprovado,,,2026-10-29T12:45:02.043Z
+22976,deepseek,reenvio_02_AMBIGUIDADE,AMBIGUIDADE,d7ce6563a537,aprovado,,"Reenvio: sem ""excedente"", T1 pode incidir só sobre os minutos excedentes (B, R$ 130) ou sobre todos os minutos para a mesma operadora (C, R$ 135, já que B passa a R$ 195).",2026-11-11T14:00:32Z
+117785,deepseek,reenvio_02_AMBIGUIDADE,AMBIGUIDADE,458eef548db0,aprovado,,Reenvio: sem o total investido (R$ 2 520 000) a diferença T/4 000 − T/7 500 fica indeterminada; dado essencial ausente.,2026-11-11T14:00:32Z
+29575,deepseek,lote_09_AMBIGUIDADE,AMBIGUIDADE,c83368153d14,aprovado,,,2026-10-29T13:01:28.590Z
+111738,deepseek,lote_09_AMBIGUIDADE,AMBIGUIDADE,fe722f9a96af,aprovado,,"A troca também foi aplicada ao 1º parágrafo, que ainda dizia 'mediana' e desfazia a ambiguidade. Conferir e aprovar.",2026-11-11T20:42:54.873Z
+32369,deepseek,lote_09_AMBIGUIDADE,AMBIGUIDADE,7fa0a7056e89,aprovado,,"Removido 'por categoria', que abria uma 3ª leitura (2%, sem alternativa) e deixava o texto confuso. Conferir e aprovar.",2026-11-11T20:42:55.660Z
+29938,deepseek,lote_10_CONTRADICAO,CONTRADICAO,2d489dad414f,aprovado,,,2026-11-01T14:40:29.305Z
+39880,deepseek,lote_10_CONTRADICAO,CONTRADICAO,29ce71b72126,aprovado,,"A versão do LLM contrapunha um desejo do consumidor ('menor desconto') a uma pergunta objetiva, sem contradição real (resposta seguia D). Conferir e aprovar.",2026-11-11T20:43:07.353Z
+96833,deepseek,lote_10_CONTRADICAO,CONTRADICAO,5d3f4361a26b,aprovado,,,2026-11-01T15:20:43.637Z
+30935,deepseek,lote_10_CONTRADICAO,CONTRADICAO,b34d5c50d176,aprovado,,,2026-11-01T15:25:16.881Z
+70201,deepseek,lote_11_CONTRADICAO,CONTRADICAO,c69aa394d75a,aprovado,,"Lado 1,20 m e diagonal 1,20 m são incompatíveis (d = l·√2). Atinge a resposta: pelo lado, 1,70 (B); pela diagonal declarada, 1,20 (A).",2026-11-05T02:42:15Z
+72052,deepseek,lote_11_CONTRADICAO,CONTRADICAO,25040dfbfa52,aprovado,,"""2 300 mm, ou seja, 23 m"" é falso (2,3 m). Atinge a resposta: com 23 m nenhuma alternativa traz ""23 e 1,6""; o gabarito B contradiz o próprio texto.",2026-11-05T02:42:15Z
+117717,deepseek,lote_11_CONTRADICAO,CONTRADICAO,11d243501e2a,aprovado,,"4 × 60 = 240 m ≠ ""totalizando 180 m"". Não altera a resposta (tipo III é o mais barato por metro nas duas leituras): testa a detecção de incoerência pura.",2026-11-05T02:42:15Z
+39806,deepseek,lote_11_CONTRADICAO,CONTRADICAO,72fa25093536,aprovado,,"""Cubo"" é incompatível com 10 × 20 × 10 cm. Pelas dimensões a resposta segue 600 (C).",2026-11-05T02:42:15Z
+16331,deepseek,lote_12_CONTRADICAO,CONTRADICAO,a7197fe5804d,aprovado,,"A versão do LLM também trocava o azul de 40% para 60%, um segundo defeito (de cálculo). Conferir e aprovar.",2026-11-11T20:43:07.785Z
+126030,deepseek,lote_12_CONTRADICAO,CONTRADICAO,51efd8618ef1,aprovado,,"30 °C × 20 °C no mesmo instante inicial. Com 20 °C o ajuste seria diminuir 2,8 °C (fora das alternativas), então o gabarito D não se sustenta. O ""embora"" deixa a contradição explícita, mas é um defeito único.",2026-11-05T02:42:15Z
+81329,deepseek,lote_12_CONTRADICAO,CONTRADICAO,3aa2bedb59dd,aprovado,,"Aprovado após restaurar as alternativas pela prova (ENEM PPL 2023, Q173): 3^t, 3^(2t), 2^(t/3), 3^(t/2), 3^(t/2−1). Triplica × quadruplica no mesmo intervalo; com ×4 seria Q0·2^t, fora das alternativas.",2026-11-06T02:12:22Z
+30327,deepseek,lote_12_CONTRADICAO,CONTRADICAO,20c9d3ca3651,aprovado,,"O quadro soma 200 vagas, não 210. Não altera a resposta (1 235, D), pois o total de vagas não entra no cálculo. O aviso do validador (""pergunta final alterada"") é falso positivo: o quadro fica na mesma ""frase"" da pergunta.",2026-11-05T02:42:15Z
+72028,gemini,lote_01_GABARITO,GABARITO,6fa0594e6a84,aprovado,,,2026-10-27T22:39:44.483Z
+111626,gemini,lote_01_GABARITO,GABARITO,bd11ac11a6c0,aprovado,,,2026-10-27T22:39:46.443Z
+117727,gemini,lote_01_GABARITO,GABARITO,8839f01de119,aprovado,,,2026-10-27T22:39:47.875Z
+8489,gemini,lote_01_GABARITO,GABARITO,12a49bf826f1,aprovado,,,2026-10-27T22:39:48.963Z
+125995,gemini,lote_02_GABARITO,GABARITO,90f6ca4c5c02,aprovado,,,2026-10-27T22:39:50.216Z
+39894,gemini,lote_02_GABARITO,GABARITO,7d549ed0729a,aprovado,,,2026-10-27T22:39:51.323Z
+71832,gemini,lote_02_GABARITO,GABARITO,fd8a8d08c7c4,aprovado,,,2026-10-27T22:39:52.507Z
+89124,gemini,lote_02_GABARITO,GABARITO,f953d90acd78,aprovado,,,2026-10-27T22:39:53.699Z
+61172,gemini,lote_03_GABARITO,GABARITO,375b8da75537,aprovado,,,2026-10-27T22:39:54.958Z
+72056,gemini,lote_03_GABARITO,GABARITO,36045e9dd3ae,aprovado,,,2026-10-27T22:39:59.107Z
+15460,gemini,lote_03_GABARITO,GABARITO,98bfc17d4e2a,aprovado,,,2026-10-27T22:40:00.433Z
+44243,gemini,lote_04_CALCULO,CALCULO,b4ac19f81176,aprovado,,"Base pentagonal (6 faces) admite seção hexagonal: um plano que separa o ápice e um vértice da base dos outros quatro corta 6 arestas. Então E (""… e pentágonos, apenas"") deixa de estar certa e nenhuma alternativa serve. Exige raciocínio geométrico, mas o defeito é objetivo.",2026-11-05T02:42:15Z
+70698,gemini,reenvio_01_CALCULO,CALCULO,63fa67b2639a,aprovado,,"Reenvio: a troca da ordem dos cortes (2º em AB em vez de BC) muda os descartes para inteiro, −1 canto, −1 canto e −2 cantos: apenas dois iguais (D), e o gabarito E cai. O item não tem números, por isso o validador acusa 'sem alteração numérica' (falso positivo neste caso).",2026-11-11T14:00:32Z
+60078,gemini,lote_04_CALCULO,CALCULO,225e6c136295,aprovado,,"12 × 0,08 × 20 = 19,2 m³ = 19 200 L, fora das alternativas; o gabarito E (16 000) fica errado.",2026-11-05T02:42:15Z
+71130,gemini,lote_04_CALCULO,CALCULO,0f68af98d4e7,aprovado,,"Restaurado 'deixá- la', alterado por acidente pelo LLM. Conferir e aprovar.",2026-11-11T20:43:08.616Z
+97008,gemini,lote_05_CALCULO,CALCULO,fb516f7764e5,aprovado,,"I: 4 × 24,00 = 96,00; II: 33,81/8 → 5 embalagens × 18,50 = 92,50; III: 93,00. A mais barata passa a ser a II (D).",2026-11-05T02:42:15Z
+117865,gemini,lote_05_CALCULO,CALCULO,f24ef2fe5a4f,aprovado,,"'O aumento no tempo de organização' virou 'o tempo de organização': com duas semanas nas duas edições não há aumento, e a frase criava um defeito extra. Conferir e aprovar.",2026-11-11T20:43:10.132Z
+8466,gemini,lote_05_CALCULO,CALCULO,f00ed6eef7d3,aprovado,,"Aprovado após reescrever os sistemas que a extração intercalou. Com 37,00 milhões nenhum sistema está certo e o gabarito A cai.",2026-11-06T02:12:22Z
+82608,gemini,lote_05_CALCULO,CALCULO,c52cce2b082d,aprovado,,"Com o troco de A = 3,40: arroz 4,20, feijão 4,20 e macarrão 3,90; 1 kg de arroz + 2 kg de macarrão = 12,00 (D).",2026-11-05T02:42:15Z
+86027,gemini,lote_06_CALCULO,CALCULO,6bf5041f0328,aprovado,,"Círculo de Apolônio (PA = 2·PB) tem diâmetro 4d/3: com d = 36, 48 m, fora das alternativas; o gabarito B (40) fica errado.",2026-11-05T02:42:15Z
+87525,gemini,lote_06_CALCULO,CALCULO,453b9034f4a1,aprovado,,"III passa a 28 + 20 − 5 = 43,00; II = 23 + 18 = 41,00 vira o menor (B).",2026-11-05T02:42:15Z
+71238,gemini,lote_06_CALCULO,CALCULO,8bc1cfd302ea,aprovado,,"Com o dia 7 = 16: mediana 16 (8º valor ordenado), média 253/15 ≈ 16,9 e moda 13,5. Nenhuma alternativa serve; o gabarito B fica errado.",2026-11-05T02:42:15Z
+32469,gemini,lote_06_CALCULO,CALCULO,801c562da536,aprovado,,"0,8·0,9 / (0,2·0,1) = 0,72/0,02 = 36, fora das alternativas; o gabarito D (24) fica errado.",2026-11-05T02:42:15Z
+70183,gemini,reenvio_02_AMBIGUIDADE,AMBIGUIDADE,6d7046f00220,aprovado,,"Reenvio: ""indicada pelo ponteiro"" com o ponteiro entre dois algarismos admite o anterior (2 614, A) ou o seguinte (3 725, D).",2026-11-11T14:00:32Z
+72128,gemini,reenvio_02_AMBIGUIDADE,AMBIGUIDADE,6b0756acf20e,aprovado,,"Reenvio: sem os 600 milhões de doentes o custo total não pode ser calculado; o ""1 bilhão de pessoas pobres"" não se refere à ancilostomose (e daria 166,7 milhões, fora das alternativas).",2026-11-11T14:00:32Z
+111524,gemini,reenvio_02_AMBIGUIDADE,AMBIGUIDADE,3bde01274ffd,aprovado,,"Reenvio: sem o tempo da Gama, d_Gama fica indeterminada; supor os mesmos 90 minutos leva a D. Dado essencial ausente.",2026-11-11T14:00:32Z
+82581,gemini,reenvio_02_AMBIGUIDADE,AMBIGUIDADE,90e439a9a27c,aprovado,,"Reenvio ainda fraco: ""a razão entre a duração de seus anos e a de anos terrestres seja de 2 para 1"" tem leitura literal única (ano de Z = 2 anos terrestres → 10, B). É gabarito errado, não ambiguidade.",2026-11-11T20:48:12.005Z
+60250,gemini,reenvio_03_AMBIGUIDADE,AMBIGUIDADE,29b351c9ef89,aprovado,,"Reenvio: sem ""na forma de um cubo"" só se sabe o volume da caixa (13 824 cm³); o número de esferas depende das dimensões. Dado essencial ausente.",2026-11-11T14:00:32Z
+49782,gemini,lote_08_AMBIGUIDADE,AMBIGUIDADE,09eacb6fae81,aprovado,,"Sem a distância da ciclovia falta um dado essencial (o próprio prompt admite esse caso em AMBIGUIDADE), e nada no texto o recupera: não dá para comparar os tempos e o gabarito C fica sem sustentação. Mesmo padrão da 72821, que você aprovou.",2026-11-05T02:42:15Z
+84374,gemini,reenvio_03_AMBIGUIDADE,AMBIGUIDADE,2f5ebf6c804b,aprovado,,"Reenvio: sem a frequência não é possível calcular Ms = 3,30 + log(A·f); a tabela só traz a unidade. Dado essencial ausente.",2026-11-11T14:00:32Z
+49022,gemini,reenvio_03_AMBIGUIDADE,AMBIGUIDADE,dded0f22e73a,aprovado,,"Reenvio: sem o valor da marca (1 600) não há como igualar f(t); ""marca pré-estabelecida"" soa natural. Dado essencial ausente.",2026-11-11T14:00:32Z
+60227,gemini,reenvio_03_AMBIGUIDADE,AMBIGUIDADE,4522c2fb24cb,aprovado,,"Reenvio: sem o ano pedido, o período 2010–2050 permite 2010 (≈ 490 milhões, A) ou 2030 (≈ 893 milhões, E).",2026-11-11T14:00:32Z
+38212,gemini,reenvio_04_AMBIGUIDADE,AMBIGUIDADE,1869147707fd,aprovado,,"Reenvio: ""maior produção de leite"" admite produção diária (Maravilha, C), total na lactação (Malhada, A) ou o índice em kg/mês (Mateira, D). Leituras nas alternativas.",2026-11-11T14:00:32Z
+12922,gemini,reenvio_04_AMBIGUIDADE,AMBIGUIDADE,7f5ccf5e0cf0,aprovado,,"Reenvio: ""pontos que a quarta avaliação deve fornecer para a média"" admite a contribuição ponderada (29,8, A) ou a nota da prova (74,5, C).",2026-11-11T14:00:32Z
+141582,gemini,reenvio_04_AMBIGUIDADE,AMBIGUIDADE,d7fed50f955d,aprovado,,"Reenvio: sem as 4 bolinhas pretas da urna B o acréscimo mínimo é 16n e fica indeterminado (64 se n = 4, 80 se n = 5).",2026-11-11T14:00:32Z
+10783,gemini,lote_10_CONTRADICAO,CONTRADICAO,b039bfb0a001,aprovado,,"Aprovado após restaurar os traços sobre X, MCCV e XLIII e remover o ""aW"". ""10 × 1 000, ou seja, 100 000"" é falso; pela regra a resposta continua A.",2026-11-06T02:12:22Z
+9593,gemini,lote_10_CONTRADICAO,CONTRADICAO,914df28ff4a2,aprovado,,"40 mil litros num tanque ""com capacidade total de 30 mil litros"" é impossível. Não altera a resposta (adicionar 10 000 L, C), pois a capacidade não entra no cálculo.",2026-11-05T02:42:15Z
+117877,gemini,lote_10_CONTRADICAO,CONTRADICAO,83dfe6fca988,aprovado,,"""Quando cheio, contém 360 mL"" × ""capacidade máxima de 200 mL"". Atinge a resposta: com 200 mL seriam 200/1 800 ≈ 0,111 mL por acionamento, fora das alternativas.",2026-11-05T02:42:15Z
+71864,gemini,lote_10_CONTRADICAO,CONTRADICAO,d475a01030e5,aprovado,,"""R$ 29,90 por 200 minutos"" × ""franquia total de 250 minutos"" no mesmo plano. Com 250 min nenhum gráfico das alternativas serve (todos começam a cobrar o excedente em 200 ou 300).",2026-11-05T02:42:15Z
+25028,gemini,reenvio_05_CONTRADICAO,CONTRADICAO,6d3d466e899f,aprovado,,"Reenvio: ""televisão mais o sofá … R$ 3 800,00"" × ""televisão mais o sofá sairiam por R$ 4 200,00"". Contradição explícita; sem o par com a estante a resposta não pode ser calculada.",2026-11-11T14:00:32Z
+117622,gemini,reenvio_05_CONTRADICAO,CONTRADICAO,1e7ea24e2edf,aprovado,,"Reenvio: ""propostas de quatro empresas"" × cinco empresas listadas (I a V). Contradição explícita; não altera a resposta (D).",2026-11-11T14:00:32Z
+72909,gemini,lote_11_CONTRADICAO,CONTRADICAO,e5f20bfd9f2a,aprovado,,"""Sol em torno dos 4 000 K"" × classe G2 (luminosidade 1 = Sol) a 5 770 K. Depende de identificar G2 como o Sol, inferência que o próprio item já exige. Atinge a resposta: 5 × 4 000 = 20 000 K não corresponde a nenhuma classe.",2026-11-05T02:42:15Z
+71504,gemini,lote_11_CONTRADICAO,CONTRADICAO,e489bd886870,aprovado,,"Gestantes: 900 curadas + 255 mortas = 1 155 > 1 020 contaminadas. Não altera a resposta (crianças, 65% de mortos, A). O aviso do validador (""pergunta final alterada"") é falso positivo por causa da tabela.",2026-11-05T02:42:15Z
+95676,gemini,lote_12_CONTRADICAO,CONTRADICAO,e83ce955a619,aprovado,,"""Tempo fixo de 8 horas"" × tempos de 6, 6, 9 e 10 h no quadro. Atinge a resposta: pela tabela, I = 960 (A); com 8 h para todos, V = 880 (E). O aviso do validador é falso positivo (tabela).",2026-11-05T02:42:15Z
+71837,gemini,lote_12_CONTRADICAO,CONTRADICAO,336726b620b7,aprovado,,"""Todos os jogadores obtiveram a mesma média"" × A com soma 83 (média 20,75) contra 80 dos demais. Verificável somando as linhas. Não altera a resposta (C continua o mais regular).",2026-11-05T02:42:15Z
+40864,gemini,reenvio_05_CONTRADICAO,CONTRADICAO,81fe9c33d82a,aprovado,,"Reenvio: ""Um casal, ambos com 30 anos"" × ""pelo menos um dos três"". Contradição explícita.",2026-11-11T14:00:32Z
+68369,gpt,lote_01_GABARITO,GABARITO,3701e3d5958f,aprovado,,,2026-10-27T22:40:01.161Z
+85357,gpt,lote_01_GABARITO,GABARITO,4598e10cbc91,aprovado,,,2026-10-27T22:40:01.363Z
+73124,gpt,lote_01_GABARITO,GABARITO,0d29bc0c4879,aprovado,,,2026-10-27T22:40:01.560Z
+111733,gpt,lote_01_GABARITO,GABARITO,bf95cb041dc6,aprovado,,,2026-10-27T22:40:01.739Z
+28904,gpt,lote_02_GABARITO,GABARITO,09f85dd61693,aprovado,,,2026-10-27T22:40:01.907Z
+70124,gpt,lote_02_GABARITO,GABARITO,e4eaa6ccb2a1,aprovado,,,2026-10-27T22:40:02.157Z
+117607,gpt,lote_02_GABARITO,GABARITO,9f01aeaf0c2a,aprovado,,,2026-10-27T22:40:02.369Z
+43030,gpt,lote_02_GABARITO,GABARITO,f2f046d39dee,aprovado,,,2026-10-27T22:40:03.147Z
+84219,gpt,lote_03_GABARITO,GABARITO,520851bcfdf7,aprovado,,,2026-10-27T22:40:03.372Z
+83220,gpt,lote_03_GABARITO,GABARITO,834baf5702fc,aprovado,,,2026-10-27T22:40:03.551Z
+85504,gpt,lote_03_GABARITO,GABARITO,aaef8604fb7d,aprovado,,,2026-10-27T22:40:03.870Z
+53559,gpt,lote_03_GABARITO,GABARITO,38e199b35ca8,aprovado,,"Original confere: (5+x)/(20+x) = 0,75 → x = 40 (D). Letra nova A (10) é distrator plausível (75% de 20 − 5).",2026-11-05T02:42:15Z
+29531,gpt,lote_04_CALCULO,CALCULO,48c3f9de56dc,aprovado,,"Trocar o algarismo pedido (2 → 0) é alterar um dado numérico do enunciado, como a regra permite. Zeros de 100 a 399: 30 nas unidades + 30 nas dezenas = 60 (E); o gabarito A (160, que vale para o algarismo 2) fica errado.",2026-11-05T02:42:15Z
+11456,gpt,lote_04_CALCULO,CALCULO,5a7ff05c5d3c,aprovado,,"Aprovado após corrigir o gabarito da base para C (ENEM 2012 PPL, Q147: 30 − 4,2 = 25,8 m³). Com ""1 hora"" sobram 27,6 m³ (E), então o gabarito C fica errado.",2026-11-06T02:12:22Z
+97059,gpt,lote_04_CALCULO,CALCULO,fe6ab653a1b8,aprovado,,"260 × 0,75 × 0,80 = 156 mg/dL → limite (C).",2026-11-05T02:42:15Z
+86499,gpt,lote_04_CALCULO,CALCULO,aa449a01c5a5,aprovado,,8 × 2 × 2³ = 128 configurações por cor; 8 cores dão 1 024 > 1 000 (A).,2026-11-05T02:42:15Z
+72041,gpt,lote_05_CALCULO,CALCULO,4ffd3d721582,aprovado,,"π·15²·35 / (π·1,5²·5/3) = 7 875/3,75 = 2 100 cones, fora das alternativas.",2026-11-05T02:42:15Z
+66689,gpt,lote_05_CALCULO,CALCULO,82723d671441,aprovado,,"100 × 180 − 50 × 240 = 6 000 m²; 6 000/0,02 = 300 000 mudas, fora das alternativas.",2026-11-05T02:42:15Z
+117759,gpt,lote_05_CALCULO,CALCULO,96bc933ad6b6,aprovado,,"3 · 8² · 20 + 400 = 4 240 cm³; 4 240/17² ≈ 14,7 → 15 cm (B).",2026-11-05T02:42:15Z
+30574,gpt,lote_05_CALCULO,CALCULO,356c31d1aa79,aprovado,,"Cada pintura leva 52 h. Três pinturas = 156 h = 19 dias + 4 h → 19,5 × 240 = 4 680 ≤ 5 000; quatro = 6 240. Máximo de 3 (C).",2026-11-05T02:42:15Z
+39631,gpt,lote_06_CALCULO,CALCULO,e2dca14b987b,aprovado,,(1/2)/(2/3) = 3/4 → d(Q) = 3/4 d(R) (C).,2026-11-05T02:42:15Z
+5977,gpt,lote_06_CALCULO,CALCULO,d04b07530170,aprovado,,"Regra e exemplo alterados de forma coerente (30% de 60 = 18; 60 − 18 = 42). A pontuação vira n − n²/200, máxima em n = 100: 50 (C). Mexe em três trechos, mas é uma única mudança de regra, sem contradição.",2026-11-05T02:42:15Z
+77429,gpt,lote_06_CALCULO,CALCULO,7082a419ac3c,aprovado,,"I passa a 300 × 0,0025 + 1,3 × 0,30 = 1,14 por hora, o menor custo (V = 1,23). Resposta A.",2026-11-05T02:42:15Z
+66986,gpt,lote_06_CALCULO,CALCULO,0fa87863f11c,aprovado,,"Vitória: (0,73 + 0,78 + 0,70)/3 ≈ 0,737, abaixo de Florianópolis (0,75). Resposta E.",2026-11-05T02:42:15Z
+39361,gpt,reenvio_01_AMBIGUIDADE,AMBIGUIDADE,929802fefa3b,aprovado,,Reenvio: sem o preço anterior ao reajuste (R$ 300) não há base para o percentual pedido; dado essencial ausente.,2026-11-11T14:00:32Z
+11343,gpt,lote_07_AMBIGUIDADE,AMBIGUIDADE,0705b86ca91e,aprovado,,"""Duas ou três pessoas"" admite dimensionar pela ocupação mínima (12 600, B) ou máxima (13 200, C). Leituras distintas, ambas nas alternativas, e o gabarito D (13 800, para 4 pessoas) não se sustenta em nenhuma.",2026-11-05T02:42:15Z
+117832,gpt,reenvio_01_AMBIGUIDADE,AMBIGUIDADE,f92ba3bd0d5a,aprovado,,Reenvio: sem o desempenho inicial (16 km/L) não dá para calcular o novo; dado essencial ausente.,2026-11-11T14:00:32Z
+75935,gpt,reenvio_01_AMBIGUIDADE,AMBIGUIDADE,b610a1d8d34e,aprovado,,"Reenvio: sem a marca da 4ª colocada a diferença fica indeterminada. Ressalva: o padrão 4,60 → 4,50 → 4,40 sugere 4,30, o que pode levar o avaliador a A.",2026-11-11T14:00:32Z
+40459,gpt,reenvio_01_AMBIGUIDADE,AMBIGUIDADE,db87c0ed4a19,aprovado,,"O reenvio omitia os 240 m, mas as ruas ""de 240 m de comprimento"" recuperam essa medida; passou-se a omitir os 90 m, que não podem ser deduzidos. Conferir e aprovar.",2026-11-11T20:43:10.633Z
+61248,gpt,reenvio_02_AMBIGUIDADE,AMBIGUIDADE,1db7bf6be32e,aprovado,,"Reenvio: com c ""característica de cada estrela"", L_E/L_F = 4·c_E/c_F fica indeterminada; com c comum seria D.",2026-11-11T14:00:32Z
+48921,gpt,reenvio_02_AMBIGUIDADE,AMBIGUIDADE,e4dca2662a4c,aprovado,,"Reenvio: ""em qualquer ordem"" deixa X e Y intercambiáveis: 50X/4 + 50Y/9 (A) ou 50X/9 + 50Y/4 (B).",2026-11-11T14:00:32Z
+86783,gpt,lote_08_AMBIGUIDADE,AMBIGUIDADE,424e60ad0d6f,aprovado,,"N = 10·(log 8 + 4) = 49 dB passa a caber em ""49 dB ou menos"" (medida I, A) e em ""(48 dB, 55 dB)"" (medida II, B). Duas classificações nas alternativas, com o gabarito numa delas.",2026-11-05T02:42:15Z
+54184,gpt,lote_09_AMBIGUIDADE,AMBIGUIDADE,4e2f00f8dc8f,aprovado,,"Aprovado após reescrever a fórmula de Young (idade/(idade + 12) · dose do adulto). ""Não se sabe se a dose … estava correta"" tira a premissa que permite achar a idade, e o gabarito B passa a depender de uma suposição que o texto nega.",2026-11-06T02:12:22Z
+24145,gpt,reenvio_02_AMBIGUIDADE,AMBIGUIDADE,fee3cb771094,aprovado,,"Reenvio é CONTRADICAO, não ambiguidade: EUA com 6 + 7 + 4 = 17 medalhas contra o total de 16 na mesma linha (parcelas × total).",2026-11-11T20:48:14.153Z
+54142,gpt,lote_09_AMBIGUIDADE,AMBIGUIDADE,bbadc29c41de,aprovado,,"Sem os 54%, P = 0,40 − 0,15·p depende da fração p da turma A: bônus III (C) se p > 1/3 e IV (D) se p < 1/3. Dado essencial ausente, com duas alternativas possíveis.",2026-11-05T02:42:15Z
+70038,gpt,reenvio_03_CONTRADICAO,CONTRADICAO,de909d22419b,aprovado,,"Reenvio: ""quanto mais pontos acumula, menor é seu nível"" × níveis que sobem com pontos adicionais. Contradição explícita; não altera a resposta (E).",2026-11-11T14:00:32Z
+28085,gpt,lote_10_CONTRADICAO,CONTRADICAO,ce0933fae4fc,aprovado,,"""30 arestas, 20 vértices e 13 faces"" num poliedro convexo viola Euler (20 − 30 + 13 = 3 ≠ 2). Atinge a resposta: o texto passa a afirmar 13 faces (fora das alternativas) e Euler dá 12 (B).",2026-11-05T02:42:15Z
+81332,gpt,lote_10_CONTRADICAO,CONTRADICAO,1b008c0e9ea9,aprovado,,"""11 cm de raio e 20 cm de diâmetro"" é impossível (d = 2r). Atinge a resposta: com d = 22 cm a caixa é a 5 (E); com d = 20 cm a caixa 2 passa a servir e tem a menor área (B).",2026-11-05T02:42:15Z
+25236,gpt,lote_10_CONTRADICAO,CONTRADICAO,f91a5f6655ac,aprovado,,"Pelos comprimentos a escala é 150 (3 600/24) e pelas larguras 180 (900/5): o desenho feito ""para isso"" não pode representar o terreno numa escala única, que é o que a pergunta pressupõe.",2026-11-05T02:42:15Z
+40363,gpt,lote_11_CONTRADICAO,CONTRADICAO,c6db39695783,aprovado,,"""3,6 m de altura e 7,8 m de altura"" atribui duas alturas à mesma pintura. Não altera a resposta (1 : 26, E). Pode ser lido como erro de digitação, mas é uma contradição objetiva.",2026-11-05T02:42:15Z
+58784,gpt,lote_11_CONTRADICAO,CONTRADICAO,6608f43fd33b,aprovado,,"Altura máxima de 0,2 m × paciente que já alcançou 0,8 m na rampa. Atinge a resposta: pela semelhança, a distância restante ficaria negativa.",2026-11-05T02:42:15Z
+13654,gpt,lote_11_CONTRADICAO,CONTRADICAO,41ca942aa9c8,aprovado,,"Com 12 meninas, ""13 pares distintos"" não pode formar uma função de A em B (exatamente 12 pares). Atinge a resposta: o cenário passa a lembrar a alternativa E (uma menina com dois meninos).",2026-11-05T02:42:15Z
+75890,gpt,lote_11_CONTRADICAO,CONTRADICAO,0b81ce5af705,aprovado,,"""30 convidados, totalizando 29 convidados"" no mesmo trecho. Atinge a resposta: com 29 convidados as quantidades de E (7,5 kg, 7,5 copos, 120 colheres) deixam de bater.",2026-11-05T02:42:15Z
+53461,gpt,reenvio_03_CONTRADICAO,CONTRADICAO,03932d1f6337,aprovado,,"Reenvio: ""modelo que avalia a quantidade de pessoas infectadas"" × ""p(t) a quantidade de pessoas não infectadas"". Atinge a resposta: o máximo de infectados passaria a ser o mínimo de p (t = 12, V).",2026-11-11T14:00:32Z
+84409,gpt,lote_12_CONTRADICAO,CONTRADICAO,3fa2b8f77090,aprovado,,"""Financiamento aprovado de R$ 399,00"" × valor presente das parcelas: 202/1,01 + 204,02/1,01² = 400,00. Atinge a resposta: o texto passa a afirmar 399 (fora das alternativas) contra 400 (B).",2026-11-05T02:42:15Z
+125956,gpt,lote_12_CONTRADICAO,CONTRADICAO,54f1078e1d31,aprovado,,"""Seis unidades de cada um dos cinco lotes"" × listas com cinco medidas por lote. Não altera a resposta (lote I, amplitude 0,5, A).",2026-11-05T02:42:15Z
+117731,gpt,lote_12_CONTRADICAO,CONTRADICAO,5c3d160f031c,aprovado,,"Com lançamentos independentes e p = 1/2, três dardos dão 1 − (1/2)³ = 7/8, não 9/10. Atinge a resposta: se 3 dardos já dessem 9/10, a meta estaria cumprida sem aumentar dardos (3 não é alternativa). O acréscimo ""em lançamentos independentes"" só torna a contradição rigorosa.",2026-11-05T02:42:15Z

@@ -1,0 +1,53 @@
+[
+  {
+    "id": "95676",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma pessoa precisa contratar um operário para fazer um serviço em sua casa. Para isso, ela postou um anúncio em uma rede social. Cinco pessoas responderam informando preços por hora trabalhada, gasto diário com transporte e tempo necessário fixo de 8 horas para conclusão do serviço, conforme valores apresentados no quadro.\n| Operário | Preço por hora (real) | Preço do transporte (real) | Tempo até conclusão (hora) |\n|---|---|---|---|\n| I | 120 | 0,00 | 8 |\n| II | 180 | 0,00 | 6 |\n| III | 170 | 20,00 | 6 |\n| IV | 110 | 10,00 | 9 |\n| V | 110 | 0,00 | 10 |\nSe a pessoa pretende gastar o mínimo possível com essa contratação, irá contratar o operário",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Inserção de um trecho no enunciado afirmando que o tempo de conclusão é fixo em 8 horas, o que contradiz os valores variados de tempo presentes na tabela.",
+    "trecho_original": "tempo necessário para conclusão do serviço",
+    "trecho_adulterado": "tempo necessário fixo de 8 horas para conclusão do serviço",
+    "resposta_correta_apos_adulteracao": "O enunciado afirma que o tempo necessário para a conclusão do serviço é um valor fixo de \"8 horas\", o que contradiz diretamente os dados da tabela, onde os operários II, III, IV e V apresentam tempos de conclusão distintos (6, 6, 9 e 10 horas, respectivamente), sendo impossível que ambos sejam verdadeiros simultaneamente."
+  },
+  {
+    "id": "71837",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "O quadro indica a quantidade de pontos marcados, em quatro partidas, por cinco jogadores de uma mesma equipe de basquete.\n| jogador | 1ª partida | 2ª partida | 3ª partida | 4ª partida |\n|---|---|---|---|---|\n| A | 31 | 22 | 18 | 12 |\n| B | 15 | 25 | 25 | 15 |\n| C | 20 | 23 | 19 | 18 |\n| D | 18 | 22 | 24 | 16 |\n| E | 17 | 19 | 20 | 24 |\nComo todos os jogadores obtiveram a mesma média de pontos por partida, para definir quem, entre os cinco atletas, foi o de melhor rendimento, o técnico da equipe resolveu escolher aquele de maior regularidade. Dessa forma, ele escolheu o jogador",
+    "alternativas": {
+      "A": "A.",
+      "B": "B.",
+      "C": "C.",
+      "D": "D.",
+      "E": "E."
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "Alteração da pontuação do jogador A na 4ª partida de 9 para 12, fazendo com que sua média deixe de ser igual à dos demais jogadores, contradizendo o texto.",
+    "trecho_original": "| A | 31 | 22 | 18 | 9 |",
+    "trecho_adulterado": "| A | 31 | 22 | 18 | 12 |",
+    "resposta_correta_apos_adulteracao": "O texto afirma que \"todos os jogadores obtiveram a mesma média de pontos por partida\" (20 pontos), o que contradiz os dados da tabela modificada para o jogador A, cuja soma passa a ser 83 pontos (média 20,75), enquanto os demais jogadores mantêm a soma de 80 pontos (média 20)."
+  },
+  {
+    "id": "40864",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Um casal, ambos com 35 anos de idade, pretende fazer um plano de previdência privada. A seguradora pesquisada, para definir o valor do recolhimento mensal, estima a probabilidade de que pelo menos um deles esteja vivo daqui a 50 anos, tomando por base dados da população, que indicam que 20% dos homens e 30% das mulheres de hoje alcançarão a idade de 80 anos. Qual é essa probabilidade?",
+    "alternativas": {
+      "A": "50%",
+      "B": "44%",
+      "C": "38%",
+      "D": "25%",
+      "E": "6%"
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "Alteração da idade inicial do casal de 30 para 35 anos, gerando uma contradição com a idade final de 80 anos informada para daqui a 50 anos.",
+    "trecho_original": "Um casal, ambos com 30 anos de idade",
+    "trecho_adulterado": "Um casal, ambos com 35 anos de idade",
+    "resposta_correta_apos_adulteracao": "O enunciado afirma no início que o casal possui \"35 anos de idade\" e que a estimativa é feita para \"daqui a 50 anos\" (o que totalizaria 85 anos de idade), o que contradiz a informação posterior de que eles alcançarão \"a idade de 80 anos\"."
+  }
+]

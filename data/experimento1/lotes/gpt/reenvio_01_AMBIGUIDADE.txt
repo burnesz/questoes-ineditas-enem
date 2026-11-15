@@ -1,0 +1,147 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: AMBIGUIDADE (comando ou dados com mais de uma leitura).
+- Altere o enunciado para que a pergunta admita duas ou mais interpretações razoáveis
+  que levem a respostas diferentes, ou para que falte uma informação essencial
+  (por exemplo: remover a unidade pedida, uma restrição, um período de tempo, ou
+  tornar ambígua a grandeza solicitada).
+- Mantenha as alternativas e o campo "gabarito" idênticos ao original.
+- Em "resposta_correta_apos_adulteracao", descreva as leituras possíveis e a resposta
+  a que cada uma leva.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+REENVIO: estas questões já foram adulteradas uma vez, e a revisão reprovou o defeito inserido. Faça uma nova adulteração do mesmo tipo, partindo da questão original abaixo (não da versão anterior), e evite o problema apontado em cada item. Pode escolher outro trecho para alterar.
+
+Critérios adicionais da revisão:
+- A informação retirada ou tornada vaga não pode continuar disponível em outro ponto do
+  enunciado, da tabela ou das alternativas.
+- Cada leitura razoável deve levar a uma alternativa diferente entre as existentes (uma
+  delas pode ser o gabarito). Leituras cujo resultado não aparece nas alternativas não
+  servem, porque as próprias alternativas desfazem a ambiguidade.
+- Outra opção válida: retirar um dado essencial que não possa ser deduzido de nenhuma
+  outra parte, de modo que a pergunta fique sem resposta determinada.
+- Não troque a pergunta por outra de leitura única (isso é gabarito errado, não
+  ambiguidade), não use construções que pareçam erro de digitação e não dependa de
+  conhecimento de outra disciplina.
+
+Tentativas anteriores reprovadas:
+[
+  {
+    "id": "39361",
+    "descricao_anterior": "Foi removida a referência explícita ao valor do celular que deveria servir de base para o cálculo percentual. Assim, o comando admite a interpretação de que se pede o percentual de desconto aplicado durante a promoção ou o percentual de redução em relação ao preço anterior ao aumento.",
+    "trecho_original_anterior": "O desconto dado no preço do celular, em porcentagem, com base no valor dele anteriormente ao aumento sofrido antes da promoção, foi de",
+    "trecho_adulterado_anterior": "O desconto dado no preço do celular, em porcentagem, foi de",
+    "motivo_da_reprovacao": "Sem a base de comparação, a leitura literal é o próprio desconto citado no texto (20%), que não é alternativa; por eliminação as alternativas levam de volta a 16% (B). Ambiguidade fraca."
+  },
+  {
+    "id": "117832",
+    "descricao_anterior": "Foi retirada a especificação de que o desempenho solicitado se refere ao automóvel com o novo motor. O comando passa a permitir tanto a referência ao desempenho inicialmente informado quanto ao desempenho após a substituição do motor.",
+    "trecho_original_anterior": "O valor do desempenho médio do automóvel com o novo motor",
+    "trecho_adulterado_anterior": "O valor do desempenho médio do automóvel",
+    "motivo_da_reprovacao": "Sem \"com o novo motor\", a leitura alternativa é o desempenho já informado (16,0 km/L), que não é alternativa; por eliminação as alternativas levam a 17,4 (D). Ambiguidade fraca."
+  },
+  {
+    "id": "75935",
+    "descricao_anterior": "Foi removida a identificação da primeira e da quarta colocadas como referências para o cálculo da diferença. O comando não especifica quais marcas devem ser comparadas, permitindo obter diferenças distintas.",
+    "trecho_original_anterior": "A diferença entre as marcas da 1ª e da 4ª colocadas",
+    "trecho_adulterado_anterior": "A diferença entre as marcas das colocadas",
+    "motivo_da_reprovacao": "\"A diferença entre as marcas das colocadas\" ficou vaga, mas qualquer par dá entre 0,10 e 0,30 m, e só o gato tem altura nessa faixa. As alternativas levam a A em qualquer leitura."
+  },
+  {
+    "id": "40459",
+    "descricao_anterior": "A orientação do lado de 45 m foi relacionada a um dos lados do terreno, sem especificar qual deles. As duas orientações possíveis permitem quantidades diferentes de lotes e podem levar à escolha de projetos distintos.",
+    "trecho_original_anterior": "Projeto 1: dividir o terreno em lotes iguais de 45 m \\times 10 m, sem ruas entre os lotes",
+    "trecho_adulterado_anterior": "Projeto 1: dividir o terreno em lotes iguais de 45 m \\times 10 m, com o lado de 45 m paralelo a um dos lados do terreno, sem ruas entre os lotes",
+    "motivo_da_reprovacao": "A frase acrescentada não restringe nada: qualquer lote alinhado ao terreno tem o lado de 45 m paralelo a um dos lados. Como a empresa busca o maior lucro, escolhe a orientação de 48 lotes (B), como no original."
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "39361",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "A associação de comerciantes varejistas de uma cidade, a fim de incrementar as vendas para o Natal, decidiu promover um fim de semana de descontos e promoções, no qual produtos e serviços estariam com valores reduzidos. Antes do período promocional, um celular custava R$ 300,00 e teve seu preço reajustado, passando a custar R$ 315,00. Durante o fim de semana de descontos e promoções, o preço desse celular recebeu um desconto de 20%. O desconto dado no preço do celular, em porcentagem, com base no valor dele anteriormente ao aumento sofrido antes da promoção, foi de",
+    "alternativas": {
+      "A": "15,24%",
+      "B": "16,00%",
+      "C": "19,04%",
+      "D": "21,00%",
+      "E": "25,00%"
+    },
+    "gabarito": "B"
+  },
+  {
+    "id": "117832",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Um automóvel apresenta um desempenho médio de 16 km/L. Um engenheiro desenvolveu um novo motor a combustão que economiza, em relação ao consumo do motor anterior, 0,1 L de combustível a cada 20 km percorridos. O valor do desempenho médio do automóvel com o novo motor, em quilômetro por litro, expresso com uma casa decimal, é",
+    "alternativas": {
+      "A": "15,9.",
+      "B": "16,1.",
+      "C": "16,4.",
+      "D": "17,4.",
+      "E": "18,0."
+    },
+    "gabarito": "D"
+  },
+  {
+    "id": "75935",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Fabiana Murer garante mais uma medalha de ouro na Noruega. A atleta brasileira saltou 4,60 m na etapa da Diamond League e terminou em primeiro lugar na disputa. Ela ainda é detentora da melhor marca do ano. Ao final da prova, a classificação dos quatro melhores resultados foi: 1º lugar: Fabiana Murer (BRA) – 4,60 m 2º lugar: Aleksandra Kiryashiva (RUS) – 4,50 m 3º lugar: Anna Rogowska (POL) – 4,40 m 4º lugar: Monika Pyrek (POL) – 4,30 m Disponível em: http://www.globoesporte.globo.com. Acesso em: 24 jun. 2011 (adaptado). A diferença entre as marcas da 1ª e da 4ª colocadas pode ser comparada com a altura de um animal adulto. Que animal é esse?",
+    "alternativas": {
+      "A": "Gato.",
+      "B": "Leão.",
+      "C": "Pulga.",
+      "D": "Elefante.",
+      "E": "Gafanhoto."
+    },
+    "gabarito": "A"
+  },
+  {
+    "id": "40459",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma empresa de construção comprou um terreno de formato retangular por R$ 700 000,00. O terreno tem 90 m de comprimento e 240 m de largura. O engenheiro da empresa elaborou três projetos diferentes para serem avaliados pela direção da construtora, da seguinte maneira: Projeto 1: dividir o terreno em lotes iguais de 45 m \\times 10 m, sem ruas entre os lotes, e vender cada lote por R$ 23 000,00; Projeto 2: dividir o terreno em lotes iguais de 20 m \\times 30 m, deixando entre lotes ruas de 10 m de largura e 240 m de comprimento, e vender cada lote por R$ 35 000,00; Projeto 3: dividir o terreno em lotes iguais de 35 m \\times 20 m, deixando entre lotes ruas de 20 m de largura e 240 m de comprimento, e vender cada lote por R$ 45 000,00. A direção da empresa decidiu dividir o terreno e utilizar o projeto que permitirá o maior lucro, sendo que este será igual ao valor obtido pela venda dos lotes, menos o valor da compra do terreno. Nesse caso, o lucro da construtora, em real, será de",
+    "alternativas": {
+      "A": "380 000,00.",
+      "B": "404 000,00.",
+      "C": "1 104 000,00.",
+      "D": "1 120 000,00.",
+      "E": "1 460 000,00."
+    },
+    "gabarito": "B"
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "id": "10783",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "O sistema de numeração romana, hoje em desuso, já foi o principal sistema de numeração da Europa. Nos dias atuais, a numeração romana é usada no nosso cotidiano essencialmente para designar os séculos, mas já foi necessário fazer contas e descrever números bastante grandes nesse sistema de numeração. Para isto, os romanos colocavam um traço sobre o número para representar que esse número deveria ser multiplicado por 1 000. Por exemplo, o número $\\overline{X}$ representa o número 10 \\times 1 000, ou seja, 100 000. De acordo com essas informações, os números $\\overline{MCCV}$ e $\\overline{XLIII}$ são, respectivamente, iguais a",
+    "alternativas": {
+      "A": "1 205 000 e 43 000.",
+      "B": "1 205 000 e 63 000.",
+      "C": "1 205 000 e 493 000.",
+      "D": "1 250 000 e 43 000.",
+      "E": "1 250 000 e 63 000."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Incompatibilidade numérica na explicação do exemplo, afirmando incorretamente que o produto de 10 por 1 000 resulta em 100 000 em vez de 10 000.",
+    "trecho_original": "10 000",
+    "trecho_adulterado": "100 000",
+    "resposta_correta_apos_adulteracao": "O texto afirma que o número X com traço representa 10 \\times 1 000 (o que resulta corretamente em 10 000), mas logo em seguida conclui de forma contraditória que o valor é igual a 100 000."
+  },
+  {
+    "id": "9593",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Alguns países têm regulamentos que obrigam a misturar 5%, 10% ou 20% de etanol com a gasolina regular. Esta mistura recebe o nome de gasool. E20, por exemplo, é o gasool que contém a mistura de 20% de etanol com 80% de gasolina. Em agosto de 2011, o governo decidiu reduzir a mistura de etanol na gasolina de 25% para 20%, isto é, nossos postos de gasolina, a partir daquele mês, não puderam mais vender o combustível do tipo E25. Disponível em: http://g1.globo.com (adaptado). Uma distribuidora possuía 40 mil litros de combustível do tipo E25, disponíveis em um tanque com capacidade total de 30 mil litros. Quantos litros de gasolina precisam ser adicionados de modo a obter uma mistura E20?",
+    "alternativas": {
+      "A": "32 000",
+      "B": "16 000",
+      "C": "10 000",
+      "D": "8 000",
+      "E": "2 000"
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "Inserção de contradição entre o volume de combustível possuído (40 mil litros) e a capacidade total informada para o tanque (30 mil litros).",
+    "trecho_original": "em um dos tanques de seu estoque antigo.",
+    "trecho_adulterado": "em um tanque com capacidade total de 30 mil litros.",
+    "resposta_correta_apos_adulteracao": "O texto afirma que a distribuidora possuía 40 mil litros de combustível, mas simultaneamente diz que o tanque possui capacidade total de 30 mil litros, tornando impossível o armazenamento do volume informado."
+  },
+  {
+    "id": "117877",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Um borrifador de atuação automática libera, a cada acionamento, uma mesma quantidade de inseticida. O recipiente desse produto, quando cheio, contém 360 mL de inseticida (capacidade máxima de 200 mL), que duram 60 dias se o borrifador permanecer ligado ininterruptamente e for acionado a cada 48 minutos. A quantidade de inseticida que é liberada a cada acionamento do borrifador, em mililitro, é",
+    "alternativas": {
+      "A": "0,125.",
+      "B": "0,200.",
+      "C": "4,800.",
+      "D": "6,000.",
+      "E": "12,000."
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "Contradição entre o volume de inseticida contido no recipiente cheio (360 mL) e a capacidade máxima declarada para o mesmo recipiente (200 mL).",
+    "trecho_original": "contém 360 mL de inseticida, que",
+    "trecho_adulterado": "contém 360 mL de inseticida (capacidade máxima de 200 mL), que",
+    "resposta_correta_apos_adulteracao": "O texto afirma que o recipiente cheio contém 360 mL de inseticida, mas simultaneamente declara que sua capacidade máxima é de 200 mL, gerando uma inconsistência física direta."
+  },
+  {
+    "id": "71864",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma empresa de telefonia fixa oferece dois planos aos seus clientes: no plano K, o cliente paga R$ 29,90 por 200 minutos mensais (franquia total de 250 minutos) e R$ 0,20 por minuto excedente; no plano Z, paga R$ 49,90 por 300 minutos mensais e R$ 0,10 por minuto excedente. Os gráficos das funções correspondentes aos planos K e Z foram representados em um plano cartesiano, em que no eixo das abscissas estão representados os minutos, de 0 a 500, em intervalos de 100, e no eixo das ordenadas estão representados os seguintes valores em reais: 29,90; 39,90; 49,90; 59,90; 69,90; 79,90 e 89,90. A descrição dos gráficos que representam os valores pagos, em reais, em cada um dos planos K e Z, em função dos minutos utilizados, é",
+    "alternativas": {
+      "A": "gráfico do plano K: para x entre 0 e 200, segmento de reta horizontal de altura inferior a R$ 29,90; para x entre 200 e 500, segmento de reta com inclinação positiva; gráfico do plano Z: para x entre 0 e 300, segmento de reta horizontal de altura igual a R$ 49,90; para x entre 300 e 500, segmento de reta com inclinação positiva, idêntica à inclinação do segmento de reta K(x), para x entre 300 e 500.",
+      "B": "gráfico do plano K: para x entre 0 e 200, segmento de reta horizontal de altura igual a R$ 29,90; para x entre 200 e 500, segmento de reta com inclinação positiva; gráfico do plano Z: para x entre 0 e 200, segmento de reta horizontal de altura igual a R$ 49,90; para x entre 200 e 500, segmento de reta com inclinação positiva e inferior à inclinação do segmento de reta K(x), para x entre 200 e 500.",
+      "C": "gráfico do plano K: para x entre 0 e 200, segmento de reta horizontal de altura igual a R$ 29,90; para x entre 200 e 500, segmento de reta com inclinação positiva; gráfico do plano Z: para x entre 0 e 300, segmento de reta horizontal de altura igual a R$ 49,90; para x entre 300 e 500, mesmo segmento de reta correspondente ao gráfico de K(x), para x entre 300 e 500.",
+      "D": "gráfico do plano K: para x entre 0 e 200, segmento de reta horizontal de altura igual a R$ 29,90; para x entre 200 e 500,  segmento de reta com inclinação positiva; gráfico do plano Z: para x entre 0 e 300, segmento de reta horizontal de altura igual a R$ 49,90; para x entre 300 e 500, segmento de reta com inclinação positiva e inferior à inclinação do segmento de reta K(x), para x entre 300 e 500.",
+      "E": "gráfico do plano K: para x entre 0 e 300, segmento de reta horizontal de altura igual a R$ 29,90; para x entre 300 e 500, segmento de reta com inclinação positiva; gráfico do plano Z: para x entre 0 e 300, segmento de reta horizontal de altura igual a R$ 49,90; para x entre 300 e 500, segmento de reta com inclinação positiva e inferior à inclinação do segmento de reta K(x), para x entre 300 e 500."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Inconsistência interna ao definir simultaneamente a franquia do plano K como 200 minutos e como 250 minutos.",
+    "trecho_original": "200 minutos mensais",
+    "trecho_adulterado": "200 minutos mensais (franquia total de 250 minutos)",
+    "resposta_correta_apos_adulteracao": "O texto afirma que o plano K inclui 200 minutos mensais, mas imediatamente contradiz essa informação ao estipular uma franquia total de 250 minutos para o mesmo plano."
+  }
+]

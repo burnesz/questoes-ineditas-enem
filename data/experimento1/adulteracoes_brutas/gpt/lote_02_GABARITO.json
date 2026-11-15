@@ -1,0 +1,70 @@
+[
+  {
+    "id": "28904",
+    "tipo_erro": "GABARITO",
+    "enunciado": "As exportações de soja do Brasil totalizaram 4,129 milhões de toneladas no mês de julho de 2012, e registraram um aumento em relação ao mês de julho de 2011, embora tenha havido uma baixa em relação ao mês de maio de 2012. Disponível em: www.noticiasagricolas.com.br. Acesso em: 2 ago. 2012. A quantidade, em quilogramas, de soja exportada pelo Brasil no mês de julho de 2012 foi de",
+    "alternativas": {
+      "A": "$4,129 \\times 10^{3}$",
+      "B": "$4,129 \\times 10^{6}$",
+      "C": "$4,129 \\times 10^{9}$",
+      "D": "$4,129 \\times 10^{12}$",
+      "E": "$4,129 \\times 10^{15}$"
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "O gabarito foi alterado de C para B, indicando uma alternativa incorreta que desconsidera a conversão de toneladas para quilogramas.",
+    "trecho_original": "C",
+    "trecho_adulterado": "B",
+    "resposta_correta_apos_adulteracao": "C"
+  },
+  {
+    "id": "70124",
+    "tipo_erro": "GABARITO",
+    "enunciado": "O Salto Triplo é uma modalidade do atletismo em que o atleta dá um salto em um só pé, uma passada e um salto, nessa ordem. Sendo que o salto com impulsão em um só pé será feito de modo que o atleta caia primeiro sobre o mesmo pé que deu a impulsão; na passada ele cairá com o outro pé, do qual o salto é realizado. Disponível em: www.cbat.org.br (adaptado). Um atleta da modalidade Salto Triplo, depois de estudar seus movimentos, percebeu que, do segundo para o primeiro salto, o alcance diminuía em 1,2 m, e, do terceiro para o segundo salto, o alcance diminuía 1,5 m. Querendo atingir a meta de 17,4 m nessa prova e considerando os seus estudos, a distância alcançada no primeiro salto teria de estar entre",
+    "alternativas": {
+      "A": "4,0 m e 5,0 m.",
+      "B": "5,0 m e 6,0 m.",
+      "C": "6,0 m e 7,0 m.",
+      "D": "7,0 m e 8,0 m.",
+      "E": "8,0 m e 9,0 m."
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "O gabarito foi alterado de D para C, indicando uma alternativa incorreta associada à interpretação equivocada das diferenças entre os alcances dos saltos.",
+    "trecho_original": "D",
+    "trecho_adulterado": "C",
+    "resposta_correta_apos_adulteracao": "D"
+  },
+  {
+    "id": "117607",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Para contratar três máquinas que farão o reparo de vias rurais de um município, a prefeitura elaborou um edital que, entre outras cláusulas, previa: \\bullet Cada empresa interessada só pode cadastrar uma única máquina para concorrer ao edital; \\bullet O total de recursos destinados para contratar o conjunto das três máquinas é de R$ 31 000,00; \\bullet O valor a ser pago a cada empresa será inversamente proporcional à idade de uso da máquina cadastrada pela empresa para o presente edital. As três empresas vencedoras do edital cadastraram máquinas com 2, 3 e 5 anos de idade de uso. Quanto receberá a empresa que cadastrou a máquina com maior idade de uso?",
+    "alternativas": {
+      "A": "R$ 3 100,00",
+      "B": "R$ 6 000,00",
+      "C": "R$ 6 200,00",
+      "D": "R$ 15 000,00",
+      "E": "R$ 15 500,00"
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "O gabarito foi alterado de B para E, indicando uma alternativa incorreta que corresponde à aplicação de proporcionalidade direta em vez de inversa.",
+    "trecho_original": "B",
+    "trecho_adulterado": "E",
+    "resposta_correta_apos_adulteracao": "B"
+  },
+  {
+    "id": "43030",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Um clube tem um campo de futebol com área total de 8 000 $m^{2}$, correspondente ao gramado. Usualmente, a poda da grama desse campo é feita por duas máquinas do clube próprias para o serviço. Trabalhando no mesmo ritmo, as duas máquinas podam juntas 200 $m^{2}$ por hora. Por motivo de urgência na realização de uma partida de futebol, o administrador do campo precisará solicitar ao clube vizinho máquinas iguais às suas para fazer o serviço de poda em um tempo máximo de 5 h. Utilizando as duas máquinas que o clube já possui, qual o número mínimo de máquinas que o administrador do campo deverá solicitar ao clube vizinho?",
+    "alternativas": {
+      "A": "4",
+      "B": "6",
+      "C": "8",
+      "D": "14",
+      "E": "16"
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "O gabarito foi alterado de D para E, indicando uma alternativa incorreta que representa a quantidade total de máquinas necessária, sem descontar as duas já disponíveis.",
+    "trecho_original": "D",
+    "trecho_adulterado": "E",
+    "resposta_correta_apos_adulteracao": "D"
+  }
+]

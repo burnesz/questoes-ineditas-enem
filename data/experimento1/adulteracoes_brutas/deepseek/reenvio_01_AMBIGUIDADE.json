@@ -1,0 +1,53 @@
+[
+  {
+    "id": "76177",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Um instituto de pesquisa constatou que, nos últimos dez anos, o crescimento populacional de uma cidade foi de 135,25%. Qual é a representação decimal do número que expressa a taxa desse crescimento populacional?",
+    "alternativas": {
+      "A": "13 525,0",
+      "B": "135,25",
+      "C": "13,525",
+      "D": "1,3525",
+      "E": "0,13525"
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "O comando foi alterado para pedir a representação decimal do número que expressa a taxa, sem especificar se esse número é 135,25 ou a taxa 135,25%, gerando duas leituras.",
+    "trecho_original": "Qual é a representação decimal da taxa percentual desse crescimento populacional?",
+    "trecho_adulterado": "Qual é a representação decimal do número que expressa a taxa desse crescimento populacional?",
+    "resposta_correta_apos_adulteracao": "Leitura 1: o número que expressa a taxa é 135,25; sua representação decimal é 135,25 (alternativa B). Leitura 2: a taxa é 135,25%, cuja representação decimal é 1,3525 (alternativa D, gabarito)."
+  },
+  {
+    "id": "29359",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Segundo dados apurados no Censo 2010, para uma população de 101,8 milhões de brasileiros com 10 anos ou mais de idade e que teve algum tipo de rendimento em 2010, a renda média mensal apurada foi de R$ 1 202,00. A soma dos rendimentos mensais dos 10% mais pobres correspondeu a apenas 1,1% do total de rendimentos dessa população considerada. Disponível em: www.estadao.com.br. Acesso em: 16 nov. 2011(adaptado). Qual foi a diferença, em reais, entre a renda média mensal de um brasileiro que estava na faixa dos 10% mais ricos e de um brasileiro que estava na faixa dos 10% mais pobres?",
+    "alternativas": {
+      "A": "240,40",
+      "B": "548,11",
+      "C": "1 723,67",
+      "D": "4 026,70",
+      "E": "5 216,68"
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "Foi removido o percentual correspondente à soma dos rendimentos dos 10% mais ricos, dado essencial para calcular a renda média desse grupo e a diferença pedida.",
+    "trecho_original": " enquanto que a soma dos rendimentos mensais dos 10% mais ricos correspondeu a 44,5% desse total.",
+    "trecho_adulterado": "",
+    "resposta_correta_apos_adulteracao": "Sem o dado de 44,5% referente aos 10% mais ricos, a diferença não fica determinada. Se o dado original fosse mantido, a resposta seria E (5 216,68), mas ele não pode ser deduzido do restante do enunciado."
+  },
+  {
+    "id": "28646",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Para o modelo de um troféu foi escolhido um poliedro P, obtido a partir de cortes nos vértices de um cubo. Com um corte plano em cada um dos cantos do cubo, retira-se o canto, que é um tetraedro. Cada face do poliedro P, então, é pintada usando uma cor distinta das demais faces. Com base nas informações, qual é a quantidade de cores que serão utilizadas na pintura das faces do troféu?",
+    "alternativas": {
+      "A": "6",
+      "B": "8",
+      "C": "14",
+      "D": "24",
+      "E": "30"
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "Foi removida a restrição de que as arestas dos tetraedros retirados são menores do que metade da aresta do cubo; sem esse dado, o número de faces do poliedro P não fica determinado.",
+    "trecho_original": "que é um tetraedro de arestas menores do que metade da aresta do cubo",
+    "trecho_adulterado": "que é um tetraedro",
+    "resposta_correta_apos_adulteracao": "Com cortes pequenos (arestas menores que metade da aresta do cubo), P tem 6 faces quadradas e 8 triangulares, totalizando 14 faces (alternativa C). Com cortes grandes o suficiente para eliminar as faces quadradas originais, restam as 8 faces triangulares (alternativa B). Como a restrição foi removida, o número de cores não fica determinado."
+  }
+]

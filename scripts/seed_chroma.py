@@ -14,7 +14,7 @@ logger = logging.getLogger("seed_chroma")
 
 
 def seed_chroma(
-    csv_path: str = "data/itens_prova_2009_2024_enriquecido.csv",
+    csv_path: str = "data/itens_prova_2009_2024_llm_texto.csv",
     batch_size: int = 50,
     mock_embeddings: bool = False,
     store: Optional[ChromaVectorStore] = None
@@ -37,7 +37,7 @@ def seed_chroma(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Indexação do acervo histórico do ENEM no ChromaDB local.")
-    parser.add_argument("--csv", default="data/itens_prova_2009_2024_enriquecido.csv", help="Caminho do CSV")
+    parser.add_argument("--csv", default="data/itens_prova_2009_2024_llm_texto.csv", help="Caminho do CSV")
     parser.add_argument("--batch-size", type=int, default=50, help="Tamanho do lote para embeddings")
     parser.add_argument("--mock-embeddings", action="store_true", help="Gera vetores mock sem carregar modelo neural (testes rápidos)")
     args = parser.parse_args()

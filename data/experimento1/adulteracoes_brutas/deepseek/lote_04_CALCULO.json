@@ -1,0 +1,70 @@
+[
+  {
+    "id": "70709",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Em 2009, o Estado de São Paulo perdeu 3 205,7 hectares de sua cobertura vegetal, área 30% menor que a desmatada em 2008, segundo balanço do projeto ambiental estratégico “Desmatamento Zero”, divulgado pela Secretaria do Meio Ambiente (SMA). SãoPaulo reduz área desmatada. Boletim Agência FAPESP. Disponível em: http://www.agencia.fapesp.br. Acesso em: 26 abr. 2010. Um hectare é uma unidade de medida de área equivalente a 100 ares. Um are, por sua vez, é equivalente a 10 $m^2$. Logo, a área 3 205,7 hectares corresponde a",
+    "alternativas": {
+      "A": "$3 205,7 \\times 10^{-1} m^2$",
+      "B": "$3 205,7 \\times 10 m^2$",
+      "C": "$3 205,7 \\times 10^{2} m^2$",
+      "D": "$3 205,7 \\times 10^{3} m^2$",
+      "E": "$3 205,7 \\times 10^{4} m^2$"
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "Alterou-se a equivalência de 1 are de 100 $m^2$ para 10 $m^2$, modificando o fator de conversão de hectares para metros quadrados.",
+    "trecho_original": "Um are, por sua vez, é equivalente a 100 $m^2$.",
+    "trecho_adulterado": "Um are, por sua vez, é equivalente a 10 $m^2$.",
+    "resposta_correta_apos_adulteracao": "$3 205,7 \\times 10^3 m^2$, que coincide com a alternativa D."
+  },
+  {
+    "id": "62736",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Torneios de tênis, em geral, são disputados em sistema de eliminatória simples. Nesse sistema, são disputadas partidas entre dois competidores, com a eliminação do perdedor e promoção do vencedor para a fase seguinte. Dessa forma, se na 1ª fase o torneio conta com 2n competidores, então na 2ª fase restarão n competidores, e assim sucessivamente até a partida final. Em um torneio de tênis, disputado nesse sistema, participam 64 tenistas. Para se definir o campeão desse torneio, o número de partidas necessárias é dado por",
+    "alternativas": {
+      "A": "$2 \\times 128$",
+      "B": "64 + 32 + 16 + 8 + 4 + 2",
+      "C": "128 + 64 + 32 + 16 + 8 + 4 + 2 + 1",
+      "D": "128 + 64 + 32 + 16 + 8 + 4 + 2",
+      "E": "64 + 32 + 16 + 8 + 4 + 2 + 1"
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "Alterou-se o número de tenistas participantes de 128 para 64, mantendo as alternativas originais.",
+    "trecho_original": "participam 128 tenistas",
+    "trecho_adulterado": "participam 64 tenistas",
+    "resposta_correta_apos_adulteracao": "63 partidas, que não coincide com nenhuma alternativa."
+  },
+  {
+    "id": "63862",
+    "tipo_erro": "CALCULO",
+    "enunciado": "As bactérias são microrganismos formados por uma única célula. Elas estão presentes em praticamente todos os meios: no ar, na água, no solo ou no interior de outros seres vivos. A forma de reprodução mais comum das bactérias é a assexuada por bipartição. Nesse processo, cada uma delas tem seu DNA duplicado e, posteriormente, se divide em duas células bacterianas. De modo geral, em condições favoráveis, esse processo de bipartição se conclui a cada 20 minutos. Disponível em: www.sobiologia.com.br. Acesso em: 16 nov. 2013 (adaptado). Considere que, no instante t= 0, há uma quantidade $N_{0}$ de bactérias em um meio favorável à sua reprodução, de modo que nele só se reproduzem por bipartição. A sequência formada pela quantidade de bactérias nesse meio nos instantes 0, 20, 40, 60, 80 e 120 minutos é",
+    "alternativas": {
+      "A": "$N_{0} , N_{0}^{2}, N_{0}^{3}, N_{0}^{4}, N_{0}^{5}, N_{0}^{6}$",
+      "B": "$N_{0} , N_{0}^{2}, N_{0}^{4}, N_{0}^{8}, N_{0}^{16}, N_{0}^{32}$",
+      "C": "$N_{0} , 2N_{0} , 3N_{0} , 4N_{0} , 5N_{0} , 6N_{0}$",
+      "D": "$N_{0} , 2N_{0} , 4N_{0} , 8N_{0} , 16N_{0} , 32N_{0}$",
+      "E": "$N_{0} , 3N_{0} , 7N_{0} , 15N_{0} , 31N_{0} , 63N_{0}$"
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Alterou-se o último instante da sequência de 100 para 120 minutos, modificando o termo final esperado.",
+    "trecho_original": "0, 20, 40, 60, 80 e 100 minutos",
+    "trecho_adulterado": "0, 20, 40, 60, 80 e 120 minutos",
+    "resposta_correta_apos_adulteracao": "A sequência correta passa a ser $N_{0}, 2N_{0}, 4N_{0}, 8N_{0}, 16N_{0}, 64N_{0}$, que não coincide com nenhuma alternativa."
+  },
+  {
+    "id": "7685",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Uma fábrica de produtos químicos utiliza, para armazenar a sua produção, recipientes na forma de cilindros circulares retos, com 1 metro de altura e raio externo da base igual a 20 cm. Para facilitar o transporte desse tipo de recipiente, cada um deles será colocado dentro de uma caixa, na forma de paralelepípedo retangular reto de base quadrada, e com a mesma altura do cilindro. A empresa deseja construir a menor caixa possível em que possa colocar cada cilindro. De acordo com o texto, a medida interna do lado da base da caixa, em centímetro, a ser construída será igual a",
+    "alternativas": {
+      "A": "25.",
+      "B": "35.",
+      "C": "39.",
+      "D": "50.",
+      "E": "157."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Alterou-se o raio externo da base do cilindro de 25 cm para 20 cm, alterando o diâmetro que determina o lado mínimo da caixa.",
+    "trecho_original": "raio externo da base igual a 25 cm",
+    "trecho_adulterado": "raio externo da base igual a 20 cm",
+    "resposta_correta_apos_adulteracao": "40 cm, que não coincide com nenhuma alternativa."
+  }
+]

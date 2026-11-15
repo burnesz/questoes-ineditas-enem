@@ -1,0 +1,70 @@
+[
+  {
+    "id": "44243",
+    "tipo_erro": "CALCULO",
+    "enunciado": "É comum os artistas plásticos se apropriarem de entes matemáticos para produzirem, por exemplo, formas e imagens por meio de manipulações. Um artista plástico, em uma de suas obras, pretende retratar os diversos polígonos obtidos pelas intersecções de um plano com uma pirâmide regular de base de 5 lados. Segundo a classificação dos polígonos, quais deles são possíveis de serem obtidos pelo artista plástico?",
+    "alternativas": {
+      "A": "Quadrados, apenas.",
+      "B": "Triângulos e quadrados, apenas.",
+      "C": "Triângulos, quadrados e trapézios, apenas.",
+      "D": "Triângulos, quadrados, trapézios e quadriláteros irregulares, apenas.",
+      "E": "Triângulos, quadrados, trapézios, quadriláteros irregulares e pentágonos, apenas."
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "Altera a descrição da base da pirâmide de quadrada para de 5 lados, introduzindo um dado numérico que torna a resposta E incorreta.",
+    "trecho_original": "base quadrada",
+    "trecho_adulterado": "base de 5 lados",
+    "resposta_correta_apos_adulteracao": "Para uma pirâmide de base pentagonal, é possível obter polígonos adicionais (como hexágonos), fazendo com que a alternativa E deixe de ser a resposta correta e nenhuma das alternativas originais cubra todos os casos corretos."
+  },
+  {
+    "id": "70698",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Uma indústria fabrica brindes promocionais em forma de pirâmide, que é obtida a partir de três cortes feitos em um sólido que tem a forma de um cubo, cujos vértices da face inferior são indicados pelas letras A, B, C e D e o ponto central da face superior é indicado pela letra O. A cada corte, é descartada a parte que não comporá a pirâmide. Os cortes são feitos da seguinte maneira: \\bullet o primeiro corte é feito pelo plano que passa pelo ponto O e pela aresta AD ; \\bullet o segundo corte é feito pelo plano que passa pelo ponto O e pela aresta BC , paralela à aresta AD ; \\bullet o terceiro corte é feito pelo plano que passa pelo ponto O e pela aresta AB ; \\bullet o quarto corte é feito pelo plano que passa pelo ponto O e pela aresta CD, paralela à aresta AB . Os formatos dos sólidos descartados são",
+    "alternativas": {
+      "A": "todos iguais.",
+      "B": "todos diferentes.",
+      "C": "três iguais e um diferente.",
+      "D": "apenas dois iguais.",
+      "E": "iguais dois a dois."
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "Altera o número de cortes de quatro para três no início do enunciado, gerando inconsistência com a listagem subsequente dos quatro cortes.",
+    "trecho_original": "quatro",
+    "trecho_adulterado": "três",
+    "resposta_correta_apos_adulteracao": "O enunciado torna-se contraditório e inconsistente (afirma haver 3 cortes mas lista 4), de modo que nenhuma alternativa representa corretamente a situação modificada."
+  },
+  {
+    "id": "60078",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Para economizar em suas contas mensais de água, uma família de 12 pessoas deseja construir um reservatório para armazenar a água captada das chuvas, que tenha capacidade suficiente para abastecer a família por 20 dias. Cada pessoa da família consome, diariamente, 0,08 $m^{3}$ de água. Para que os objetivos da família sejam atingidos, a capacidade mínima, em litros, do reservatório a ser construído deve ser",
+    "alternativas": {
+      "A": "16.",
+      "B": "800.",
+      "C": "1 600.",
+      "D": "8 000.",
+      "E": "16 000."
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "Altera o número de pessoas da família de 10 para 12, alterando o volume total de água necessário para 19 200 litros.",
+    "trecho_original": "10",
+    "trecho_adulterado": "12",
+    "resposta_correta_apos_adulteracao": "19 200 litros, que não coincide com nenhuma das alternativas."
+  },
+  {
+    "id": "71130",
+    "tipo_erro": "CALCULO",
+    "enunciado": "É possível usar água ou comida para atrair as aves e observá-las. Muitas pessoas costumam usar água com açúcar, por exemplo, para atrair beija-flores. Mas é importante saber que, na hora de fazer a mistura, você deve sempre usar uma parte de açúcar para cinco partes de água. Além disso, em dias quentes, precisa trocar a água de duas a três vezes, pois com o calor ela pode fermentar e, se for ingerida pela ave, pode deixá- la doente. O excesso de açúcar, ao cristalizar, também pode manter o bico da ave fechado, impedindo-a de se alimentar. Isso pode até matá-la. Pretende-se encher completamente um copo com a mistura para atrair beija-flores. O copo tem formato cilíndrico, e suas medidas são 12 cm de altura e 4 cm de diâmetro. A quantidade de água que deve ser utilizada na mistura é cerca de (utilize \\pi = 3)",
+    "alternativas": {
+      "A": "20 mL.",
+      "B": "24 mL.",
+      "C": "100 mL.",
+      "D": "120 mL.",
+      "E": "600 mL."
+    },
+    "gabarito": "C",
+    "ajuste_manual": "Restaurado 'deixá- la', alterado por acidente pelo LLM.", "descricao_modificacao": "Altera a altura do copo de 10 cm para 12 cm, fazendo com que a quantidade de água necessária passe a ser 120 mL.",
+    "trecho_original": "10",
+    "trecho_adulterado": "12",
+    "resposta_correta_apos_adulteracao": "120 mL, que coincide com a alternativa D."
+  }
+]

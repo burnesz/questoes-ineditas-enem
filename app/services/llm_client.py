@@ -41,6 +41,7 @@ class LLMClient:
         timeout_seconds: Optional[float] = None,
         max_retries: int = 3,
         mock_mode: bool = False,
+        think: Optional[bool] = None,
         **kwargs: Any
     ):
         self.endpoint_url = (endpoint_url or settings.LLM_ENDPOINT_URL).rstrip("/")
@@ -48,6 +49,8 @@ class LLMClient:
         self.timeout_seconds = timeout_seconds or settings.LLM_TIMEOUT_SECONDS
         self.max_retries = max_retries
         self.mock_mode = mock_mode
+        # Modelos com raciocínio (ex.: qwen3) aceitam ligar/desligar o "thinking"; None mantém o padrão do modelo
+        self.think = think
 
     @property
     def headers(self) -> Dict[str, str]:
@@ -68,15 +71,21 @@ class LLMClient:
         resolved_max_tokens = max_tokens if max_tokens is not None else settings.LLM_MAX_TOKENS
 
         url = f"{self.endpoint_url}/api/generate"
+        num_ctx = settings.LLM_NUM_CTX
+        if self.think:
+            resolved_max_tokens += settings.LLM_THINK_BUDGET_TOKENS
+            num_ctx = max(num_ctx, settings.LLM_THINK_NUM_CTX)
         options: Dict[str, Any] = {
             "num_predict": resolved_max_tokens,
             "temperature": temperature,
             "top_p": top_p,
             "repeat_penalty": repetition_penalty,
-            "num_ctx": settings.LLM_NUM_CTX
+            "num_ctx": num_ctx
         }
         if seed is not None:
             options["seed"] = int(seed)
+        if settings.LLM_NUM_THREAD:
+            options["num_thread"] = settings.LLM_NUM_THREAD
 
         payload: Dict[str, Any] = {
             "model": self.model_name,
@@ -87,6 +96,8 @@ class LLMClient:
         }
         if format:
             payload["format"] = format
+        if self.think is not None:
+            payload["think"] = self.think
 
         return url, payload
 

@@ -1,0 +1,70 @@
+[
+  {
+    "id": "53461",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Ao analisar os dados de uma epidemia em uma cidade, peritos obtiveram um modelo que avalia a quantidade de pessoas infectadas a cada mês, ao longo de um ano. O modelo é dado por p(t) = −t ^{2} + 10t + 24, sendo t um número natural, variando de 1 a 11, que representa os meses do ano, e p(t) a quantidade de pessoas infectadas no mês t do ano. Para tentar diminuir o número de infectados no próximo ano, a Secretaria Municipal de Saúde decidiu intensificar a propaganda oficial sobre os cuidados com a epidemia. Foram apresentadas cinco propostas (I, II, III, IV e V), com diferentes períodos de intensificação das propagandas: \\bullet I: 1 \\le t \\le 2; \\bullet II: 3 \\le t \\le 4; \\bullet III: 5 \\le t \\le 6; \\bullet IV: 7 \\le t \\le 9; \\bullet V: 10 \\le t \\le 12. A sugestão dos peritos é que seja escolhida a proposta cujo período de intensificação da propaganda englobe o mês em que, segundo o modelo, há a maior quantidade de infectados. A sugestão foi aceita. A proposta escolhida foi a",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V."
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "O domínio de t foi alterado para terminar no mês 11, embora a proposta V inclua o mês 12. Assim, essa proposta contém um mês fora do domínio declarado do modelo.",
+    "trecho_original": "variando de 1 a 12",
+    "trecho_adulterado": "variando de 1 a 11",
+    "resposta_correta_apos_adulteracao": "O trecho \"variando de 1 a 11\" contradiz o período da proposta V, definido como \"10 \\le t \\le 12\". O modelo declara que t varia apenas de 1 a 11, mas a proposta V inclui t = 12, que está fora desse domínio."
+  },
+  {
+    "id": "84409",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma pessoa se interessou em adquirir um produto anunciado em uma loja. Negociou com o gerente e conseguiu comprá-lo a uma taxa de juros compostos de 1% ao mês. O primeiro pagamento será um mês após a aquisição do produto, e no valor de R$ 202,00. O segundo pagamento será efetuado um mês após o primeiro, e terá o valor de R$ 204,02. Para concretizar a compra, o gerente emitirá uma nota fiscal com o valor do produto à vista negociado com o cliente, correspondendo ao financiamento aprovado de R$ 399,00. O valor à vista, em real, que deverá constar na nota fiscal é de",
+    "alternativas": {
+      "A": "398,02.",
+      "B": "400,00.",
+      "C": "401,94.",
+      "D": "404,00.",
+      "E": "406,02."
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "Foi informado que o financiamento aprovado corresponde a R$ 399,00. Entretanto, o valor presente dos dois pagamentos, calculado pela taxa de juros compostos de 1% ao mês, é R$ 400,00.",
+    "trecho_original": "correspondendo ao financiamento aprovado.",
+    "trecho_adulterado": "correspondendo ao financiamento aprovado de R$ 399,00.",
+    "resposta_correta_apos_adulteracao": "O trecho \"financiamento aprovado de R$ 399,00\" contradiz os valores dos pagamentos e a taxa informada. O valor presente do primeiro pagamento é R$ 202,00 / 1,01 = R$ 200,00, e o do segundo é R$ 204,02 / (1,01)^2 = R$ 200,00. A soma é R$ 400,00, não R$ 399,00."
+  },
+  {
+    "id": "125956",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "A amplitude é uma medida estatística que detecta a variabilidade dos dados de uma amostra. Ela pode ser utilizada como critério de qualidade da produção na indústria de peças, indicando, por exemplo, a necessidade do descarte de um lote defeituoso. Uma fábrica analisou seis unidades de cada um dos cinco lotes da produção de um tipo de peça que, por projeto, devem ter comprimento igual a 10 cm. As medidas, em centímetro, dessas unidades estão distribuídas a seguir: \\bullet lote I: 9,80; 10,30; 10,30; 10,30 e 10,30; \\bullet lote II: 10,55; 10,58; 10,58; 10,60 e 10,60; \\bullet lote III: 9,80; 9,80; 10,00; 10,00 e 10,20; \\bullet lote IV: 9,90; 9,90; 9,90; 10,20 e 10,20; \\bullet lote V: 9,30; 9,30; 9,50; 9,50 e 9,50. Foi determinado o descarte do lote que apresentasse a maior amplitude. De acordo com o critério adotado, a fábrica descartará o lote",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "A quantidade de unidades analisadas por lote foi alterada de cinco para seis. Contudo, a relação de medidas apresentada para cada lote contém apenas cinco valores.",
+    "trecho_original": "cinco unidades de cada um dos cinco lotes",
+    "trecho_adulterado": "seis unidades de cada um dos cinco lotes",
+    "resposta_correta_apos_adulteracao": "O trecho \"seis unidades de cada um dos cinco lotes\" contradiz as listas de medidas apresentadas. Por exemplo, o lote I contém apenas cinco valores: 9,80; 10,30; 10,30; 10,30 e 10,30. Portanto, o texto afirma que foram analisadas seis unidades por lote, mas apresenta somente cinco medidas para cada um."
+  },
+  {
+    "id": "117731",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "O organizador de uma competição de lançamento de dardos pretende tornar o campeonato mais competitivo. Pelas regras atuais da competição, numa rodada, o jogador lança 3 dardos, em lançamentos independentes, e pontua caso acerte pelo menos um deles no alvo, com probabilidade de pontuar igual a $\\frac{9}{10}$. O organizador considera que, em média, os jogadores têm, em cada lançamento, $\\frac{1}{2}$ de probabilidade de acertar um dardo no alvo. A fim de tornar o jogo mais atrativo, planeja modificar as regras de modo que a probabilidade de um jogador pontuar em uma rodada seja igual ou superior a $\\frac{9}{10}$. Para isso, decide aumentar a quantidade de dardos a serem lançados em cada rodada. Com base nos valores considerados pelo organizador da competição, a quantidade mínima de dardos que devem ser disponibilizados em uma rodada para tornar o jogo mais atrativo é",
+    "alternativas": {
+      "A": "2.",
+      "B": "4.",
+      "C": "6.",
+      "D": "9.",
+      "E": "10."
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "Foi acrescentada uma afirmação sobre a probabilidade de pontuar com três dardos. Essa probabilidade contradiz o valor calculado a partir dos lançamentos independentes, cada um com probabilidade de acerto igual a 1/2.",
+    "trecho_original": "o jogador lança 3 dardos e pontua caso acerte pelo menos um deles no alvo.",
+    "trecho_adulterado": "o jogador lança 3 dardos, em lançamentos independentes, e pontua caso acerte pelo menos um deles no alvo, com probabilidade de pontuar igual a $\\frac{9}{10}$.",
+    "resposta_correta_apos_adulteracao": "O trecho \"com probabilidade de pontuar igual a $\\frac{9}{10}$\" contradiz a informação de que cada lançamento independente tem probabilidade de acerto igual a $\\frac{1}{2}$. Com três dardos independentes, a probabilidade de acertar pelo menos um é $1 - (\\frac{1}{2})^3 = \\frac{7}{8}$, e não $\\frac{9}{10}$."
+  }
+]

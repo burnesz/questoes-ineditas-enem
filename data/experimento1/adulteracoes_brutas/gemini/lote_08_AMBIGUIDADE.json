@@ -1,0 +1,70 @@
+[
+  {
+    "id": "60250",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma empresa que fabrica esferas de aço, de 6 cm, utiliza caixas de madeira, na forma de um cubo, para transportá-las. Sabendo que a capacidade da caixa é de 13.824 $cm^{3}$, então o número máximo de esferas que podem ser transportadas em uma caixa é igual a",
+    "alternativas": {
+      "A": "4.",
+      "B": "8.",
+      "C": "16.",
+      "D": "24.",
+      "E": "32."
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "A remoção da especificação da grandeza (raio ou diâmetro) torna o enunciado ambíguo, pois o valor de 6 cm pode ser interpretado como raio ou diâmetro da esfera.",
+    "trecho_original": "de 6 cm de raio",
+    "trecho_adulterado": "de 6 cm",
+    "resposta_correta_apos_adulteracao": "Se interpretado como raio, o diâmetro é 12 cm e cabem 8 esferas (gabarito original B). Se interpretado como diâmetro, o raio é 3 cm e o número máximo de esferas calculado difere, gerando múltiplas interpretações válidas."
+  },
+  {
+    "id": "49782",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Para chegar à universidade, um estudante utiliza um metrô e, depois, tem duas opções: \\bullet seguir num ônibus, percorrendo 2,0 km; \\bullet alugar uma bicicleta, ao lado da estação do metrô, seguindo pela ciclovia. O quadro fornece as velocidades médias do ônibus e da bicicleta, em km/h, no trajeto metrô−universidade.\nVelocidade média\n| Dia da semana | Ônibus (km/h) | Bicicleta (km/h) |\n|---|---|---|\n| Segunda-feira | 9 | 15 |\n| Terça-feira | 20 | 22 |\n| Quarta-feira | 15 | 24 |\n| Quinta-feira | 12 | 15 |\n| Sexta-feira | 10 | 18 |\n| Sábado | 30 | 16 |\nA fim de poupar tempo no deslocamento para a universidade, em quais dias o aluno deve seguir pela ciclovia?",
+    "alternativas": {
+      "A": "Às segundas, quintas e sextas-feiras.",
+      "B": "Às terças e quintas-feiras e aos sábados.",
+      "C": "Às segundas, quartas e sextas-feiras.",
+      "D": "Às terças, quartas e sextas-feiras.",
+      "E": "Às terças e quartas-feiras e aos sábados."
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "A omissão da distância percorrida pela bicicleta cria ambiguidade, pois o estudante não dispõe de dados suficientes sobre o percurso da ciclovia.",
+    "trecho_original": "seguindo 3,0 km pela ciclovia.",
+    "trecho_adulterado": "seguindo pela ciclovia.",
+    "resposta_correta_apos_adulteracao": "Sem a distância da bicicleta, a comparação de tempos torna-se ambígua: se o aluno assumir que a distância é igual à do ônibus ou desconhecida, obtém interpretações e resultados distintos."
+  },
+  {
+    "id": "84374",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Charles Richter e Beno Gutenberg desenvolveram a escala Richter, que mede a magnitude de um terremoto. Essa escala pode variar de 0 a 10, com possibilidades de valores maiores. O quadro mostra a escala de magnitude local ($M_{s}$) de um terremoto que é utilizada para descrevê-lo.\n| Descrição | Magnitude local ($M_{s}$) (µm \\cdot Hz) |\n|---|---|\n| Pequeno | $0 \\le M_{s} \\le 3,9$ |\n| Ligeiro | $4,0 \\le M_{s} \\le 4,9$ |\n| Moderado | $5,0 \\le M_{s} \\le 5,9$ |\n| Grande | $6,0 \\le M_{s} \\le 9,9$ |\n| Extremo | $M_{s} \\ge 10,0$ |\nPara se calcular a magnitude local, usa-se a fórmula $M_{s}$ = 3,30 + \\log(A\\cdot f ), em que A representa a amplitude máxima da onda registrada por um sismógrafo em micrômetro (µm) e f representa a frequência da onda, em hertz (Hz). Ocorreu um terremoto com amplitude máxima de 2 000 µm e frequência de 0,2. Disponível em: http://cejarj.cecierj.edu.br. Acesso em: 1 fev. 2015 (adaptado). Utilize 0,3 como aproximação para \\log 2. De acordo com os dados fornecidos, o terremoto ocorrido pode ser descrito como",
+    "alternativas": {
+      "A": "Pequeno.",
+      "B": "Ligeiro.",
+      "C": "Moderado.",
+      "D": "Grande.",
+      "E": "Extremo."
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "A remoção da unidade de medida da frequência (Hz) torna o dado ambíguo, pois o valor 0,2 fica desprovido de dimensão física clara.",
+    "trecho_original": "frequência de 0,2 Hz.",
+    "trecho_adulterado": "frequência de 0,2.",
+    "resposta_correta_apos_adulteracao": "Sem a unidade Hz, a grandeza f pode ser interpretada de formas distintas, alterando o cálculo do logaritmo e a classificação final do terremoto."
+  },
+  {
+    "id": "49022",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Para evitar uma epidemia, a Secretaria de Saúde de uma cidade dedetizou todos os bairros, de modo a evitar a proliferação do mosquito da dengue. Sabe-se que o número f de infectados é dado pela função f(t) = -2t^2 + 120t (em que t é expresso em dia e t = 0 é o dia da primeira infecção) e que tal expressão é válida para os 60 primeiros dias da epidemia. A Secretaria de Saúde decidiu que uma segunda dedetização deveria ser feita no dia em que o número de infectados chegasse à marca de 1 600 pessoas, e uma segunda dedetização precisou acontecer. A segunda dedetização começou no",
+    "alternativas": {
+      "A": "19º dia.",
+      "B": "20º dia.",
+      "C": "29º dia.",
+      "D": "30º dia.",
+      "E": "60º dia."
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "A alteração na definição do marco temporal (t = 0) gera ambiguidade na contagem dos dias em relação ao calendário da epidemia.",
+    "trecho_original": "t = 0 é o dia anterior à primeira infecção",
+    "trecho_adulterado": "t = 0 é o dia da primeira infecção",
+    "resposta_correta_apos_adulteracao": "Dependendo de como o aluno interpreta o dia t = 0 frente aos dias corridos, o instante t = 20 pode ser associado a contagens distintas de dias, gerando múltiplas leituras."
+  }
+]

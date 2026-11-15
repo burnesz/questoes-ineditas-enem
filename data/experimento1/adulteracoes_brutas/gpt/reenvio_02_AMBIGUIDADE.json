@@ -1,0 +1,53 @@
+[
+  {
+    "id": "61248",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "A luminosidade L de uma estrela está relacionada com o raio R e com a temperatura T dessa estrela segundo a Lei de Stefan-Boltzmann: L = c \\cdot R ^{2} \\cdot T ^{4}, em que c é uma constante característica de cada estrela. Disponível em: http://ciencia.hsw.uol.com.br. Acesso em: 22 nov. 2013 (adaptado). Considere duas estrelas E e F, sendo que a estrela E tem metade do raio da estrela F e o dobro da temperatura de F. Indique por $L_{E}$ e $L_{F}$ suas respectivas luminosidades. A relação entre as luminosidades dessas duas estrelas é dada por",
+    "alternativas": {
+      "A": "$L_{E} =\\frac{L_{F}}{2}$",
+      "B": "$L_{E} =\\frac{L_{F}}{4}$",
+      "C": "$L_{E} = L_{F}$",
+      "D": "$L_{E} = 4L_{F}$",
+      "E": "$L_{E} = 8L_{F}$"
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "A constante c deixou de ser definida como igual para todas as estrelas e passou a ser associada individualmente a cada uma. Assim, não é possível determinar a relação entre as luminosidades sem saber se as constantes das duas estrelas são iguais ou conhecer a razão entre elas.",
+    "trecho_original": "c é uma constante igual para todas as estrelas",
+    "trecho_adulterado": "c é uma constante característica de cada estrela",
+    "resposta_correta_apos_adulteracao": "Se c for interpretada como uma constante comum às duas estrelas, a relação será L_E = 4L_F (D). Se for interpretada como uma constante própria de cada estrela, a relação será L_E = 4(c_E/c_F)L_F. Como o enunciado não informa a razão entre c_E e c_F, não há uma resposta determinada entre as alternativas."
+  },
+  {
+    "id": "48921",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma empresa deseja iniciar uma campanha publicitária divulgando uma promoção para seus possíveis consumidores. Para esse tipo de campanha, os meios mais viáveis são a distribuição de panfletos na rua e anúncios na rádio local. Considera-se que a população alcançada pela distribuição de panfletos seja igual à quantidade de panfletos distribuídos, enquanto que a alcançada por um anúncio na rádio seja igual à quantidade de ouvintes desse anúncio. O custo de cada anúncio na rádio é de R$ 120,00, e a estimativa é de que seja ouvido por 1 500 pessoas. Já a produção e a distribuição dos panfletos custam R$ 180,00 cada 1 000 unidades. Considerando que cada pessoa será alcançada por um único desses meios de divulgação, a empresa pretende investir em ambas as mídias. Considere X e Y os valores (em real) gastos em anúncios na rádio e com panfletos, em qualquer ordem. O número de pessoas alcançadas pela campanha será dado pela expressão",
+    "alternativas": {
+      "A": "$\\frac{50X}{4} + \\frac{50Y}{9}$",
+      "B": "$\\frac{50X}{9} + \\frac{50Y}{4}$",
+      "C": "$\\frac{4X}{50} + \\frac{4Y}{50}$",
+      "D": "$\\frac{50}{4X} + \\frac{50}{9Y}$",
+      "E": "$\\frac{50}{9X} + \\frac{50Y}{4Y}$"
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "A correspondência entre as variáveis X e Y e os gastos com cada mídia deixou de estar definida. Como as duas variáveis podem representar os gastos em qualquer ordem, duas expressões diferentes são possíveis.",
+    "trecho_original": "respectivamente.",
+    "trecho_adulterado": "em qualquer ordem.",
+    "resposta_correta_apos_adulteracao": "Se X representar o gasto com anúncios na rádio e Y o gasto com panfletos, a expressão será 50X/4 + 50Y/9 (A). Se X representar o gasto com panfletos e Y o gasto com anúncios na rádio, a expressão será 50X/9 + 50Y/4 (B)."
+  },
+  {
+    "id": "24145",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "O quadro apresenta a ordem de colocação dos seis primeiros países em um dia de disputa nas Olimpíadas. A ordenação é feita de acordo com as quantidades de medalhas de ouro, prata e bronze, respectivamente.\n| País | Ouro | Prata | Bronze | Total |\n|---|---|---|---|---|\n| 1º China | 9 | 5 | 3 | 17 |\n| 2º EUA | 6 | 7 | 4 | 16 |\n| 3º França | 3 | 1 | 3 | 7 |\n| 4º Argentina | 3 | 2 | 2 | 7 |\n| 5º Itália | 2 | 6 | 2 | 10 |\n| 6º Brasil | 2 | 5 | 3 | 10 |\nSe as medalhas obtidas por Brasil e Argentina fossem reunidas para formar um único país hipotético, qual a posição ocupada por esse país?",
+    "alternativas": {
+      "A": "1ª",
+      "B": "2ª",
+      "C": "3ª",
+      "D": "4ª",
+      "E": "5ª"
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "O número de medalhas de ouro dos EUA passou a ser incompatível com o total informado na mesma linha. É possível considerar válidos os números das medalhas por categoria ou considerar válido o total e inferir a quantidade de medalhas de ouro, levando a posições diferentes para o país hipotético.",
+    "trecho_original": "| 2º EUA | 5 | 7 | 4 | 16 |",
+    "trecho_adulterado": "| 2º EUA | 6 | 7 | 4 | 16 |",
+    "resposta_correta_apos_adulteracao": "Se forem considerados válidos os valores das medalhas por categoria, os EUA têm 6 medalhas de ouro e ficam à frente do país hipotético, que possui 5; assim, o hipotético ocupa a 3ª posição (C). Se for considerado válido o total de 16 medalhas dos EUA, descontando as 7 de prata e as 4 de bronze, o país possui 5 medalhas de ouro. Nesse caso, o hipotético, com 5 de ouro, 7 de prata e 5 de bronze, fica à frente dos EUA e ocupa a 2ª posição (B)."
+  }
+]

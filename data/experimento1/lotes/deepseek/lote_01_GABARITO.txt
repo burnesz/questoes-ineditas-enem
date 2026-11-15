@@ -1,0 +1,99 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: GABARITO (gabarito incorreto).
+- Altere SOMENTE o campo "gabarito" para a letra de uma alternativa incorreta.
+- Prefira o distrator mais plausível, que corresponda a um erro típico de raciocínio.
+- O "enunciado" e as "alternativas" devem ser devolvidos idênticos ao original.
+- Em "trecho_original" e "trecho_adulterado", informe apenas a letra (ex.: "C" e "A").
+- Em "resposta_correta_apos_adulteracao", informe a letra correta (a original).
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "38234",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Para comemorar o aniversário de uma cidade, a prefeitura organiza quatro dias consecutivos de atrações culturais. A experiência de anos anteriores mostra que, de um dia para o outro, o número de visitantes no evento é triplicado. É esperada a presença de 345 visitantes para o primeiro dia do evento. Uma representação possível do número esperado de participantes para o último dia é",
+    "alternativas": {
+      "A": "$3 \\times 345$",
+      "B": "$(3 + 3 + 3) \\times 345$",
+      "C": "$3^{3} \\times 345$",
+      "D": "$3 \\times 4 \\times 345$",
+      "E": "$3^{4} \\times 345$"
+    },
+    "gabarito": "C"
+  },
+  {
+    "id": "39762",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Para cadastrar-se em um site, uma pessoa precisa escolher uma senha composta por quatro caracteres, sendo dois algarismos e duas letras (maiúsculas ou minúsculas). As letras e os algarismos podem estar em qualquer posição. Essa pessoa sabe que o alfabeto é composto por vinte e seis letras e que uma letra maiúscula difere da minúscula em uma senha. Disponível em: www.infowester.com. Acesso em: 14 dez. 2012. O número total de senhas possíveis para o cadastramento nesse site é dado por",
+    "alternativas": {
+      "A": "$10^{2} . 26^{2}$",
+      "B": "$10^{2} . 52^{2}$",
+      "C": "$10^{2} . 52^{2} . \\frac{4!}{2!}$",
+      "D": "$10^{2} . 26^{2} . \\frac{4!}{2! . 2!}$",
+      "E": "$10^{2} . 52^{2} . \\frac{4!}{2! . 2!}$"
+    },
+    "gabarito": "E"
+  },
+  {
+    "id": "117633",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Um pescador tem um custo fixo diário de R$ 900,00 com combustível, iscas, manutenção de seu barco e outras pequenas despesas. Ele vende cada quilograma de peixe por R$ 5,00. Sua meta é obter um lucro mínimo de R$ 800,00 por dia. Sozinho, ele consegue, ao final de um dia de trabalho, pescar 180 kg de peixe, o que é suficiente apenas para cobrir o custo fixo diário. Portanto, precisa contratar ajudantes, pagando para cada um R$ 250,00 por dia de trabalho. Além desse valor, 4% da receita obtida pela venda de peixe é repartida igualmente entre os ajudantes. Considerando o tamanho de seu barco, ele pode contratar até 5 ajudantes. Ele sabe que com um ajudante a pesca diária é de 300 kg e que, a partir do segundo ajudante contratado, aumenta-se em 100 kg a quantidade de peixe pescada por ajudante em um dia de trabalho. A quantidade mínima de ajudantes que esse pescador precisa contratar para conseguir o lucro diário pretendido é",
+    "alternativas": {
+      "A": "1.",
+      "B": "2.",
+      "C": "3.",
+      "D": "4.",
+      "E": "5."
+    },
+    "gabarito": "D"
+  },
+  {
+    "id": "14797",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Peças metálicas de aeronaves abandonadas em aeroportos serão recicladas. Uma dessas peças é maciça e tem o formato cilíndrico, com a medida do raio da base igual a 4 cm e a da altura igual a 50 cm. Ela será derretida, e o volume de metal resultante será utilizado para a fabricação de esferas maciças com diâmetro de 1 cm, a serem usadas para confeccionar rolamentos. Para estimar a quantidade de esferas que poderão ser produzidas a partir de cada uma das peças cilíndricas, admite-se que não ocorre perda de material durante o processo de derretimento. Quantas dessas esferas poderão ser obtidas a partir de cada peça cilíndrica?",
+    "alternativas": {
+      "A": "800",
+      "B": "1 200",
+      "C": "2 400",
+      "D": "4 800",
+      "E": "6 400"
+    },
+    "gabarito": "D"
+  }
+]

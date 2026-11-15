@@ -1,0 +1,70 @@
+[
+  {
+    "id": "97008",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Um fazendeiro precisava de 1 L de certo produto fabricado por três indústrias distintas. \\bullet A indústria I comercializa o produto em embalagens de 250 mL por R$ 24,00 cada. \\bullet A indústria II comercializa o produto em embalagens de 8 fl oz (onça fluida) por R$ 18,50 cada. \\bullet A indústria III comercializa o produto em embalagens de 1 L por R$ 93,00 cada. O fazendeiro conseguiu adquirir a quantidade necessária do produto de que precisava, de uma única indústria, gastando o menor valor possível nessa compra. Considere que 1 L seja equivalente a 33,81 fl oz. Nessas condições, a quantidade de embalagens e a respectiva indústria onde a compra foi realizada foram",
+    "alternativas": {
+      "A": "quatro da indústria I.",
+      "B": "cinco da indústria I.",
+      "C": "quatro da indústria II.",
+      "D": "cinco da indústria II.",
+      "E": "uma da indústria III."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Modificou-se o preço de cada embalagem da indústria I de R$ 23,00 para R$ 24,00, fazendo com que o custo total da indústria I passe para R$ 96,00, tornando a indústria II a opção mais econômica.",
+    "trecho_original": "por R$ 23,00 cada.",
+    "trecho_adulterado": "por R$ 24,00 cada.",
+    "resposta_correta_apos_adulteracao": "Cinco da indústria II (coincide com a alternativa D)."
+  },
+  {
+    "id": "117865",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Na primeira edição de uma Feira do Livro, a organização contou com a participação de dez voluntários, de mesma habilidade e experiência, que montaram cinco estandes de livros em duas semanas, trabalhando todos os dias. Na segunda edição da Feira do Livro, a organização dispôs de duas semanas para montar os estandes. Considere que todos os novos voluntários escolhidos tenham a mesma experiência, habilidade e produtividade dos voluntários da primeira edição da feira e que trabalharão todos os dias nessas duas semanas. Considere duas situações para a segunda edição: \\bullet I: o número de voluntários permanecerá o mesmo; \\bullet II: o número de estandes a serem montados permanecerá o mesmo. Observe que o tempo de organização para montar os estandes, junto a uma das duas situações citadas, pode fazer o valor das outras variáveis (número de voluntários e de estandes) aumentar, diminuir ou permanecer igual. O número de estandes na situação I e o número de voluntários na situação II, na segunda edição da feira, comparados aos números da primeira edição, serão, respectivamente,",
+    "alternativas": {
+      "A": "maior e maior.",
+      "B": "maior e menor.",
+      "C": "igual e igual.",
+      "D": "igual e menor.",
+      "E": "menor e menor."
+    },
+    "gabarito": "B",
+    "ajuste_manual": "'O aumento no tempo de organização' virou 'o tempo de organização': com duas semanas nas duas edições não há aumento, e a frase criava um defeito extra.", "descricao_modificacao": "Altera o tempo de montagem da primeira edição de uma para duas semanas, igualando-o ao tempo da segunda edição e fazendo com que as quantidades comparadas permaneçam iguais.",
+    "trecho_original": "uma semana",
+    "trecho_adulterado": "duas semanas",
+    "resposta_correta_apos_adulteracao": "Igual e igual (coincide com a alternativa C)."
+  },
+  {
+    "id": "8466",
+    "tipo_erro": "CALCULO",
+    "enunciado": "O governo de um país criou o Fundo da Soja e do Milho, que tem como expectativa inicial arrecadar, por ano, R$ 37,00 milhões para investimento em pesquisas relacionadas aos principais produtos da agricultura. Com isso, a cada operação de venda, seriam destinados ao Fundo R$ 0,28 por tonelada de soja e R$ 0,22 por tonelada de milho comercializadas. Para este ano, espera-se que as quantidades de toneladas produzidas, de soja e de milho, juntas, seja 150,5 milhões. Foi pedido a cinco funcionários do Fundo, André, Bruno, Caio, Douglas e Eduardo, que apresentassem um sistema que modelasse os dados apresentados. Cada funcionário apresentou um sistema diferente, considerando x e y como as quantidades de toneladas comercializadas, respectivamente, de soja e de milho. O resultado foi o seguinte: André: x + y = 150 500 000 e 0,28x + 0,22y = 36 140 000; Bruno: 100 000 000x + 100 000 000y = 150,5 e 0,28x + 0,22y = 36 140 000; Caio: x + y = 150,5 e 0,28x + 0,22y = 36 140 000; Douglas: x + y = 150,5 e 0,28x + 0,22y = 36,14; Eduardo: x + y = 150 500 000 e 0,28x + 0,22y = 36,14. O funcionário que fez a modelagem correta foi",
+    "alternativas": {
+      "A": "André.",
+      "B": "Bruno.",
+      "C": "Caio.",
+      "D": "Douglas.",
+      "E": "Eduardo."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Altera a expectativa inicial de arrecadação anual de R$ 36,14 milhões para R$ 37,00 milhões, tornando incorreta a equação correspondente em todos os sistemas propostos.",
+    "trecho_original": "R$ 36,14 milhões",
+    "trecho_adulterado": "R$ 37,00 milhões",
+    "resposta_correta_apos_adulteracao": "Nenhuma das alternativas (o sistema correto passa a ter a segunda equação igual a 0,28x + 0,22y = 37.000.000, valor que não consta em nenhum dos sistemas apresentados)."
+  },
+  {
+    "id": "82608",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Três amigos, A, B e C, se encontraram em um supermercado. Por coincidência, estavam comprando os mesmos itens, conforme o quadro.\n| Amigos | Arroz (kg) | Feijão (kg) | Macarrão (kg) |\n|---|---|---|---|\n| A | 3 | 2 | 4 |\n| B | 2 | 3 | 3 |\n| C | 2 | 2 | 2 |\nOs amigos estavam muito entretidos na conversa e nem perceberam que pagaram suas compras, pegaram seus trocos e esqueceram seus comprovantes. Já longe do supermercado, “A” lembrou que precisava saber o quanto pagou por um quilo de arroz e dois quilos de macarrão, pois estava comprando para sua vizinha e esperava ser ressarcido. “B”, que adorava desafios matemáticos, disse que pagou suas compras com R$ 40,00 e obteve troco de R$ 7,30, e que conseguiria determinar o custo desses itens se os amigos dissessem como pagaram e quanto foram seus respectivos trocos. “A” disse que pagou com R$ 40,00 e obteve troco de R$ 3,40, e “C” pagou com R$ 30,00 e obteve troco de R$ 5,40. A vizinha de “A” deve a ele pela compra, em reais, o valor de",
+    "alternativas": {
+      "A": "8,10.",
+      "B": "10,00.",
+      "C": "11,40.",
+      "D": "12,00.",
+      "E": "13,20."
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "Altera o troco obtido por A de R$ 4,00 para R$ 3,40, modificando o custo total de suas compras e o valor devido pela vizinha.",
+    "trecho_original": "obteve troco de R$ 4,00",
+    "trecho_adulterado": "obteve troco de R$ 3,40",
+    "resposta_correta_apos_adulteracao": "12,00 reais (coincide com a alternativa D)."
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "id": "39361",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "A associação de comerciantes varejistas de uma cidade, a fim de incrementar as vendas para o Natal, decidiu promover um fim de semana de descontos e promoções, no qual produtos e serviços estariam com valores reduzidos. Antes do período promocional, um celular custava R$ 300,00 e teve seu preço reajustado, passando a custar R$ 315,00. Durante o fim de semana de descontos e promoções, o preço desse celular recebeu um desconto de 20%. O desconto dado no preço do celular, em porcentagem, foi de",
+    "alternativas": {
+      "A": "15,24%",
+      "B": "16,00%",
+      "C": "19,04%",
+      "D": "21,00%",
+      "E": "25,00%"
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "Foi removida a referência explícita ao valor do celular que deveria servir de base para o cálculo percentual. Assim, o comando admite a interpretação de que se pede o percentual de desconto aplicado durante a promoção ou o percentual de redução em relação ao preço anterior ao aumento.",
+    "trecho_original": "O desconto dado no preço do celular, em porcentagem, com base no valor dele anteriormente ao aumento sofrido antes da promoção, foi de",
+    "trecho_adulterado": "O desconto dado no preço do celular, em porcentagem, foi de",
+    "resposta_correta_apos_adulteracao": "Se a pergunta se refere ao desconto aplicado durante a promoção, a base é R$ 315,00 e o desconto corresponde a 20%. Se a pergunta se refere à redução do preço final em relação ao valor original de R$ 300,00, o preço promocional é R$ 252,00 e a redução corresponde a 16%, alternativa B. A ausência da base de comparação permite interpretações diferentes."
+  },
+  {
+    "id": "11343",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "A capacidade mínima, em BTU/h, de um aparelho de ar-condicionado, para ambientes sem exposição ao sol, pode ser determinada da seguinte forma: \\bullet 600 BTU/h por $m^{2}$, considerando-se até duas pessoas no ambiente; \\bullet para cada pessoa adicional nesse ambiente, acrescentar 600 BTU/h; \\bullet acrescentar mais 600 BTU/h para cada equipamento eletroeletrônico em funcionamento no ambiente. Será instalado um aparelho de ar-condicionado em uma sala, sem exposição ao sol, de dimensões 4 m x 5 m, em que permaneçam duas ou três pessoas e possua um aparelho de televisão em funcionamento. A capacidade mínima, em BTU/h, desse aparelho de ar- condicionado deve ser",
+    "alternativas": {
+      "A": "12 000.",
+      "B": "12 600.",
+      "C": "13 200.",
+      "D": "13 800.",
+      "E": "15 000."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "A quantidade exata de pessoas foi substituída por uma faixa de ocupação, sem especificar se o cálculo deve considerar a ocupação mínima ou a máxima. As duas possibilidades levam a capacidades diferentes.",
+    "trecho_original": "em que permaneçam quatro pessoas",
+    "trecho_adulterado": "em que permaneçam duas ou três pessoas",
+    "resposta_correta_apos_adulteracao": "Se forem consideradas duas pessoas no ambiente, a capacidade é 20 × 600 + 600 = 12 600 BTU/h, alternativa B. Se forem consideradas três pessoas, acrescenta-se 600 BTU/h pela terceira pessoa e 600 BTU/h pela televisão, totalizando 13 200 BTU/h, alternativa C. O enunciado não especifica qual ocupação deve orientar o cálculo."
+  },
+  {
+    "id": "117832",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Um automóvel apresenta um desempenho médio de 16 km/L. Um engenheiro desenvolveu um novo motor a combustão que economiza, em relação ao consumo do motor anterior, 0,1 L de combustível a cada 20 km percorridos. O valor do desempenho médio do automóvel, em quilômetro por litro, expresso com uma casa decimal, é",
+    "alternativas": {
+      "A": "15,9.",
+      "B": "16,1.",
+      "C": "16,4.",
+      "D": "17,4.",
+      "E": "18,0."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "Foi retirada a especificação de que o desempenho solicitado se refere ao automóvel com o novo motor. O comando passa a permitir tanto a referência ao desempenho inicialmente informado quanto ao desempenho após a substituição do motor.",
+    "trecho_original": "O valor do desempenho médio do automóvel com o novo motor",
+    "trecho_adulterado": "O valor do desempenho médio do automóvel",
+    "resposta_correta_apos_adulteracao": "Se a pergunta se refere ao desempenho inicialmente informado, o resultado é 16,0 km/L, pois esse é o valor apresentado para o automóvel antes da descrição do novo motor. Se se refere ao desempenho após a instalação do novo motor, o consumo passa de 1,25 L para 1,15 L a cada 20 km, resultando em aproximadamente 17,4 km/L, alternativa D. A configuração do motor a que o comando se refere não está explicitada."
+  },
+  {
+    "id": "75935",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Fabiana Murer garante mais uma medalha de ouro na Noruega. A atleta brasileira saltou 4,60 m na etapa da Diamond League e terminou em primeiro lugar na disputa. Ela ainda é detentora da melhor marca do ano. Ao final da prova, a classificação dos quatro melhores resultados foi: 1º lugar: Fabiana Murer (BRA) – 4,60 m 2º lugar: Aleksandra Kiryashiva (RUS) – 4,50 m 3º lugar: Anna Rogowska (POL) – 4,40 m 4º lugar: Monika Pyrek (POL) – 4,30 m Disponível em: http://www.globoesporte.globo.com. Acesso em: 24 jun. 2011 (adaptado). A diferença entre as marcas das colocadas pode ser comparada com a altura de um animal adulto. Que animal é esse?",
+    "alternativas": {
+      "A": "Gato.",
+      "B": "Leão.",
+      "C": "Pulga.",
+      "D": "Elefante.",
+      "E": "Gafanhoto."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Foi removida a identificação da primeira e da quarta colocadas como referências para o cálculo da diferença. O comando não especifica quais marcas devem ser comparadas, permitindo obter diferenças distintas.",
+    "trecho_original": "A diferença entre as marcas da 1ª e da 4ª colocadas",
+    "trecho_adulterado": "A diferença entre as marcas das colocadas",
+    "resposta_correta_apos_adulteracao": "Se forem comparadas as marcas da primeira e da quarta colocadas, a diferença é 4,60 − 4,30 = 0,30 m, associada à alternativa A, gato. Se forem comparadas as marcas da primeira e da segunda colocadas, a diferença é 4,60 − 4,50 = 0,10 m, que pode levar a uma comparação diferente, como a alternativa E, gafanhoto. Como o comando não identifica o par de marcas, não há uma diferença única a calcular."
+  }
+]

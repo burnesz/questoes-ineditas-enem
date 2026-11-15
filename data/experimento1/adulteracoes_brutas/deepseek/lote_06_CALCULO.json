@@ -1,0 +1,53 @@
+[
+  {
+    "id": "141567",
+    "tipo_erro": "CALCULO",
+    "enunciado": "O gerente de uma fábrica pretende comparar a evolução das vendas de dois produtos similares (I e II). Para isso, passou a verificar o número de unidades vendidas de cada um desses produtos em cada mês. Os resultados dessa verificação, para os meses de abril a junho, são apresentados na tabela.\n| Produto | Vendas em abril (unidade) | Vendas em maio (unidade) | Vendas em junho (unidade) |\n|---|---|---|---|\n| l | 80 | 90 | 100 |\n| ll | 190 | 160 | 130 |\nO gerente estava decidido a cessar a produção do produto II no mês seguinte àquele em que as vendas do produto I superassem as do produto II. Suponha que a variação na quantidade de unidades vendidas dos produtos I e II se manteve, mês a mês, como no período representado na tabela. Em qual mês o produto II parou de ser produzido?",
+    "alternativas": {
+      "A": "Junho.",
+      "B": "Julho.",
+      "C": "Agosto.",
+      "D": "Setembro.",
+      "E": "Outubro."
+    },
+    "gabarito": "D",
+    "ajuste_manual": "Linha de II trocada de 190 | 170 | 120 (variação não constante, que contradizia 'a variação se manteve') para 190 | 160 | 130.", "descricao_modificacao": "A linha do produto II foi alterada de 190, 170, 150 para 190, 160, 130, mantendo a variação constante (−30 por mês). Com isso, as vendas de I superam as de II em julho e a produção para em agosto (C), não em setembro.",
+    "trecho_original": "| ll | 190 | 170 | 150 |",
+    "trecho_adulterado": "| ll | 190 | 160 | 130 |",
+    "resposta_correta_apos_adulteracao": "Agosto (alternativa C): em julho, I = 110 e II = 100."
+  },
+  {
+    "id": "32092",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Descargas atmosféricas, objetos estranhos e quedas de árvores, entre outros motivos, podem gerar interrupções na rede elétrica. Em certo município, um levantamento realizado pela companhia de fornecimento de energia relacionou, durante 30 dias, o número de interrupções na rede elétrica com o número de dias em que elas ocorreram.\n| Número de interrupções | Número de dias |\n|---|---|\n| 0 | 5 |\n| 1 | 6 |\n| 2 | 6 |\n| 3 | 10 |\n| 5 | 3 |\n| Total | 30 |\nA moda e a média diária do número de interrupções são, respectivamente, iguais a",
+    "alternativas": {
+      "A": "3 e 2,0.",
+      "B": "3 e 2,4.",
+      "C": "3 e 6,0.",
+      "D": "10 e 2,0.",
+      "E": "10 e 2,4."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Alterou-se o valor 4 para 5 na primeira coluna da tabela (número de interrupções), mantendo 3 dias. A média passa a ser (0·5+1·6+2·6+3·10+5·3)/30 = 63/30 = 2,1, e a moda continua 3; assim, a alternativa A deixa de ser correta.",
+    "trecho_original": "| 4 | 3 |",
+    "trecho_adulterado": "| 5 | 3 |",
+    "resposta_correta_apos_adulteracao": "Moda 3 e média 2,1; não coincide com nenhuma alternativa."
+  },
+  {
+    "id": "70445",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Todo o país passa pela primeira fase de campanha de vacinação contra a gripe suína (H1N1). Segundo um médico infectologista do Instituto Emílio Ribas, de São Paulo, a imunização “deve mudar”, no país, a história da epidemia. Com a vacina, de acordo com ele, o Brasil tem a chance de barrar uma tendência do crescimento da doença, que já matou 17 mil no mundo. Os dados seguintes referem-se a um único posto de Campanha de vacinação contra a gripe suína \\bullet data de vacinação: 8 a 19 de março; público alvo: trabalhadores da saúde e indígenas; quantidade de pessoas vacinadas: 42; \\bullet data de vacinação: 22 de março a 2 de abril; público alvo: portadores de doenças crônicas; quantidade de pessoas vacinadas: 20; \\bullet data de vacinação: 5 a 23 de abril; público alvo: adultos saudáveis entre 20 e 29 anos; quantidade de pessoas vacinadas: 56; \\bullet data de vacinação: 24 de abril a 7 de maio; público alvo: população com mais de 60 anos; quantidade de pessoas vacinadas: 30; \\bullet data de vacinação: 10 a 21 de maio; público alvo: adultos saudáveis entre 30 e 39 anos; quantidade de pessoas vacinadas: 50. Escolhendo-se aleatoriamente uma pessoa atendida nesse posto de vacinação, a probabilidade de ela ser portadora de doença crônica é",
+    "alternativas": {
+      "A": "8%.",
+      "B": "9%.",
+      "C": "11%.",
+      "D": "12%.",
+      "E": "22%."
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "Alterou-se a quantidade de pessoas vacinadas do grupo de portadores de doenças crônicas de 22 para 20. O total passa a 198 e a probabilidade correta é 20/198 ≈ 10,1%, de modo que 11% (alternativa C) deixa de ser correta.",
+    "trecho_original": "quantidade de pessoas vacinadas: 22;",
+    "trecho_adulterado": "quantidade de pessoas vacinadas: 20;",
+    "resposta_correta_apos_adulteracao": "Aproximadamente 10,1% (20/198); não coincide com nenhuma alternativa."
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "id": "72028",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Uma pessoa aplicou certa quantia em ações. No primeiro mês, ela perdeu 30% do total do investimento e, no segundo mês, recuperou 20% do que havia perdido. Depois desses dois meses, resolveu tirar o montante de R$ 3 800,00 gerado pela aplicação. A quantia inicial que essa pessoa aplicou em ações corresponde ao valor de",
+    "alternativas": {
+      "A": "R$ 4 222,22.",
+      "B": "R$ 4 523,80.",
+      "C": "R$ 5 000,00.",
+      "D": "R$ 13 300,00.",
+      "E": "R$ 17 100,00."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "O gabarito foi alterado para a alternativa A, correspondendo a um distrator plausível derivado de um erro conceitual de cálculo percentual.",
+    "trecho_original": "C",
+    "trecho_adulterado": "A",
+    "resposta_correta_apos_adulteracao": "C"
+  },
+  {
+    "id": "111626",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Uma cidade enfrenta racionamento no abastecimento de água. Para minimizar os efeitos da falta de água para seus hóspedes, o gerente de um hotel pretende substituir a caixa-d’água existente por um reservatório. Sabe-se que o consumo médio diário do hotel é de 10 mil litros de água. Mantido o consumo médio diário, o gerente quer que o novo reservatório, uma vez cheio, seja capaz de suprir as necessidades do hotel por, pelo menos, 6 dias completos, mesmo que não haja abastecimento de água nesse período. O espaço de que o hotel dispõe para instalar o novo reservatório tem formato retangular com largura de 5 m e comprimento de 6 m. O gerente analisa cinco opções disponíveis para esse reservatório.\nReservatórios retangulares\n| Reservatório | Largura (m) | Comprimento (m) | Altura (m) |\n|---|---|---|---|\n| $R_{1}$ | 6 | 6 | 2 |\n| $R_{2}$ | 4 | 5 | 2,5 |\n| $R_{3}$ | 5 | 6 | 2 |\n\nReservatórios cilíndricos\n| Reservatório | Raio (m) | Altura (m) |\n|---|---|---|\n| $R_{4}$ | 6 | 6 |\n| $R_{5}$ | 4 | 5 |\nA opção de reservatório que atende à necessidade do hotel e que cabe no espaço disponível é",
+    "alternativas": {
+      "A": "$R_{1}$",
+      "B": "$R_{2}$",
+      "C": "$R_{3}$",
+      "D": "$R_{4}$",
+      "E": "$R_{5}$"
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "O gabarito foi alterado para a alternativa B, indicando incorretamente um reservatório com volume insuficiente para atender à demanda exigida.",
+    "trecho_original": "C",
+    "trecho_adulterado": "B",
+    "resposta_correta_apos_adulteracao": "C"
+  },
+  {
+    "id": "117727",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Um professor de matemática desenvolveu uma atividade educacional relacionada aos Jogos Olímpicos e confeccionou uma maquete que representa uma piscina nas dimensões olímpicas. Admitiu que a piscina olímpica deve ter capacidade mínima de 2 500 000 litros e construiu sua maquete, referente a esse valor mínimo, na forma de paralelepípedo reto retângulo com dimensões internas 2 cm, 25 cm e 50 cm, cujo volume é 2 500 $cm^{3}$. Considere que 1 L = $10^{3}$ $cm^{3}$. A maquete confeccionada pelo professor foi elaborada na escala",
+    "alternativas": {
+      "A": "1 : 100.",
+      "B": "1 : 1 000.",
+      "C": "1 : 2 000.",
+      "D": "1 : 50 000.",
+      "E": "1 : 1 000 000."
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "O gabarito foi alterado para a alternativa B, refletindo um erro típico na determinação da escala linear a partir da razão de volumes.",
+    "trecho_original": "A",
+    "trecho_adulterado": "B",
+    "resposta_correta_apos_adulteracao": "A"
+  },
+  {
+    "id": "8489",
+    "tipo_erro": "GABARITO",
+    "enunciado": "O Índice de Desenvolvimento Humano (IDH) mede a qualidade de vida dos países para além dos indicadores econômicos. O IDH do Brasil tem crescido ano a ano e atingiu os seguintes patamares: 0,600 em 1990; 0,665 em 2000; 0,715 em 2010. Quanto mais perto de 1,00, maior é o desenvolvimento do país. O Globo. Caderno Economia, 3 nov. 2011 (adaptado). Observando o comportamento do IDH nos períodos citados, constata-se que, ao longo do período 1990-2010, o IDH brasileiro",
+    "alternativas": {
+      "A": "diminuiu com variações decenais crescentes.",
+      "B": "diminuiu em proporção direta com o tempo.",
+      "C": "aumentou com variações decenais decrescentes.",
+      "D": "aumentou em proporção direta com o tempo.",
+      "E": "aumentou em proporção inversa com o tempo."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "O gabarito foi alterado para a alternativa D, que simula o erro de considerar o crescimento linear uniforme (proporção direta).",
+    "trecho_original": "C",
+    "trecho_adulterado": "D",
+    "resposta_correta_apos_adulteracao": "C"
+  }
+]

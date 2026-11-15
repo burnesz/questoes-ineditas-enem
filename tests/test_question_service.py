@@ -1289,6 +1289,42 @@ def test_evaluate_item_enem_fast_path_numerico_e_early_exit_cego():
     assert mock_llm.generate.call_count == 1
 
 
+def test_valor_numerico_le_formatos_do_enem_e_recusa_texto_com_sentido():
+    """Moeda, milhar com espaço, percentual, unidade neutra e expressões LaTeX viram número; o resto vai ao juiz LLM."""
+    from app.services.question_service import _valor_numerico
+
+    assert _valor_numerico("R$ 3 610,00.") == (3610.0, False)
+    assert _valor_numerico("16,00%") == (16.0, True)
+    assert _valor_numerico("1,20 m") == (1.2, False)
+    assert _valor_numerico("$3 205,7 \\times 10^{4} m^2$") == (32057000.0, False)
+    assert _valor_numerico("$10^{2} . 52^{2} . \\frac{4!}{2! . 2!}$") == (1622400.0, False)
+    for texto in ("200 milhões.", "R$ 2,00 menor.", "Plano B.", "(5,0 ; 5,5).", "$Q(t) = Q_{0} \\cdot 3^{t}$", "1 : 26."):
+        assert _valor_numerico(texto) is None, texto
+
+
+def test_evaluate_item_enem_mapeia_alternativas_em_expressao_sem_llm():
+    """Alternativas que são expressões aritméticas são calculadas em Python e não passam pelo juiz LLM."""
+    mock_llm = MagicMock(spec=LLMClient)
+    service = QuestionService(llm_client=mock_llm, vector_store=MagicMock(spec=ChromaVectorStore))
+    alts = {
+        "A": "$10^{2} . 26^{2}$", "B": "$10^{2} . 52^{2}$", "C": "$10^{2} . 52^{2} . \\frac{4!}{2!}$",
+        "D": "$10^{2} . 26^{2} . \\frac{4!}{2! . 2!}$", "E": "$10^{2} . 52^{2} . \\frac{4!}{2! . 2!}$",
+    }
+    mock_llm.generate.side_effect = [_blind_json(1622400)] + [json.dumps({"defeito": False}) for _ in range(5)]
+    res = service.evaluate_item("Quantas senhas?", alts, gabarito="E")
+    assert res.aprovada is True
+    assert res.letras_mapeadas == ["E"]
+    assert mock_llm.generate.call_count == 6
+
+
+def test_blind_solving_prompt_nao_pede_premissas_ja_afirmadas():
+    """A 4.1 pede só suposições sobre dados ausentes, não o que o texto afirma nem convenções usuais."""
+    from app.core.prompts import build_blind_solving_prompt
+
+    prompt = build_blind_solving_prompt("Quanto?", perfil="enem")
+    assert "NÃO liste: o que o próprio enunciado ou a tabela afirmam" in prompt
+
+
 def test_evaluate_item_perfil_gerada_confronta_texto_do_gabarito():
     """Perfil 'gerada' em item pronto: confronta a resolução cega com o texto da alternativa do gabarito."""
     mock_llm = MagicMock(spec=LLMClient)
@@ -1306,3 +1342,203 @@ def test_evaluate_item_enem_mock_mode():
     service = QuestionService(llm_client=LLMClient(mock_mode=True), vector_store=MagicMock(spec=ChromaVectorStore))
     res = service.evaluate_item("Qual plano?", _ALTS_PLANOS, gabarito="B", habilidade_codigo="H16")
     assert res.aprovada is True
+
+
+def test_perfil_enem_nao_reprova_por_dados_ociosos():
+    """Dados ociosos reprovam itens gerados, mas não itens do ENEM (fonte, rótulos e opções de comparação são normais)."""
+    from app.schemas.question import QuestaoBlindSolvingOutput
+    from app.services.question_service import _check_blind_solving_flags
+
+    sol = QuestaoBlindSolvingOutput(
+        resolucao_passo_a_passo="R.", resultado_obtido=12.5,
+        dados_nao_utilizados=["Plano A", "Plano D", "Fonte: http://exemplo.br; 6 ago. 2012"],
+    )
+    assert _check_blind_solving_flags(sol)[0] == "4.1_dados_ociosos"
+    assert _check_blind_solving_flags(sol, perfil="enem") is None
+
+    mock_llm = MagicMock(spec=LLMClient)
+    service = QuestionService(llm_client=mock_llm, vector_store=MagicMock(spec=ChromaVectorStore))
+    alts = {"A": "10", "B": "12,5", "C": "15", "D": "20", "E": "25"}
+    mock_llm.generate.side_effect = [_blind_json(12.5, ociosos=["Plano A", "Plano D"])] + [
+        json.dumps({"defeito": False}) for _ in range(5)
+    ]
+    res = service.evaluate_item("Quanto?", alts, gabarito="B")
+    assert res.aprovada is True
+    assert res.dados_nao_utilizados == ["Plano A", "Plano D"]
+
+
+def test_mapeamento_parcial_e_razoes_decididos_em_python():
+    """Uma única alternativa numérica coincidente basta, mesmo com alternativas em texto; razões aceitam a escala."""
+    from app.services.question_service import _valores_alternativa
+
+    assert _valores_alternativa("1 : 100.") == [0.01, 100.0]
+    assert _valores_alternativa("16,00%") == [16.0, 0.16]
+    assert _valores_alternativa("Plano B.") is None
+
+    mock_llm = MagicMock(spec=LLMClient)
+    service = QuestionService(llm_client=mock_llm, vector_store=MagicMock(spec=ChromaVectorStore))
+    alts = {"A": "1 : 10.", "B": "1 : 100.", "C": "1 : 1 000.", "D": "Nenhuma escala.", "E": "1 : 10 000."}
+    mapeamento = service._run_alternative_mapping("Qual a escala?", 100.0, alts)
+    assert mapeamento.letras_equivalentes == ["B"]
+    mock_llm.generate.assert_not_called()
+
+    # Sem coincidência entre as numéricas e com alternativa em texto, o modelo escolhe a partir da resolução
+    mock_llm.generate.return_value = json.dumps({"letras_equivalentes": ["d"], "explicacao": "Nenhuma escala."})
+    mapeamento = service._run_alternative_mapping("Qual a escala?", 7.0, alts, resolucao="Concluí que não há escala.")
+    assert mapeamento.letras_equivalentes == ["D"]
+    prompt = mock_llm.generate.call_args.kwargs["prompt"]
+    assert "Concluí que não há escala." in prompt
+
+
+def test_prompts_enem_sem_ancora_de_letra_e_auditor_sem_gabarito():
+    """O exemplo do schema não sugere letra nem veredito, e no perfil 'enem' o auditor não vê o gabarito."""
+    from app.core.prompts import build_mapeamento_alternativa_prompt, build_auditoria_criterio_prompt
+
+    prompt_map = build_mapeamento_alternativa_prompt("E", "3", _ALTS_PLANOS, resolucao="O plano 3 é o mais barato.")
+    assert '["B"]' not in prompt_map
+    assert "O plano 3 é o mais barato." in prompt_map
+    assert "gabarito" not in prompt_map.lower()
+
+    enem = build_auditoria_criterio_prompt("deficit_ou_contradicao", "E", _ALTS_PLANOS, letra_gabarito="C", perfil="enem")
+    gerada = build_auditoria_criterio_prompt("deficit_ou_contradicao", "E", _ALTS_PLANOS, letra_gabarito="C")
+    assert "Alternativa correta segundo o sistema" not in enem
+    assert '"defeito": false' not in enem
+    assert "Alternativa correta segundo o sistema: C" in gerada
+
+
+def test_resolucao_cega_pot_substitui_conta_de_cabeca():
+    """Perfil 'enem': o número calculado pelo código substitui o da resposta em texto; falha ou resposta em texto mantém o texto."""
+    parsed = {"resultado_obtido": 270400, "codigo": "def resolver():\n    a = 100\n    b = 52 * 52\n    correta = a * b * 6"}
+    QuestionService._aplicar_resolucao_pot(parsed)
+    assert parsed["resultado_obtido"] == 1622400
+    assert parsed["resultado_texto"] == 270400
+
+    parsed = {"resultado_obtido": 5, "codigo": "def resolver():\n    import os\n    correta = 1"}
+    QuestionService._aplicar_resolucao_pot(parsed)
+    assert parsed["resultado_obtido"] == 5
+    assert parsed["erro_codigo"]
+
+    parsed = {"resultado_obtido": "Plano B", "codigo": "def resolver():\n    correta = 2"}
+    QuestionService._aplicar_resolucao_pot(parsed)
+    assert parsed["resultado_obtido"] == "Plano B"
+
+    mock_llm = MagicMock(spec=LLMClient)
+    service = QuestionService(llm_client=mock_llm, vector_store=MagicMock(spec=ChromaVectorStore))
+    alts = {"A": "10", "B": "12,5", "C": "15", "D": "20", "E": "25"}
+    blind = json.loads(_blind_json(12.0))
+    blind["codigo"] = "def resolver():\n    total = 50\n    partes = 4\n    correta = total / partes"
+    mock_llm.generate.side_effect = [json.dumps(blind)] + [json.dumps({"defeito": False}) for _ in range(5)]
+    res = service.evaluate_item("Quanto?", alts, gabarito="B")
+    assert res.aprovada is True
+    assert res.resultado_obtido == 12.5
+    assert res.resultado_texto == 12.0
+    assert "def resolver" in mock_llm.generate.call_args_list[0].kwargs["prompt"]
+
+
+def test_resolucao_cega_aceita_dados_nao_utilizados_que_nao_sao_texto():
+    """O modelo às vezes lista números ou objetos em 'dados_nao_utilizados'; eles viram texto em vez de quebrar o schema."""
+    mock_llm = MagicMock(spec=LLMClient)
+    service = QuestionService(llm_client=mock_llm, vector_store=MagicMock(spec=ChromaVectorStore))
+    blind = json.loads(_blind_json(12.5))
+    blind["dados_nao_utilizados"] = [14, {"coluna": "Plano A"}]
+    mock_llm.generate.return_value = json.dumps(blind)
+    sol = service._run_blind_solving("Quanto?", perfil="enem")
+    assert sol.dados_nao_utilizados == ["14", '{"coluna": "Plano A"}']
+
+
+def test_llm_client_da_folga_de_tokens_para_raciocinio():
+    """Com think=True o pensamento conta no num_predict: a chamada ganha folga extra e contexto maior."""
+    from app.core.config import settings
+
+    _, sem = LLMClient(model_name="m")._build_payload_and_url("p", max_tokens=400)
+    _, com = LLMClient(model_name="m", think=True)._build_payload_and_url("p", max_tokens=400)
+    assert sem["options"]["num_predict"] == 400 and "think" not in sem
+    assert com["think"] is True
+    assert com["options"]["num_predict"] == 400 + settings.LLM_THINK_BUDGET_TOKENS
+    assert com["options"]["num_ctx"] >= settings.LLM_THINK_NUM_CTX
+
+
+def test_evaluate_item_propaga_falha_de_conexao_em_vez_de_reprovar():
+    """Queda de conexão com o Ollama é falha de infraestrutura: sobe como exceção, não vira reprovação na 4.1."""
+    from app.services.llm_client import LLMConnectionError
+
+    mock_llm = MagicMock(spec=LLMClient)
+    service = QuestionService(llm_client=mock_llm, vector_store=MagicMock(spec=ChromaVectorStore))
+    mock_llm.generate.side_effect = LLMConnectionError("conexão recusada")
+    with pytest.raises(LLMConnectionError):
+        service.evaluate_item("Quanto?", {"A": "1", "B": "2", "C": "3", "D": "4", "E": "5"}, gabarito="B")
+
+
+def test_geracao_interrompe_ciclo_em_queda_de_conexao_sem_gastar_tentativas():
+    """Na geração, queda de conexão com o Ollama sobe como exceção na 1ª chamada, em vez de consumir as tentativas como reprovação."""
+    from app.services.llm_client import LLMConnectionError
+
+    db = TestingSessionLocal()
+    try:
+        mock_llm = MagicMock(spec=LLMClient)
+        mock_vs = MagicMock(spec=ChromaVectorStore)
+        mock_vs.search.return_value = []
+        mock_llm.generate.side_effect = LLMConnectionError("conexão recusada")
+        service = QuestionService(llm_client=mock_llm, vector_store=mock_vs)
+        with pytest.raises(LLMConnectionError):
+            service.generate_single_questao_inedita(db=db, habilidade_codigo="H01", max_attempts=3)
+        assert mock_llm.generate.call_count == 1
+        db.rollback()
+    finally:
+        db.close()
+
+
+def test_geracao_trata_erro_de_resposta_do_modelo_como_tentativa_reprovada():
+    """Erro devolvido pelo modelo (ex.: HTTP 500 por repetição) continua sendo tentativa reprovada, não queda de infraestrutura."""
+    from app.services.llm_client import LLMResponseError
+
+    db = TestingSessionLocal()
+    try:
+        mock_llm = MagicMock(spec=LLMClient)
+        mock_vs = MagicMock(spec=ChromaVectorStore)
+        mock_vs.search.return_value = []
+        mock_llm.generate.side_effect = LLMResponseError("token repeat limit reached")
+        service = QuestionService(llm_client=mock_llm, vector_store=mock_vs)
+        with pytest.raises(ValueError, match="RN-Q01"):
+            service.generate_single_questao_inedita(db=db, habilidade_codigo="H01", max_attempts=2)
+        assert mock_llm.generate.call_count == 2
+    finally:
+        db.close()
+
+
+def test_saturacao_por_modelo_ignora_questoes_de_outros_modelos():
+    """Com saturacao_por_modelo=True, a barreira anti-saturação só injeta enunciados já aprovados do próprio modelo."""
+    from app.db.models.ciclo_geracao import CicloGeracao
+    from app.db.models.tentativa_geracao import TentativaGeracao
+    from app.services.llm_client import LLMConnectionError
+
+    db = TestingSessionLocal()
+    try:
+        for modelo, texto in [("modelo-x", "ENUNCIADO DO MODELO X"), ("modelo-y", "ENUNCIADO DO MODELO Y")]:
+            ciclo = CicloGeracao(id=uuid.uuid4(), habilidade_codigo="H01", max_attempts=1, total_tentativas=1, sucesso=True)
+            tentativa = TentativaGeracao(id=uuid.uuid4(), ciclo_id=ciclo.id, habilidade_codigo="H01", numero_tentativa=1,
+                                         modelo=modelo, temperatura=0.2, top_p=0.9)
+            db.add_all([ciclo, tentativa])
+            db.flush()
+            db.add(QuestaoInedita(id=uuid.uuid4(), tentativa_id=tentativa.id, ciclo_id=ciclo.id, habilidade_codigo="H01",
+                                  enunciado=texto, is_validated=True))
+        db.commit()
+
+        def prompt_da_fase_2a(saturacao_por_modelo: bool) -> str:
+            mock_llm = MagicMock(spec=LLMClient)
+            mock_llm.model_name = "modelo-y"
+            mock_llm.generate.side_effect = LLMConnectionError("para na 1ª chamada")
+            mock_vs = MagicMock(spec=ChromaVectorStore)
+            mock_vs.search.return_value = []
+            service = QuestionService(llm_client=mock_llm, vector_store=mock_vs, saturacao_por_modelo=saturacao_por_modelo)
+            with pytest.raises(LLMConnectionError):
+                service.generate_single_questao_inedita(db=db, habilidade_codigo="H01", max_attempts=1)
+            db.rollback()
+            return mock_llm.generate.call_args.kwargs["prompt"]
+
+        isolado = prompt_da_fase_2a(True)
+        assert "ENUNCIADO DO MODELO Y" in isolado and "ENUNCIADO DO MODELO X" not in isolado
+        compartilhado = prompt_da_fase_2a(False)
+        assert "ENUNCIADO DO MODELO Y" in compartilhado and "ENUNCIADO DO MODELO X" in compartilhado
+    finally:
+        db.close()

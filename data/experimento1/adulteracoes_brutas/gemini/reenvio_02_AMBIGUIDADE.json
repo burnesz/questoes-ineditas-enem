@@ -1,0 +1,70 @@
+[
+  {
+    "id": "70183",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "O medidor de energia elétrica das residências, conhecido por “relógio de luz”, é constituído de quatro pequenos relógios, dispostos lado a lado, correspondentes, respectivamente, às posições MILHAR, CENTENA, DEZENA e UNIDADE. Em cada um desses relógios, há um único ponteiro, que gira no sentido crescente da numeração. A medida é expressa em kWh. O número obtido na leitura é composto por quatro algarismos, sendo cada posição desse número indicada pelo ponteiro do relógio correspondente àquela posição. Em determinado momento, o relógio de luz de uma residência apresentava a seguinte sequência: \\bullet relógio correspondente à posição MILHAR: ponteiro entre os algarismos 2 e 3; \\bullet relógio correspondente à posição CENTENA: ponteiro entre os algarismos 6 e 7; \\bullet relógio correspondente à posição DEZENA: ponteiro entre os algarismos 1 e 2; \\bullet relógio correspondente à posição UNIDADE: ponteiro entre os algarismos 4 e 5. De acordo com essa descrição, o número obtido, em kWh, pela leitura do relógio de luz dessa residência é",
+    "alternativas": {
+      "A": "2 614.",
+      "B": "3 624.",
+      "C": "2 715.",
+      "D": "3 725.",
+      "E": "4 162."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Substituiu-se a especificação de leitura posicional ('formada pelo último algarismo ultrapassado pelo ponteiro') por uma instrução vaga ('indicada pelo ponteiro'). Como os ponteiros estão entre dois algarismos, não fica definido se a leitura considera o algarismo anterior ou o posterior.",
+    "trecho_original": "formada pelo último algarismo ultrapassado pelo ponteiro do relógio correspondente àquela posição",
+    "trecho_adulterado": "indicada pelo ponteiro do relógio correspondente àquela posição",
+    "resposta_correta_apos_adulteracao": "A questão passa a admitir duas interpretações: (1) Se a leitura considerar o algarismo anterior (já ultrapassado pelo ponteiro), os valores são 2, 6, 1 e 4, resultando em 2 614 (alternativa A); (2) Se a leitura considerar o algarismo seguinte (para o qual o ponteiro avança), os valores são 3, 7, 2 e 5, resultando em 3 725 (alternativa D)."
+  },
+  {
+    "id": "72128",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Por falta de tratamentos simples, mais de 1 bilhão de pessoas pobres no mundo acordam doentes todos os dias. Entre essas doenças está a ancilostomose, que causa anemia severa e desnutrição proteica. Para fornecer tratamento a essas pessoas, estima-se um gasto anual de cinquenta centavos de dólar por paciente. Hortez, P. J. Um plano para derrotar Doenças Tropicais Negligenciadas. Scientific American Brasil. Ano 8, $n^{o}$ 33 (adaptado). Uma organização está disposta a lançar uma campanha internacional a fim de obter recursos suficientes para cobrir o tratamento das pessoas com ancilostomose por um ano. Segundo seu planejamento, estima-se um valor médio de US$ 3,00 por doador. De acordo com o planejamento dessa organização, para arrecadar o total de recursos necessários para cobrir o tratamento das pessoas com ancilostomose, por um ano, o número mínimo de contribuintes necessários é de",
+    "alternativas": {
+      "A": "200 milhões.",
+      "B": "120 milhões.",
+      "C": "36 milhões.",
+      "D": "40 milhões.",
+      "E": "100 milhões."
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "Removeu-se a informação sobre o número de pessoas afligidas pela ancilostomose (600 milhões). Sem essa quantidade, o custo total necessário da campanha fica indeterminado, tornando a questão sem resposta.",
+    "trecho_original": "Entre essas doenças está a ancilostomose, que aflige 600 milhões de pessoas e causa anemia severa e desnutrição proteica.",
+    "trecho_adulterado": "Entre essas doenças está a ancilostomose, que causa anemia severa e desnutrição proteica.",
+    "resposta_correta_apos_adulteracao": "A questão fica sem resposta determinada. O texto original informava que a ancilostomose afetava 600 milhões de pessoas, valor essencial para calcular o custo total anual (600 milhões × US$ 0,50 = US$ 300 milhões) e obter 100 milhões de contribuintes a US$ 3,00 cada (alternativa E). Com a retirada desse dado, resta apenas a menção genérica a 'mais de 1 bilhão de pessoas pobres no mundo acordam doentes todos os dias', sem discriminar quantas têm ancilostomose, impossibilitando a resolução do item."
+  },
+  {
+    "id": "111524",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Numa atividade de treinamento realizada no Exército de um determinado país, três equipes – Alpha, Beta e Gama – foram designadas a percorrer diferentes caminhos, todos com os mesmos pontos de partida e de chegada. \\bullet A equipe Alpha realizou seu percurso em 90 minutos com uma velocidade média de 6,0 km/h. \\bullet A equipe Beta também percorreu sua trajetória em 90 minutos, mas sua velocidade média foi de 5,0 km/h. \\bullet Com uma velocidade média de 6,5 km/h, a equipe Gama concluiu seu caminho. Com base nesses dados, foram comparadas as distâncias $d_{Beta}$; $d_{Alpha}$ e $d_{Gama}$ percorridas pelas três equipes. A ordem das distâncias percorridas pelas equipes Alpha, Beta e Gama é",
+    "alternativas": {
+      "A": "$d_{Gama} < d_{Beta} < d_{Alpha}$",
+      "B": "$d_{Alpha} = d_{Beta} < d_{Gama}$",
+      "C": "$d_{Gama} < d_{Beta} = d_{Alpha}$",
+      "D": "$d_{Beta} < d_{Alpha} < d_{Gama}$",
+      "E": "$d_{Gama} < d_{Alpha} < d_{Beta}$"
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Removeu-se o tempo de percurso da equipe Gama ('em 60 minutos'). Isso torna a questão sem determinação objetiva ou induz à leitura de duração idêntica à das outras duas equipes.",
+    "trecho_original": "\\bullet Com uma velocidade média de 6,5 km/h, a equipe Gama concluiu seu caminho em 60 minutos.",
+    "trecho_adulterado": "\\bullet Com uma velocidade média de 6,5 km/h, a equipe Gama concluiu seu caminho.",
+    "resposta_correta_apos_adulteracao": "A questão admite duas leituras: (1) O tempo de percurso da equipe Gama não foi fornecido, o que torna impossível calcular d_Gama e deixa a questão sem resposta determinada; (2) Se o candidato assumir que o tempo do treinamento foi comum às três equipes (90 minutos = 1,5 h, duração realizada por Alpha e também por Beta), a distância de Gama seria 6,5 × 1,5 = 9,75 km, levando à ordenação d_Beta (7,5 km) < d_Alpha (9,0 km) < d_Gama (9,75 km), correspondente à alternativa D."
+  },
+  {
+    "id": "82581",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Definem-se o dia e o ano de um planeta de um sistema solar como sendo, respectivamente, o tempo que o planeta leva para dar 1 volta completa em torno de seu próprio eixo de rotação e o tempo para dar 1 volta completa em torno de seu Sol. Suponha que exista um planeta Z, em algum sistema solar, onde um dia corresponda a 73 dias terrestres e que a razão entre a duração de seus anos e a de anos terrestres seja de 2 para 1. Considere que 1 ano terrestre tem 365 de seus dias. No planeta Z, seu ano corresponderia a quantos de seus dias?",
+    "alternativas": {
+      "A": "2,5",
+      "B": "10,0",
+      "C": "730,0",
+      "D": "13 322,5",
+      "E": "53 290,0"
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Substituiu-se a relação direta '2 de seus anos correspondam a 1 ano terrestre' pela expressão 'a razão entre a duração de seus anos e a de anos terrestres seja de 2 para 1', gerando ambiguidade sobre qual grandeza corresponde ao numerador da razão.",
+    "trecho_original": "e que 2 de seus anos correspondam a 1 ano terrestre.",
+    "trecho_adulterado": "e que a razão entre a duração de seus anos e a de anos terrestres seja de 2 para 1.",
+    "resposta_correta_apos_adulteracao": "A questão passa a admitir duas interpretações válidas que levam a alternativas existentes: (1) Se a razão direta das durações for ano_Z / ano_T = 2 / 1, então 1 ano de Z equivale a 2 anos terrestres (730 dias terrestres); dividindo por 73 dias terrestres por dia de Z, obtém-se 10,0 dias (alternativa B); (2) Se a proporção for interpretada na ordem de ocorrência de voltas/frequência (2 anos de Z para cada 1 ano terrestre, ou seja, ano_Z = 0,5 ano terrestre = 182,5 dias terrestres), obtém-se 182,5 / 73 = 2,5 dias (alternativa A)."
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "id": "125917",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Na planta baixa de uma casa, um quarto retangular, cuja área é de 54 $m^{2}$, está representado por um retângulo com lados medindo 0,10 m e 0,15 m. A escala dessa planta é",
+    "alternativas": {
+      "A": "1 : 24.",
+      "B": "1 : 40.",
+      "C": "1 : 60.",
+      "D": "1 : 1 600.",
+      "E": "1 : 16 000."
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "Alterou-se a área do quarto de 24 m² para 54 m², mantendo os demais dados. Com isso, a escala correta passa a ser 1 : 60, e a alternativa B deixa de ser a correta.",
+    "trecho_original": "área é de 24 $m^{2}$",
+    "trecho_adulterado": "área é de 54 $m^{2}$",
+    "resposta_correta_apos_adulteracao": "1 : 60, que coincide com a alternativa C."
+  },
+  {
+    "id": "15292",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Os tipos de prata normalmente vendidos são 975, 950 e 925. Essa classificação é feita de acordo com a sua pureza. Por exemplo, a prata 975 é a substância constituída de 975 partes de prata pura e 25 partes de cobre em 1 000 partes da substância. Já a prata 950 é constituída de 950 partes de prata pura e 50 de cobre em 1 000; e a prata 925 é constituída de 925 partes de prata pura e 75 partes de cobre em 1 000. Um ourives possui 10 gramas de prata 925 e deseja obter 50 gramas de prata 950 para produção de uma joia. Nessas condições, quantos gramas de prata e de cobre, respectivamente, devem ser fundidos com os 10 gramas de prata 925?",
+    "alternativas": {
+      "A": "29,25 e 0,75",
+      "B": "28,75 e 1,25",
+      "C": "28,50 e 1,50",
+      "D": "27,75 e 2,25",
+      "E": "25,00 e 5,00"
+    },
+    "gabarito": "B",
+    "descricao_modificacao": "Alterou-se a quantidade final desejada de prata 950 de 40 gramas para 50 gramas. Assim, os valores necessários passam a ser 38,25 g de prata e 1,75 g de cobre, não correspondendo à alternativa B.",
+    "trecho_original": "deseja obter 40 gramas de prata 950",
+    "trecho_adulterado": "deseja obter 50 gramas de prata 950",
+    "resposta_correta_apos_adulteracao": "38,25 g de prata e 1,75 g de cobre; não coincide com nenhuma alternativa."
+  },
+  {
+    "id": "125935",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Um supermercado conta com cinco caixas disponíveis para pagamento. Foram instaladas telas que apresentam o tempo médio gasto por cada caixa para iniciar e finalizar o atendimento de cada cliente, e o número de pessoas presentes na fila de cada caixa em tempo real. Um cliente, na hora de passar sua compra, sabendo que cada um dos cinco caixas iniciará um novo atendimento naquele momento, pretende gastar o menor tempo possível de espera na fila. Ele observa que as telas apresentavam as informações a seguir. \\bullet Caixa I: atendimento 12 minutos, 5 pessoas na fila. \\bullet Caixa II: atendimento 6 minutos, 9 pessoas na fila. \\bullet Caixa III: atendimento 5 minutos, 5 pessoas na fila. \\bullet Caixa IV: atendimento 15 minutos, 2 pessoas na fila. \\bullet Caixa V: atendimento 9 minutos, 3 pessoas na fila. Para alcançar seu objetivo, o cliente deverá escolher o caixa",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V."
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "Alterou-se o número de pessoas na fila do Caixa III de 6 para 5. Com isso, o menor tempo de espera passa a ser o do Caixa III, e a alternativa E deixa de ser a correta.",
+    "trecho_original": "Caixa III: atendimento 5 minutos, 6 pessoas na fila.",
+    "trecho_adulterado": "Caixa III: atendimento 5 minutos, 5 pessoas na fila.",
+    "resposta_correta_apos_adulteracao": "Caixa III, que coincide com a alternativa C."
+  },
+  {
+    "id": "125993",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Uma doceira vende e entrega, em seu bairro, porções de 100 g de docinhos de aniversário. Atualmente, a taxa única de entrega é R$ 20,00, e o valor cobrado por uma porção é R$ 25,00. Por uma estratégia de vendas, a partir da próxima semana, a taxa única de entrega será R$ 15,00, e um novo valor será cobrado por uma porção, de maneira que o valor total a ser pago por um cliente na compra de 5 porções permaneça o mesmo. A partir da próxima semana, qual será o novo valor cobrado, em real, por uma porção?",
+    "alternativas": {
+      "A": "12,50",
+      "B": "20,00",
+      "C": "24,00",
+      "D": "30,00",
+      "E": "37,50"
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "Alterou-se a taxa única de entrega atual de R$ 10,00 para R$ 20,00. Com isso, o novo valor por porção passa a ser R$ 26,00, e a alternativa C deixa de ser a correta.",
+    "trecho_original": "taxa única de entrega é R$ 10,00",
+    "trecho_adulterado": "taxa única de entrega é R$ 20,00",
+    "resposta_correta_apos_adulteracao": "R$ 26,00 por porção; não coincide com nenhuma alternativa."
+  }
+]

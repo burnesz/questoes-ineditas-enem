@@ -1,0 +1,53 @@
+[
+  {
+    "id": "38212",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "O índice de eficiência utilizado por um produtor de leite para qualificar suas vacas é dado pelo produto do tempo de lactação (em dias) pela produção média diária de leite (em kg), dividido pelo intervalo entre partos (em meses). Para esse produtor, a vaca é qualificada como eficiente quando esse índice é, no mínimo, 281 quilogramas por mês, mantendo sempre as mesmas condições de manejo (alimentação, vacinação e outros). Na comparação de duas ou mais vacas, a mais eficiente é a que tem maior produção de leite. A tabela apresenta os dados coletados de cinco vacas: Dados relativos à produção das vacas\n| Vaca | Tempo de lactação (em dias) | Produção média diária de leite (em kg) | Intervalo entre partos (em meses) |\n|---|---|---|---|\n| Malhada | 360 | 12,0 | 15 |\n| Mamona | 310 | 11,0 | 12 |\n| Maravilha | 260 | 14,0 | 12 |\n| Mateira | 310 | 13,0 | 13 |\n| Mimosa | 270 | 12,0 | 11 |\nApós a análise dos dados, o produtor avaliou que a vaca mais eficiente é a",
+    "alternativas": {
+      "A": "Malhada.",
+      "B": "Mamona.",
+      "C": "Maravilha.",
+      "D": "Mateira.",
+      "E": "Mimosa."
+    },
+    "gabarito": "D",
+    "descricao_modificacao": "A substituição do critério comparativo de 'maior índice' por 'maior produção de leite' introduz ambiguidade sobre qual grandeza de produção define a eficiência entre vacas que superam a meta mínima.",
+    "trecho_original": "Na comparação de duas ou mais vacas, a mais eficiente é a que tem maior índice.",
+    "trecho_adulterado": "Na comparação de duas ou mais vacas, a mais eficiente é a que tem maior produção de leite.",
+    "resposta_correta_apos_adulteracao": "A expressão 'maior produção de leite' admite três leituras plausíveis a partir dos dados: 1) Produção média diária de leite (dado explícito na tabela), cuja maior marca é da vaca Maravilha (14,0 kg), levando à alternativa C; 2) Produção total acumulada no período de lactação (tempo de lactação multiplicado pela produção diária), em que a vaca Malhada atinge o maior valor (360 × 12 = 4 320 kg), levando à alternativa A; 3) Taxa mensal de produção segundo o índice de eficiência em kg/mês definido no início do texto, em que a vaca Mateira obtém o maior valor (310 kg/mês), mantendo o gabarito D. Como todas as cinco vacas superam a linha de corte de 281 kg/mês, a questão passa a admitir respostas distintas (A, C ou D)."
+  },
+  {
+    "id": "12922",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Os alunos da disciplina de estatística, em um curso universitário, realizam quatro avaliações por semestre com os pesos de 20%, 10%, 30% e 40%, respectivamente. No final do semestre, precisam obter uma média nas quatro avaliações de, no mínimo, 60 pontos para serem aprovados. Um estudante dessa disciplina obteve os seguintes pontos nas três primeiras avaliações: 46, 60 e 50, respectivamente. O mínimo de pontos que a quarta avaliação deve fornecer para a média de aprovação desse estudante é",
+    "alternativas": {
+      "A": "29,8.",
+      "B": "71,0.",
+      "C": "74,5.",
+      "D": "75,5.",
+      "E": "84,0."
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "A alteração no comando gera ambiguidade entre a nota bruta necessária na quarta avaliação e a quantidade ponderada de pontos que essa avaliação deve computar diretamente na média final.",
+    "trecho_original": "O mínimo de pontos que esse estudante precisa obter na quarta avaliação para ser aprovado é",
+    "trecho_adulterado": "O mínimo de pontos que a quarta avaliação deve fornecer para a média de aprovação desse estudante é",
+    "resposta_correta_apos_adulteracao": "O comando admite duas leituras distintas com respostas presentes nas alternativas: 1) Se interpretado como a nota na escala da própria quarta avaliação necessária para atingir a aprovação, calcula-se N4 tal que 0,20(46) + 0,10(60) + 0,30(50) + 0,40(N4) ≥ 60, resultando em N4 ≥ 74,5 pontos (alternativa C, gabarito original); 2) Se interpretado como a parcela ponderada de pontos que a quarta avaliação deve agregar diretamente à média final do estudante (já que as três primeiras somaram 9,2 + 6,0 + 15,0 = 30,2 pontos), a contribuição necessária para atingir os 60 pontos é de 60 - 30,2 = 29,8 pontos (alternativa A)."
+  },
+  {
+    "id": "141582",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Visando atrair mais clientes, o gerente de uma loja anunciou uma promoção em que cada cliente que realizar uma compra pode ganhar um voucher para ser usado em sua próxima compra. Para ganhar seu voucher, o cliente precisa retirar, ao acaso, uma bolinha de dentro de cada uma das duas urnas A e B disponibilizadas pelo gerente, nas quais há apenas bolinhas pretas e brancas. Atualmente, a probabilidade de se escolher, ao acaso, uma bolinha preta na urna A é igual a 20% e a probabilidade de se escolher uma bolinha preta na urna B é 25%. Ganha o voucher o cliente que retirar duas bolinhas pretas, uma de cada urna. Com o passar dos dias, o gerente percebeu que, para a promoção ser viável aos negócios, era preciso alterar a probabilidade de acerto do cliente sem alterar a regra da promoção. Para isso, resolveu alterar a quantidade de bolinhas brancas na urna B de forma que a probabilidade de um cliente ganhar o voucher passasse a ser menor ou igual a 1%. Sabe-se que, em ambas as urnas, todas as bolinhas têm a mesma probabilidade de serem retiradas. Qual é o número mínimo de bolinhas brancas que o gerente deve adicionar à urna B?",
+    "alternativas": {
+      "A": "20",
+      "B": "60",
+      "C": "64",
+      "D": "68",
+      "E": "80"
+    },
+    "gabarito": "C",
+    "descricao_modificacao": "A remoção da informação sobre a quantidade de bolinhas pretas na urna B retira um dado essencial que não pode ser deduzido do restante do enunciado, deixando o número de bolinhas a adicionar indeterminado.",
+    "trecho_original": "Sabe-se que a urna B tem 4 bolinhas pretas e que, em ambas as urnas,",
+    "trecho_adulterado": "Sabe-se que, em ambas as urnas,",
+    "resposta_correta_apos_adulteracao": "Sem a quantidade absoluta de bolinhas pretas na urna B, o problema não possui resposta determinada. Sabendo apenas que P(A) = 20%, para que a probabilidade conjunta seja ≤ 1%, a nova probabilidade na urna B deve ser ≤ 5%. Como a probabilidade inicial na urna B era de 25% de pretas, se a urna contivesse n bolinhas pretas, o número mínimo de bolinhas brancas a adicionar seria 16n. Logo, para n = 1 teríamos 16 bolinhas adicionadas; para n = 4 teríamos 64 (alternativa C, gabarito original); para n = 5 teríamos 80 (alternativa E). Como o valor de n não é informado e não pode ser deduzido de nenhuma outra parte do enunciado, a pergunta fica sem resposta determinada."
+  }
+]

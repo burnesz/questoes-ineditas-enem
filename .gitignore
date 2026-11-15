@@ -13,3 +13,10 @@ htmlcov/
 AGENTS.md
 CLAUDE.md
 docs/*.md
+backups/
+
+# Página de revisão (gerada por scripts/experimento1/gerar_pagina_revisao.py)
+data/experimento1/revisao/*.html
+
+# Arquivos locais fora do trabalho (testes, rodadas descartadas, backups)
+arquivo_local/

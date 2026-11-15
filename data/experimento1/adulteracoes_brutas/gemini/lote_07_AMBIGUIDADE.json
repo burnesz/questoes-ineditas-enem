@@ -1,0 +1,70 @@
+[
+  {
+    "id": "70183",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "O medidor de energia elétrica das residências, conhecido por “relógio de luz”, é constituído de quatro pequenos relógios, dispostos lado a lado, correspondentes às posições MILHAR, CENTENA, DEZENA e UNIDADE. Em cada um desses relógios, há um único ponteiro, que gira no sentido crescente da numeração. A medida é expressa em kWh. O número obtido na leitura é composto por quatro algarismos, sendo cada posição desse número formada pelo último algarismo ultrapassado pelo ponteiro do relógio correspondente àquela posição. Em determinado momento, o relógio de luz de uma residência apresentava a seguinte sequência: \\bullet relógio correspondente à posição MILHAR: ponteiro entre os algarismos 2 e 3; \\bullet relógio correspondente à posição CENTENA: ponteiro entre os algarismos 6 e 7; \\bullet relógio correspondente à posição DEZENA: ponteiro entre os algarismos 1 e 2; \\bullet relógio correspondente à posição UNIDADE: ponteiro entre os algarismos 4 e 5. De acordo com essa descrição, o número obtido, em kWh, pela leitura do relógio de luz dessa residência é",
+    "alternativas": {
+      "A": "2 614.",
+      "B": "3 624.",
+      "C": "2 715.",
+      "D": "3 725.",
+      "E": "4 162."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Removeu-se a palavra 'respectivamente' da correlação entre os relógios e as posições, gerando ambiguidade sobre a ordem posicional dos algarismos.",
+    "trecho_original": "correspondentes, respectivamente, às posições",
+    "trecho_adulterado": "correspondentes às posições",
+    "resposta_correta_apos_adulteracao": "Sem o termo 'respectivamente', a ordem dos relógios em relação às posições (milhar, centena, dezena, unidade) deixa de ser estritamente definida, permitindo leituras alternativas (como a inversão da ordem, resultando em 4 162 ou outras combinações)."
+  },
+  {
+    "id": "72128",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Por falta de tratamentos simples, mais de 1 bilhão de pessoas pobres no mundo acordam doentes todos os dias. Entre essas doenças está a ancilostomose, que aflige 600 milhões de pessoas e causa anemia severa e desnutrição proteica. Para fornecer tratamento a essas pessoas, estima-se um gasto anual de cinquenta centavos de dólar por paciente. Hortez, P. J. Um plano para derrotar Doenças Tropicais Negligenciadas. Scientific American Brasil. Ano 8, $n^{o}$ 33 (adaptado). Uma organização está disposta a lançar uma campanha internacional a fim de obter recursos suficientes para cobrir o tratamento das pessoas com ancilostomose por um ano. Segundo seu planejamento, estima-se um valor médio de US$ 3,00 por doador. De acordo com o planejamento dessa organização, para arrecadar o total de recursos necessários para cobrir o tratamento das pessoas com ancilostomose o número mínimo de contribuintes necessários é de",
+    "alternativas": {
+      "A": "200 milhões.",
+      "B": "120 milhões.",
+      "C": "36 milhões.",
+      "D": "40 milhões.",
+      "E": "100 milhões."
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "Removeu-se o trecho 'por um ano' da pergunta final, tornando ambíguo se o cálculo refere-se ao período anual total ou a outra periodicidade implícita.",
+    "trecho_original": "por um ano, o número mínimo de contribuintes necessários é de",
+    "trecho_adulterado": "o número mínimo de contribuintes necessários é de",
+    "resposta_correta_apos_adulteracao": "A ausência da especificação temporal na pergunta final permite interpretar que o custo total pode abranger mais de um ano ou ser incorretamente associado a custos mensais recorrentes, resultando em valores de contribuintes diferentes de 100 milhões."
+  },
+  {
+    "id": "111524",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Numa atividade de treinamento realizada no Exército de um determinado país, três equipes – Alpha, Beta e Gama – foram designadas a percorrer diferentes caminhos, todos com os mesmos pontos de partida e de chegada. \\bullet A equipe Alpha realizou seu percurso em 90 com uma velocidade média de 6,0 km/h. \\bullet A equipe Beta também percorreu sua trajetória em 90 minutos, mas sua velocidade média foi de 5,0 km/h. \\bullet Com uma velocidade média de 6,5 km/h, a equipe Gama concluiu seu caminho em 60 minutos. Com base nesses dados, foram comparadas as distâncias $d_{Beta}$; $d_{Alpha}$ e $d_{Gama}$ percorridas pelas três equipes. A ordem das distâncias percorridas pelas equipes Alpha, Beta e Gama é",
+    "alternativas": {
+      "A": "$d_{Gama} < d_{Beta} < d_{Alpha}$",
+      "B": "$d_{Alpha} = d_{Beta} < d_{Gama}$",
+      "C": "$d_{Gama} < d_{Beta} = d_{Alpha}$",
+      "D": "$d_{Beta} < d_{Alpha} < d_{Gama}$",
+      "E": "$d_{Gama} < d_{Alpha} < d_{Beta}$"
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Removeu-se a unidade de tempo 'minutos' do dado referente à equipe Alpha, gerando ambiguidade na unidade temporal utilizada.",
+    "trecho_original": "90 minutos",
+    "trecho_adulterado": "90",
+    "resposta_correta_apos_adulteracao": "Sem a unidade explícita, o valor '90' na equipe Alpha pode ser interpretado como horas em vez de minutos, alterando a distância calculada para Alpha para 540 km e quebrando a coerência da ordenação nas alternativas."
+  },
+  {
+    "id": "82581",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Definem-se o dia e o ano de um planeta de um sistema solar como sendo, respectivamente, o tempo que o planeta leva para dar 1 volta completa em torno de seu próprio eixo de rotação e o tempo para dar 1 volta completa em torno de seu Sol. Suponha que exista um planeta Z, em algum sistema solar, onde um dia corresponda a 73 dias terrestres e que 2 de seus anos correspondam a 1 ano terrestre. Considere que 1 ano terrestre tem 365 de seus dias. No planeta Z, seu ano corresponderia a quantos dias?",
+    "alternativas": {
+      "A": "2,5",
+      "B": "10,0",
+      "C": "730,0",
+      "D": "13 322,5",
+      "E": "53 290,0"
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "Removeu-se o pronome 'de seus' na pergunta final, tornando ambígua a unidade dos dias solicitados (dias do planeta Z ou dias terrestres).",
+    "trecho_original": "quantos de seus dias?",
+    "trecho_adulterado": "quantos dias?",
+    "resposta_correta_apos_adulteracao": "A omissão de 'de seus' permite duas leituras: se interpretado como dias terrestres, a resposta seria 182,5; se interpretado como dias do planeta Z, a resposta correta é 2,5 (alternativa A), gerando ambiguidade de interpretação."
+  }
+]

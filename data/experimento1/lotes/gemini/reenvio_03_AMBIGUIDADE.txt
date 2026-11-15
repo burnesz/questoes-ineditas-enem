@@ -1,0 +1,147 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: AMBIGUIDADE (comando ou dados com mais de uma leitura).
+- Altere o enunciado para que a pergunta admita duas ou mais interpretações razoáveis
+  que levem a respostas diferentes, ou para que falte uma informação essencial
+  (por exemplo: remover a unidade pedida, uma restrição, um período de tempo, ou
+  tornar ambígua a grandeza solicitada).
+- Mantenha as alternativas e o campo "gabarito" idênticos ao original.
+- Em "resposta_correta_apos_adulteracao", descreva as leituras possíveis e a resposta
+  a que cada uma leva.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+REENVIO: estas questões já foram adulteradas uma vez, e a revisão reprovou o defeito inserido. Faça uma nova adulteração do mesmo tipo, partindo da questão original abaixo (não da versão anterior), e evite o problema apontado em cada item. Pode escolher outro trecho para alterar.
+
+Critérios adicionais da revisão:
+- A informação retirada ou tornada vaga não pode continuar disponível em outro ponto do
+  enunciado, da tabela ou das alternativas.
+- Cada leitura razoável deve levar a uma alternativa diferente entre as existentes (uma
+  delas pode ser o gabarito). Leituras cujo resultado não aparece nas alternativas não
+  servem, porque as próprias alternativas desfazem a ambiguidade.
+- Outra opção válida: retirar um dado essencial que não possa ser deduzido de nenhuma
+  outra parte, de modo que a pergunta fique sem resposta determinada.
+- Não troque a pergunta por outra de leitura única (isso é gabarito errado, não
+  ambiguidade), não use construções que pareçam erro de digitação e não dependa de
+  conhecimento de outra disciplina.
+
+Tentativas anteriores reprovadas:
+[
+  {
+    "id": "60250",
+    "descricao_anterior": "A remoção da especificação da grandeza (raio ou diâmetro) torna o enunciado ambíguo, pois o valor de 6 cm pode ser interpretado como raio ou diâmetro da esfera.",
+    "trecho_original_anterior": "de 6 cm de raio",
+    "trecho_adulterado_anterior": "de 6 cm",
+    "motivo_da_reprovacao": "Boa ideia (raio × diâmetro), mas a leitura \"6 cm de diâmetro\" dá (24/6)³ = 64 esferas, que não está nas alternativas; por eliminação elas levam de volta ao raio (8, B). Mesmo caso da 60238: a ambiguidade não sustenta outra alternativa."
+  },
+  {
+    "id": "84374",
+    "descricao_anterior": "A remoção da unidade de medida da frequência (Hz) torna o dado ambíguo, pois o valor 0,2 fica desprovido de dimensão física clara.",
+    "trecho_original_anterior": "frequência de 0,2 Hz.",
+    "trecho_adulterado_anterior": "frequência de 0,2.",
+    "motivo_da_reprovacao": "Tirar \"Hz\" de \"0,2 Hz\" não cria leitura nova: a própria fórmula define f como \"frequência da onda, em hertz (Hz)\". O cálculo segue igual (C)."
+  },
+  {
+    "id": "49022",
+    "descricao_anterior": "A alteração na definição do marco temporal (t = 0) gera ambiguidade na contagem dos dias em relação ao calendário da epidemia.",
+    "trecho_original_anterior": "t = 0 é o dia anterior à primeira infecção",
+    "trecho_adulterado_anterior": "t = 0 é o dia da primeira infecção",
+    "motivo_da_reprovacao": "É mudança de dado (CALCULO), não ambiguidade: com t = 0 no dia da primeira infecção, t = 20 cai no 21º dia, que não está nas alternativas. Não há duas leituras legítimas, só uma resposta diferente."
+  },
+  {
+    "id": "60227",
+    "descricao_anterior": "A alteração na definição da variável x remove a especificação explícita de que x representa o tempo decorrido, tornando ambígua a sua atribuição para o ano de 2030 (se como o ano civil ou como o número de anos decorridos).",
+    "trecho_original_anterior": "em que x = 0 corresponde ao ano 2000, x = 1 corresponde ao ano 2001, e assim sucessivamente,",
+    "trecho_adulterado_anterior": "em que x corresponde aos anos a partir de 2000,",
+    "motivo_da_reprovacao": "\"x corresponde aos anos a partir de 2000\" ainda leva a x = 30 para 2030 (E). A leitura x = 2030 é absurda (e^60,9) e não leva a nenhuma alternativa."
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "60250",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma empresa que fabrica esferas de aço, de 6 cm de raio, utiliza caixas de madeira, na forma de um cubo, para transportá-las. Sabendo que a capacidade da caixa é de 13.824 $cm^{3}$, então o número máximo de esferas que podem ser transportadas em uma caixa é igual a",
+    "alternativas": {
+      "A": "4.",
+      "B": "8.",
+      "C": "16.",
+      "D": "24.",
+      "E": "32."
+    },
+    "gabarito": "B"
+  },
+  {
+    "id": "84374",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Charles Richter e Beno Gutenberg desenvolveram a escala Richter, que mede a magnitude de um terremoto. Essa escala pode variar de 0 a 10, com possibilidades de valores maiores. O quadro mostra a escala de magnitude local ($M_{s}$) de um terremoto que é utilizada para descrevê-lo.\n| Descrição | Magnitude local ($M_{s}$) (µm \\cdot Hz) |\n|---|---|\n| Pequeno | $0 \\le M_{s} \\le 3,9$ |\n| Ligeiro | $4,0 \\le M_{s} \\le 4,9$ |\n| Moderado | $5,0 \\le M_{s} \\le 5,9$ |\n| Grande | $6,0 \\le M_{s} \\le 9,9$ |\n| Extremo | $M_{s} \\ge 10,0$ |\nPara se calcular a magnitude local, usa-se a fórmula $M_{s}$ = 3,30 + \\log(A\\cdot f ), em que A representa a amplitude máxima da onda registrada por um sismógrafo em micrômetro (µm) e f representa a frequência da onda, em hertz (Hz). Ocorreu um terremoto com amplitude máxima de 2 000 µm e frequência de 0,2 Hz. Disponível em: http://cejarj.cecierj.edu.br. Acesso em: 1 fev. 2015 (adaptado). Utilize 0,3 como aproximação para \\log 2. De acordo com os dados fornecidos, o terremoto ocorrido pode ser descrito como",
+    "alternativas": {
+      "A": "Pequeno.",
+      "B": "Ligeiro.",
+      "C": "Moderado.",
+      "D": "Grande.",
+      "E": "Extremo."
+    },
+    "gabarito": "C"
+  },
+  {
+    "id": "49022",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Para evitar uma epidemia, a Secretaria de Saúde de uma cidade dedetizou todos os bairros, de modo a evitar a proliferação do mosquito da dengue. Sabe-se que o número f de infectados é dado pela função f(t) = -2t^2 + 120t (em que t é expresso em dia e t = 0 é o dia anterior à primeira infecção) e que tal expressão é válida para os 60 primeiros dias da epidemia. A Secretaria de Saúde decidiu que uma segunda dedetização deveria ser feita no dia em que o número de infectados chegasse à marca de 1 600 pessoas, e uma segunda dedetização precisou acontecer. A segunda dedetização começou no",
+    "alternativas": {
+      "A": "19º dia.",
+      "B": "20º dia.",
+      "C": "29º dia.",
+      "D": "30º dia.",
+      "E": "60º dia."
+    },
+    "gabarito": "B"
+  },
+  {
+    "id": "60227",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Suponha que o modelo exponencial y = 363e^{0,03 x}, em que x = 0 corresponde ao ano 2000, x = 1 corresponde ao ano 2001, e assim sucessivamente, e que y é a população em milhões de habitantes no ano x, seja usado para estimar essa população com 60 anos ou mais de idade nos países em desenvolvimento entre 2010 e 2050. Desse modo, considerando $e^{0,3}$ = 1,35, estima-se que a população com 60 anos ou mais estará, em 2030, entre",
+    "alternativas": {
+      "A": "490 e 510 milhões.",
+      "B": "550 e 620 milhões.",
+      "C": "780 e 800 milhões.",
+      "D": "810 e 860 milhões.",
+      "E": "870 e 910 milhões."
+    },
+    "gabarito": "E"
+  }
+]

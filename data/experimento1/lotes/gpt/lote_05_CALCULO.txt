@@ -1,0 +1,100 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: CALCULO (dado numérico inconsistente).
+- Altere UM dado numérico do enunciado (ou da tabela contida nele) de modo que a
+  alternativa indicada no gabarito deixe de ser a resposta correta.
+- Mantenha as alternativas e o campo "gabarito" idênticos ao original.
+- O novo valor deve ser plausível no contexto (sem números absurdos).
+- Em "resposta_correta_apos_adulteracao", informe o valor que passa a ser correto e
+  diga se ele coincide com alguma das alternativas (e qual) ou com nenhuma.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "72041",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Célia é uma confeiteira renomada na pequena cidade onde mora. Herdou de sua avó uma receita de brigadeiro que faz o maior sucesso. Os ingredientes da receita enchem sempre uma panela, de forma cilíndrica, com 40 cm de altura e 30 cm de diâmetro. Para inovar e atrair mais clientes, em vez de vender os brigadeiros na forma de “bolinhas”, Célia tem feito brigadeiros em forma de cones. Para isso, utiliza forminhas cônicas de 5 cm de altura e raio da base de 1,5 cm. A cada receita produzida, a quantidade de cones de brigadeiro que Célia consegue obter é $(V_{cilindro} =\\pi R^{2}h e V_{cone} = \\frac{\\pi R^{2}h}{3})$",
+    "alternativas": {
+      "A": "600 unidades.",
+      "B": "800 unidades.",
+      "C": "2 400 unidades.",
+      "D": "3 200 unidades.",
+      "E": "9 600 unidades."
+    },
+    "gabarito": "C"
+  },
+  {
+    "id": "66689",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Um agricultor utilizava toda a área de uma região plana, em formato retangular, com 50 m de largura e 240 m de comprimento, para o plantio de mudas. Seguindo recomendações técnicas, cada muda é plantada no centro de uma pequena região retangular de 10 cm de largura por 20 cm de comprimento. Esse agricultor decidiu ampliar a área destinada ao plantio de mudas, utilizando agora um terreno, também plano, em formato retangular, com 100 m de comprimento por 200 m de largura. As mudas deverão ser plantadas respeitando-se as mesmas recomendações técnicas. Com o aumento da área destinada ao plantio, a quantidade máxima de mudas que poderão ser plantadas a mais é",
+    "alternativas": {
+      "A": "100 000.",
+      "B": "400 000.",
+      "C": "600 000.",
+      "D": "1 000 000.",
+      "E": "1 600 000."
+    },
+    "gabarito": "B"
+  },
+  {
+    "id": "117759",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Uma empresa produz embalagens para acomodar seu produto. As embalagens atuais são cilíndricas e medem 16 cm de diâmetro e 20 cm de altura. A pedido da direção, as embalagens terão um novo formato. Elas serão na forma de paralelepípedos retos retângulos, de base quadrada, de lado medindo 16 cm. A capacidade delas deverá ser, pelo menos, 400 mL maior que a das embalagens atuais. Use 3 como valor aproximado de \\pi. O valor aproximado da medida da altura das novas embalagens, em centímetro, é",
+    "alternativas": {
+      "A": "11.",
+      "B": "15.",
+      "C": "17.",
+      "D": "62.",
+      "E": "66."
+    },
+    "gabarito": "C"
+  },
+  {
+    "id": "30574",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Um pintor cobra R$ 240,00 por dia de trabalho, que equivale a 8 horas de trabalho num dia. Quando é chamado para um serviço, esse pintor trabalha 8 horas por dia com exceção, talvez, do seu último dia nesse serviço. Nesse último dia, caso trabalhe até 4 horas, ele cobra metade do valor de um dia de trabalho. Caso trabalhe mais de 4 horas, cobra o valor correspondente a um dia de trabalho. Esse pintor gasta 8 horas para pintar uma vez uma área de 40 m^{2}. Um cliente deseja pintar as paredes de sua casa, com uma área total de 260 m^{2}. Ele quer que essa área seja pintada o maior número possível de vezes para que a qualidade da pintura seja a melhor possível. O orçamento desse cliente para a pintura é de R$ 4 600,00. Quantas vezes, no máximo, as paredes da casa poderão ser pintadas com o orçamento do cliente?",
+    "alternativas": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "5",
+      "E": "6"
+    },
+    "gabarito": "B"
+  }
+]

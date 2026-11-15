@@ -1,0 +1,100 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: CALCULO (dado numérico inconsistente).
+- Altere UM dado numérico do enunciado (ou da tabela contida nele) de modo que a
+  alternativa indicada no gabarito deixe de ser a resposta correta.
+- Mantenha as alternativas e o campo "gabarito" idênticos ao original.
+- O novo valor deve ser plausível no contexto (sem números absurdos).
+- Em "resposta_correta_apos_adulteracao", informe o valor que passa a ser correto e
+  diga se ele coincide com alguma das alternativas (e qual) ou com nenhuma.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "44243",
+    "tipo_erro": "CALCULO",
+    "enunciado": "É comum os artistas plásticos se apropriarem de entes matemáticos para produzirem, por exemplo, formas e imagens por meio de manipulações. Um artista plástico, em uma de suas obras, pretende retratar os diversos polígonos obtidos pelas intersecções de um plano com uma pirâmide regular de base quadrada. Segundo a classificação dos polígonos, quais deles são possíveis de serem obtidos pelo artista plástico?",
+    "alternativas": {
+      "A": "Quadrados, apenas.",
+      "B": "Triângulos e quadrados, apenas.",
+      "C": "Triângulos, quadrados e trapézios, apenas.",
+      "D": "Triângulos, quadrados, trapézios e quadriláteros irregulares, apenas.",
+      "E": "Triângulos, quadrados, trapézios, quadriláteros irregulares e pentágonos, apenas."
+    },
+    "gabarito": "E"
+  },
+  {
+    "id": "70698",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Uma indústria fabrica brindes promocionais em forma de pirâmide, que é obtida a partir de quatro cortes feitos em um sólido que tem a forma de um cubo, cujos vértices da face inferior são indicados pelas letras A, B, C e D e o ponto central da face superior é indicado pela letra O. A cada corte, é descartada a parte que não comporá a pirâmide. Os cortes são feitos da seguinte maneira: \\bullet o primeiro corte é feito pelo plano que passa pelo ponto O e pela aresta AD ; \\bullet o segundo corte é feito pelo plano que passa pelo ponto O e pela aresta BC , paralela à aresta AD ; \\bullet o terceiro corte é feito pelo plano que passa pelo ponto O e pela aresta AB ; \\bullet o quarto corte é feito pelo plano que passa pelo ponto O e pela aresta CD, paralela à aresta AB . Os formatos dos sólidos descartados são",
+    "alternativas": {
+      "A": "todos iguais.",
+      "B": "todos diferentes.",
+      "C": "três iguais e um diferente.",
+      "D": "apenas dois iguais.",
+      "E": "iguais dois a dois."
+    },
+    "gabarito": "E"
+  },
+  {
+    "id": "60078",
+    "tipo_erro": "CALCULO",
+    "enunciado": "Para economizar em suas contas mensais de água, uma família de 10 pessoas deseja construir um reservatório para armazenar a água captada das chuvas, que tenha capacidade suficiente para abastecer a família por 20 dias. Cada pessoa da família consome, diariamente, 0,08 $m^{3}$ de água. Para que os objetivos da família sejam atingidos, a capacidade mínima, em litros, do reservatório a ser construído deve ser",
+    "alternativas": {
+      "A": "16.",
+      "B": "800.",
+      "C": "1 600.",
+      "D": "8 000.",
+      "E": "16 000."
+    },
+    "gabarito": "E"
+  },
+  {
+    "id": "71130",
+    "tipo_erro": "CALCULO",
+    "enunciado": "É possível usar água ou comida para atrair as aves e observá-las. Muitas pessoas costumam usar água com açúcar, por exemplo, para atrair beija-flores. Mas é importante saber que, na hora de fazer a mistura, você deve sempre usar uma parte de açúcar para cinco partes de água. Além disso, em dias quentes, precisa trocar a água de duas a três vezes, pois com o calor ela pode fermentar e, se for ingerida pela ave, pode deixá- la doente. O excesso de açúcar, ao cristalizar, também pode manter o bico da ave fechado, impedindo-a de se alimentar. Isso pode até matá-la. Pretende-se encher completamente um copo com a mistura para atrair beija-flores. O copo tem formato cilíndrico, e suas medidas são 10 cm de altura e 4 cm de diâmetro. A quantidade de água que deve ser utilizada na mistura é cerca de (utilize \\pi = 3)",
+    "alternativas": {
+      "A": "20 mL.",
+      "B": "24 mL.",
+      "C": "100 mL.",
+      "D": "120 mL.",
+      "E": "600 mL."
+    },
+    "gabarito": "C"
+  }
+]

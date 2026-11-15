@@ -1,0 +1,70 @@
+[
+  {
+    "id": "40302",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Segundo o Instituto Brasileiro de Geografia e Estatística (IBGE), produtos sazonais são aqueles que apresentam ciclos bem definidos de produção, consumo e preço. Resumidamente, existem épocas do ano em que a sua disponibilidade nos mercados varejistas ora é escassa, com preços elevados, ora é abundante, com preços mais baixos, o que ocorre no mês de produção máxima da safra. A partir de uma série histórica, observou-se que o preço P, em reais, do quilograma de um certo produto sazonal pode ser descrito pela função P(x) = 8 + 5cos $\\frac{\\pi x - \\pi}{6}$ , onde x representa o mês do ano, sendo x = 1 associado ao mês de janeiro, x = 2 ao mês de fevereiro, e assim sucessivamente, até x = 12 associado ao mês de dezembro. Disponível em: www.ibge.gov.br. Acesso em: 2 ago. 2012 (adaptado). Na safra, o mês de produção máxima desse produto é",
+    "alternativas": {
+      "A": "janeiro.",
+      "B": "abril.",
+      "C": "junho.",
+      "D": "julho.",
+      "E": "outubro."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "O gabarito foi alterado de D para A, indicando janeiro, que corresponde ao máximo preço e não ao mês de produção máxima.",
+    "trecho_original": "D",
+    "trecho_adulterado": "A",
+    "resposta_correta_apos_adulteracao": "D"
+  },
+  {
+    "id": "15890",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Em uma escola, a probabilidade de um aluno compreender e falar inglês é de 30%. Três alunos dessa escola, que estão em fase final de seleção de intercâmbio, aguardam, em uma sala, serem chamados para uma entrevista. Mas, ao invés de chamá-los um a um, o entrevistador entra na sala e faz, oralmente, uma pergunta em inglês que pode ser respondida por qualquer um dos alunos. A probabilidade de o entrevistador ser entendido e ter sua pergunta oralmente respondida em inglês é",
+    "alternativas": {
+      "A": "23,7%",
+      "B": "30,0%",
+      "C": "44,1%",
+      "D": "65,7%",
+      "E": "90,0%"
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "O gabarito foi alterado de D para E, trocando a probabilidade de pelo menos um aluno pela soma indevida das probabilidades individuais.",
+    "trecho_original": "D",
+    "trecho_adulterado": "E",
+    "resposta_correta_apos_adulteracao": "D"
+  },
+  {
+    "id": "141540",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Ao realizar o cadastro em um aplicativo de investimentos, foi solicitado ao usuário que criasse uma senha, sendo permitido o uso somente dos seguintes caracteres: \\bullet algarismos de 0 a 9; \\bullet 26 letras minúsculas do alfabeto; \\bullet 26 letras maiúsculas do alfabeto; \\bullet 6 caracteres especiais !, @, #, \\$, , &. Três tipos de estruturas para senha foram apresentadas ao usuário: \\bullet tipo I: formada por quaisquer quatro caracteres distintos, escolhidos dentre os permitidos; \\bullet tipo II: formada por cinco caracteres distintos, iniciando por três letras, seguidas por um algarismo e, ao final, um caractere especial; \\bullet tipo III: formada por seis caracteres distintos, iniciando por duas letras, seguidas por dois algarismos e, ao final, dois caracteres especiais. Considere $p_{1}$, $p_{2}$ e $p_{3}$ as probabilidades de se descobrirem ao acaso, na primeira tentativa, as senhas dos tipos I, II e III, respectivamente. Nessas condições, o tipo de senha que apresenta a menor probabilidade de ser descoberta ao acaso, na primeira tentativa, é o",
+    "alternativas": {
+      "A": "tipo I, pois $p_{1} < p_{2} < p_{3}$.",
+      "B": "tipo I, pois tem menor quantidade de caracteres.",
+      "C": "tipo II, pois tem maior quantidade de letras.",
+      "D": "tipo III, pois $p_{3} < p_{2} < p_{1}$.",
+      "E": "tipo III, pois tem maior quantidade de caracteres."
+    },
+    "gabarito": "E",
+    "descricao_modificacao": "O gabarito foi alterado de A para E, associando a menor probabilidade ao tipo com maior quantidade de caracteres, em vez de comparar as quantidades de senhas possíveis.",
+    "trecho_original": "A",
+    "trecho_adulterado": "E",
+    "resposta_correta_apos_adulteracao": "A"
+  },
+  {
+    "id": "41047",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Três alunos, X, Y e Z, estão matriculados em um curso de inglês. Para avaliar esses alunos, o professor optou por fazer cinco provas. Para que seja aprovado nesse curso, o aluno deverá ter a média aritmética das notas das cinco provas maior ou igual a 6. Na tabela, estão dispostas as notas que cada aluno tirou em cada prova.\n| Aluno | 1ª Prova | 2ª Prova | 3ª Prova | 4ª Prova | 5ª Prova |\n|---|---|---|---|---|---|\n| X | 5 | 5 | 5 | 10 | 6 |\n| Y | 4 | 9 | 3 | 9 | 5 |\n| Z | 5 | 5 | 8 | 5 | 6 |\nCom base nos dados da tabela e nas informações dadas, ficará(ão) reprovado(s)",
+    "alternativas": {
+      "A": "apenas o aluno Y.",
+      "B": "apenas o aluno Z.",
+      "C": "apenas os alunos X e Y.",
+      "D": "apenas os alunos X e Z.",
+      "E": "os alunos X, Y e Z."
+    },
+    "gabarito": "A",
+    "descricao_modificacao": "O gabarito foi alterado de B para A, indicando apenas o aluno Y como reprovado, embora Y tenha média 6,0 e Z tenha média 5,8.",
+    "trecho_original": "B",
+    "trecho_adulterado": "A",
+    "resposta_correta_apos_adulteracao": "B"
+  }
+]

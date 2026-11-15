@@ -1,0 +1,99 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: GABARITO (gabarito incorreto).
+- Altere SOMENTE o campo "gabarito" para a letra de uma alternativa incorreta.
+- Prefira o distrator mais plausível, que corresponda a um erro típico de raciocínio.
+- O "enunciado" e as "alternativas" devem ser devolvidos idênticos ao original.
+- Em "trecho_original" e "trecho_adulterado", informe apenas a letra (ex.: "C" e "A").
+- Em "resposta_correta_apos_adulteracao", informe a letra correta (a original).
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "125995",
+    "tipo_erro": "GABARITO",
+    "enunciado": "A meta de uma concessionária de automóveis é vender, pelo menos, 104 carros por mês. Sabe-se que, em média, em dias em que não são oferecidos descontos, são vendidos 3 carros por dia; em dias em que há o desconto mínimo, são vendidos 4 carros por dia; e, em dias em que há o desconto máximo, são vendidos 5 carros por dia. No mês atual, até o fim do expediente do sexto dia em que a concessionária abriu, não foram oferecidos descontos, tendo sido vendidos 18 carros, conforme indicava a média. Ela ainda abrirá por mais 20 dias neste mês. A menor quantidade de dias em que será necessário oferecer o desconto máximo, de modo que ainda seja possível a concessionária alcançar sua meta de vendas para o mês, é",
+    "alternativas": {
+      "A": "6.",
+      "B": "10.",
+      "C": "11.",
+      "D": "13.",
+      "E": "18."
+    },
+    "gabarito": "A"
+  },
+  {
+    "id": "39894",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Um investidor comprou ações de uma empresa em 3 de maio de certo ano (uma segunda-feira), pagando R$ 20,00 por cada uma. As ações mantinham seus preços inalterados por uma semana e tinham novos valores divulgados pela empresa a cada segunda-feira, antes da realização de qualquer negócio. O quadro ilustra o valor de uma dessas ações, em real, ao longo de algumas semanas.\n| Semana | Valor (R$) |\n|---|---|\n| 03 a 09 de maio | 20 |\n| 10 a 16 de maio | 25 |\n| 17 a 23 de maio | 20 |\n| 24 a 30 de maio | 35 |\n| 31 de maio a 06 de junho | 45 |\nO investidor vendeu suas ações em 7 de junho, mas fez isso antes da divulgação do valor das ações naquela semana. E obteve, por cada ação, a média entre os valores unitários da primeira e última semanas indicados no quadro. Suponha que o valor divulgado para uma ação daquela empresa na semana de 7 a 13 de junho tenha sido 30% maior que a média dos valores nas semanas observadas no quadro. Se o investidor tivesse vendido as ações pelo preço divulgado para a semana de 7 a 13 de junho, quanto ele teria recebido a mais, em real, pela venda de cada ação?",
+    "alternativas": {
+      "A": "4,55",
+      "B": "5,20",
+      "C": "9,75",
+      "D": "16,25",
+      "E": "26,00"
+    },
+    "gabarito": "B"
+  },
+  {
+    "id": "71832",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Os dados a seguir descrevem o consumo mensal, em kWh, dos consumidores residenciais e dos de baixa renda, antes e depois da redução da tarifa de energia no estado de Pernambuco. Como fica a tarifa \\bullet para consumidores residenciais ◦ consumo mensal de 140 kWh – antes: R$ 71,04; depois: R$ 64,75; economia: R$ 6,29; ◦ consumo mensal de 185 kWh – antes: R$ 93,87; depois: R$ 85,56; economia: R$ 8,32; ◦ consumo mensal de 350 kWh – antes: R$ 177,60; depois: R$ 161,86; economia: R$ 15,74; ◦ consumo mensal de 500 kWh – antes: R$ 253,72; depois: R$ 231,24; economia: R$ 22,48; \\bullet para consumidores de baixa renda ◦ consumo mensal de 30 kWh – antes: R$ 3,80; depois: R$ 3,35; economia: R$ 0,45; ◦ consumo mensal de 65 kWh – antes: R$ 11,53; depois: R$ 10,04; economia: R$ 1,49; ◦ consumo mensal de 80 kWh – antes: R$ 14,84; depois: R$ 12,90; economia: R$ 1,94; ◦ consumo mensal de 100 kWh – antes: R$ 19,31; depois: R$ 16,73; economia: R$ 2,59; ◦ consumo mensal de 140 kWh – antes: R$ 32,72; depois: R$ 28,20; economia: R$ 4,53. Considere dois consumidores: um que é de baixa renda e gastou 100 kWh e outro do tipo residencial que gastou 185 kWh. A diferença entre o gasto desses consumidores com 1 kWh, depois da redução da tarifa de energia, mais aproximada, é de",
+    "alternativas": {
+      "A": "R$ 0,27.",
+      "B": "R$ 0,29.",
+      "C": "R$ 0,32.",
+      "D": "R$ 0,34.",
+      "E": "R$ 0,61."
+    },
+    "gabarito": "B"
+  },
+  {
+    "id": "89124",
+    "tipo_erro": "GABARITO",
+    "enunciado": "Demografia médica é o estudo da população de médicos sob vários aspectos quantitativos e qualitativos. Um dos componentes desse estudo é a densidade médica, a qual é obtida dividindo-se o número de médicos registrados no Conselho Federal de Medicina (CFM) em uma região pela respectiva quantidade de pessoas da Unidade Federativa (UF) correspondente à região em estudo. A tabela apresenta informações sobre cinco unidades federativas, relativamente ao total de médicos registrados no CFM e à população existente.\n| UF | Total de médicos | População (em milhar) |\n|---|---|---|\n| Distrito Federal | 10 800 | 2 650 |\n| Minas Gerais | 40 400 | 19 900 |\n| São Paulo | 110 450 | 41 900 |\n| Sergipe | 3 000 | 2 120 |\n| Piauí | 3 300 | 3 140 |\nDisponível em: www.cremesp.org.br. Acesso em: 24 jun. 2015 (adaptado). Dentre as unidades federativas indicadas, qual apresenta a maior densidade médica?",
+    "alternativas": {
+      "A": "Distrito Federal.",
+      "B": "Minas Gerais.",
+      "C": "São Paulo.",
+      "D": "Sergipe.",
+      "E": "Piauí."
+    },
+    "gabarito": "A"
+  }
+]

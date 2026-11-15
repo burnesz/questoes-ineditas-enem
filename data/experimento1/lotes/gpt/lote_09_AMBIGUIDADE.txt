@@ -1,0 +1,88 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: AMBIGUIDADE (comando ou dados com mais de uma leitura).
+- Altere o enunciado para que a pergunta admita duas ou mais interpretações razoáveis
+  que levem a respostas diferentes, ou para que falte uma informação essencial
+  (por exemplo: remover a unidade pedida, uma restrição, um período de tempo, ou
+  tornar ambígua a grandeza solicitada).
+- Mantenha as alternativas e o campo "gabarito" idênticos ao original.
+- Em "resposta_correta_apos_adulteracao", descreva as leituras possíveis e a resposta
+  a que cada uma leva.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "54184",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "A expressão “Fórmula de Young” é utilizada para calcular a dose infantil de um medicamento, dada a dose do adulto: dose de criança =( idade da criança (em anos) ) dose do adulto · idade da criança (em anos) + 12 Uma enfermeira deve administrar um medicamento X a uma criança inconsciente, cuja dosagem de adulto é de 60 mg. A enfermeira não consegue descobrir onde está registrada a idade da criança no prontuário, mas identifica que, algumas horas antes, foi administrada a ela uma dose de 14 mg de um medicamento Y, cuja dosagem de adulto é 42 mg. Sabe-se que a dose da medicação Y administrada à criança estava correta. Então, a enfermeira deverá ministrar uma dosagem do medicamento X, em miligramas, igual a",
+    "alternativas": {
+      "A": "15.",
+      "B": "20.",
+      "C": "30.",
+      "D": "36.",
+      "E": "40."
+    },
+    "gabarito": "B"
+  },
+  {
+    "id": "24145",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "O quadro apresenta a ordem de colocação dos seis primeiros países em um dia de disputa nas Olimpíadas. A ordenação é feita de acordo com as quantidades de medalhas de ouro, prata e bronze, respectivamente.\n| País | Ouro | Prata | Bronze | Total |\n|---|---|---|---|---|\n| 1º China | 9 | 5 | 3 | 17 |\n| 2º EUA | 5 | 7 | 4 | 16 |\n| 3º França | 3 | 1 | 3 | 7 |\n| 4º Argentina | 3 | 2 | 2 | 7 |\n| 5º Itália | 2 | 6 | 2 | 10 |\n| 6º Brasil | 2 | 5 | 3 | 10 |\nSe as medalhas obtidas por Brasil e Argentina fossem reunidas para formar um único país hipotético, qual a posição ocupada por esse país?",
+    "alternativas": {
+      "A": "1ª",
+      "B": "2ª",
+      "C": "3ª",
+      "D": "4ª",
+      "E": "5ª"
+    },
+    "gabarito": "B"
+  },
+  {
+    "id": "54142",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Um curso preparatório para concursos tem duas turmas, A e B. Do total de alunos, 54% estão na turma A. A direção do curso decidiu pagar um bônus salarial aos professores dessas turmas, de acordo com a probabilidade de um aluno do curso, escolhido ao acaso, ser aprovado no concurso. Foi estabelecida a tabela que indica como o bônus seria definido.\n| Probabilidade de aprovação (%) | Bônus |\n|---|---|\n| $0 < P < 10$ | I |\n| $10 < P < 20$ | II |\n| $20 < P < 35$ | III |\n| $35 < P < 50$ | IV |\n| $50 < P < 100$ | V |\nPara calcular a probabilidade desejada, foi aplicado um simulado anterior ao concurso. Nele, o percentual de aprovados da turma A foi de 25%, enquanto houve uma aprovação de 40% para os alunos da turma B. Dessa forma, os professores desse curso devem receber o bônus",
+    "alternativas": {
+      "A": "I.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV.",
+      "E": "V"
+    },
+    "gabarito": "C"
+  }
+]

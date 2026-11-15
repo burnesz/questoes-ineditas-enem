@@ -1,0 +1,104 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: CONTRADICAO (inconsistência interna).
+- Altere UM trecho do enunciado (ou da tabela contida nele) para que ele contradiga
+  outra informação já presente no próprio texto, de forma que os dados não possam ser
+  todos verdadeiros ao mesmo tempo (ex.: "3 horas" em um ponto e "as 4 horas de
+  percurso" em outro; parcelas cuja soma difere do total informado; "metade dos 40
+  alunos, ou seja, 25"; porcentagens de uma distribuição somando mais de 100%).
+- A contradição deve ser verificável apenas lendo o texto, sem conhecimento externo.
+- Não altere a pergunta final. Mantenha as alternativas e o campo "gabarito"
+  idênticos ao original.
+- Em "resposta_correta_apos_adulteracao", cite os dois trechos que se contradizem e
+  explique por que não podem ser ambos verdadeiros.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "16331",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Para pintar um automóvel, cuja cor é personalizada, a oficina encarregada de fazer o serviço terá de, por meio de uma mistura adequada de tintas, compor tons de azul e de branco. O tom azul representa 40% dessa mistura. Sabe-se, ainda, que a oficina deverá adquirir somente a tinta de tom azul, pois já possui, em seus estoques, 6 litros da tinta de tom branco, que serão totalmente utilizados na referida composição. A quantidade, em litro, de tinta de tom azul que a oficina deverá adquirir para compor essa mistura, sem que haja sobras, é",
+    "alternativas": {
+      "A": "2,4.",
+      "B": "3,6.",
+      "C": "4,0.",
+      "D": "9,0.",
+      "E": "10,0."
+    },
+    "gabarito": "C"
+  },
+  {
+    "id": "126030",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma câmara de resfriamento de um laboratório tem um dispositivo que, ao ser ajustado, alterará a temperatura, em grau Celsius, de um líquido ao final de cada minuto. Nessa câmara, existem dois visores, o primeiro indicando o quanto a temperatura do líquido deve ser diminuída ao final de cada minuto, e o segundo indicando a temperatura do líquido na câmara naquele instante. Foi iniciado um teste nessa câmara quando um líquido, à temperatura de 30 ^\\circ C, foi colocado em seu interior. Ela estava programada no primeiro visor em 1,4 ^\\circ C. No final de 5 minutos, foi alterada a temperatura, e o valor da mudança que aparecia no primeiro visor foi diminuído em 0,5 ^\\circ C. Ao final de 15 minutos do início do teste, a temperatura registrada no primeiro visor foi aumentada em 0,3 ^\\circ C em relação à última marcação. Um dos objetivos desse teste é que, ao final de 30 minutos, a temperatura do líquido seja de 0 ^\\circ C. Assim, após 25 minutos relativamente ao início do teste, novo ajuste deve ser feito na numeração do primeiro visor. Que alteração deverá ser feita na numeração do primeiro visor ao final de 25 minutos do início do teste?",
+    "alternativas": {
+      "A": "Aumentar 4,0 ^\\circ C.",
+      "B": "Aumentar 3,0 ^\\circ C.",
+      "C": "Aumentar 1,0 ^\\circ C.",
+      "D": "Diminuir 0,8 ^\\circ C.",
+      "E": "Diminuir 3,0 ^\\circ C."
+    },
+    "gabarito": "D"
+  },
+  {
+    "id": "81329",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Um tipo de célula se reproduz constantemente por divisão celular, triplicando sua quantidade a cada duas horas, sob condições ideais de proliferação. Suponha uma quantidade inicial $Q_{0}$ dessas células sob as condições ideais de proliferação durante um certo período. Qual a representação algébrica da quantidade Q dessas células em função do tempo t, em hora, nesse período?",
+    "alternativas": {
+      "A": "$Q(t) = Q_{0} \\cdot 3^{t}$",
+      "B": "Q(t) = Q_{0} \\cdot 3^{2 t} $\\frac{t}{3}$",
+      "C": "Q(t) = Q_{0} \\cdot 2 $\\frac{t}{2}$",
+      "D": "Q(t) = Q_{0} \\cdot 3 $\\frac{t}{2}-1$",
+      "E": "$Q(t) = Q_{0} \\cdot 3$"
+    },
+    "gabarito": "D"
+  },
+  {
+    "id": "30327",
+    "tipo_erro": "CONTRADICAO",
+    "enunciado": "Uma instituição de ensino superior ofereceu vagas em um processo seletivo de acesso a seus cursos. Finalizadas as inscrições, foi divulgada a relação do número de candidatos por vaga em cada um dos cursos oferecidos. Esses dados são apresentados no quadro.\n| Curso | Número de vagas oferecidas | Número de candidatos por vaga |\n|---|---|---|\n| Administração | 30 | 6 |\n| Ciências Contábeis | 40 | 6 |\n| Engenharia Elétrica | 50 | 7 |\n| História | 30 | 8 |\n| Letras | 25 | 4 |\n| Pedagogia | 25 | 5 |\nQual foi o número total de candidatos inscritos nesse processo seletivo?",
+    "alternativas": {
+      "A": "200",
+      "B": "400",
+      "C": "1 200",
+      "D": "1 235",
+      "E": "7 200"
+    },
+    "gabarito": "D"
+  }
+]

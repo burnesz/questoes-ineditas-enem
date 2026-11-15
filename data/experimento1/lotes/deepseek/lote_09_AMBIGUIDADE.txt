@@ -1,0 +1,101 @@
+Você é um especialista em elaboração de itens de Matemática do ENEM. Estamos construindo
+um conjunto de teste para medir se modelos avaliadores automáticos conseguem detectar
+questões defeituosas. Para isso, você vai ADULTERAR questões autênticas do ENEM,
+inserindo em cada uma EXATAMENTE UM defeito objetivo do tipo indicado.
+
+Regras obrigatórias:
+1. Insira um único defeito, do tipo pedido. Não corrija, melhore nem reescreva o resto.
+2. Faça a menor alteração possível: preserve estilo, tamanho, formatação, LaTeX,
+   tabelas, unidades e pontuação de todo o texto não envolvido no defeito.
+3. O defeito deve ser objetivo e verificável por um professor de Matemática, sem
+   depender de opinião.
+4. O defeito deve ser discreto: a questão deve continuar parecendo um item real do
+   ENEM. Não deixe pistas como "(erro)", "atenção", comentários, negrito ou marcas.
+5. Não remova nem acrescente alternativas: devem continuar existindo A, B, C, D e E.
+6. Não mencione que a questão foi alterada em nenhum campo exceto
+   "descricao_modificacao", "trecho_original", "trecho_adulterado" e
+   "resposta_correta_apos_adulteracao".
+
+
+Tipo de defeito: AMBIGUIDADE (comando ou dados com mais de uma leitura).
+- Altere o enunciado para que a pergunta admita duas ou mais interpretações razoáveis
+  que levem a respostas diferentes, ou para que falte uma informação essencial
+  (por exemplo: remover a unidade pedida, uma restrição, um período de tempo, ou
+  tornar ambígua a grandeza solicitada).
+- Mantenha as alternativas e o campo "gabarito" idênticos ao original.
+- Em "resposta_correta_apos_adulteracao", descreva as leituras possíveis e a resposta
+  a que cada uma leva.
+
+Responda APENAS com um array JSON dentro de um único bloco de código ```json
+(sem texto antes ou depois do bloco), com um objeto por questão, na mesma ordem da entrada. O JSON deve ser válido: dentro
+dos valores de texto, escape aspas duplas como \" e quebras de linha como \n.
+Formato:
+[
+  {
+    "id": "<id da questão, inalterado>",
+    "tipo_erro": "<tipo pedido>",
+    "enunciado": "<enunciado completo após a adulteração>",
+    "alternativas": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+    "gabarito": "<letra>",
+    "descricao_modificacao": "<1-2 frases explicando o defeito inserido>",
+    "trecho_original": "<trecho exato que foi alterado, antes>",
+    "trecho_adulterado": "<o mesmo trecho, depois>",
+    "resposta_correta_apos_adulteracao": "<conforme as instruções do tipo>"
+  }
+]
+
+Questões a adulterar:
+[
+  {
+    "id": "117785",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma confecção de roupas pretende contratar novos funcionários e, para treiná-los, dispõe de duas opções: \\bullet ela própria realizar o treinamento que teria custo de R$ 9 000,00 por funcionário. Nesse caso, ao fim do treinamento, as coleções de peças de roupas confeccionadas por funcionário serão vendidas por R$ 1 500,00 pela confecção, valor que será abatido do investimento com o treinamento de cada funcionário; \\bullet contratar uma empresa especializada que cobra R$ 4 000,00 por funcionário. Nesse caso, as peças produzidas no treinamento não poderão ser comercializadas pela confecção. A confecção investirá um total de R$ 2 520 000,00 no treinamento desses futuros funcionários. Quantos funcionários essa confecção conseguirá treinar a mais se optar pela empresa especializada em vez de ela própria realizar o treinamento?",
+    "alternativas": {
+      "A": "294",
+      "B": "336",
+      "C": "390",
+      "D": "504",
+      "E": "630"
+    },
+    "gabarito": "A"
+  },
+  {
+    "id": "29575",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Em um jogo de tabuleiro, a pontuação é marcada com fichas coloridas. Cada ficha vermelha vale um ponto. Três fichas vermelhas podem ser trocadas por uma azul, três fichas azuis podem ser trocadas por uma branca, e três fichas brancas podem ser trocadas por uma verde. Ao final do jogo, os jogadores A, B e C terminaram, cada um, com as quantidades de fichas, conforme a tabela seguinte:\n|  | Fichas verdes | Fichas brancas | Fichas azuis | Fichas vermelhas |\n|---|---|---|---|---|\n| Jogador A | 3 | 1 | 1 | 4 |\n| Jogador B | 2 | 4 | 0 | 9 |\n| Jogador C | 1 | 5 | 8 | 2 |\nDe acordo com essa tabela, as classificações em primeiro, segundo e terceiro lugares ficaram, respectivamente, para os jogadores",
+    "alternativas": {
+      "A": "A, B e C.",
+      "B": "B, A e C.",
+      "C": "C, B e A.",
+      "D": "B, C e A.",
+      "E": "C, A e B."
+    },
+    "gabarito": "D"
+  },
+  {
+    "id": "111738",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Uma das informações que pode auxiliar no dimensionamento do número de pediatras que devem atender em uma Unidade Básica de Saúde (UBS) é o número que representa a mediana da quantidade de crianças por família existente na região sob sua responsabilidade. O quadro mostra a distribuição das frequências do número de crianças por família na região de responsabilidade de uma UBS.\n| Número de crianças por família | Frequência |\n|---|---|\n| 0 | 100 |\n| 1 | 400 |\n| 2 | 200 |\n| 3 | 150 |\n| 4 | 100 |\n| 5 | 50 |\nO número que representa a mediana da quantidade de crianças por família nessa região é",
+    "alternativas": {
+      "A": "1,0.",
+      "B": "1,5.",
+      "C": "1,9.",
+      "D": "2,1.",
+      "E": "2,5."
+    },
+    "gabarito": "B"
+  },
+  {
+    "id": "32369",
+    "tipo_erro": "AMBIGUIDADE",
+    "enunciado": "Em uma universidade, atuam professores que estão enquadrados funcionalmente pela sua maior titulação: mestre ou doutor. Nela há, atualmente, 60 mestres e 40 doutores. Os salários mensais dos professores mestres e dos doutores são, respectivamente, R$ 8 000,00 e R$ 12 000,00. A diretoria da instituição pretende proporcionar um aumento salarial diferenciado para o ano seguinte, de tal forma que o salário médio mensal dos professores dessa instituição não ultrapasse R$ 12 240,00. A universidade já estabeleceu que o aumento salarial será de 25% para os mestres e precisa ainda definir o percentual de reajuste para os doutores. Mantido o número atual de professores com suas atuais titulações, o aumento salarial, em porcentagem, a ser concedido aos doutores deverá ser de, no máximo,",
+    "alternativas": {
+      "A": "14,4.",
+      "B": "20,7.",
+      "C": "22,0.",
+      "D": "30,0.",
+      "E": "37,5."
+    },
+    "gabarito": "D"
+  }
+]
