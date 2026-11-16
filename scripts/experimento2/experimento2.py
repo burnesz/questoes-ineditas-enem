@@ -225,7 +225,10 @@ def cmd_resumo(args: argparse.Namespace) -> None:
     from scipy.stats import chi2_contingency
 
     geracoes = [r for r in ler_jsonl(MANIFESTO_GERACOES) if r["status"] != "interrompido"]
-    avaliacoes = {r["questao_id"]: r for r in ler_jsonl(MANIFESTO_AVALIACOES) if r["status"] in ("aprovada", "reprovada")}
+    todas = {r["questao_id"]: r for r in ler_jsonl(MANIFESTO_AVALIACOES) if r["status"] != "interrompido"}  # a última vale
+    avaliacoes = {q: r for q, r in todas.items() if r["status"] in ("aprovada", "reprovada")}
+    # Falha técnica: o avaliador não deu veredito (ex.: Ollama abortou a resposta por repetição); fica fora da taxa
+    falhas_tecnicas = {q: r for q, r in todas.items() if r["status"] == "erro"}
     por_modelo: Dict[str, List[dict]] = defaultdict(list)
     for g in geracoes:
         por_modelo[g["modelo_gerador"]].append(g)
@@ -235,17 +238,18 @@ def cmd_resumo(args: argparse.Namespace) -> None:
         passou = [g for g in gs if g["status"] == "passou_etapa3"]
         avaliadas = [avaliacoes[g["questao_id"]] for g in passou if g["questao_id"] in avaliacoes]
         aprovadas = [a for a in avaliadas if a["status"] == "aprovada"]
+        tecnicas = [falhas_tecnicas[g["questao_id"]] for g in passou if g["questao_id"] in falhas_tecnicas]
         n_validos = (len(gs) - len(passou)) + len(avaliadas)  # pedidos com veredito final
         taxa = len(aprovadas) / n_validos if n_validos else 0.0
         # Tempo por questão aprovada: todo o tempo gasto (geração de todos os pedidos + avaliações) ÷ aprovadas
-        tempo_total = sum(g["tempo_geracao_s"] for g in gs) + sum(a["tempo_avaliacao_s"] for a in avaliadas)
+        tempo_total = sum(g["tempo_geracao_s"] for g in gs) + sum(a["tempo_avaliacao_s"] for a in avaliadas + tecnicas)
         erros = Counter(g.get("etapa_falha") or "?" for g in gs if g["status"] == "reprovada_etapa2_3")
         erros.update(a.get("etapa_falha") or "?" for a in avaliadas if a["status"] == "reprovada")
         contagem_erros[modelo] = erros
         tabela_chi.append([len(aprovadas), n_validos - len(aprovadas)])
         linhas.append({
             "modelo": modelo, "pedidos": len(gs), "passaram_etapa3": len(passou), "avaliadas": len(avaliadas),
-            "pendentes": len(passou) - len(avaliadas), "aprovadas": len(aprovadas), "taxa": taxa,
+            "pendentes": len(passou) - len(avaliadas) - len(tecnicas), "falhas_tecnicas": len(tecnicas), "aprovadas": len(aprovadas), "taxa": taxa,
             "tentativas_por_aprovada": (1 / taxa) if taxa else None,
             "tempo_por_aprovada_s": (tempo_total / len(aprovadas)) if aprovadas else None,
             "tempo_medio_geracao_s": statistics.mean(g["tempo_geracao_s"] for g in gs),
@@ -254,14 +258,14 @@ def cmd_resumo(args: argparse.Namespace) -> None:
     md = ["# Experimento 2: resultados dos modelos geradores", "",
           "Uma tentativa por pedido. Etapas 1 a 3 com o gerador; Etapa 4 com o avaliador escolhido no Experimento 1.", "",
           "| Gerador | Pedidos | Passaram na Etapa 3 | Aprovadas | % aprovadas | Tentativas por aprovada | "
-          "Tempo por aprovada | Pendentes de avaliação |",
-          "| :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"]
+          "Tempo por aprovada | Falhas técnicas | Pendentes de avaliação |",
+          "| :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"]
     for l in linhas:
         tent = f"{l['tentativas_por_aprovada']:.1f}".replace(".", ",") if l["tentativas_por_aprovada"] else "-"
         tempo = f"{l['tempo_por_aprovada_s'] / 60:.1f} min".replace(".", ",") if l["tempo_por_aprovada_s"] else "-"
         taxa = f"{100 * l['taxa']:.1f}%".replace(".", ",")
         md.append(f"| {l['modelo']} | {l['pedidos']} | {l['passaram_etapa3']} | {l['aprovadas']} | "
-                  f"{taxa} | {tent} | {tempo} | {l['pendentes']} |")
+                  f"{taxa} | {tent} | {tempo} | {l['falhas_tecnicas']} | {l['pendentes']} |")
 
     etapas = sorted({e for c in contagem_erros.values() for e in c})
     md += ["", "## Onde as tentativas foram reprovadas", "",
@@ -270,14 +274,19 @@ def cmd_resumo(args: argparse.Namespace) -> None:
     for e in etapas:
         md.append(f"| {e} | " + " | ".join(str(contagem_erros[l['modelo']].get(e, 0)) for l in linhas) + " |")
 
-    if len(tabela_chi) >= 2 and all(sum(r) for r in tabela_chi) and any(r[0] for r in tabela_chi):
+    pendentes_total = sum(l["pendentes"] for l in linhas)
+    if pendentes_total:
+        md += ["", f"## Comparação estatística", "", f"Ainda há {pendentes_total} questão(ões) pendente(s) de avaliação: "
+               "o teste estatístico só é calculado com todas avaliadas."]
+    elif len(tabela_chi) >= 2 and all(sum(r) for r in tabela_chi) and any(r[0] for r in tabela_chi):
         chi2, p, _, _ = chi2_contingency(tabela_chi)
         p_txt = "< 0,001" if p < 0.001 else f"{p:.3f}".replace(".", ",")
         md += ["", "## Comparação estatística", "",
-               f"Teste qui-quadrado da taxa de aprovação entre os geradores: χ² = {chi2:.2f}, p = {p_txt}. "
+               f"Teste qui-quadrado da taxa de aprovação entre os geradores: χ² = {chi2:.2f}".replace(".", ",") + f", p {p_txt if p_txt.startswith('<') else '= ' + p_txt}. "
                "p < 0,05 indica que a taxa de aprovação difere entre os geradores."]
     md += ["", "## Como ler", "",
-           "- **% aprovadas**: aprovadas ÷ pedidos com veredito final (os pendentes de avaliação ficam de fora).",
+           "- **% aprovadas**: aprovadas ÷ pedidos com veredito final (falhas técnicas e pendentes ficam de fora).",
+           "- **Falhas técnicas**: o avaliador não chegou a um veredito (resposta abortada pelo Ollama).",
            "- **Tentativas por aprovada**: 1 ÷ taxa de aprovação; é o número médio de tentativas para obter uma questão aprovada.",
            "- **Tempo por aprovada**: todo o tempo de geração e avaliação gasto pelo gerador ÷ número de aprovadas.", ""]
 

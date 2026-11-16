@@ -1,0 +1,168 @@
+GERAR qwen2.5:7b-instruct-q4_K_M (845dbda0ea48) think=None | Ollama 0.34.1 em http://localhost:11434 | meta 5/habilidade | já feitos 140 | nesta execução 0
+GERAR llama3.1:8b-instruct-q4_K_M (46e0c10c039e) think=None | Ollama 0.34.1 em http://localhost:11434 | meta 5/habilidade | já feitos 140 | nesta execução 0
+GERAR qwen3:8b-q4_K_M (500a1f067a9f) think=False | Ollama 0.34.1 em http://localhost:11434 | meta 5/habilidade | já feitos 140 | nesta execução 0
+AVALIAR com qwen3:8b-q4_K_M (500a1f067a9f) think=False | Ollama 0.34.1 | já avaliadas 23 | pendentes 141
+[1/141] H30 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (76.2s) | média 76s → faltam ~3.0 h
+[2/141] H23 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (83.3s) | média 80s → faltam ~3.1 h
+[3/141] H14 (qwen2.5:7b-instruct-q4_K_M): aprovada  (79.6s) | média 80s → faltam ~3.1 h
+[4/141] H27 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (60.6s) | média 75s → faltam ~2.9 h
+[5/141] H24 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (47.6s) | média 69s → faltam ~2.6 h
+[6/141] H01 (qwen2.5:7b-instruct-q4_K_M): aprovada  (91.6s) | média 73s → faltam ~2.7 h
+[7/141] H25 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (59.3s) | média 71s → faltam ~2.6 h
+[8/141] H17 (qwen2.5:7b-instruct-q4_K_M): aprovada  (91.5s) | média 74s → faltam ~2.7 h
+[9/141] H19 (qwen2.5:7b-instruct-q4_K_M): aprovada  (89.4s) | média 75s → faltam ~2.8 h
+[10/141] H26 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (56.2s) | média 74s → faltam ~2.7 h
+[11/141] H22 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (78.1s) | média 74s → faltam ~2.7 h
+[12/141] H30 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (81.7s) | média 75s → faltam ~2.7 h
+[13/141] H04 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (76.8s) | média 75s → faltam ~2.7 h
+[14/141] H14 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.3_auditoria_pedagogica (83.5s) | média 75s → faltam ~2.7 h
+[15/141] H08 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.1_dados_ociosos (20.0s) | média 72s → faltam ~2.5 h
+[16/141] H27 (qwen2.5:7b-instruct-q4_K_M): aprovada  (120.0s) | média 75s → faltam ~2.6 h
+[17/141] H07 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.1_nao_respondivel (50.4s) | média 73s → faltam ~2.5 h
+[18/141] H05 (qwen2.5:7b-instruct-q4_K_M): aprovada  (68.9s) | média 73s → faltam ~2.5 h
+[19/141] H11 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.1_premissa_oculta (57.1s) | média 72s → faltam ~2.4 h
+[20/141] H25 (qwen2.5:7b-instruct-q4_K_M): aprovada  (87.4s) | média 73s → faltam ~2.5 h
+[21/141] H16 (qwen2.5:7b-instruct-q4_K_M): aprovada  (95.6s) | média 74s → faltam ~2.5 h
+[22/141] H15 (qwen2.5:7b-instruct-q4_K_M): aprovada  (81.4s) | média 74s → faltam ~2.5 h
+[23/141] H26 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (67.2s) | média 74s → faltam ~2.4 h
+[24/141] H28 (qwen2.5:7b-instruct-q4_K_M): aprovada  (85.4s) | média 75s → faltam ~2.4 h
+[25/141] H18 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (66.9s) | média 74s → faltam ~2.4 h
+[26/141] H12 (qwen2.5:7b-instruct-q4_K_M): aprovada  (72.7s) | média 74s → faltam ~2.4 h
+[27/141] H04 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (53.6s) | média 73s → faltam ~2.3 h
+[28/141] H03 (qwen2.5:7b-instruct-q4_K_M): aprovada  (70.3s) | média 73s → faltam ~2.3 h
+[29/141] H27 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (45.7s) | média 72s → faltam ~2.3 h
+[30/141] H07 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (44.5s) | média 71s → faltam ~2.2 h
+[31/141] H21 (qwen2.5:7b-instruct-q4_K_M): aprovada  (70.4s) | média 71s → faltam ~2.2 h
+[32/141] H29 (qwen2.5:7b-instruct-q4_K_M): aprovada  (99.4s) | média 72s → faltam ~2.2 h
+[33/141] H05 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (80.0s) | média 72s → faltam ~2.2 h
+[34/141] H15 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (47.1s) | média 72s → faltam ~2.1 h
+[35/141] H26 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (48.5s) | média 71s → faltam ~2.1 h
+[36/141] H09 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (73.7s) | média 71s → faltam ~2.1 h
+[37/141] H28 (qwen2.5:7b-instruct-q4_K_M): reprovada 4.2_equivalencia (74.1s) | média 71s → faltam ~2.1 h
+[38/141] H18 (qwen2.5:7b-instruct-q4_K_M): aprovada  (68.8s) | média 71s → faltam ~2.0 h
+[39/141] H14 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_nao_respondivel (26.7s) | média 70s → faltam ~2.0 h
+[40/141] H03 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (68.4s) | média 70s → faltam ~2.0 h
+[41/141] H07 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (39.5s) | média 69s → faltam ~1.9 h
+[42/141] H29 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (55.6s) | média 69s → faltam ~1.9 h
+[43/141] H02 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_premissa_oculta (35.9s) | média 68s → faltam ~1.9 h
+[44/141] H17 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (56.8s) | média 68s → faltam ~1.8 h
+[45/141] H15 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_dados_ociosos (41.5s) | média 67s → faltam ~1.8 h
+[46/141] H22 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_premissa_oculta (64.3s) | média 67s → faltam ~1.8 h
+[47/141] H12 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_premissa_oculta (73.3s) | média 67s → faltam ~1.8 h
+[48/141] H27 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_premissa_oculta (43.4s) | média 67s → faltam ~1.7 h
+2026-11-15 19:11:17,908 [INFO] HTTP Request: POST http://localhost:11434/api/generate "HTTP/1.1 500 Internal Server Error"
+2026-11-15 19:11:37,694 [INFO] HTTP Request: POST http://localhost:11434/api/generate "HTTP/1.1 500 Internal Server Error"
+2026-11-15 19:11:56,027 [INFO] HTTP Request: POST http://localhost:11434/api/generate "HTTP/1.1 500 Internal Server Error"
+[49/141] H07 (llama3.1:8b-instruct-q4_K_M): erro  (95.9s) | média 67s → faltam ~1.7 h
+[50/141] H02 (llama3.1:8b-instruct-q4_K_M): aprovada  (96.8s) | média 68s → faltam ~1.7 h
+[51/141] H17 (llama3.1:8b-instruct-q4_K_M): aprovada  (98.8s) | média 69s → faltam ~1.7 h
+[52/141] H22 (llama3.1:8b-instruct-q4_K_M): aprovada  (77.1s) | média 69s → faltam ~1.7 h
+[53/141] H30 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_nao_respondivel (38.8s) | média 68s → faltam ~1.7 h
+[54/141] H23 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (127.0s) | média 69s → faltam ~1.7 h
+[55/141] H18 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_nao_respondivel (38.0s) | média 69s → faltam ~1.6 h
+[56/141] H07 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (58.6s) | média 69s → faltam ~1.6 h
+[57/141] H29 (llama3.1:8b-instruct-q4_K_M): aprovada  (105.0s) | média 69s → faltam ~1.6 h
+[58/141] H11 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_nao_respondivel (33.3s) | média 69s → faltam ~1.6 h
+[59/141] H25 (llama3.1:8b-instruct-q4_K_M): aprovada  (67.8s) | média 69s → faltam ~1.6 h
+[60/141] H17 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_dados_ociosos (40.6s) | média 68s → faltam ~1.5 h
+[61/141] H15 (llama3.1:8b-instruct-q4_K_M): aprovada  (73.6s) | média 68s → faltam ~1.5 h
+[62/141] H19 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (64.8s) | média 68s → faltam ~1.5 h
+[63/141] H23 (llama3.1:8b-instruct-q4_K_M): aprovada  (81.0s) | média 68s → faltam ~1.5 h
+[64/141] H28 (llama3.1:8b-instruct-q4_K_M): aprovada  (76.1s) | média 68s → faltam ~1.5 h
+[65/141] H18 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (56.1s) | média 68s → faltam ~1.4 h
+[66/141] H12 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (33.1s) | média 68s → faltam ~1.4 h
+[67/141] H03 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (47.5s) | média 67s → faltam ~1.4 h
+[68/141] H05 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (77.2s) | média 68s → faltam ~1.4 h
+[69/141] H17 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (46.8s) | média 67s → faltam ~1.3 h
+[70/141] H15 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (50.7s) | média 67s → faltam ~1.3 h
+[71/141] H19 (llama3.1:8b-instruct-q4_K_M): aprovada  (78.9s) | média 67s → faltam ~1.3 h
+[72/141] H09 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_premissa_oculta (43.9s) | média 67s → faltam ~1.3 h
+[73/141] H23 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (59.8s) | média 67s → faltam ~1.3 h
+[74/141] H18 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_nao_respondivel (63.6s) | média 67s → faltam ~1.2 h
+[75/141] H10 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (45.1s) | média 66s → faltam ~1.2 h
+[76/141] H03 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (71.6s) | média 67s → faltam ~1.2 h
+[77/141] H21 (llama3.1:8b-instruct-q4_K_M): aprovada  (65.9s) | média 67s → faltam ~1.2 h
+[78/141] H05 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_dados_ociosos (43.2s) | média 66s → faltam ~1.2 h
+[79/141] H02 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_premissa_oculta (50.4s) | média 66s → faltam ~1.1 h
+[80/141] H01 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_premissa_oculta (45.7s) | média 66s → faltam ~1.1 h
+[81/141] H16 (llama3.1:8b-instruct-q4_K_M): aprovada  (79.0s) | média 66s → faltam ~1.1 h
+[82/141] H17 (llama3.1:8b-instruct-q4_K_M): aprovada  (120.7s) | média 67s → faltam ~1.1 h
+[83/141] H15 (llama3.1:8b-instruct-q4_K_M): aprovada  (76.5s) | média 67s → faltam ~1.1 h
+[84/141] H19 (llama3.1:8b-instruct-q4_K_M): reprovada 4.2_equivalencia (63.0s) | média 67s → faltam ~1.1 h
+[85/141] H09 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_premissa_oculta (82.1s) | média 67s → faltam ~1.0 h
+[86/141] H23 (llama3.1:8b-instruct-q4_K_M): aprovada  (88.8s) | média 67s → faltam ~1.0 h
+[87/141] H28 (llama3.1:8b-instruct-q4_K_M): reprovada 4.1_nao_respondivel (41.6s) | média 67s → faltam ~1.0 h
+[88/141] H14 (qwen3:8b-q4_K_M): aprovada  (85.2s) | média 67s → faltam ~1.0 h
+[89/141] H27 (qwen3:8b-q4_K_M): aprovada  (79.1s) | média 67s → faltam ~1.0 h
+[90/141] H29 (qwen3:8b-q4_K_M): reprovada 4.1_nao_respondivel (355.7s) | média 70s → faltam ~1.0 h
+[91/141] H05 (qwen3:8b-q4_K_M): aprovada  (83.9s) | média 71s → faltam ~1.0 h
+[92/141] H02 (qwen3:8b-q4_K_M): reprovada 4.1_premissa_oculta (67.5s) | média 70s → faltam ~1.0 h
+[93/141] H01 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (58.1s) | média 70s → faltam ~0.9 h
+[94/141] H25 (qwen3:8b-q4_K_M): aprovada  (62.4s) | média 70s → faltam ~0.9 h
+[95/141] H15 (qwen3:8b-q4_K_M): aprovada  (71.4s) | média 70s → faltam ~0.9 h
+[96/141] H19 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (50.1s) | média 70s → faltam ~0.9 h
+[97/141] H22 (qwen3:8b-q4_K_M): aprovada  (107.0s) | média 70s → faltam ~0.9 h
+[98/141] H30 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (54.8s) | média 70s → faltam ~0.8 h
+[99/141] H18 (qwen3:8b-q4_K_M): aprovada  (76.4s) | média 70s → faltam ~0.8 h
+[100/141] H12 (qwen3:8b-q4_K_M): aprovada  (79.4s) | média 70s → faltam ~0.8 h
+[101/141] H04 (qwen3:8b-q4_K_M): reprovada 4.1_nao_respondivel (27.5s) | média 70s → faltam ~0.8 h
+[102/141] H14 (qwen3:8b-q4_K_M): aprovada  (110.3s) | média 70s → faltam ~0.8 h
+[103/141] H21 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (93.2s) | média 71s → faltam ~0.7 h
+[104/141] H29 (qwen3:8b-q4_K_M): reprovada 4.1_premissa_oculta (90.9s) | média 71s → faltam ~0.7 h
+[105/141] H13 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (78.6s) | média 71s → faltam ~0.7 h
+[106/141] H11 (qwen3:8b-q4_K_M): aprovada  (79.9s) | média 71s → faltam ~0.7 h
+[107/141] H01 (qwen3:8b-q4_K_M): aprovada  (81.6s) | média 71s → faltam ~0.7 h
+[108/141] H25 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (48.6s) | média 71s → faltam ~0.6 h
+[109/141] H16 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (45.0s) | média 71s → faltam ~0.6 h
+[110/141] H19 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (51.4s) | média 70s → faltam ~0.6 h
+[111/141] H28 (qwen3:8b-q4_K_M): aprovada  (84.4s) | média 71s → faltam ~0.6 h
+[112/141] H18 (qwen3:8b-q4_K_M): aprovada  (78.1s) | média 71s → faltam ~0.6 h
+[113/141] H12 (qwen3:8b-q4_K_M): aprovada  (74.9s) | média 71s → faltam ~0.5 h
+[114/141] H04 (qwen3:8b-q4_K_M): reprovada 4.1_nao_respondivel (25.3s) | média 70s → faltam ~0.5 h
+[115/141] H03 (qwen3:8b-q4_K_M): aprovada  (69.5s) | média 70s → faltam ~0.5 h
+[116/141] H27 (qwen3:8b-q4_K_M): aprovada  (105.1s) | média 71s → faltam ~0.5 h
+[117/141] H29 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (48.3s) | média 70s → faltam ~0.5 h
+[118/141] H13 (qwen3:8b-q4_K_M): reprovada 4.3_auditoria_pedagogica (115.4s) | média 71s → faltam ~0.5 h
+[119/141] H02 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (48.1s) | média 71s → faltam ~0.4 h
+[120/141] H17 (qwen3:8b-q4_K_M): reprovada 4.1_premissa_oculta (57.1s) | média 70s → faltam ~0.4 h
+[121/141] H27 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (52.4s) | média 70s → faltam ~0.4 h
+[122/141] H07 (qwen3:8b-q4_K_M): aprovada  (66.0s) | média 70s → faltam ~0.4 h
+[123/141] H24 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (71.8s) | média 70s → faltam ~0.4 h
+[124/141] H01 (qwen3:8b-q4_K_M): aprovada  (71.7s) | média 70s → faltam ~0.3 h
+[125/141] H15 (qwen3:8b-q4_K_M): aprovada  (75.3s) | média 70s → faltam ~0.3 h
+[126/141] H23 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (61.1s) | média 70s → faltam ~0.3 h
+[127/141] H28 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (44.4s) | média 70s → faltam ~0.3 h
+[128/141] H18 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (47.2s) | média 70s → faltam ~0.3 h
+[129/141] H14 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (61.2s) | média 70s → faltam ~0.2 h
+[130/141] H21 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (46.5s) | média 70s → faltam ~0.2 h
+[131/141] H29 (qwen3:8b-q4_K_M): aprovada  (58.6s) | média 70s → faltam ~0.2 h
+[132/141] H05 (qwen3:8b-q4_K_M): aprovada  (94.3s) | média 70s → faltam ~0.2 h
+[133/141] H13 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (83.9s) | média 70s → faltam ~0.2 h
+[134/141] H02 (qwen3:8b-q4_K_M): aprovada  (75.9s) | média 70s → faltam ~0.1 h
+[135/141] H11 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (64.7s) | média 70s → faltam ~0.1 h
+[136/141] H17 (qwen3:8b-q4_K_M): aprovada  (81.1s) | média 70s → faltam ~0.1 h
+[137/141] H15 (qwen3:8b-q4_K_M): aprovada  (64.8s) | média 70s → faltam ~0.1 h
+[138/141] H30 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (51.7s) | média 70s → faltam ~0.1 h
+[139/141] H23 (qwen3:8b-q4_K_M): reprovada 4.2_equivalencia (51.3s) | média 70s → faltam ~0.0 h
+[140/141] H28 (qwen3:8b-q4_K_M): aprovada  (103.8s) | média 70s → faltam ~0.0 h
+[141/141] H12 (qwen3:8b-q4_K_M): aprovada  (66.1s) | média 70s → faltam ~0.0 h
+# Experimento 2: resultados dos modelos geradores
+| Gerador | Pedidos | Passaram na Etapa 3 | Aprovadas | % aprovadas | Tentativas por aprovada | Tempo por aprovada | Pendentes de avaliação |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| llama3.1:8b-instruct-q4_K_M | 140 | 49 | 14 | 10,1% | 9,9 | 23,6 min | 1 |
+| qwen2.5:7b-instruct-q4_K_M | 140 | 61 | 28 | 20,0% | 5,0 | 10,9 min | 0 |
+| qwen3:8b-q4_K_M | 140 | 54 | 26 | 18,6% | 5,4 | 18,7 min | 0 |
+## Onde as tentativas foram reprovadas
+| Etapa | llama3.1:8b-instruct-q4_K_M | qwen2.5:7b-instruct-q4_K_M | qwen3:8b-q4_K_M |
+| :--- | ---: | ---: | ---: |
+| 2a_planejamento | 5 | 2 | 21 |
+| 2b_solver | 11 | 11 | 9 |
+| 3_execucao_solver | 25 | 28 | 33 |
+| 3_nexo_complexidade | 50 | 38 | 23 |
+| 4.1_dados_ociosos | 3 | 1 | 0 |
+| 4.1_nao_respondivel | 6 | 2 | 3 |
+| 4.1_premissa_oculta | 8 | 3 | 3 |
+| 4.2_equivalencia | 17 | 26 | 21 |
+| 4.3_auditoria_pedagogica | 0 | 1 | 1 |
+## Comparação estatística
+## Como ler

@@ -26,3 +26,16 @@ Os arquivos estão na ordem em que foram produzidos:
 | 10. Resultados | `avaliacoes/`: as respostas dos 4 modelos (ver `avaliacoes/LEIAME.md`) | `avaliar_base.py` |
 
 Os scripts ficam em `scripts/experimento1/`.
+
+## Experimento 2: seleção do modelo gerador (`experimento2/`)
+
+| Arquivo | Para que serve | Script que gera |
+| :--- | :--- | :--- |
+| `geracoes.jsonl` | Um registro por pedido de geração (3 geradores × 140) | `experimento2.py gerar` |
+| `avaliacoes.jsonl` | Um registro por avaliação feita pelo avaliador | `experimento2.py avaliar` |
+| `questoes_geradas.jsonl` | As 420 questões geradas, com veredito (cópia do SQLite, que fica fora do git) | (exportação do banco) |
+| `resultados/` | Tabela final do experimento | `experimento2.py resumo` |
+
+As questões geradas ficam no SQLite (`questoes_ineditas.db`), e os manifestos apontam para elas. Detalhes em `experimento2/LEIAME.md`.
+
+Os scripts ficam em `scripts/experimento2/`.
