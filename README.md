@@ -93,19 +93,46 @@ questoes-ineditas-enem/
 │   ├── schemas/                 # Schemas tipados Pydantic v2 e JSON Schemas Ollama
 │   └── services/                # CodeExecutor, QuestionService, LLMClient, ChromaVectorStore
 ├── data/
+│   ├── LEIAME.md                               # Guia dos dados e registro completo dos experimentos
 │   ├── habilidades_queries.json                # 30 habilidades com queries expandidas e tipologias
-│   └── itens_prova_2009_2024_llm_texto.csv   # Dataset raw de questões históricas do ENEM
+│   ├── itens_prova_2009_2024_llm_texto.csv     # Dataset de questões históricas do ENEM
+│   ├── relatorio_defeitos_itens_prova_llm_texto.md  # Defeitos de extração conhecidos no dataset
+│   ├── experimento1/                           # Seleção do avaliador: base de 280 itens, chave, avaliações e resultados
+│   └── experimento2/                           # Seleção do gerador: 420 pedidos, avaliações, resultados e validação humana
 ├── scripts/
 │   ├── seed_habilidades.py           # Popula H01 a H30 no banco
 │   ├── seed_questoes.py              # Popula acervo histórico no banco relacional
 │   ├── seed_chroma.py                # Indexa o CSV histórico no ChromaDB local
-│   └── populate_questoes_ineditas.py # Wrapper compatível para geração em lote
-├── tests/                       # Suíte completa de testes unitários e de integração
+│   ├── populate_questoes_ineditas.py # Wrapper compatível para geração em lote
+│   ├── experimento1/                 # Montagem da base, avaliação dos 4 modelos e análise (Experimento 1)
+│   └── experimento2/                 # Geração, avaliação, resumo e amostra para professores (Experimento 2)
+├── tests/                       # Suíte de testes unitários e de integração (pytest)
 ├── cli.py                       # Ponto de entrada executável da CLI unificada
 ├── requirements.txt             # Dependências do projeto
 ├── pytest.ini                   # Configurações do Pytest
 └── README.md
 ```
+
+Ficam fora do git, por serem locais ou gerados: `questoes_ineditas.db`, `chroma_db/`, `.env`, `docs/`, `backups/`, `arquivo_local/`, os logs de execução (`*.log`) e o roteiro pessoal das rodadas (`scripts/experimento2/rodar_noite.sh`).
+
+---
+
+## 🧪 Experimentos: seleção do avaliador e do gerador
+
+O repositório inclui um protocolo experimental em duas etapas para escolher os LLMs do sistema:
+
+| Experimento | O que compara | Resultado |
+| :--- | :--- | :--- |
+| **1. Avaliador** | Qwen2.5 7B, Qwen3 8B, DeepSeek-R1 8B e Llama 3.1 8B avaliando 280 questões (140 autênticas do ENEM e 140 com erros inseridos) | **Qwen3 8B**: maior F1 (0,719), diferença significativa no teste de McNemar |
+| **2. Gerador** | Qwen2.5 7B, Qwen3 8B e Llama 3.1 8B gerando 140 questões cada, todas avaliadas pelo Qwen3 | **Qwen2.5 7B**: 20% de aprovadas e o menor tempo por questão aprovada |
+
+O registro completo está em [`data/LEIAME.md`](data/LEIAME.md):
+- montagem da base;
+- condições de execução;
+- métricas;
+- resultados;
+- limitações;
+- comandos para reproduzir.
 
 ---
 
@@ -199,3 +226,13 @@ python cli.py export -o caderno_questoes.md
 # Exportar em formato JSON estruturado:
 python cli.py export -o questoes.json --habilidade H01
 ```
+
+---
+
+## ✅ Testes
+
+```bash
+./.venv/bin/pytest tests/
+```
+
+Toda alteração no código deve manter a suíte inteira passando.

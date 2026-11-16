@@ -12,7 +12,7 @@ em data/experimento2/ dizem quais registros são deste experimento e guardam os 
     avaliacoes.jsonl   uma linha por avaliação
 
 Os comandos são retomáveis: o que já está no manifesto é pulado. Com --prazo, nenhum pedido novo começa
-depois do horário indicado, então dá para rodar em noites de 8 h.
+depois do horário indicado, então dá para dividir a execução em várias rodadas.
 
 Uso:
     python scripts/experimento2/experimento2.py gerar --modelo qwen2.5:7b-instruct-q4_K_M --prazo "2026-11-16 07:00"

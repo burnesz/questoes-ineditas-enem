@@ -20,3 +20,8 @@ data/experimento1/revisao/*.html
 
 # Arquivos locais fora do trabalho (testes, rodadas descartadas, backups)
 arquivo_local/
+
+# Execução pontual do autor: roteiro das rodadas noturnas e logs de terminal (os dados ficam nos .jsonl)
+scripts/experimento2/rodar_noite.sh
+data/**/logs/
+data/**/*.log

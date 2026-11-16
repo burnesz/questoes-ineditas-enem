@@ -13,4 +13,3 @@ Cada registro inclui a tag do modelo, o digest e a versão do Ollama.
 | `rtx4090__*.jsonl` | Rodadas oficiais dos 4 modelos |
 | `calibracao__*.jsonl` | Conjunto de calibração (30 autênticas fora da base) com a pipeline v2 |
 | `_piloto_v1/` | Rodada piloto (pipeline v1) que motivou as correções da Etapa 4 |
-| `logs/` | Logs das rodadas |
