@@ -770,3 +770,77 @@ Responda EXCLUSIVAMENTE em JSON curto:
   "evidencia": "1 frase curta justificando"
 }}
 """
+
+
+# ==============================================================================
+# BASELINE ZERO-SHOT DE QUESTÕES (avaliação do TCC)
+# ==============================================================================
+# Mesmo prompt da Fase 2A, com as mesmas regras de redação, habilidade, tipologia, tema e abertura, mas sem os
+# exemplos históricos recuperados (RAG), sem o exemplo few-shot e sem PoT: o próprio modelo escreve as alternativas
+# e escolhe o gabarito, numa única geração e sem validação.
+
+BASELINE_QUESTAO_JSON_SCHEMA: Dict[str, Any] = {
+    "type": "object",
+    "properties": {
+        "enunciado": {"type": "string"},
+        "tabela_dados": {"type": ["array", "null"], "items": {"type": "object"}},
+        "alternativas": {
+            "type": "object",
+            "properties": {letra: {"type": "string"} for letra in "ABCDE"},
+            "required": list("ABCDE"),
+        },
+        "gabarito": {"type": "string", "enum": list("ABCDE")},
+    },
+    "required": ["enunciado", "alternativas", "gabarito"],
+}
+
+
+def _regras_redacao_baseline() -> str:
+    """As regras de redação 1 a 8, 10 e 11 do prompt de geração, sem as de solver (9) e de saída (12)."""
+    texto = POT_QUESTION_GENERATOR_SYSTEM_PROMPT
+    regras = texto[texto.index("=== REGRAS"):texto.index("9. SOLVER")] + texto[texto.index("10. PROIBIDO"):texto.index("12. SAÍDA")]
+    return regras.replace(
+        "Cada distrator deve ser calculado por uma VARIÁVEL com nome do erro.",
+        "Cada distrator deve corresponder a um erro típico de aluno.",
+    )
+
+
+def build_baseline_questao_prompt(
+    habilidade_codigo: str,
+    habilidade_descricao: str,
+    competencia: int,
+    eixo_tematico: Optional[str] = None,
+    tema: Optional[str] = None,
+    abertura: Optional[str] = None,
+    tipologia: Optional[str] = None,
+) -> str:
+    """Prompt da baseline zero-shot: o da Fase 2A sem RAG, sem few-shot e pedindo a questão completa (A–E e gabarito)."""
+    completo = build_enunciado_solver_prompt(
+        habilidade_codigo=habilidade_codigo,
+        habilidade_descricao=habilidade_descricao,
+        competencia=competencia,
+        eixo_tematico=eixo_tematico,
+        exemplos_referencia=None,
+        tema=tema,
+        abertura=abertura,
+        tipologia=tipologia,
+        exemplo_few_shot="",
+        enunciados_recentes=None,
+    )
+    especificacao = completo[len(POT_QUESTION_GENERATOR_SYSTEM_PROMPT):completo.index("Antes de responder, confira mentalmente:")]
+    return f"""Você é um Elaborador de Itens de Matemática para o ENEM.
+Gere uma QUESTÃO INÉDITA de múltipla escolha em JSON: enunciado + (tabela opcional) + 5 alternativas (A a E) + gabarito.
+
+{_regras_redacao_baseline()}{especificacao}Antes de responder, confira mentalmente:
+[ ] a pergunta pede um NÚMERO com unidade?   [ ] há pelo menos 2 etapas?
+[ ] todo dado é usado e nenhum dado essencial falta?   [ ] texto e tabela não se contradizem?
+[ ] os valores são realistas?   [ ] exatamente uma alternativa é correta e as outras 4 vêm de erros típicos?
+
+Responda EXCLUSIVAMENTE em formato JSON com as chaves 'enunciado', 'tabela_dados' (opcional), 'alternativas' e 'gabarito':
+{{
+  "enunciado": "Texto contextualizado da questão com comando final que pede um número...",
+  "tabela_dados": [{{"Coluna1": "A", "Coluna2": 10}}],
+  "alternativas": {{"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."}},
+  "gabarito": "letra da alternativa correta"
+}}
+"""

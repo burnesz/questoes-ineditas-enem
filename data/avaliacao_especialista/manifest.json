@@ -1,0 +1,11 @@
+{
+  "criado_em": "2026-11-15T22:59:10",
+  "gerador": "qwen2.5:7b-instruct-q4_K_M",
+  "gerador_digest": "845dbda0ea48",
+  "ollama_versao": "0.34.1",
+  "endpoint": "http://localhost:11434",
+  "n_pares": 10,
+  "semente": 2026,
+  "vera": "questões aprovadas do Experimento 2 (Etapas 1 a 4, uma tentativa)",
+  "baseline": "BaselineQuestaoService: mesmo prompt da Fase 2A sem RAG, few-shot, PoT e validação"
+}
