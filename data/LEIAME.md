@@ -52,11 +52,24 @@ Os scripts ficam em `scripts/experimento1/`.
 | `avaliacoes.jsonl` | Um registro por avaliação feita pelo avaliador | `experimento2.py avaliar` |
 | `questoes_geradas.jsonl` | As 420 questões geradas, com veredito (cópia do SQLite, que fica fora do git) | (exportação do banco) |
 | `resultados/` | Tabela final do experimento | `experimento2.py resumo` |
-| `validacao_humana/` | Amostra cega de 30 aprovadas para os professores. A `chave_amostra.csv` **não** deve ser entregue a eles | `montar_validacao_humana.py` |
 
 As questões geradas ficam no SQLite (`questoes_ineditas.db`), e os manifestos apontam para elas. Detalhes em `experimento2/LEIAME.md`.
 
 Os scripts ficam em `scripts/experimento2/`.
+
+### Avaliação por especialista (`avaliacao_especialista/`)
+
+Um caderno único serve à validação humana do Experimento 2 (artigo) e à comparação VERA × baseline zero-shot (TCC, critério R7).
+
+| Arquivo | Para que serve | Script que gera |
+| :--- | :--- | :--- |
+| `pares_questoes.jsonl`, `manifest.json` | 10 pares: uma questão aprovada do Qwen2.5 e a questão da baseline para o mesmo insumo | `gerar_pares_questoes.py` |
+| `caderno/caderno_especialista.html` | O caderno cego com os 40 itens (abre no navegador e imprime) | `montar_caderno.py` |
+| `caderno/ficha_respostas.csv` | A planilha em que o especialista registra as notas | `montar_caderno.py` |
+| `caderno/chave_caderno.csv` | A origem de cada item. **Não** deve ser entregue ao especialista | `montar_caderno.py` |
+| `resultados/tabela_avaliacao_especialista.md` | Tabelas do artigo e do TCC, depois de preenchida a ficha | `analisar_caderno.py` |
+
+Os scripts ficam em `scripts/avaliacao_especialista/`.
 
 ---
 
@@ -320,19 +333,39 @@ As métricas são calculadas por `python scripts/experimento2/experimento2.py re
 
 Os resultados estão em `data/experimento2/resultados/tabela_experimento2.md`. As 420 questões, com o veredito de cada uma, estão em `data/experimento2/questoes_geradas.jsonl` e no SQLite.
 
-#### 2.6 Validação humana (amostra pronta, aguardando os professores)
+#### 2.6 Validação humana (caderno pronto, aguardando o especialista)
 
-- **Amostra cega:** 30 questões aprovadas, 10 por gerador, cobrindo 18 habilidades e misturadas sem indicar o gerador. Foi sorteada com semente 2026 por `scripts/experimento2/montar_validacao_humana.py`.
-- **Critérios avaliados pelo professor** (sim/não):
-  1. enunciado claro e com uma única interpretação;
-  2. dados suficientes e coerentes;
-  3. gabarito correto;
-  4. distratores plausíveis;
-  5. alinhamento à habilidade;
-  6. contexto realista;
-  7. "usaria na prova?".
-- **Recomendação:** pelo menos 2 professores, avaliando de forma independente, para medir também a concordância entre eles.
-- **Medidas previstas:** % das aprovadas pelo sistema que os professores também aprovam, por gerador e por critério, e concordância entre os professores.
+A validação humana do Experimento 2 e a comparação com a baseline zero-shot exigida pela monografia (R7) usam **o mesmo caderno**, para o especialista avaliar cada questão uma única vez.
+
+- **Itens (40, misturados, sem indicar a origem):**
+  - 10 aprovadas do Qwen2.5. São as questões da VERA nos 10 pares do TCC, uma por habilidade, sorteadas com semente 2026 entre as aprovadas;
+  - 10 aprovadas do Llama 3.1 e 10 do Qwen3, sorteadas com semente 2026, uma por habilidade antes de repetir;
+  - 10 da baseline: o mesmo Qwen2.5, para a mesma habilidade, tema, abertura e tipologia de cada questão da VERA nos pares, com o mesmo prompt de redação, mas sem RAG, sem exemplo few-shot, sem PoT e sem validação. O próprio modelo escreve as alternativas e o gabarito.
+- **Cegamento:** o caderno não diz a origem de nenhum item. As duas questões de um mesmo par ficam a pelo menos 8 posições de distância, para o especialista não compará-las lado a lado.
+- **Rubrica, igual para todos os itens:**
+  - **Escala Likert de 1 a 5:** os 5 critérios da monografia para questões inéditas:
+    1. plausibilidade da situação-problema;
+    2. clareza e inequivocidade do comando;
+    3. qualidade pedagógica dos distratores;
+    4. adequação do grau de dificuldade ao ENEM;
+    5. alinhamento à habilidade.
+  - **Sim/Não:** dados suficientes e coerentes, gabarito correto e "usaria na prova?".
+  - Os critérios Sim/Não da versão anterior do caderno (enunciado claro, distratores plausíveis, habilidade alinhada e contexto realista) passaram a ser os critérios Likert equivalentes. Nas tabelas, a nota ≥ 4 corresponde ao antigo "Sim".
+- **Medidas para o artigo (por gerador, só aprovadas):**
+  - % de gabarito correto;
+  - % de dados coerentes;
+  - % "aprovada pelo especialista" (as duas coisas ao mesmo tempo);
+  - % "usaria na prova";
+  - média e % de notas ≥ 4 em cada critério Likert.
+- **Medidas para o TCC (10 pares):**
+  - média da VERA e da baseline em cada critério e teste de Wilcoxon pareado;
+  - % de gabarito correto em cada condição;
+  - regra de aceitação da monografia: VERA ≥ baseline na média de todos os critérios.
+- **Mais de um avaliador (recomendado para o artigo):**
+  - cada um preenche a sua ficha de forma independente;
+  - a análise usa a média das notas e a maioria nas respostas Sim/Não;
+  - a análise também mede a concordância entre eles.
+- **Limitação:** as questões da VERA nos pares já passaram pelo filtro de validação, e as da baseline não. A comparação mede o sistema completo (geração e filtro), não só a geração.
 
 ---
 
@@ -354,8 +387,10 @@ python scripts/experimento2/experimento2.py resumo
 
 A construção da base do Experimento 1, passo a passo e com o script de cada etapa, está na Parte A, na tabela do Experimento 1.
 
-A amostra para os professores é gerada por:
+O caderno do especialista e a análise das fichas preenchidas:
 
 ```bash
-python scripts/experimento2/montar_validacao_humana.py
+python scripts/avaliacao_especialista/gerar_pares_questoes.py   # pares VERA × baseline (usa o Ollama)
+python scripts/avaliacao_especialista/montar_caderno.py
+python scripts/avaliacao_especialista/analisar_caderno.py ficha_prof1.csv [ficha_prof2.csv ...]
 ```

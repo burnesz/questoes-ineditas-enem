@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avaliação de questões de Matemática</title>
+<style>
+  body { font-family: Georgia, serif; max-width: 820px; margin: 24px auto; padding: 0 16px; color: #111; background: #fff; line-height: 1.5; }
+  h1 { font-size: 1.5em; } h2 { font-size: 1.15em; border-bottom: 1px solid #999; padding-bottom: 4px; }
+  .instrucoes { border: 1px solid #999; padding: 12px 16px; background: #f6f6f6; }
+  .hab { font-size: .9em; color: #333; }
+  table { border-collapse: collapse; margin: 8px 0; } th, td { border: 1px solid #999; padding: 4px 8px; text-align: left; }
+  .alts { list-style: none; padding-left: 0; } .alts li { margin: 2px 0; }
+  .crit { width: 100%; font-size: .92em; } .crit th { font-weight: normal; background: #f0f0f0; }
+  .box { width: 46px; white-space: nowrap; text-align: center; }
+  .obs { min-height: 70px; border-bottom: 1px dotted #999; }
+  .questao { margin-bottom: 32px; }
+  @page { size: A4; margin: 14mm 14mm 16mm; }
+  @media print {
+    body { margin: 0; max-width: none; font-size: 10.5pt; line-height: 1.35; }
+    h2 { margin: 0 0 4px; } p { margin: 4px 0; } .alts { margin: 4px 0; }
+    th, td { padding: 2px 6px; } .crit { font-size: 9pt; margin: 4px 0; } .obs { min-height: 110px; }
+    .questao { page-break-after: always; margin: 0; } .instrucoes { page-break-after: always; }
+    .avaliacao, table { break-inside: avoid; }
+  }
+</style></head><body>
+<h1>Avaliação de questões de Matemática no estilo ENEM</h1>
+<div class="instrucoes">
+  <p>Este caderno tem 40 itens de múltipla escolha no estilo do ENEM, produzidos por diferentes
+  processos de elaboração. Cada item vem com a habilidade da Matriz de Referência que ele pretende avaliar e com
+  o gabarito indicado.</p>
+  <p><b>Para cada item:</b></p>
+  <ol>
+    <li>Resolva a questão antes de olhar o gabarito indicado.</li>
+    <li>Dê uma nota de <b>1</b> (discordo totalmente) a <b>5</b> (concordo totalmente) para cada afirmação:
+      <ul><li>A situação-problema é plausível: o contexto e os valores são realistas.</li><li>O comando é claro e tem uma única interpretação.</li><li>As alternativas erradas correspondem a erros que um estudante cometeria.</li><li>O grau de dificuldade é adequado ao ENEM.</li><li>A questão exige a habilidade indicada da Matriz de Referência.</li></ul></li>
+    <li>Responda <b>Sim</b> ou <b>Não</b> às três perguntas seguintes (dados coerentes, gabarito correto e uso
+      numa prova).</li>
+    <li>Se quiser, escreva uma observação, principalmente quando der nota 1 ou 2 ou responder Não.</li>
+  </ol>
+  <ul>
+    <li>Se um critério não puder ser avaliado (por exemplo, porque o enunciado é impossível de resolver), dê nota
+      1 ou marque Não e explique nas observações.</li>
+  </ul>
+  <p>As respostas também podem ser registradas na planilha <code>ficha_respostas.csv</code>: uma linha por item,
+  notas de 1 a 5 nas cinco primeiras colunas de critério e <b>S</b> ou <b>N</b> nas três seguintes.</p>
+</div>
+
+<section class="questao">
+  <h2>Item 01</h2>
+  <p class="hab"><b>Habilidade H16:</b> Resolver situação-problema envolvendo a variação de grandezas, direta ou inversamente proporcionais.</p>
+  <div class="enunciado"><p>Um centro de distribuição organiza o transporte de produtos para diferentes regiões do país. A tabela a seguir apresenta a quantidade de produtos transportados e o custo de transporte por região. Sabendo que a distribuição dos lucros entre as regiões é proporcional ao custo de transporte, qual é o lucro total, em reais, distribuído para a região que teve o maior custo de transporte?</p>
+<table><thead><tr><th>Região</th><th>Quantidade (unidades)</th><th>Custo de transporte (R$)</th></tr></thead><tbody><tr><td>Norte</td><td>1000</td><td>40000</td></tr><tr><td>Nordeste</td><td>1500</td><td>60000</td></tr><tr><td>Sudeste</td><td>2000</td><td>80000</td></tr><tr><td>Sul</td><td>2500</td><td>100000</td></tr><tr><td>Centro-Oeste</td><td>3000</td><td>120000</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 50000</li><li><b>B)</b> 60000</li><li><b>C)</b> 70000</li><li><b>D)</b> 80000</li><li><b>E)</b> 90000</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> C</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 02</h2>
+  <p class="hab"><b>Habilidade H14:</b> Avaliar proposta de intervenção na realidade envolvendo grandezas e medidas.</p>
+  <div class="enunciado"><p>Em uma pesquisa realizada em uma escola pública, foi verificado que a média de consumo de água por aluno durante o dia é de 1,5 litros. A diretoria decidiu substituir o piso do refeitório e da sala de aula por dois tipos de revestimento: ladrilho cerâmico e piso vinílico. A tabela a seguir apresenta o custo por metro quadrado de cada revestimento. Sabendo que a área do refeitório é de 40 m² e a da sala de aula é de 30 m², qual é o custo total, em reais, do revestimento mais econômico?</p>
+<table><thead><tr><th>Revestimento</th><th>Custo por m² (R$)</th></tr></thead><tbody><tr><td>Ladrilho Cerâmico</td><td>80</td></tr><tr><td>Piso Vinílico</td><td>60</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 80</li><li><b>B)</b> 4800</li><li><b>C)</b> 9800</li><li><b>D)</b> 5000</li><li><b>E)</b> 60</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> D</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 03</h2>
+  <p class="hab"><b>Habilidade H24:</b> Utilizar informações expressas em gráficos ou tabelas para fazer inferências.</p>
+  <div class="enunciado"><p>Um levantamento sobre o consumo de combustível de ônibus em uma cidade revelou que, em março, foram realizadas 1200 viagens com um consumo médio de 150 litros por viagem; em abril, 1500 viagens com 140 litros por viagem; e em maio, 1300 viagens com 160 litros por viagem. Qual foi a média de consumo de combustível por viagem no trimestre de março a maio?</p>
+<table><thead><tr><th>Mês</th><th>Viagens</th><th>Consumo médio (litros/viagem)</th></tr></thead><tbody><tr><td>Março</td><td>1200</td><td>150</td></tr><tr><td>Abril</td><td>1500</td><td>140</td></tr><tr><td>Maio</td><td>1300</td><td>160</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 12000</li><li><b>B)</b> 53820000</li><li><b>C)</b> 149,5</li><li><b>D)</b> 150</li><li><b>E)</b> 199333,33</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> C</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 04</h2>
+  <p class="hab"><b>Habilidade H15:</b> Identificar a relação de dependência entre grandezas.</p>
+  <div class="enunciado"><p>Em uma gincana comunitária, um sistema de distribuição de água é usado para preencher um reservatório. O sistema possui duas torneiras de entrada, A e B, que juntas fornecem 8 litros de água por minuto. Além disso, há uma válvula de saída que remove 2 litros de água por minuto. Inicialmente, o reservatório já contém 200 litros de água. O regulamento da gincana exige que o reservatório seja preenchido até a capacidade máxima de 1000 litros. Em quantos minutos o reservatório atingirá a capacidade máxima?</p></div>
+  <ol class="alts"><li><b>A)</b> 10</li><li><b>B)</b> 160</li><li><b>C)</b> 133,33</li><li><b>D)</b> 80</li><li><b>E)</b> 200</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> C</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 05</h2>
+  <p class="hab"><b>Habilidade H28:</b> Resolver situação-problema que envolva conhecimentos de estatística e probabilidade.</p>
+  <div class="enunciado"><p>Um estudo de satisfação de clientes em uma empresa de telecomunicações revelou que 20% dos clientes são jovens (0-25 anos), 30% são adultos (26-50 anos) e 50% são idosos (51-75 anos). A satisfação média desses grupos é de 80%, 70% e 60%, respectivamente. Qual é a satisfação média total, em porcento, dos clientes da empresa?</p>
+<table><thead><tr><th>Faixa etária</th><th>Satisfação média</th><th>Percentual de clientes</th></tr></thead><tbody><tr><td>0-25 anos</td><td>80</td><td>20</td></tr><tr><td>26-50 anos</td><td>70</td><td>30</td></tr><tr><td>51-75 anos</td><td>60</td><td>50</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 51</li><li><b>B)</b> 67</li><li><b>C)</b> 70</li><li><b>D)</b> 69</li><li><b>E)</b> 71</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> B</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 06</h2>
+  <p class="hab"><b>Habilidade H01:</b> Reconhecer, no contexto social, diferentes significados e representações dos números e operações.</p>
+  <div class="enunciado"><p>Um levantamento sobre o consumo de água em um condomínio residencial revelou que a tarifa de água varia de acordo com o número de moradores em cada faixa etária. Os dados são apresentados na tabela abaixo. Qual é o custo total, em reais, do consumo de água no condomínio, sabendo que cada morador consome 15 litros de água por dia e que o condomínio tem 100 moradores distribuídos da seguinte forma: 30 crianças (até 12 anos), 50 adultos (13 a 60 anos) e 20 idosos (mais de 60 anos)?</p>
+<table><thead><tr><th>faixa_etaria</th><th>tarifa</th><th>moradores</th></tr></thead><tbody><tr><td>Crianças (até 12 anos)</td><td>0.05</td><td>30</td></tr><tr><td>Adultos (13 a 60 anos)</td><td>0.1</td><td>50</td></tr><tr><td>Idosos (mais de 60 anos)</td><td>0.07</td><td>20</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 37,5</li><li><b>B)</b> 118,5</li><li><b>C)</b> 120000</li><li><b>D)</b> 97,5</li><li><b>E)</b> 11850</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> B</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 07</h2>
+  <p class="hab"><b>Habilidade H02:</b> Identificar padrões numéricos ou princípios de contagem.</p>
+  <div class="enunciado"><p>Em uma pesquisa sobre o consumo de energia elétrica em uma região, foram analisados 5 condomínios. Cada condomínio tem um número diferente de moradores e um consumo médio de energia por morador. A tabela a seguir apresenta esses dados. Qual é o consumo total de energia elétrica, em kWh, dessa região?</p>
+<table><thead><tr><th>Condomínio</th><th>Moradores</th><th>Consumo por morador (kWh)</th></tr></thead><tbody><tr><td>A</td><td>120</td><td>15</td></tr><tr><td>B</td><td>85</td><td>12</td></tr><tr><td>C</td><td>150</td><td>10</td></tr><tr><td>D</td><td>90</td><td>14</td></tr><tr><td>E</td><td>110</td><td>13</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 7010</li><li><b>B)</b> 5580</li><li><b>C)</b> 8325</li><li><b>D)</b> 555</li><li><b>E)</b> 15</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> A</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 08</h2>
+  <p class="hab"><b>Habilidade H12:</b> Resolver situação-problema que envolva medidas de grandezas.</p>
+  <div class="enunciado"><p>Uma empresa de telecomunicações está instalando uma nova caixa-d&#x27;água para um de seus centros de dados. A caixa-d&#x27;água é um paralelepípedo retangular com as seguintes dimensões: comprimento de 4 metros, largura de 2 metros e altura de 3 metros. A empresa precisa calcular o volume total da caixa-d&#x27;água para determinar a capacidade de armazenamento de água. Sabendo que o custo de instalação do sistema de drenagem é de R$ 15,00 por metro cúbico de volume, qual é o custo total para a instalação do sistema de drenagem na caixa-d&#x27;água?</p></div>
+  <ol class="alts"><li><b>A)</b> 180</li><li><b>B)</b> 240</li><li><b>C)</b> 300</li><li><b>D)</b> 360</li><li><b>E)</b> 420</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> C</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 09</h2>
+  <p class="hab"><b>Habilidade H29:</b> Utilizar conhecimentos de estatística e probabilidade como recurso para a construção de argumentação.</p>
+  <div class="enunciado"><p>A empresa de telecomunicações XYZ opera duas linhas de produção de fibra óptica em um município. A Linha A produz 80% da fibra óptica necessária para o município, enquanto a Linha B produz 20%. A taxa de falha percentual para a Linha A é de 2,5%, enquanto para a Linha B é de 1,8%. Qual é o risco relativo entre as duas linhas de produção, considerando a quantidade de fibra óptica produzida por cada linha?</p></div>
+  <ol class="alts"><li><b>A)</b> 5,56</li><li><b>B)</b> 4</li><li><b>C)</b> 8,33</li><li><b>D)</b> 6,94</li><li><b>E)</b> 1,39</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> A</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 10</h2>
+  <p class="hab"><b>Habilidade H14:</b> Avaliar proposta de intervenção na realidade envolvendo grandezas e medidas.</p>
+  <div class="enunciado"><p>Um bairro tem três faixas etárias: crianças (0-12 anos), adultos (13-60 anos) e idosos (61 anos ou mais). O consumo médio de água por pessoa por mês é de 100 litros para crianças, 200 litros para adultos e 150 litros para idosos. O custo do m³ de água é de R$ 5,00. Se o bairro tem 100 crianças, 200 adultos e 50 idosos, qual é o custo total, em reais, para abastecer o bairro com água?</p>
+<table><thead><tr><th>Faixa Etária</th><th>Número de Moradores</th><th>Consumo Médio (L/mês)</th></tr></thead><tbody><tr><td>Crianças</td><td>100</td><td>100</td></tr><tr><td>Adultos</td><td>200</td><td>200</td></tr><tr><td>Idosos</td><td>50</td><td>150</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 787,5</li><li><b>B)</b> 866,25</li><li><b>C)</b> 287,5</li><li><b>D)</b> 287578,75</li><li><b>E)</b> 287500</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> C</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 11</h2>
+  <p class="hab"><b>Habilidade H23:</b> Avaliar propostas de intervenção na realidade envolvendo conhecimentos algébricos.</p>
+  <div class="enunciado"><p>Em uma competição de agricultura, os participantes podem escolher entre dois contratos de prestação de serviço:</p>
+<ul><li>Contrato A: taxa fixa de R$ 100,00 mais R$ 2,00 por galão de água utilizada;</li><li>Contrato B: taxa fixa de R$ 50,00 mais R$ 4,00 por galão de água utilizada.</li></ul>
+<p>Para um evento em que os participantes utilizaram exatamente 100 galões de água, qual será o valor total pago, em reais, caso escolha o contrato mais econômico?</p></div>
+  <ol class="alts"><li><b>A)</b> 75</li><li><b>B)</b> 450</li><li><b>C)</b> 300</li><li><b>D)</b> 150</li><li><b>E)</b> 200</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> C</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 12</h2>
+  <p class="hab"><b>Habilidade H05:</b> Avaliar propostas de intervenção na realidade envolvendo conhecimentos numéricos.</p>
+  <div class="enunciado"><p>Uma empresa de armazenamento de dados está projetando um novo sistema para uma cliente que deseja armazenar 500 TB (terabytes) de dados. A empresa oferece dois planos: Plano A, que custa R$ 0,05 por GB (gigabyte) e inclui um desconto de 10% no frete; e Plano B, que custa R$ 0,045 por GB e inclui um desconto de 5% no valor total. Qual é o custo total, em reais, para armazenar 500 TB de dados no Plano B, considerando que 1 TB = 1024 GB?</p></div>
+  <ol class="alts"><li><b>A)</b> 25600</li><li><b>B)</b> 25200</li><li><b>C)</b> 26000</li><li><b>D)</b> 24800</li><li><b>E)</b> 25400</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> B</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 13</h2>
+  <p class="hab"><b>Habilidade H22:</b> Utilizar conhecimentos algébricos/geométricos como recurso para a construção de argumentação.</p>
+  <div class="enunciado"><p>Uma empresa de energia renovável planeja instalar duas antenas de transmissão em uma região rural. As coordenadas dos pontos onde as antenas serão instaladas são A(2, 5) e B(8, 1). Considerando que cada unidade no plano cartesiano representa 1 km, qual é a distância, em quilômetros, entre as antenas A e B?</p>
+<table><thead><tr><th>Coordenada A</th><th>Coordenada B</th></tr></thead><tbody><tr><td>A(2, 5)</td><td>B(8, 1)</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 57,21</li><li><b>B)</b> [5.0, 3.0]</li><li><b>C)</b> 7,21</li><li><b>D)</b> 2</li><li><b>E)</b> 52</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> C</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 14</h2>
+  <p class="hab"><b>Habilidade H19:</b> Identificar representações algébricas que expressem a relação entre grandezas.</p>
+  <div class="enunciado"><p>Uma fazenda de frutas organiza a produção de laranjas e maçãs. A tabela a seguir apresenta os dados de produção e custo para cada tipo de fruta:</p>
+<ul><li>Laranjas: 20 kg/hectare com custo de R$ 1,50/kg;</li><li>Maçãs: 15 kg/hectare com custo de R$ 2,00/kg.</li></ul>
+<p>Qual será o custo total, em reais, para produzir 100 hectares de laranjas e maçãs?</p></div>
+  <ol class="alts"><li><b>A)</b> 4000</li><li><b>B)</b> 3000000</li><li><b>C)</b> 6000</li><li><b>D)</b> 2250</li><li><b>E)</b> 3001750</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> C</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 15</h2>
+  <p class="hab"><b>Habilidade H17:</b> Analisar informações envolvendo a variação de grandezas como recurso para a construção de argumentação.</p>
+  <div class="enunciado"><p>Uma usina de tratamento de água projeta um reservatório com capacidade total de 15.000 litros. Inicialmente, o reservatório contém 3.000 litros de água. Para completá-lo, abre-se uma torneira que despeja 120 litros por minuto, ao mesmo tempo em que uma válvula de drenagem retira 80 litros por minuto de forma contínua. Mantendo-se essas vazões constantes, em quantos minutos o reservatório atingirá sua capacidade máxima?</p></div>
+  <ol class="alts"><li><b>A)</b> 300</li><li><b>B)</b> 100</li><li><b>C)</b> 5</li><li><b>D)</b> 450</li><li><b>E)</b> 375</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> A</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 16</h2>
+  <p class="hab"><b>Habilidade H25:</b> Resolver problema com dados apresentados em tabelas ou gráficos.</p>
+  <div class="enunciado"><p>Durante o monitoramento da vazão de um reservatório de frutas, foram registradas as seguintes compras: 20 kg de maçãs a R$ 5,00/kg, 30 kg de bananas a R$ 3,00/kg e 40 kg de laranjas a R$ 4,00/kg. Qual é o custo total, em reais, de todas as frutas compradas?</p></div>
+  <ol class="alts"><li><b>A)</b> 280</li><li><b>B)</b> 4</li><li><b>C)</b> 3,57</li><li><b>D)</b> 250</li><li><b>E)</b> 350</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> E</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 17</h2>
+  <p class="hab"><b>Habilidade H21:</b> Resolver situação-problema cuja modelagem envolva conhecimentos algébricos.</p>
+  <div class="enunciado"><p>Uma empresa de transporte coletivo está organizando um torneio de corrida de ônibus. Os ônibus podem ter 2 ou 4 rodas. A empresa tem dois ônibus, um com 2 rodas e outro com 4 rodas. O ônibus com 2 rodas tem uma velocidade média de 30 km/h e o ônibus com 4 rodas tem uma velocidade média de 40 km/h. A empresa quer saber qual é o tempo total de percurso para os dois ônibus juntos, considerando que o ônibus com 2 rodas percorre 120 km e o ônibus com 4 rodas percorre 160 km.</p></div>
+  <ol class="alts"><li><b>A)</b> 9,67</li><li><b>B)</b> 9,33</li><li><b>C)</b> 8,33</li><li><b>D)</b> 8</li><li><b>E)</b> 3</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> D</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 18</h2>
+  <p class="hab"><b>Habilidade H02:</b> Identificar padrões numéricos ou princípios de contagem.</p>
+  <div class="enunciado"><p>O centro de distribuição tem 5 carros, cada um com capacidade de 10 metros cúbicos. As mercadorias são classificadas em 3 categorias: eletrônicos, roupas e brinquedos. Cada carro pode transportar apenas 1 categoria de mercadorias. As categorias são distribuídas entre os carros da seguinte forma: carro 1: eletrônicos (10 metros cúbicos), carro 2: roupas (10 metros cúbicos), carro 3: brinquedos (10 metros cúbicos), carro 4: eletrônicos (10 metros cúbicos), carro 5: roupas (10 metros cúbicos).</p></div>
+  <ol class="alts"><li><b>A)</b> 500</li><li><b>B)</b> 0</li><li><b>C)</b> 550</li><li><b>D)</b> 100</li><li><b>E)</b> 50</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> A</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 19</h2>
+  <p class="hab"><b>Habilidade H01:</b> Reconhecer, no contexto social, diferentes significados e representações dos números e operações.</p>
+  <div class="enunciado"><p>Em uma pesquisa realizada em um condomínio, foram coletados dados sobre o consumo de água dos moradores. A tabela a seguir apresenta o consumo médio mensal de água (em m³) por morador, bem como o valor cobrado por metro cúbico de água. Sabendo que o condomínio tem 200 moradores, qual é o custo total mensal para abastecer todas as residências, considerando que o consumo médio mensal por morador é 15% superior ao apresentado na tabela?</p>
+<table><thead><tr><th>morador</th><th>consumo_m3</th><th>preço_m3</th></tr></thead><tbody><tr><td>1</td><td>2.5</td><td>5.5</td></tr><tr><td>2</td><td>3.0</td><td>6.0</td></tr><tr><td>3</td><td>3.5</td><td>6.5</td></tr><tr><td>4</td><td>4.0</td><td>7.0</td></tr><tr><td>5</td><td>4.5</td><td>7.5</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 30000</li><li><b>B)</b> 32000</li><li><b>C)</b> 34000</li><li><b>D)</b> 36000</li><li><b>E)</b> 38000</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> C</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 20</h2>
+  <p class="hab"><b>Habilidade H03:</b> Resolver situação-problema envolvendo conhecimentos numéricos.</p>
+  <div class="enunciado"><p>Um reservatório hidrelétrico tem uma capacidade total de 1000 m³ de água. Desse total, 60% é usado para irrigação e 20% para a geração de energia. Qual é a capacidade, em m³, de água restante para outros usos?</p></div>
+  <ol class="alts"><li><b>A)</b> 600</li><li><b>B)</b> 200</li><li><b>C)</b> 1200</li><li><b>D)</b> 1000</li><li><b>E)</b> 800</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> B</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 21</h2>
+  <p class="hab"><b>Habilidade H14:</b> Avaliar proposta de intervenção na realidade envolvendo grandezas e medidas.</p>
+  <div class="enunciado"><p>Um condomínio está planejando a instalação de um sistema de irrigação para seus jardins. Para isso, eles estão comparando duas opções de bombas de irrigação. A tabela a seguir apresenta os detalhes das duas bombas. Qual é o custo total, em reais, para equipar 10 jardins com a bomba mais econômica, sabendo que cada jardim tem 500 m² de área e que a bomba mais econômica é a que tem a menor custo total de operação anual, considerando que cada jardim precisa de 20 litros de água por m² por dia e que o custo do água é de R$ 0,005 por litro?</p></div>
+  <ol class="alts"><li><b>A)</b> 12000</li><li><b>B)</b> 13000</li><li><b>C)</b> 14000</li><li><b>D)</b> 15000</li><li><b>E)</b> 16000</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> A</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 22</h2>
+  <p class="hab"><b>Habilidade H21:</b> Resolver situação-problema cuja modelagem envolva conhecimentos algébricos.</p>
+  <div class="enunciado"><p>Em uma cidade, uma cooperativa de energia elétrica oferece dois planos residenciais:</p>
+<ul><li>Plano A: taxa fixa mensal de R$ 100,00 mais R$ 0,50 por kWh consumido;</li><li>Plano B: taxa fixa mensal de R$ 70,00 mais R$ 0,70 por kWh consumido.</li></ul>
+<p>Para qual consumo, em kWh, o custo mensal será o mesmo para ambos os planos?</p></div>
+  <ol class="alts"><li><b>A)</b> 85</li><li><b>B)</b> 78,57</li><li><b>C)</b> 290</li><li><b>D)</b> -150</li><li><b>E)</b> 150</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> E</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 23</h2>
+  <p class="hab"><b>Habilidade H28:</b> Resolver situação-problema que envolva conhecimentos de estatística e probabilidade.</p>
+  <div class="enunciado"><p>Em uma pesquisa realizada com 500 usuários de um aplicativo de entrega de alimentos, foi constatado que 40% dos usuários preferem pedidos à vista, 35% preferem parcelar em duas vezes e 25% preferem parcelar em três vezes. A tabela a seguir apresenta o tempo médio de entrega para cada tipo de pagamento. Qual é a média ponderada do tempo de entrega, em minutos, para todos os usuários do aplicativo?</p>
+<table><thead><tr><th>Tipo_de_pagamento</th><th>Tempo_médio_de_entrega</th></tr></thead><tbody><tr><td>À vista</td><td>24</td></tr><tr><td>2x</td><td>26</td></tr><tr><td>3x</td><td>28</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 25.5</li><li><b>B)</b> 26.5</li><li><b>C)</b> 27.5</li><li><b>D)</b> 28.5</li><li><b>E)</b> 29.5</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> C</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 24</h2>
+  <p class="hab"><b>Habilidade H05:</b> Avaliar propostas de intervenção na realidade envolvendo conhecimentos numéricos.</p>
+  <div class="enunciado"><p>Uma empresa de armazenamento oferece dois planos para um cliente que deseja armazenar 1000 unidades de um produto. O plano A oferece um desconto de 15% no preço de R$ 20,00 por unidade, com um frete de R$ 500,00. O plano B oferece um desconto de 20% no preço de R$ 18,00 por unidade, com um frete de R$ 400,00. Qual é o custo total, em reais, para o cliente escolher o plano que oferece o menor custo total?</p></div>
+  <ol class="alts"><li><b>A)</b> 13500</li><li><b>B)</b> 23500</li><li><b>C)</b> 17000</li><li><b>D)</b> 14800</li><li><b>E)</b> 17425</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> D</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 25</h2>
+  <p class="hab"><b>Habilidade H16:</b> Resolver situação-problema envolvendo a variação de grandezas, direta ou inversamente proporcionais.</p>
+  <div class="enunciado"><p>Um levantamento sobre o consumo de água em um condomínio de 400 famílias revelou que as famílias com 1 a 2 filhos bebem em média 120 litros de água por dia, enquanto as famílias com 3 a 4 filhos bebem em média 180 litros de água por dia. As famílias com 5 ou mais filhos bebem em média 240 litros de água por dia. Qual é o percentual de aumento do consumo de água das famílias com 5 ou mais filhos em relação às famílias com 1 a 2 filhos?</p></div>
+  <ol class="alts"><li><b>A)</b> 120</li><li><b>B)</b> 60</li><li><b>C)</b> -50</li><li><b>D)</b> 210</li><li><b>E)</b> 100</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> E</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 26</h2>
+  <p class="hab"><b>Habilidade H15:</b> Identificar a relação de dependência entre grandezas.</p>
+  <div class="enunciado"><p>Um consumidor compara duas opções de parcelamento de um plano de streaming: uma com custo fixo de R$ 50 e parcela variável de R$ 5 por hora assistida, e outra com custo fixo de R$ 30 e parcela variável de R$ 3 por hora assistida. O consumidor assiste 20 horas de streaming por mês. Qual é o custo total, em reais, da opção mais econômica?</p></div>
+  <ol class="alts"><li><b>A)</b> 50</li><li><b>B)</b> 65</li><li><b>C)</b> 90</li><li><b>D)</b> 150</li><li><b>E)</b> 10</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> C</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 27</h2>
+  <p class="hab"><b>Habilidade H15:</b> Identificar a relação de dependência entre grandezas.</p>
+  <div class="enunciado"><p>Uma academia oferece aulas de musculação com custo fixo mensal de R$ 150,00 e custo variável de R$ 25,00 por aula. Um atleta treina 12 vezes por mês. Qual é o custo médio por aula, em reais?</p>
+<table><thead><tr><th>Aulas por mês</th><th>Custo fixo (R$)</th><th>Custo variável por aula (R$)</th></tr></thead><tbody><tr><td>12</td><td>150</td><td>25</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 12,5</li><li><b>B)</b> 227,08</li><li><b>C)</b> 14,58</li><li><b>D)</b> 225</li><li><b>E)</b> 37,5</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> E</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 28</h2>
+  <p class="hab"><b>Habilidade H18:</b> Avaliar propostas de intervenção na realidade envolvendo variação de grandezas.</p>
+  <div class="enunciado"><p>Em um município, para transportar 120 passageiros entre dois distritos, uma cooperativa oferece dois tipos de serviços: ônibus que transportam 40 passageiros por viagem com custo de R$ 60,00 por viagem, e táxis que transportam 5 passageiros por viagem com custo de R$ 25,00 por viagem. Qual é o custo total, em reais, para transportar todos os passageiros utilizando apenas ônibus e táxis, de forma a minimizar o gasto?</p>
+<table><thead><tr><th>Modalidade</th><th>Capacidade</th><th>Custo por viagem</th></tr></thead><tbody><tr><td>Ônibus</td><td>40</td><td>60</td></tr><tr><td>Táxi</td><td>5</td><td>25</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 960</li><li><b>B)</b> 180</li><li><b>C)</b> 0</li><li><b>D)</b> 780</li><li><b>E)</b> 600</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> B</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 29</h2>
+  <p class="hab"><b>Habilidade H16:</b> Resolver situação-problema envolvendo a variação de grandezas, direta ou inversamente proporcionais.</p>
+  <div class="enunciado"><p>Um agricultor possui dois campos, um de 4 hectares e outro de 6 hectares. Ele planeja irrigar esses campos com um sistema que distribui 1000 litros de água por dia. Qual é a quantidade de água, em litros, que cada hectare receberá por dia, se a distribuição for proporcional à área de cada campo?</p></div>
+  <ol class="alts"><li><b>A)</b> 5000</li><li><b>B)</b> 10000</li><li><b>C)</b> 1100</li><li><b>D)</b> 500</li><li><b>E)</b> 1000</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> E</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 30</h2>
+  <p class="hab"><b>Habilidade H27:</b> Calcular medidas de tendência central ou de dispersão de um conjunto de dados.</p>
+  <div class="enunciado"><p>Em uma pesquisa realizada com 500 moradores de uma região metropolitana, foi coletada a distância média diária de deslocamento para o trabalho, conforme a tabela a seguir. Qual é a distância média diária, em quilômetros, dos deslocamentos dos moradores dessa região?</p>
+<table><thead><tr><th>Modo de deslocamento</th><th>Distância média (km)</th><th>Frequência</th></tr></thead><tbody><tr><td>Metrô</td><td>8</td><td>150</td></tr><tr><td>Carro</td><td>12</td><td>200</td></tr><tr><td>Ônibus</td><td>10</td><td>100</td></tr><tr><td>Bicicleta</td><td>5</td><td>50</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 9,7</li><li><b>B)</b> 0,07</li><li><b>C)</b> 35</li><li><b>D)</b> 0,31</li><li><b>E)</b> 35,24</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> A</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 31</h2>
+  <p class="hab"><b>Habilidade H15:</b> Identificar a relação de dependência entre grandezas.</p>
+  <div class="enunciado"><p>Em uma gincana comunitária, os alunos participam de uma atividade onde precisam preencher um reservatório com água. O reservatório tem uma capacidade total de 1000 litros. Durante a atividade, a água é adicionada a uma taxa de 50 litros por minuto e removida a uma taxa de 20 litros por minuto. A tabela a seguir apresenta o volume de água no reservatório em diferentes momentos da atividade. Qual é o volume de água, em litros, no momento em que o reservatório atinge a metade de sua capacidade total?</p>
+<table><thead><tr><th>Tempo (min)</th><th>Volume (litros)</th></tr></thead><tbody><tr><td>0</td><td>0</td></tr><tr><td>10</td><td>300</td></tr><tr><td>20</td><td>600</td></tr><tr><td>30</td><td>900</td></tr><tr><td>40</td><td>1200</td></tr><tr><td>50</td><td>1500</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 450</li><li><b>B)</b> 500</li><li><b>C)</b> 550</li><li><b>D)</b> 600</li><li><b>E)</b> 650</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> B</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 32</h2>
+  <p class="hab"><b>Habilidade H22:</b> Utilizar conhecimentos algébricos/geométricos como recurso para a construção de argumentação.</p>
+  <div class="enunciado"><p>Uma cooperativa local de interligação de distritos agrícolas analisa duas propostas de contrato mensal com uma empresa de logística:</p>
+<ul><li>Plano A: taxa fixa mensal de R$ 120,00 mais R$ 3,00 por entrega realizada;</li><li>Plano B: taxa fixa mensal de R$ 60,00 mais R$ 5,00 por entrega realizada.</li></ul>
+<p>Para um mês em que a cooperativa realizará exatamente 40 entregas, qual será o valor total pago, em reais, caso escolha o plano mais econômico?</p></div>
+  <ol class="alts"><li><b>A)</b> 240</li><li><b>B)</b> 260</li><li><b>C)</b> 120</li><li><b>D)</b> 250</li><li><b>E)</b> 20</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> A</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 33</h2>
+  <p class="hab"><b>Habilidade H21:</b> Resolver situação-problema cuja modelagem envolva conhecimentos algébricos.</p>
+  <div class="enunciado"><p>Em uma pequena cidade, uma cooperativa local está planejando instalar um sistema de iluminação solar para economizar energia. O sistema custará R$ 5.000,00 para a instalação inicial. A cooperativa estima que, a partir da instalação, a economia mensal em energia será de R$ 250,00. No entanto, a cooperativa também precisa pagar uma taxa de manutenção mensal de R$ 50,00. Qual será o número de meses necessários para que o sistema de iluminação solar seja economicamente viável, ou seja, o custo total da instalação e das taxas de manutenção seja igualado pela economia mensal em energia?</p></div>
+  <ol class="alts"><li><b>A)</b> 10</li><li><b>B)</b> 20</li><li><b>C)</b> 30</li><li><b>D)</b> 40</li><li><b>E)</b> 50</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> C</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 34</h2>
+  <p class="hab"><b>Habilidade H03:</b> Resolver situação-problema envolvendo conhecimentos numéricos.</p>
+  <div class="enunciado"><p>Em um município, um orçamento total de R$ 12.000,00 foi dividido entre três equipes de saúde: a equipe A recebeu 1/3 do orçamento, a equipe B recebeu 1/4 e a equipe C recebeu o restante. Qual é o valor, em reais, recebido pela equipe C?</p>
+<table><thead><tr><th>Coluna1</th><th>Coluna2</th></tr></thead><tbody><tr><td>Equipe A</td><td>1/3</td></tr><tr><td>Equipe B</td><td>1/4</td></tr><tr><td>Equipe C</td><td>Restante</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 85000</li><li><b>B)</b> 4000</li><li><b>C)</b> 84000</li><li><b>D)</b> 5000</li><li><b>E)</b> 7000</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> D</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 35</h2>
+  <p class="hab"><b>Habilidade H24:</b> Utilizar informações expressas em gráficos ou tabelas para fazer inferências.</p>
+  <div class="enunciado"><p>Um levantamento foi realizado sobre o consumo de combustível por ônibus urbanos em uma cidade. A tabela a seguir apresenta o consumo médio de combustível por viagem e o número de viagens realizadas em cada dia da semana. Qual é o consumo total de combustível, em litros, no mês de junho, considerando que cada mês tem 30 dias e que o número de viagens por dia é constante durante todo o mês?</p>
+<table><thead><tr><th>Dia</th><th>Consumo médio (L/viagem)</th><th>Número de viagens</th></tr></thead><tbody><tr><td>Segunda</td><td>100</td><td>50</td></tr><tr><td>Terça</td><td>110</td><td>60</td></tr><tr><td>Quarta</td><td>120</td><td>70</td></tr><tr><td>Quinta</td><td>130</td><td>80</td></tr><tr><td>Sexta</td><td>140</td><td>90</td></tr><tr><td>Sábado</td><td>150</td><td>100</td></tr><tr><td>Domingo</td><td>160</td><td>110</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 12000</li><li><b>B)</b> 13500</li><li><b>C)</b> 14400</li><li><b>D)</b> 15300</li><li><b>E)</b> 16200</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> C</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 36</h2>
+  <p class="hab"><b>Habilidade H12:</b> Resolver situação-problema que envolva medidas de grandezas.</p>
+  <div class="enunciado"><p>Um servidor de armazenamento possui um disco rígido com capacidade de armazenamento de 1 TB (1024 GB). Durante uma operação de backup, 75% do disco rígido foi preenchido com dados. Após o backup, 40% dos dados armazenados foram transferidos para outro servidor. Qual é o volume, em gigabytes (GB), de dados restantes no disco rígido?</p></div>
+  <ol class="alts"><li><b>A)</b> 0,3</li><li><b>B)</b> 1236</li><li><b>C)</b> 1075,2</li><li><b>D)</b> 460,8</li><li><b>E)</b> 300</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> D</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 37</h2>
+  <p class="hab"><b>Habilidade H01:</b> Reconhecer, no contexto social, diferentes significados e representações dos números e operações.</p>
+  <div class="enunciado"><p>Uma clínica oferece três opções de suplementos de vitamina C: cápsulas, tabletes e comprimidos. Cada cápsula contém 300 mg, cada tablete 200 mg e cada comprimido 150 mg. O custo de cada cápsula é R$ 2,00, cada tablete custa R$ 1,50 e cada comprimido custa R$ 1,20. Qual é a quantidade de vitamina C, em mg, por real gasto, na opção que oferece a maior taxa unitária?</p>
+<table><thead><tr><th>Medicamento</th><th>Quantidade (mg)</th><th>Preço (R$)</th></tr></thead><tbody><tr><td>Cápsula</td><td>300</td><td>2.0</td></tr><tr><td>Tablete</td><td>200</td><td>1.5</td></tr><tr><td>Comprimido</td><td>150</td><td>1.2</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 150</li><li><b>B)</b> 216,67</li><li><b>C)</b> 616,67</li><li><b>D)</b> 133,33</li><li><b>E)</b> 600</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> A</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 38</h2>
+  <p class="hab"><b>Habilidade H28:</b> Resolver situação-problema que envolva conhecimentos de estatística e probabilidade.</p>
+  <div class="enunciado"><p>Durante o monitoramento da capacidade de três linhas de ônibus, foi observado que a linha A tem capacidade para 120 passageiros, a linha B tem capacidade para 150 passageiros e a linha C tem capacidade para 180 passageiros. Além disso, foi observado que a linha A transportou 80 passageiros, a linha B transportou 120 passageiros e a linha C transportou 160 passageiros. Qual é a porcentagem de passageiros que utilizam a capacidade total das linhas?</p></div>
+  <ol class="alts"><li><b>A)</b> 0,74</li><li><b>B)</b> 133,33</li><li><b>C)</b> 80</li><li><b>D)</b> 1,53</li><li><b>E)</b> 0,67</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> C</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 39</h2>
+  <p class="hab"><b>Habilidade H05:</b> Avaliar propostas de intervenção na realidade envolvendo conhecimentos numéricos.</p>
+  <div class="enunciado"><p>Durante o monitoramento da eficiência energética de um bairro, os engenheiros identificaram que os custos de habitação em três setores eram de R$ 120.000, R$ 150.000 e R$ 180.000, respectivamente. Para otimizar o orçamento, foi decidido reduzir os custos em 15% no primeiro setor, 10% no segundo e 20% no terceiro. Qual foi o total economizado, em reais, com essas reduções?</p>
+<table><thead><tr><th>Setor</th><th>Custo Inicial (R$)</th></tr></thead><tbody><tr><td>1</td><td>120000</td></tr><tr><td>2</td><td>150000</td></tr><tr><td>3</td><td>180000</td></tr></tbody></table></div>
+  <ol class="alts"><li><b>A)</b> 15300</li><li><b>B)</b> 33000</li><li><b>C)</b> 49500</li><li><b>D)</b> 69000</li><li><b>E)</b> 67500</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> D</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+<section class="questao">
+  <h2>Item 40</h2>
+  <p class="hab"><b>Habilidade H03:</b> Resolver situação-problema envolvendo conhecimentos numéricos.</p>
+  <div class="enunciado"><p>Em uma cidade, a prefeitura está planejando a distribuição de água para os moradores. A tabela a seguir apresenta a distribuição da água entre diferentes faixas etárias. Sabendo que a cidade tem 1.200 moradores, qual é a quantidade total de litros de água que devem ser distribuídos diariamente para atender a demanda dos moradores, considerando que cada pessoa adulta consome 2 litros de água por dia, cada adolescente consome 1,5 litro e cada criança consome 1 litro de água por dia?</p></div>
+  <ol class="alts"><li><b>A)</b> 2400</li><li><b>B)</b> 2600</li><li><b>C)</b> 2800</li><li><b>D)</b> 3000</li><li><b>E)</b> 3200</li></ol>
+  <p class="gab"><b>Gabarito indicado:</b> C</p>
+  <div class="avaliacao">
+  <table class="crit">
+    <thead><tr><th>Avalie de 1 (discordo totalmente) a 5 (concordo totalmente)</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+    <tbody><tr><td>1. A situação-problema é plausível: o contexto e os valores são realistas.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>2. O comando é claro e tem uma única interpretação.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>3. As alternativas erradas correspondem a erros que um estudante cometeria.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>4. O grau de dificuldade é adequado ao ENEM.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr><tr><td>5. A questão exige a habilidade indicada da Matriz de Referência.</td><td class='box'>☐ 1</td><td class='box'>☐ 2</td><td class='box'>☐ 3</td><td class='box'>☐ 4</td><td class='box'>☐ 5</td></tr></tbody>
+  </table>
+  <table class="crit"><tbody><tr><td>6. Os dados são suficientes e coerentes entre si (texto, tabela e pergunta).</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>7. O gabarito indicado está correto.</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr><tr><td>8. Você usaria esta questão numa prova?</td><td class='box'>☐ Sim</td><td class='box'>☐ Não</td></tr></tbody></table>
+  <p class="obs"><b>Observações:</b></p>
+  </div>
+</section>
+</body></html>
