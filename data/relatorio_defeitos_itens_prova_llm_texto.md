@@ -100,3 +100,13 @@ Aplicar a cada linha do CSV e falhar, ou sinalizar o item, se alguma regra dispa
 
 Observação: a varredura foi heurística e pode não ter pegado todos os casos.
 Depois da correção, vale rodar as checagens 1 a 8 no arquivo inteiro.
+
+## Correção posterior: alternativas cortadas na quebra de linha (2026-11-16)
+
+A revisão visual do caderno de explicações encontrou mais um padrão, que a varredura acima não pegava.
+
+- **Padrão:** a alternativa termina no fim da linha do PDF, e a continuação, na linha seguinte, se perde.
+- **Item 73134** (H17, ENEM 2010, posição 150, `ENEM_2010_PROVA_GAB_DIA_2_AZUL_7.pdf`): as alternativas A, B, D e E acabavam em "porque a", "mas", "mas" e "porque o".
+- **Correção:** o texto foi refeito a partir da prova original, por exemplo "maior do que o valor da primeira encomenda, mas não o dobro.".
+- **Atualizações:** o SQLite e o ChromaDB foram atualizados com `python cli.py seed`.
+- **Checagem sugerida:** alternativa terminada em artigo, preposição ou conjunção (`a`, `o`, `de`, `que`, `mas`, `porque`, ...). No arquivo corrigido, nenhum item tem esse padrão.
