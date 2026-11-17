@@ -19,7 +19,11 @@ from app.db.models.habilidade import HabilidadeEnem
 from app.db.models.questao_enem import QuestaoEnem
 from app.db.models.questao_inedita import QuestaoInedita
 from app.db.session import engine, SessionLocal
-from app.schemas.question import HABILIDADES_DESABILITADAS, MOTIVOS_HABILIDADES_DESABILITADAS
+from app.schemas.question import (
+    HABILIDADES_DESABILITADAS,
+    MOTIVOS_HABILIDADES_DESABILITADAS,
+    resolver_habilidades,
+)
 from app.services.llm_client import LLMClient
 from app.services.question_service import QuestionService
 from app.services.vectorstore import ChromaVectorStore, EmbeddingService
@@ -93,21 +97,10 @@ def cmd_generate(args: argparse.Namespace) -> int:
     else:
         print("[!] Modo MOCK ativado — inferência real do LLM desabilitada.")
 
+    habilidades_list, desabilitadas = resolver_habilidades(args.habilidades)
     if args.habilidades.strip().lower() == "all":
-        habilidades_list = [f"H{i:02d}" for i in range(1, 31) if f"H{i:02d}" not in HABILIDADES_DESABILITADAS]
         print(f"[*] Habilidades desabilitadas ignoradas na geração global: {', '.join(sorted(HABILIDADES_DESABILITADAS))} (dependência visual / amostragem insuficiente sem imagens).")
     else:
-        raw_list = [h.strip().upper() for h in args.habilidades.split(",") if h.strip()]
-        normalized_list = []
-        for h in raw_list:
-            if h.startswith("H") and h[1:].isdigit():
-                normalized_list.append(f"H{int(h[1:]):02d}")
-            elif h.isdigit():
-                normalized_list.append(f"H{int(h):02d}")
-            else:
-                normalized_list.append(h)
-
-        desabilitadas = [h for h in normalized_list if h in HABILIDADES_DESABILITADAS]
         if desabilitadas:
             print(f"\n[ERRO] Geração bloqueada para a(s) habilidade(s): {', '.join(sorted(desabilitadas))}")
             for d in sorted(desabilitadas):
@@ -117,14 +110,10 @@ def cmd_generate(args: argparse.Namespace) -> int:
                 )
                 print(f"       • {d}: {motivo}")
 
-            validas = [h for h in normalized_list if h not in HABILIDADES_DESABILITADAS]
-            if not validas:
+            if not habilidades_list:
                 print("\nNenhuma habilidade válida restante para geração. Operação cancelada.\n")
                 return 1
-            print(f"\n[AVISO] Continuando a geração apenas para as habilidades ativas: {', '.join(validas)}\n")
-            habilidades_list = validas
-        else:
-            habilidades_list = normalized_list
+            print(f"\n[AVISO] Continuando a geração apenas para as habilidades ativas: {', '.join(habilidades_list)}\n")
 
     print(f"[*] Total de habilidades a processar: {len(habilidades_list)}")
     print(f"[*] Questões por habilidade: {args.count}")

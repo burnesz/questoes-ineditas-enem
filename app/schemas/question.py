@@ -4,7 +4,7 @@ Schemas Pydantic para validação estrutural e dados de questões inéditas do E
 
 import re
 from enum import Enum
-from typing import Dict, Optional, List, Any, Literal
+from typing import Dict, Optional, List, Any, Literal, Tuple, Union
 import uuid
 from pydantic import BaseModel, Field, field_validator
 
@@ -59,6 +59,30 @@ MOTIVOS_HABILIDADES_DESABILITADAS: Dict[str, str] = {
         "microdados históricos, extrapolando a delimitação deste projeto para LLMs exclusivamente textuais."
     ),
 }
+
+
+def normalizar_habilidade(codigo: str) -> str:
+    """'h1', '1' ou 'H01' viram 'H01'; outros textos voltam só em maiúsculas."""
+    h = codigo.strip().upper()
+    if h.startswith("H") and h[1:].isdigit():
+        return f"H{int(h[1:]):02d}"
+    if h.isdigit():
+        return f"H{int(h):02d}"
+    return h
+
+
+def resolver_habilidades(pedido: Union[str, List[str]]) -> Tuple[List[str], List[str]]:
+    """
+    Converte o pedido de habilidades do CLI ('all' ou 'H01,H05') ou da API ('all' ou lista) em
+    (habilidades ativas pedidas, habilidades desabilitadas pedidas). 'all' são as 28 ativas, sem H06 e H20.
+    """
+    if isinstance(pedido, str):
+        if pedido.strip().lower() == "all":
+            return [f"H{i:02d}" for i in range(1, 31) if f"H{i:02d}" not in HABILIDADES_DESABILITADAS], []
+        pedido = pedido.split(",")
+    normalizadas = list(dict.fromkeys(normalizar_habilidade(h) for h in pedido if h.strip()))
+    return ([h for h in normalizadas if h not in HABILIDADES_DESABILITADAS],
+            [h for h in normalizadas if h in HABILIDADES_DESABILITADAS])
 
 
 class HabilidadeDesabilitadaError(ValueError):

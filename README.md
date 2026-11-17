@@ -229,6 +229,27 @@ python cli.py export -o questoes.json --habilidade H01
 
 ---
 
+## 🌐 API para a plataforma VERA
+
+A plataforma VERA consome este serviço por HTTP. O administrador pede lotes de questões numa tela própria e importa as aprovadas para o acervo dos simulados.
+
+```bash
+./.venv/bin/uvicorn app.api:app --host 127.0.0.1 --port 8100
+```
+
+**Rotas** (código em `app/api.py`):
+- `GET /health` e `GET /habilidades`;
+- `POST /lotes`, com `{habilidades: [...] ou "all", quantidade, max_tentativas}`;
+- `GET /lotes/{id}`;
+- `POST /lotes/{id}/cancelar`.
+
+**Como os lotes rodam:** cada pedido usa o Qwen2.5 como gerador e o Qwen3 como avaliador (Experimentos 1 e 2). Os lotes rodam em segundo plano, um por vez.
+
+**Configuração:**
+- `MODELO_GERADOR`, `MODELO_AVALIADOR` e `AVALIADOR_THINK`;
+- `API_KEY`, opcional, exigida no cabeçalho `X-API-Key`;
+- `API_MOCK=true`, que faz a API funcionar sem Ollama.
+
 ## ✅ Testes
 
 ```bash

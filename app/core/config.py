@@ -24,6 +24,14 @@ class Settings(BaseSettings):
     LLM_THINK_BUDGET_TOKENS: int = 8192
     LLM_THINK_NUM_CTX: int = 16384
 
+    # API HTTP (app/api.py): modelos escolhidos nos Experimentos 1 e 2 (gerador Qwen2.5, avaliador Qwen3 sem
+    # raciocínio), chave opcional exigida no cabeçalho X-API-Key e modo simulado, sem Ollama nem embeddings
+    MODELO_GERADOR: str = "qwen2.5:7b-instruct-q4_K_M"
+    MODELO_AVALIADOR: str = "qwen3:8b-q4_K_M"
+    AVALIADOR_THINK: bool = False
+    API_KEY: Optional[str] = None
+    API_MOCK: bool = False
+
     # Banco Vetorial (ChromaDB)
     CHROMA_PERSIST_DIRECTORY: str = "./chroma_db"
     CHROMA_COLLECTION_QUESTOES: str = "questoes_enem"
