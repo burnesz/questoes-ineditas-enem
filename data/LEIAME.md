@@ -109,7 +109,6 @@ Os scripts ficam em `scripts/avaliacao_especialista/`.
 1. **Checagem automática** (`validar_adulteracoes.py`): confere o formato da resposta, se o tipo de erro é o pedido e se a modificação foi mínima.
 2. **Revisão item a item** numa página de revisão (`revisao/`). O critério é que cada versão modificada tenha **um único defeito, objetivo e do tipo declarado**.
    - Uma versão é rejeitada se a informação retirada continua no texto ou nas alternativas, se a troca parece só um erro de redação, ou se a mudança cria um defeito extra.
-   - Parte das decisões de revisão foi tomada com assistência de um assistente de IA (Claude), aplicando esses mesmos critérios.
 3. **Reenvio dos itens rejeitados:** 10 lotes, em 11/11/2026, aos mesmos LLMs, seguidos de nova revisão.
 4. **Ajuste manual pontual em 9 itens**, quando a ideia do LLM era boa mas a redação precisava de correção. Cada ajuste está descrito na coluna `ajuste_manual` da chave.
 
